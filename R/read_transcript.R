@@ -53,9 +53,6 @@
 #' @references \url{https://github.com/trinker/qdap/wiki/Reading-.docx-\%5BMS-Word\%5D-Transcripts-into-R}
 #' @keywords transcript
 #' @export
-#' @import XML RCurl
-#' @importFrom gdata read.xls
-#' @importFrom tools file_ext
 #' @examples
 #' (doc1 <- system.file("docs/trans1.docx", package = "qdap"))
 #' (doc2 <- system.file("docs/trans2.docx", package = "qdap"))
@@ -114,7 +111,7 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
         on.exit(close(file))
         y <- "text"
     } else {
-        y <- file_ext(file)
+        y <- tools::file_ext(file)
     }
 
     ## Handling for text= && multi-char sep
@@ -138,13 +135,13 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
     }
     switch(y,
         xlsx = {
-            x <- read.xls(file,  header = header,
+            x <- gdata::read.xls(file,  header = header,
                 sep = sep, as.is=FALSE, na.strings= na.strings,
                 strip.white = TRUE, stringsAsFactors = FALSE,
                 blank.lines.skip = rm.empty.rows, ...)
             },
         xls = {
-            x <- read.xls(file,  header = header,
+            x <- gdata::read.xls(file,  header = header,
                 sep = sep, as.is=FALSE, na.strings= na.strings,
                 strip.white = TRUE, stringsAsFactors = FALSE,
                 blank.lines.skip = rm.empty.rows, ...)
@@ -204,7 +201,7 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
 
 
     x[, text.var] <- as.character(x[, text.var])
-    x[, text.var] <- Trim(iconv(x[, text.var], "", "ASCII", "byte"))
+    x[, text.var] <- trimws(iconv(x[, text.var], "", "ASCII", "byte"))
     if (is.logical(quote2bracket)) {
         if (quote2bracket) {
             rbrac <- "}"

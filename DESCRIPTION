@@ -10,11 +10,10 @@ Depends:
 Suggests:
     testthat
 Imports:
-    XML,
     curl,
     gdata,
-    RCurl,
-    tools
+    tools,
+    XML
 Date: 2015-12-31
 License: GPL-2
 LazyData: TRUE

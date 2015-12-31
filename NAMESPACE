@@ -3,7 +3,3 @@
 export(download)
 export(read_docx)
 export(read_transcript)
-import(RCurl)
-import(XML)
-importFrom(gdata,read.xls)
-importFrom(tools,file_ext)
