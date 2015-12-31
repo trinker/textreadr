@@ -11,7 +11,9 @@ Suggests:
     testthat
 Imports:
     XML,
-    curl
+    curl,
+    gdata,
+    RCurl
 Date: 2015-12-31
 License: GPL-2
 LazyData: TRUE
