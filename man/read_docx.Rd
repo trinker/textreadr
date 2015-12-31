@@ -19,7 +19,8 @@ Read in the content from a .docx file.
 }
 \examples{
 \dontrun{
-download("http://umlreading.weebly.com/uploads/2/5/2/5/25253346/whole_language_timeline-updated.docx")
+x <- "http://www.cybersmart.gov.au/~/media/9999BCDEA99F40DD8170AAD978C8D2F9.docx"
+download(x)
 (txt <- read_docx("whole_language_timeline-updated.docx"))
 }
 }
