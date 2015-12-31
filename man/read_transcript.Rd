@@ -21,7 +21,7 @@ transcript columns.}
 
 \item{text.var}{A character string specifying the name of the text variable
 will ensure that variable is classed as character.  If \code{NULL}
-\code{\link[qdap]{read_transcript}} attempts to guess the text.variable
+\code{\link[textreadr]{read_transcript}} attempts to guess the text.variable
 (dialogue).}
 
 \item{merge.broke.tot}{logical.  If \code{TRUE} and if the file being read in
@@ -41,14 +41,14 @@ characters (default is to remove).}
 braces (default is \code{FALSE}).  If \code{FALSE} curly quotes are removed.}
 
 \item{rm.empty.rows}{logical.  If \code{TRUE}
-\code{\link[qdap]{read_transcript}}  attempts to remove empty rows.}
+\code{\link[textreadr]{read_transcript}}  attempts to remove empty rows.}
 
 \item{na.strings}{A vector of character strings which are to be interpreted
 as \code{NA} values.}
 
 \item{sep}{The field separator character. Values on each line of the file are
 separated by this character.  The default of \code{NULL} instructs
-\code{\link[qdap]{read_transcript}} to use a separator suitable for the file
+\code{\link[textreadr]{read_transcript}} to use a separator suitable for the file
 type being read in.}
 
 \item{skip}{Integer; the number of lines of the data file to skip before
@@ -79,7 +79,7 @@ If a transcript is a .docx file read_transcript expects two columns
 separator).  .doc files must be converted to .docx before reading in.
 }
 \section{Warning}{
- \code{\link[qdap]{read_transcript}} may contain errors if the
+ \code{\link[textreadr]{read_transcript}} may contain errors if the
 file being read in is .docx.  The researcher should carefully investigate
 each transcript for errors before further parsing the data.
 }
@@ -88,9 +88,6 @@ Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
 }
 \references{
 \url{https://github.com/trinker/qdap/wiki/Reading-.docx-\%5BMS-Word\%5D-Transcripts-into-R}
-}
-\seealso{
-\code{\link[qdap]{dir_map}}
 }
 \keyword{transcript}
 

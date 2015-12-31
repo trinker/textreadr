@@ -10,7 +10,7 @@
 #' transcript columns.
 #' @param text.var A character string specifying the name of the text variable
 #' will ensure that variable is classed as character.  If \code{NULL}
-#' \code{\link[qdap]{read_transcript}} attempts to guess the text.variable
+#' \code{\link[textreadr]{read_transcript}} attempts to guess the text.variable
 #' (dialogue).
 #' @param merge.broke.tot logical.  If \code{TRUE} and if the file being read in
 #' is .docx with broken space between a single turn of talk read_transcript
@@ -24,12 +24,12 @@
 #' @param quote2bracket logical. If \code{TRUE} replaces curly quotes with curly
 #' braces (default is \code{FALSE}).  If \code{FALSE} curly quotes are removed.
 #' @param rm.empty.rows logical.  If \code{TRUE}
-#' \code{\link[qdap]{read_transcript}}  attempts to remove empty rows.
+#' \code{\link[textreadr]{read_transcript}}  attempts to remove empty rows.
 #' @param na.strings A vector of character strings which are to be interpreted
 #' as \code{NA} values.
 #' @param sep The field separator character. Values on each line of the file are
 #' separated by this character.  The default of \code{NULL} instructs
-#' \code{\link[qdap]{read_transcript}} to use a separator suitable for the file
+#' \code{\link[textreadr]{read_transcript}} to use a separator suitable for the file
 #' type being read in.
 #' @param skip Integer; the number of lines of the data file to skip before
 #' beginning to read data.
@@ -46,13 +46,12 @@
 #' @note If a transcript is a .docx file read_transcript expects two columns
 #' (generally person and dialogue) with some sort of separator (default is colon
 #' separator).  .doc files must be converted to .docx before reading in.
-#' @section Warning: \code{\link[qdap]{read_transcript}} may contain errors if the
+#' @section Warning: \code{\link[textreadr]{read_transcript}} may contain errors if the
 #' file being read in is .docx.  The researcher should carefully investigate
 #' each transcript for errors before further parsing the data.
 #' @author Bryan Goodrich and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @references \url{https://github.com/trinker/qdap/wiki/Reading-.docx-\%5BMS-Word\%5D-Transcripts-into-R}
 #' @keywords transcript
-#' @seealso \code{\link[qdap]{dir_map}}
 #' @export
 #' @import XML RCurl
 #' @importFrom gdata read.xls

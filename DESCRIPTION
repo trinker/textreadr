@@ -13,7 +13,8 @@ Imports:
     XML,
     curl,
     gdata,
-    RCurl
+    RCurl,
+    tools
 Date: 2015-12-31
 License: GPL-2
 LazyData: TRUE
