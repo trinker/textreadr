@@ -1,0 +1,16 @@
+citHeader("To cite textreadr in publications, please use:")
+
+
+citEntry(entry = "manual",
+    title = "{textreadr}: A Read Text Documents Into R",
+    author = "Tyler W. Rinker",
+    organization = "University at Buffalo/SUNY",
+    address = "Buffalo, New York",
+    note = "version 0.0.1",
+    year = "2015",
+    url = "http://github.com/trinker/textreadr",
+    textVersion  = paste("Rinker, T. W. (2015).",
+        "textreadr: Read Text Documents Into R",
+        "version 0.0.1. University at Buffalo. Buffalo, New York.",
+        "http://github.com/trinker/textreadr")
+)

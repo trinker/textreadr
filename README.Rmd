@@ -1,0 +1,78 @@
+---
+title: "textreadr"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  md_document:
+    toc: true      
+---
+
+```{r, echo=FALSE}
+desc <- suppressWarnings(readLines("DESCRIPTION"))
+regex <- "(^Version:\\s+)(\\d+\\.\\d+\\.\\d+)"
+loc <- grep(regex, desc)
+ver <- gsub(regex, "\\2", desc[loc])
+verbadge <- sprintf('<a href="https://img.shields.io/badge/Version-%s-orange.svg"><img src="https://img.shields.io/badge/Version-%s-orange.svg" alt="Version"/></a></p>', ver, ver)
+````
+
+<img src="inst/pathr_logo/r_textreadr.png" width="320" alt="textreadr Logo">  
+
+
+[![Build Status](https://travis-ci.org/trinker/textreadr.svg?branch=master)](https://travis-ci.org/trinker/textreadr)
+[![Coverage Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](https://coveralls.io/r/trinker/textreadr?branch=master)
+`r verbadge`
+
+**textreadr** is a small collection of convenience tools for reading text documents into R.  This is not meant to be an exhaustive collection; for more see the [**tm**](https://cran.r-project.org/web/packages/tm/index.html) package.
+
+# Function Usage
+
+The main functions, task category, & descriptions are summarized in the table below:
+
+
+| Function                  | Task        | Description                           | 
+|---------------------------|-------------|---------------------------------------| 
+| `read_transcript`         | reading     | Read 2 column transcripts             | 
+| `read_docx`               | reading     | Read .docx                            |
+| `read_pdf`                | reading     | Read .pdf                            |
+| `read_dir`                | reading     | Read and format multiple .txt files   |
+| `download`                | downloading | Download documents                    | 
+
+
+# Installation
+
+To download the development version of **textreadr**:
+
+Download the [zip ball](https://github.com/trinker/textreadr/zipball/master) or [tar ball](https://github.com/trinker/textreadr/tarball/master), decompress and run `R CMD INSTALL` on it, or use the **pacman** package to install the development version:
+
+```r
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load_gh("trinker/textreadr")
+```
+
+# Contact
+
+You are welcome to:    
+- submit suggestions and bug-reports at: <https://github.com/trinker/textreadr/issues>    
+- send a pull request on: <https://github.com/trinker/textreadr/>    
+- compose a friendly e-mail to: <tyler.rinker@gmail.com>    
+
+# Demonstration
+
+## Load the Packages/Data
+
+```{r, message=FALSE}
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(textreadr, magrittr)
+pacman::p_load_gh("trinker/pathr")
+
+```
+
+
+## Read Transcripts
+
+## Read .docx
+
+## Read .pdf
+
+## Read Directory Contents
+
+## Download
