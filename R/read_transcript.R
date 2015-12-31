@@ -147,7 +147,7 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
                 blank.lines.skip = rm.empty.rows, ...)
             },
         docx = {
-            x <- read_docx(file, skip = skip, sep = sep)
+            x <- read.docx(file, skip = skip, sep = sep)
             sep_hits <- grepl(sep, x[, 2])
             if(any(sep_hits)) {
                 warning(sprintf("The following text contains the \"%s\" separator and may not have split correctly:\n", sep),
@@ -226,4 +226,28 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
         x <- combine_tot(x)
     }
     return(x)
+}
+
+
+read.docx <-
+function(file, skip = 0, sep = ":") {
+    tmp <- tempfile()
+    if (!dir.create(tmp)) stop("Temporary directory could not be established.")
+    utils::unzip(file, exdir = tmp)  # Unzip to temporary directory
+    xmlfile <- file.path(tmp, "word", "document.xml")  # Path to xml document
+    doc     <- XML::xmlTreeParse(xmlfile, useInternalNodes=TRUE)  # Import XML
+    unlink(tmp, recursive = TRUE)  # Delete unzipped files; no longer needed
+    nodeSet <- XML::getNodeSet(doc, "//w:p")  # Access all p-nodes in document
+    pvalues <- sapply(nodeSet, XML::xmlValue)  # Return their (textual) values
+    pvalues <- pvalues[pvalues != ""]  # Remove empty lines
+    if (skip > 0) pvalues <- pvalues[-seq(skip)]  # Ignore these many lines
+    keys    <- sapply(gregexpr(paste0("^.*?", sep), pvalues), function(x) x > 0)
+    speaker <- regmatches(pvalues, gregexpr(paste0("^.*?", sep), pvalues))
+    pvalues <- gsub(paste0("^.*?", sep), "", pvalues)  # Remove speaker from lines
+    speaker <- rep(speaker[which(keys)], diff(c(which(keys), length(speaker)+1)))
+    speaker <- unlist(speaker)  # Make sure it's a vector
+    speaker <- substr(speaker, 1, nchar(speaker)-nchar(sep)) # Remove ending colon
+    transcript <- data.frame(X1 = speaker,
+        X2 = pvalues, stringsAsFactors = FALSE)
+    return(transcript)
 }
