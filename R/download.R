@@ -1,61 +1,30 @@
 #' Download Instructional Documents
-#' 
-#' This function enables downloading documents for future instructional training. 
-#' 
-#' @param \ldots Document names to download. Quoted strings (complete urls) can
-#' also be supplied (if so no url argument is supplied).
-#' @param url The download url or \href{https://www.dropbox.com/}{Dropbox} key. 
-#' @return Places a copy of the downloaded document in the users working 
-#' directory.
+#'
+#' This function enables downloading documents for future instructional training.
+#'
+#' @param url The download url or \href{https://www.dropbox.com/}{Dropbox} key.
+#' @param loc Where to put the files.
+#' @return Places a copy of the downloaded document in location specified and returns
+#' vector of the locations as string paths.
 #' @export
-#' @importFrom RCurl getBinaryURL
 #' @examples
 #' \dontrun{
-#' ## Example 1 (download from Dropbox)
-#' # download transcript of the debate to working directory
-#' library(qdap)
-#' url_dl(pres.deb1.docx, pres.deb2.docx, pres.deb3.docx)   
-#' 
-#' # load multiple files with read transcript and assign to working directory
-#' dat1 <- read.transcript("pres.deb1.docx", c("person", "dialogue"))
-#' dat2 <- read.transcript("pres.deb2.docx", c("person", "dialogue"))
-#' dat3 <- read.transcript("pres.deb3.docx", c("person", "dialogue"))
-#' 
-#' docs <- qcv(pres.deb1.docx, pres.deb2.docx, pres.deb3.docx)
-#' dir() %in% docs
-#' library(reports); delete(docs)    #remove the documents
-#' dir() %in% docs
-#' 
-#' ## Example 2 (quoted string urls)
-#' url_dl("https://dl.dropboxusercontent.com/u/61803503/qdap.pdf", 
-#'    "http://www.cran.r-project.org/doc/manuals/R-intro.pdf")
-#'
-#' delete(c("qdap.pdf", "R-intro.pdf"))
+#' m <- download(
+#' c('https://cran.r-project.org/web/packages/curl/curl.pdf',
+#' "https://github.com/trinker/textreadr/raw/master/inst/docs/rl10075oralhistoryst002.pdf")
+#' )
 #' }
-download <- 
-function(..., url = 61803503) {
-    if (!is.null(url) && !grepl("http|www\\.", url)) {
-        url <- utils::tail(unlist(strsplit(as.character(url), "/", fixed = TRUE)), 
-            1)
-        url <- paste0("http://dl.dropboxusercontent.com/u/", 
-            url, "/")
-    }
-    mf <- match.call(expand.dots = FALSE)
-    payload <- as.character(mf[[2]])
-    FUN <- function(x, url) {
-        bin <- getBinaryURL(file.path(url, x), ssl.verifypeer = FALSE)
-        con <- file(x, open = "wb")
-        writeBin(bin, con)
-        close(con)
-        message(noquote(paste(x, "read into", getwd())))
-    }
-    if (all(grepl("http|www\\.", payload))) {
-        File <- basename(payload)
-        Root <- dirname(payload)
-        for (i in seq_len(length(payload))) {
-            FUN(x = File[i], url = Root[i])
-        }
-    } else {
-        invisible(lapply(payload, function(z) FUN(x = z, url = url)))
-    }
+download <- function(url, loc = tempdir()) {
+    invisible(sapply(url, function(x) {
+        try(single_download(x, loc = loc))
+    }))
 }
+
+single_download <- function(url, loc) {
+    x <- basename(url)
+    out <- file.path(loc, x)
+    curl::curl_download(url, out)
+    message(noquote(paste(x, "read into", loc)))
+    invisible(out)
+}
+

@@ -3,10 +3,17 @@ Title: Read Text Documents Into R
 Version: 0.0.1
 Authors@R: c(person("Tyler", "Rinker", email = "tyler.rinker@gmail.com", role = c("aut", "cre")))
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
-Description: A small collection of convenience tools for reading text documents into R.
-Depends: R (>= 3.2.3)
-Suggests: testthat
+Description: A small collection of convenience tools for reading text documents
+    into R.
+Depends:
+    R (>= 3.2.3)
+Suggests:
+    testthat
+Imports:
+    XML,
+    curl
 Date: 2015-12-31
 License: GPL-2
 LazyData: TRUE
 Roxygen: list(wrap = FALSE)
+RoxygenNote: 5.0.1
