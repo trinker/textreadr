@@ -54,10 +54,10 @@
 #' @keywords transcript
 #' @export
 #' @examples
-#' (doc1 <- system.file("docs/trans1.docx", package = "qdap"))
-#' (doc2 <- system.file("docs/trans2.docx", package = "qdap"))
-#' (doc3 <- system.file("docs/trans3.docx", package = "qdap"))
-#' (doc4 <- system.file("docs/trans4.xlsx", package = "qdap"))
+#' (doc1 <- system.file("docs/trans1.docx", package = "textreadr"))
+#' (doc2 <- system.file("docs/trans2.docx", package = "textreadr"))
+#' (doc3 <- system.file("docs/trans3.docx", package = "textreadr"))
+#' (doc4 <- system.file("docs/trans4.xlsx", package = "textreadr"))
 #'
 #' dat1 <- read_transcript(doc1)
 #' dat2 <- read_transcript(doc1, col.names = c("person", "dialogue"))
@@ -192,14 +192,6 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
         text.var <- text.col(x)
     }
 
-
-    ser <- c("<e2><80><9c>", "<e2><80><9d>", "<e2><80><98>", "<e2><80><99>",
-    	"<e2><80><9b>", "<ef><bc><87>", "<e2><80><a6>", "<e2><80><93>",
-    	"<e2><80><94>", "<c3><a1>", "<c3><a9>", "<c2><bd>")
-
-    reps <- c(lbrac, rbrac, "'", "'", "'", "'", ellipsis, dash, dash, "a", "e", "half")
-
-
     x[, text.var] <- as.character(x[, text.var])
     x[, text.var] <- trimws(iconv(x[, text.var], "", "ASCII", "byte"))
     if (is.logical(quote2bracket)) {
@@ -213,6 +205,12 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
             rbrac <- quote2bracket[2]
             lbrac <- quote2bracket[1]
     }
+
+    ser <- c("<e2><80><9c>", "<e2><80><9d>", "<e2><80><98>", "<e2><80><99>",
+    	"<e2><80><9b>", "<ef><bc><87>", "<e2><80><a6>", "<e2><80><93>",
+    	"<e2><80><94>", "<c3><a1>", "<c3><a9>", "<c2><bd>")
+
+    reps <- c(lbrac, rbrac, "'", "'", "'", "'", ellipsis, dash, dash, "a", "e", "half")
 
     Encoding(x[, text.var]) <-"latin1"
     x[, text.var] <- clean(mgsub(ser, reps, x[, text.var]))

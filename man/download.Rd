@@ -2,12 +2,12 @@
 % Please edit documentation in R/download.R
 \name{download}
 \alias{download}
-\title{Download Instructional Documents}
+\title{Download Documents}
 \usage{
 download(url, loc = tempdir())
 }
 \arguments{
-\item{url}{The download url or \href{https://www.dropbox.com/}{Dropbox} key.}
+\item{url}{The download url(s).}
 
 \item{loc}{Where to put the files.}
 }
@@ -16,7 +16,7 @@ Places a copy of the downloaded document in location specified and returns
 vector of the locations as string paths.
 }
 \description{
-This function enables downloading documents for future instructional training.
+This function enables downloading documents.
 }
 \examples{
 \dontrun{
@@ -24,6 +24,8 @@ m <- download(
 c('https://cran.r-project.org/web/packages/curl/curl.pdf',
 "https://github.com/trinker/textreadr/raw/master/inst/docs/rl10075oralhistoryst002.pdf")
 )
+
+m
 }
 }
 
