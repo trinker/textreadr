@@ -5,8 +5,8 @@
 \alias{package-textreadr}
 \alias{textreadr}
 \alias{textreadr-package}
-\title{What the Package Does (one line)}
+\title{Read Text Documents into R}
 \description{
-What the package does (one or more paragraphs)
+A small collection of convenience tools for reading text documents into R.
 }
 

@@ -215,7 +215,8 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
     if (merge.broke.tot) {
         x <- combine_tot(x)
     }
-    return(x)
+    class(x) <- c("textreadr", "data.frame")
+    x
 }
 
 

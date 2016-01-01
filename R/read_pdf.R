@@ -42,5 +42,9 @@ read_pdf <- function(file, engine = "ghostscript", skip = 0, language='en', id='
         stringsAsFactors = FALSE
     )
     if (skip > 0) out <- out[(skip + 1):nrow(out), ]
+    class(out) <- c("textreadr", "data.frame")
     out
 }
+
+
+
