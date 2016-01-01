@@ -2,4 +2,5 @@
 
 export(download)
 export(read_docx)
+export(read_pdf)
 export(read_transcript)

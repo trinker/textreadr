@@ -12,6 +12,7 @@ Suggests:
 Imports:
     curl,
     readxl,
+    tm,
     tools,
     XML
 Date: 2015-12-31
