@@ -19,14 +19,12 @@
 #' variables as its first line.
 #' @param dash A character string to replace the en and em dashes special
 #' characters (default is to remove).
-#' @param ellipsis A character string to replace the ellipsis special characters
-#' (default is text ...).
+#' @param ellipsis A character string to replace the ellipsis special characters.
 #' @param quote2bracket logical. If \code{TRUE} replaces curly quotes with curly
 #' braces (default is \code{FALSE}).  If \code{FALSE} curly quotes are removed.
 #' @param rm.empty.rows logical.  If \code{TRUE}
 #' \code{\link[textreadr]{read_transcript}}  attempts to remove empty rows.
-#' @param na.strings A vector of character strings which are to be interpreted
-#' as \code{NA} values.
+#' @param na A character string to be interpreted as an \code{NA} value.
 #' @param sep The field separator character. Values on each line of the file are
 #' separated by this character.  The default of \code{NULL} instructs
 #' \code{\link[textreadr]{read_transcript}} to use a separator suitable for the file
@@ -60,7 +58,6 @@
 #'
 #' dat1 <- read_transcript(doc1)
 #' dat2 <- read_transcript(doc1, col.names = c("person", "dialogue"))
-#' dat2b <- rm_row(dat2, "person", "[C") #remove bracket row
 #'
 #' ## read_transcript(doc2) #throws an error (need skip)
 #' dat3 <- read_transcript(doc2, skip = 1)
@@ -80,7 +77,6 @@
 #'
 #' ## Read in text specify spaces as sep
 #' ## EXAMPLE 1
-#'
 #' read_transcript(text="34    The New York Times reports a lot of words here.
 #' 12    Greenwire reports a lot of words.
 #' 31    Only three words.
@@ -90,7 +86,6 @@
 #'     col.names=qcv(NO,    ARTICLE), sep="   ")
 #'
 #' ## EXAMPLE 2
-#'
 #' read_transcript(text="34..    The New York Times reports a lot of words here.
 #' 12..    Greenwire reports a lot of words.
 #' 31..    Only three words.
@@ -98,12 +93,16 @@
 #'  9..    Greenwire short.
 #' 13..    The New York Times reports a lot of words again.",
 #'     col.names=qcv(NO,    ARTICLE), sep="\\.\\.")
-#' }
+#'
+#' ## Real Example
+#' real_dat <- read_transcript(
+#'     system.file("docs/Yasmine_Interivew_Transcript.docx", package = "textreadr"),
+#'     skip = 19
+#' )
 read_transcript <-
 function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
     header = FALSE, dash = "", ellipsis = "...", quote2bracket = FALSE,
-    rm.empty.rows = TRUE, na.strings = c("999", "NA", "", " "),
-    sep = NULL, skip = 0, text, comment.char = "",
+    rm.empty.rows = TRUE, na = "", sep = NULL, skip = 0, text, comment.char = "",
     ...) {
 
     if (missing(file) && !missing(text)) {
@@ -136,11 +135,11 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
     switch(y,
         xlsx = {
             x <- rm_na_row(readxl::read_excel(file, col_names = header,
-                na = na.strings, skip = skip, ...), rm.empty.rows)
+                na = na, skip = skip, ...), rm.empty.rows)
             },
         xls = {
             x <- rm_na_row(readxl::read_excel(file, col_names = header,
-                na = na.strings, skip = skip, ...), rm.empty.rows)
+                na = na, skip = skip, ...), rm.empty.rows)
             },
         docx = {
             x <- read.docx(file, skip = skip, sep = sep)
@@ -152,7 +151,7 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
             },
         csv = {
             x <- utils::read.csv(file,  header = header,
-                sep = sep, as.is=FALSE, na.strings= na.strings,
+                sep = sep, as.is=FALSE, na.strings= na,
                 strip.white = TRUE, stringsAsFactors = FALSE,
                 blank.lines.skip = rm.empty.rows, ...)
             },
@@ -186,8 +185,7 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
         text.var <- text.col(x)
     }
 
-    x[, text.var] <- as.character(x[, text.var])
-    x[, text.var] <- trimws(iconv(x[, text.var], "", "ASCII", "byte"))
+    x[[text.var]] <- trimws(iconv(as.character(x[[text.var]]), "", "ASCII", "byte"))
     if (is.logical(quote2bracket)) {
         if (quote2bracket) {
             rbrac <- "}"
@@ -206,8 +204,8 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
 
     reps <- c(lbrac, rbrac, "'", "'", "'", "'", ellipsis, dash, dash, "a", "e", "half")
 
-    Encoding(x[, text.var]) <-"latin1"
-    x[, text.var] <- clean(mgsub(ser, reps, x[, text.var]))
+    Encoding(x[[text.var]]) <-"latin1"
+    x[[text.var]] <- clean(mgsub(ser, reps, x[[text.var]]))
     if(rm.empty.rows) {
         x <- rm_empty_row(x)
     }
@@ -222,6 +220,7 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
 
 
 rm_na_row <- function(x, remove = TRUE) {
+    x <- as.data.frame(x, stringsAsFactors = FALSE)
     if (!remove) return(x)
     x[rowSums(is.na(x)) != ncol(x), ]
 }

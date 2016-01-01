@@ -6,8 +6,8 @@
 \usage{
 read_transcript(file, col.names = NULL, text.var = NULL,
   merge.broke.tot = TRUE, header = FALSE, dash = "", ellipsis = "...",
-  quote2bracket = FALSE, rm.empty.rows = TRUE, na.strings = c("999", "NA",
-  "", " "), sep = NULL, skip = 0, text, comment.char = "", ...)
+  quote2bracket = FALSE, rm.empty.rows = TRUE, na = "", sep = NULL,
+  skip = 0, text, comment.char = "", ...)
 }
 \arguments{
 \item{file}{The name of the file which the data are to be read from. Each row
@@ -33,8 +33,7 @@ variables as its first line.}
 \item{dash}{A character string to replace the en and em dashes special
 characters (default is to remove).}
 
-\item{ellipsis}{A character string to replace the ellipsis special characters
-(default is text ...).}
+\item{ellipsis}{A character string to replace the ellipsis special characters.}
 
 \item{quote2bracket}{logical. If \code{TRUE} replaces curly quotes with curly
 braces (default is \code{FALSE}).  If \code{FALSE} curly quotes are removed.}
@@ -42,8 +41,7 @@ braces (default is \code{FALSE}).  If \code{FALSE} curly quotes are removed.}
 \item{rm.empty.rows}{logical.  If \code{TRUE}
 \code{\link[textreadr]{read_transcript}}  attempts to remove empty rows.}
 
-\item{na.strings}{A vector of character strings which are to be interpreted
-as \code{NA} values.}
+\item{na}{A character string to be interpreted as an \code{NA} value.}
 
 \item{sep}{The field separator character. Values on each line of the file are
 separated by this character.  The default of \code{NULL} instructs
@@ -78,6 +76,57 @@ separator).  .doc files must be converted to .docx before reading in.
  \code{\link[textreadr]{read_transcript}} may contain errors if the
 file being read in is .docx.  The researcher should carefully investigate
 each transcript for errors before further parsing the data.
+}
+\examples{
+(doc1 <- system.file("docs/trans1.docx", package = "textreadr"))
+(doc2 <- system.file("docs/trans2.docx", package = "textreadr"))
+(doc3 <- system.file("docs/trans3.docx", package = "textreadr"))
+(doc4 <- system.file("docs/trans4.xlsx", package = "textreadr"))
+(doc5 <- system.file("docs/trans5.xls", package = "textreadr"))
+
+dat1 <- read_transcript(doc1)
+dat2 <- read_transcript(doc1, col.names = c("person", "dialogue"))
+
+## read_transcript(doc2) #throws an error (need skip)
+dat3 <- read_transcript(doc2, skip = 1)
+
+## read_transcript(doc3, skip = 1) #incorrect read; wrong sep
+dat4 <- read_transcript(doc3, sep = "-", skip = 1)
+
+dat5 <- read_transcript(doc4)
+dat6 <- read_transcript(doc5)
+
+trans <- "sam: Computer is fun. Not too fun.
+greg: No it's not, it's dumb.
+teacher: What should we do?
+sam: You liar, it stinks!"
+
+read_transcript(text=trans)
+
+## Read in text specify spaces as sep
+## EXAMPLE 1
+read_transcript(text="34    The New York Times reports a lot of words here.
+12    Greenwire reports a lot of words.
+31    Only three words.
+ 2    The Financial Times reports a lot of words.
+ 9    Greenwire short.
+13    The New York Times reports a lot of words again.",
+    col.names=qcv(NO,    ARTICLE), sep="   ")
+
+## EXAMPLE 2
+read_transcript(text="34..    The New York Times reports a lot of words here.
+12..    Greenwire reports a lot of words.
+31..    Only three words.
+ 2..    The Financial Times reports a lot of words.
+ 9..    Greenwire short.
+13..    The New York Times reports a lot of words again.",
+    col.names=qcv(NO,    ARTICLE), sep="\\\\.\\\\.")
+
+## Real Example
+real_dat <- read_transcript(
+    system.file("docs/Yasmine_Interivew_Transcript.docx", package = "textreadr"),
+    skip = 19
+)
 }
 \author{
 Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
