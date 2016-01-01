@@ -13,6 +13,9 @@ read_pdf(file, engine = "ghostscript", skip = 0, language = "en",
 \item{engine}{A character string for the preferred PDF extraction engine (see
 \code{\link[tm]{readPDF}}).}
 
+\item{skip}{Integer; the number of lines of the data file to skip before
+beginning to read data.}
+
 \item{language}{A string giving the language (see \code{\link[tm]{readPDF}}).}
 
 \item{id}{Not used (see \code{\link[tm]{readPDF}}).}

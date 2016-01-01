@@ -5,6 +5,8 @@
 #' @param file A path to a PDF file.
 #' @param engine A character string for the preferred PDF extraction engine (see
 #' \code{\link[tm]{readPDF}}).
+#' @param skip Integer; the number of lines of the data file to skip before
+#' beginning to read data.
 #' @param language A string giving the language (see \code{\link[tm]{readPDF}}).
 #' @param id Not used (see \code{\link[tm]{readPDF}}).
 #' @note A word of caution from \href{http://stackoverflow.com/a/9187015/1000343}{Carl Witthoft}"
