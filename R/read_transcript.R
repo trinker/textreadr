@@ -83,7 +83,7 @@
 #'  2    The Financial Times reports a lot of words.
 #'  9    Greenwire short.
 #' 13    The New York Times reports a lot of words again.",
-#'     col.names=qcv(NO,    ARTICLE), sep="   ")
+#'     col.names = c("NO", "ARTICLE"), sep = "   ")
 #'
 #' ## EXAMPLE 2
 #' read_transcript(text="34..    The New York Times reports a lot of words here.
@@ -92,7 +92,7 @@
 #'  2..    The Financial Times reports a lot of words.
 #'  9..    Greenwire short.
 #' 13..    The New York Times reports a lot of words again.",
-#'     col.names=qcv(NO,    ARTICLE), sep="\\.\\.")
+#'     col.names = c("NO", "ARTICLE"), sep = "\\.\\.")
 #'
 #' ## Real Example
 #' real_dat <- read_transcript(
