@@ -11,7 +11,7 @@ Suggests:
     testthat
 Imports:
     curl,
-    gdata,
+    readxl,
     tools,
     XML
 Date: 2015-12-31

@@ -7,8 +7,7 @@
 read_transcript(file, col.names = NULL, text.var = NULL,
   merge.broke.tot = TRUE, header = FALSE, dash = "", ellipsis = "...",
   quote2bracket = FALSE, rm.empty.rows = TRUE, na.strings = c("999", "NA",
-  "", " "), sep = NULL, skip = 0, nontext2factor = TRUE, text,
-  comment.char = "", ...)
+  "", " "), sep = NULL, skip = 0, text, comment.char = "", ...)
 }
 \arguments{
 \item{file}{The name of the file which the data are to be read from. Each row
@@ -54,9 +53,6 @@ type being read in.}
 \item{skip}{Integer; the number of lines of the data file to skip before
 beginning to read data.}
 
-\item{nontext2factor}{logical.  If \code{TRUE} attempts to convert any
-non-text to a factor.}
-
 \item{text}{Character string: if file is not supplied and this is, then data
 are read from the value of text. Notice that a literal string can be used to
 include (small) data sets within R code.}
@@ -71,7 +67,7 @@ comments altogether.}
 Returns a dataframe of dialogue and people.
 }
 \description{
-Read .docx, .csv or .xlsx files into R.
+Read .docx, .csv, .xlsx, .xlsx, or .txt transcript style files into R.
 }
 \note{
 If a transcript is a .docx file read_transcript expects two columns

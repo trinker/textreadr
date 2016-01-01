@@ -1,6 +1,6 @@
 #' read_transcripts Into R
 #'
-#' Read .docx, .csv or .xlsx files into R.
+#' Read .docx, .csv, .xlsx, .xlsx, or .txt transcript style files into R.
 #'
 #' @param file The name of the file which the data are to be read from. Each row
 #' of the table appears as one line of the file. If it does not contain an
@@ -33,8 +33,6 @@
 #' type being read in.
 #' @param skip Integer; the number of lines of the data file to skip before
 #' beginning to read data.
-#' @param nontext2factor logical.  If \code{TRUE} attempts to convert any
-#' non-text to a factor.
 #' @param text Character string: if file is not supplied and this is, then data
 #' are read from the value of text. Notice that a literal string can be used to
 #' include (small) data sets within R code.
@@ -58,18 +56,20 @@
 #' (doc2 <- system.file("docs/trans2.docx", package = "textreadr"))
 #' (doc3 <- system.file("docs/trans3.docx", package = "textreadr"))
 #' (doc4 <- system.file("docs/trans4.xlsx", package = "textreadr"))
+#' (doc5 <- system.file("docs/trans5.xls", package = "textreadr"))
 #'
 #' dat1 <- read_transcript(doc1)
 #' dat2 <- read_transcript(doc1, col.names = c("person", "dialogue"))
 #' dat2b <- rm_row(dat2, "person", "[C") #remove bracket row
-
+#'
 #' ## read_transcript(doc2) #throws an error (need skip)
 #' dat3 <- read_transcript(doc2, skip = 1)
-
+#'
 #' ## read_transcript(doc3, skip = 1) #incorrect read; wrong sep
 #' dat4 <- read_transcript(doc3, sep = "-", skip = 1)
 #'
-#' dat5 <- read_transcript(doc4); truncdf(dat5, 40) #an .xlsx file
+#' dat5 <- read_transcript(doc4)
+#' dat6 <- read_transcript(doc5)
 #'
 #' trans <- "sam: Computer is fun. Not too fun.
 #' greg: No it's not, it's dumb.
@@ -103,7 +103,7 @@ read_transcript <-
 function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
     header = FALSE, dash = "", ellipsis = "...", quote2bracket = FALSE,
     rm.empty.rows = TRUE, na.strings = c("999", "NA", "", " "),
-    sep = NULL, skip = 0, nontext2factor = TRUE, text, comment.char = "",
+    sep = NULL, skip = 0, text, comment.char = "",
     ...) {
 
     if (missing(file) && !missing(text)) {
@@ -135,16 +135,12 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
     }
     switch(y,
         xlsx = {
-            x <- gdata::read.xls(file,  header = header,
-                sep = sep, as.is=FALSE, na.strings= na.strings,
-                strip.white = TRUE, stringsAsFactors = FALSE,
-                blank.lines.skip = rm.empty.rows, ...)
+            x <- rm_na_row(readxl::read_excel(file, col_names = header,
+                na = na.strings, skip = skip, ...), rm.empty.rows)
             },
         xls = {
-            x <- gdata::read.xls(file,  header = header,
-                sep = sep, as.is=FALSE, na.strings= na.strings,
-                strip.white = TRUE, stringsAsFactors = FALSE,
-                blank.lines.skip = rm.empty.rows, ...)
+            x <- rm_na_row(readxl::read_excel(file, col_names = header,
+                na = na.strings, skip = skip, ...), rm.empty.rows)
             },
         docx = {
             x <- read.docx(file, skip = skip, sep = sep)
@@ -173,9 +169,7 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
         },
         stop("invalid file extension:\n \bfile must be a .docx .csv .xls or .xlsx" )
     )
-    if (nontext2factor) {
-        x <- data.frame(sapply(x,  as.factor))
-    }
+
     if (!is.null(text.var) & !is.numeric(text.var)) {
         text.var <- which(colnames(x) == text.var)
     } else {
@@ -226,6 +220,11 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
     return(x)
 }
 
+
+rm_na_row <- function(x, remove = TRUE) {
+    if (!remove) return(x)
+    x[rowSums(is.na(x)) != ncol(x), ]
+}
 
 read.docx <-
 function(file, skip = 0, sep = ":") {
