@@ -4,12 +4,14 @@
 \alias{print.textreadr}
 \title{Prints a textreadr Object}
 \usage{
-\method{print}{textreadr}(x, ...)
+\method{print}{textreadr}(x, width = 40, ...)
 }
 \arguments{
 \item{x}{A \code{\link[base]{data.frame}} textreadr object.}
 
-\item{\ldots}{ignored.}
+\item{width}{The width of the columns to be displayed.}
+
+\item{\ldots}{Other arguments passed to \code{\link[textreadr]{peek}}.}
 }
 \description{
 Prints a textreadr object

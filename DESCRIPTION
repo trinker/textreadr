@@ -12,6 +12,7 @@ Suggests:
 Imports:
     curl,
     readxl,
+    textshape,
     tm,
     tools,
     utils,

@@ -3,6 +3,7 @@
 S3method(print,textreadr)
 export(download)
 export(peek)
+export(read_dir)
 export(read_docx)
 export(read_pdf)
 export(read_transcript)
