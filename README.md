@@ -4,14 +4,14 @@ textreadr
 
 <img src="inst/textreadr_logo/r_textreadr.png" width="320" alt="textreadr Logo">
 
-[![Project Status: WIP - Initial development is in progress, but there
-has not yet been a stable, usable release suitable for the
-public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
+[![Project Status: Active - The project has reached a stable, usable
+state and is being actively
+developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Build
 Status](https://travis-ci.org/trinker/textreadr.svg?branch=master)](https://travis-ci.org/trinker/textreadr)
 [![Coverage
 Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](https://coveralls.io/r/trinker/textreadr?branch=master)
-<a href="https://img.shields.io/badge/Version-0.0.1-orange.svg"><img src="https://img.shields.io/badge/Version-0.0.1-orange.svg" alt="Version"/></a>
+<a href="https://img.shields.io/badge/Version-0.1.0-orange.svg"><img src="https://img.shields.io/badge/Version-0.1.0-orange.svg" alt="Version"/></a>
 </p>
 **textreadr** is a small collection of convenience tools for reading
 text documents into R. This is not meant to be an exhaustive collection;
@@ -57,6 +57,11 @@ table below:
 <td align="left"><code>download</code></td>
 <td align="left">downloading</td>
 <td align="left">Download documents</td>
+</tr>
+<tr class="even">
+<td align="left"><code>peek</code></td>
+<td align="left">viewing</td>
+<td align="left">Truncated viewing of <code>data.frame</code>s</td>
 </tr>
 </tbody>
 </table>
@@ -106,15 +111,6 @@ Load the Packages/Data
 
     if (!require("pacman")) install.packages("pacman")
     pacman::p_load(textreadr, magrittr)
-
-    ## Warning in p_install(package, character.only = TRUE, ...): textreadr
-
-    ## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
-    ## logical.return = TRUE, : there is no package called 'textreadr'
-
-    ## Warning in pacman::p_load(textreadr, magrittr): Failed to install/load:
-    ## textreadr
-
     pacman::p_load_gh("trinker/pathr")
 
 Read Transcripts
