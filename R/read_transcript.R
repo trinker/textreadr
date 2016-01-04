@@ -134,12 +134,12 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
     }
     switch(y,
         xlsx = {
-            x <- rm_na_row(readxl::read_excel(file, col_names = header,
-                na = na, skip = skip, ...), rm.empty.rows)
+            x <- readxl::read_excel(file, col_names = header,
+                na = na, skip = skip, ...)
             },
         xls = {
-            x <- rm_na_row(readxl::read_excel(file, col_names = header,
-                na = na, skip = skip, ...), rm.empty.rows)
+            x <- readxl::read_excel(file, col_names = header,
+                na = na, skip = skip, ...)
             },
         docx = {
             x <- read.docx(file, skip = skip, sep = sep)
@@ -215,6 +215,7 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
     if (merge.broke.tot) {
         x <- combine_tot(x)
     }
+    x <- rm_na_row(x, rm.empty.rows)
     class(x) <- c("textreadr", "data.frame")
     x
 }

@@ -59,22 +59,152 @@ You are welcome to:
 
 # Demonstration
 
-## Load the Packages/Data
+## Load the Packages?Data
 
 ```{r, message=FALSE}
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(textreadr, magrittr)
 pacman::p_load_gh("trinker/pathr")
 
+trans_docs <- dir(
+    system.file("docs", package = "textreadr"), 
+    pattern = "^trans",
+    full.names = TRUE
+)
+
+pdf_doc <- system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr")
+docx_doc <- system.file("docs/Yasmine_Interivew_Transcript.docx", package = "textreadr")
 ```
+
+
+## Download
+
+
+`download` is simply a wrapper for `curl::curl_download` that allows multiple documents to be download, has the `tempdir` pre-set as the `destfile` (named `loc` in **textreadr**), and also returns the path to the file down load for easy use in a **magrittr** chain.
+
+Here I download a .docx file of presidential debated from 2012.
+
+```{r}
+"https://dl.dropboxusercontent.com/u/61803503/pres.deb1.docx" %>%
+    download() %>%
+    read_docx() %>%
+    head(3)
+```
+
+## Read .docx
+
+A .docx file is nothing but a fancy container.  It can be parsed via XML.  The `read_docx` function allows the user to read in a .docx file as plain text.  Elements are essentially the p tags (explicitly `//w:p`) in the markup.  
+
+```{r}
+docx_doc %>%
+    read_docx() %>%
+    head(3)
+```
+
+```{r}
+docx_doc %>%
+    read_docx(19) %>%
+    head(3)
+```
+
+## Read .pdf
+
+Like .docx a .pdf file is simply a container.  Reading PDF's is made easier with a number of command line tools.  A few methods of PDF reading have been incorporated into R.  Here I wrap the stable, reliable **tm** port to produce `read_pdf`, a function with sensible defaults that is designed to read PDFs into R for as many folks as possible right out of the box.
+
+Here I read in a PDF with `read_pdf`.  Notice the result is a data frame with meta data, including page numbers and element (row) ids.
+
+```{r}
+pdf_doc %>%
+    read_pdf() 
+```
+
+[Carl Witthoft's](http://stackoverflow.com/a/9187015/1000343) word of caution is useful for those struggling to read image text into R.
+
+> Just a warning to others who may be hoping to extract data: PDF is a container, not a format. If the original document does not contain actual text, as opposed to bitmapped images of text or possibly even uglier things than I can imagine, nothing other than OCR can help you.
+
+Users may find the following sites useful for OCR in R:
+
+- http://electricarchaeology.ca/2014/07/15/doing-ocr-within-r/  
+- https://github.com/soodoku/abbyyR
 
 
 ## Read Transcripts
 
-## Read .docx
+Many researchers store their dialogue data (including interviews and observations) as a .docx or .xlsx file.  Typically the data is a two column format with the person in the first column and the text in the second separated by some sort of separator (often a colon).  The `read_transcript` wraps up many of these assumptions into a reader that will extract the data as a data frame with a person and text column. The `skip` argument is very important for correct parsing.
 
-## Read .pdf
+Here I read in and parse the different formats `read_transcript` handles. These are the files that will be read in:
+
+```{r}
+basename(trans_docs)
+```
+
+### docx Simple
+
+```{r}
+read_transcript(trans_docs[1])
+```
+
+### docx With Skip
+
+`skip` is important to capture the document structure.  Here not skipping front end document matter throws an error, while `skip = 1` correctly parses the file.
+
+```{r,error=TRUE}
+read_transcript(trans_docs[2])
+read_transcript(trans_docs[2], skip = 1)
+```
+
+### docx With Dash Separator
+
+The colon is the default separator.  At times other separators may be used to separate speaker and text.  Here is an example where hypens are used as a separator.  Notice the poor parse with colon set as the default separator the first go round.
+
+```{r}
+read_transcript(trans_docs[3],skip = 1)
+read_transcript(trans_docs[3], sep = "-", skip = 1)
+```
+
+### xls and xlsx
+
+
+```{r}
+read_transcript(trans_docs[4])
+read_transcript(trans_docs[5])
+```
+
+### Reading Text
+
+Like `read.table` `read-transcript` also has a `text` argument which is useful for demoing code.
+
+```{r}
+read_transcript(
+    text=
+
+"34    The New York Times reports a lot of words here.
+12    Greenwire reports a lot of words.
+31    Only three words.
+ 2    The Financial Times reports a lot of words.
+ 9    Greenwire short.
+13    The New York Times reports a lot of words again.",
+
+    col.names = c("NO", "ARTICLE"), sep = "   "
+)
+
+```
+
+
+### Authentic Interview
+
+Here I read in an authentic interview transcript:
+
+```{r}
+docx_doc %>%
+    read_transcript(c("Person", "Dialogue"), skip = 19)
+```
 
 ## Read Directory Contents
 
-## Download
+Often there is a need to read multiple files in from a single directory.  The `read_dir` function wraps other **textreadr** functions and `lapply` to create a data frame with a document and text column (one row per document).  
+
+```{r}
+system.file("docs/Maas2011/pos", package = "textreadr") %>%
+    read_dir()
+```
