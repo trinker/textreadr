@@ -105,9 +105,10 @@ the development version:
 Contact
 =======
 
-You are welcome to:   - submit suggestions and bug-reports at: <https://github.com/trinker/textreadr/issues>   - send a pull request on: <https://github.com/trinker/textreadr/>  
+You are welcome to:  -   submit suggestions and bug-reports at:     <https://github.com/trinker/textreadr/issues>  
 
-- compose a friendly e-mail to: <tyler.rinker@gmail.com>
+-   send a pull request on: <https://github.com/trinker/textreadr/>  
+-   compose a friendly e-mail to: <tyler.rinker@gmail.com>
 
 Demonstration
 =============
@@ -143,7 +144,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpGo8tIW
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\Rtmp6T0D2x
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
