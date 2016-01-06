@@ -205,7 +205,7 @@ docx_doc %>%
 
 Often there is a need to read multiple files in from a single directory.  The `read_dir` function wraps other **textreadr** functions and `lapply` to create a data frame with a document and text column (one row per document).  We will read the following documents from the 'pos' directory in **textreadr**'s system file:
 
-```{r}
+```{r, echo=FALSE}
 system.file("docs/Maas2011/pos", package = "textreadr") %>%
     pathr::tree(use.data.tree = TRUE)
 ```

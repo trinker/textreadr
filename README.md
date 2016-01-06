@@ -70,22 +70,22 @@ table below:
 Table of Contents
 ============
 
--   [Function Usage](#function-usage)
--   [Installation](#installation)
--   [Contact](#contact)
--   [Demonstration](#demonstration)
-    -   [Load the Packages/Data](#load-the-packagesdata)
-    -   [Download](#download)
-    -   [Read .docx](#read-.docx)
-    -   [Read .pdf](#read-.pdf)
-    -   [Read Transcripts](#read-transcripts)
-        -   [docx Simple](#docx-simple)
-        -   [docx With Skip](#docx-with-skip)
-        -   [docx With Dash Separator](#docx-with-dash-separator)
-        -   [xls and xlsx](#xls-and-xlsx)
-        -   [Reading Text](#reading-text)
-        -   [Authentic Interview](#authentic-interview)
-    -   [Read Directory Contents](#read-directory-contents)
+-   [[Function Usage](#function-usage)](#[function-usage](#function-usage))
+-   [[Installation](#installation)](#[installation](#installation))
+-   [[Contact](#contact)](#[contact](#contact))
+-   [[Demonstration](#demonstration)](#[demonstration](#demonstration))
+    -   [[Load the Packages/Data](#load-the-packagesdata)](#[load-the-packagesdata](#load-the-packagesdata))
+    -   [[Download](#download)](#[download](#download))
+    -   [[Read .docx](#read-.docx)](#[read-.docx](#read-.docx))
+    -   [[Read .pdf](#read-.pdf)](#[read-.pdf](#read-.pdf))
+    -   [[Read Transcripts](#read-transcripts)](#[read-transcripts](#read-transcripts))
+        -   [[docx Simple](#docx-simple)](#[docx-simple](#docx-simple))
+        -   [[docx With Skip](#docx-with-skip)](#[docx-with-skip](#docx-with-skip))
+        -   [[docx With Dash Separator](#docx-with-dash-separator)](#[docx-with-dash-separator](#docx-with-dash-separator))
+        -   [[xls and xlsx](#xls-and-xlsx)](#[xls-and-xlsx](#xls-and-xlsx))
+        -   [[Reading Text](#reading-text)](#[reading-text](#reading-text))
+        -   [[Authentic Interview](#authentic-interview)](#[authentic-interview](#authentic-interview))
+    -   [[Read Directory Contents](#read-directory-contents)](#[read-directory-contents](#read-directory-contents))
 
 Installation
 ============
@@ -107,7 +107,7 @@ Contact
 
 You are welcome to:  
 
--   submit suggestions and bug-reports at: <https://github.com/trinker/textreadr/issues>  
+-   submit suggestions and bug-reports at:     <https://github.com/trinker/textreadr/issues>  
 -   send a pull request on: <https://github.com/trinker/textreadr/>  
 -   compose a friendly e-mail to: <tyler.rinker@gmail.com>
 
@@ -145,7 +145,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpEZ8UIu
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\Rtmpie6DKv
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -380,9 +380,6 @@ The `read_dir` function wraps other **textreadr** functions and `lapply`
 to create a data frame with a document and text column (one row per
 document). We will read the following documents from the 'pos' directory
 in **textreadr**'s system file:
-
-    system.file("docs/Maas2011/pos", package = "textreadr") %>%
-        pathr::tree(use.data.tree = TRUE)
 
     ##        levelName
     ## 1  pos          
