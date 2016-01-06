@@ -4,10 +4,10 @@
 \alias{read_transcript}
 \title{read_transcripts Into R}
 \usage{
-read_transcript(file, col.names = NULL, text.var = NULL,
+read_transcript(file, col.names = c("Person", "Dialogue"), text.var = NULL,
   merge.broke.tot = TRUE, header = FALSE, dash = "", ellipsis = "...",
   quote2bracket = FALSE, rm.empty.rows = TRUE, na = "", sep = NULL,
-  skip = 0, text, comment.char = "", ...)
+  skip = 0, text, comment.char = "", max.person.nchar = 20, ...)
 }
 \arguments{
 \item{file}{The name of the file which the data are to be read from. Each row
@@ -58,6 +58,10 @@ include (small) data sets within R code.}
 \item{comment.char}{A character vector of length one containing a single
 character or an empty string. Use \code{""} to turn off the interpretation of
 comments altogether.}
+
+\item{max.person.nchar}{The max number of characters long names are expected
+to be.  This information is used to warn the user if a separat appears beyond
+this length in the text.}
 
 \item{\ldots}{Further arguments to be passed to \code{\link[utils]{read.table}}.}
 }
@@ -124,7 +128,7 @@ read_transcript(text="34..    The New York Times reports a lot of words here.
 
 ## Real Example
 real_dat <- read_transcript(
-    system.file("docs/Yasmine_Interivew_Transcript.docx", package = "textreadr"),
+    system.file("docs/Yasmine_Interview_Transcript.docx", package = "textreadr"),
     skip = 19
 )
 }

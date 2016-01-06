@@ -107,7 +107,7 @@ Contact
 
 You are welcome to:  
 
--   submit suggestions and bug-reports at: <https://github.com/trinker/textreadr/issues> 
+-   submit suggestions and bug-reports at: <https://github.com/trinker/textreadr/issues>  
 -   send a pull request on: <https://github.com/trinker/textreadr/>  
 -   compose a friendly e-mail to: <tyler.rinker@gmail.com>
 
@@ -128,7 +128,7 @@ Load the Packages/Data
     )
 
     pdf_doc <- system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr")
-    docx_doc <- system.file("docs/Yasmine_Interivew_Transcript.docx", package = "textreadr")
+    docx_doc <- system.file("docs/Yasmine_Interview_Transcript.docx", package = "textreadr")
 
 Download
 --------
@@ -145,7 +145,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\Rtmp6T0D2x
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpEZ8UIu
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -163,16 +163,16 @@ the markup.
         read_docx() %>%
         head(3)
 
-    ## [1] "JRMC2202 Audio Project" " "                     
+    ## [1] "JRMC2202 Audio Project" ""                      
     ## [3] "Interview Transcript"
 
     docx_doc %>%
         read_docx(19) %>%
         head(3)
 
-    ## [1] "Hassan:           Could you please tell me your name, your title, your age, and your place of ref,                                   umm, residence?      "
-    ## [2] " Abd Rabou:   My name is Ahmad Abd Rabou. I<U+0092>m assistant professor of comparative politics at "                                                             
-    ## [3] "                         both Cairo University and The American University in Cairo. I<U+0092>m 34 years old. I "
+    ## [1] "Hassan:           Could you please tell me your name, your title, your age, and your place of ref,                                   umm, residence?"
+    ## [2] "Abd Rabou:   My name is Ahmad Abd Rabou. I<U+0092>m assistant professor of comparative politics at"                                                         
+    ## [3] "both Cairo University and The American University in Cairo. I<U+0092>m 34 years old. I"
 
 Read .pdf
 ---------
@@ -242,7 +242,7 @@ handles. These are the files that will be read in:
 
     ## Source: local data frame [5 x 2]
     ## 
-    ##                  X1                                       X2
+    ##              Person                                 Dialogue
     ## 1      Researcher 2                         October 7, 1892.
     ## 2         Teacher 4 Students it's time to learn. [Student di
     ## 3 Multiple Students        Yes teacher we're ready to learn.
@@ -258,13 +258,13 @@ parses the file.
 
     read_transcript(trans_docs[2])
 
-    ## Error in data.frame(X1 = speaker, X2 = pvalues, stringsAsFactors = FALSE): arguments imply differing number of rows: 7, 8
+    ## Error in data.frame(X1 = trimws(speaker), X2 = trimws(pvalues), stringsAsFactors = FALSE): arguments imply differing number of rows: 7, 8
 
     read_transcript(trans_docs[2], skip = 1)
 
     ## Source: local data frame [5 x 2]
     ## 
-    ##                  X1                                       X2
+    ##              Person                                 Dialogue
     ## 1      Researcher 2                         October 7, 1892.
     ## 2         Teacher 4 Students it's time to learn. [Student di
     ## 3 Multiple Students        Yes teacher we're ready to learn.
@@ -283,7 +283,7 @@ separator the first go round.
 
     ## Source: local data frame [1 x 2]
     ## 
-    ##              X1                                       X2
+    ##          Person                                 Dialogue
     ## 1 [Cross Talk 3 Teacher 4-Students it's time to learn. [
     ## .           ...                                      ...
 
@@ -291,7 +291,7 @@ separator the first go round.
 
     ## Source: local data frame [3 x 2]
     ## 
-    ##                  X1                                       X2
+    ##              Person                                 Dialogue
     ## 1         Teacher 4 Students it's time to learn. [Student di
     ## 2 Multiple Students Yes teacher we're ready to learn. [Cross
     ## 3         Teacher 4 Let's read this terrific book together. 
@@ -303,7 +303,7 @@ separator the first go round.
 
     ## Source: local data frame [4 x 2]
     ## 
-    ##                   X0                                       X1
+    ##               Person                                 Dialogue
     ## 1      Researcher 2:                         October 7, 1892.
     ## 2         Teacher 4:             Students it's time to learn.
     ## 3 Multiple Students:        Yes teacher we're ready to learn.
@@ -314,7 +314,7 @@ separator the first go round.
 
     ## Source: local data frame [4 x 2]
     ## 
-    ##                   X1                                       X2
+    ##               Person                                 Dialogue
     ## 1      Researcher 2:                         October 7, 1892.
     ## 2         Teacher 4:             Students it's time to learn.
     ## 3 Multiple Students:        Yes teacher we're ready to learn.
@@ -357,20 +357,20 @@ Here I read in an authentic interview transcript:
     docx_doc %>%
         read_transcript(c("Person", "Dialogue"), skip = 19)
 
-    ## Source: local data frame [16 x 2]
+    ## Source: local data frame [15 x 2]
     ## 
-    ##                                      Person                                 Dialogue
-    ## 1                                    Hassan Could you please tell me your name, your
-    ## 2                                 Abd Rabou My name is Ahmad Abd Rabou. I'm assistan
-    ## 3                                    Hassan Professor Abd Rabou, being a current pro
-    ## 4                                 Abd Rabou Sure. First of all, let's look at the so
-    ## 5   For Cairo University, it<U+0092>s totally diff The School of Economics and Political Sc
-    ## 6                                    Hassan So from this point of the differences of
-    ## 7                                 Abd Rabou No. I don't--It depends --Like my--This 
-    ## 8                                    Hassan So, as political science students, does 
-    ## 9                                 Abd Rabou Less, not mature, they are politically m
-    ## 10                                   Hassan Since you are an active politician and w
-    ## ..                                      ...                                      ...
+    ##       Person                                 Dialogue
+    ## 1     Hassan Could you please tell me your name, your
+    ## 2  Abd Rabou My name is Ahmad Abd Rabou. I'm assistan
+    ## 3     Hassan Professor Abd Rabou, being a current pro
+    ## 4  Abd Rabou Sure. First of all, let's look at the so
+    ## 5     Hassan So from this point of the differences of
+    ## 6  Abd Rabou No. I don't--It depends --Like my--This 
+    ## 7     Hassan So, as political science students, does 
+    ## 8  Abd Rabou Less, not mature, they are politically m
+    ## 9     Hassan Since you are an active politician and w
+    ## 10 Abd Rabou It does somehow. What I do is--First of 
+    ## ..       ...                                      ...
 
 Read Directory Contents
 -----------------------
@@ -378,10 +378,40 @@ Read Directory Contents
 Often there is a need to read multiple files in from a single directory.
 The `read_dir` function wraps other **textreadr** functions and `lapply`
 to create a data frame with a document and text column (one row per
-document).
+document). We will read the following documents from the 'pos' directory
+in **textreadr**'s system file:
 
     system.file("docs/Maas2011/pos", package = "textreadr") %>%
-        read_dir()
+        pathr::tree(use.data.tree = TRUE)
+
+    ##        levelName
+    ## 1  pos          
+    ## 2   ¦--0_9.txt  
+    ## 3   ¦--1_7.txt  
+    ## 4   ¦--10_9.txt 
+    ## 5   ¦--11_9.txt 
+    ## 6   ¦--12_9.txt 
+    ## 7   ¦--13_7.txt 
+    ## 8   ¦--14_10.txt
+    ## 9   ¦--15_7.txt 
+    ## 10  ¦--16_7.txt 
+    ## 11  ¦--17_9.txt 
+    ## 12  ¦--18_7.txt 
+    ## 13  ¦--19_10.txt
+    ## 14  ¦--2_9.txt  
+    ## 15  ¦--3_10.txt 
+    ## 16  ¦--4_8.txt  
+    ## 17  ¦--5_10.txt 
+    ## 18  ¦--6_10.txt 
+    ## 19  ¦--7_7.txt  
+    ## 20  ¦--8_7.txt  
+    ## 21  °--9_7.txt
+
+Here we have read the files in, one row per file.
+
+    system.file("docs/Maas2011/pos", package = "textreadr") %>%
+        read_dir() %>%
+        peek(Inf, 40)
 
     ## Source: local data frame [20 x 2]
     ## 
@@ -396,4 +426,14 @@ document).
     ## 8      15_7 I guess if a film has magic, I don't nee
     ## 9      16_7 I found this to be a so-so romance/drama
     ## 10     17_9 This is a complex film that explores the
+    ## 11     18_7 `Stanley and Iris' is a heart warming fi
+    ## 12    19_10 I just read the comments of TomReynolds2
+    ## 13      2_9 Bromwell High is nothing short of brilli
+    ## 14     3_10 "All the world's a stage and its people 
+    ## 15      4_8 FUTZ is the only show preserved from the
+    ## 16     5_10 I came in in the middle of this film so 
+    ## 17     6_10 Fair drama/love story movie that focuses
+    ## 18      7_7 Although I didn't like Stanley & Iris tr
+    ## 19      8_7 Very good drama although it appeared to 
+    ## 20      9_7 Working-class romantic drama from direct
     ## ..      ...                                      ...

@@ -52,7 +52,7 @@ pacman::p_load_gh("trinker/textreadr")
 
 # Contact
 
-You are welcome to:    
+You are welcome to:       
 
 * submit suggestions and bug-reports at: <https://github.com/trinker/textreadr/issues>      
 * send a pull request on: <https://github.com/trinker/textreadr/>      
@@ -74,7 +74,7 @@ trans_docs <- dir(
 )
 
 pdf_doc <- system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr")
-docx_doc <- system.file("docs/Yasmine_Interivew_Transcript.docx", package = "textreadr")
+docx_doc <- system.file("docs/Yasmine_Interview_Transcript.docx", package = "textreadr")
 ```
 
 
@@ -203,9 +203,17 @@ docx_doc %>%
 
 ## Read Directory Contents
 
-Often there is a need to read multiple files in from a single directory.  The `read_dir` function wraps other **textreadr** functions and `lapply` to create a data frame with a document and text column (one row per document).  
+Often there is a need to read multiple files in from a single directory.  The `read_dir` function wraps other **textreadr** functions and `lapply` to create a data frame with a document and text column (one row per document).  We will read the following documents from the 'pos' directory in **textreadr**'s system file:
 
 ```{r}
 system.file("docs/Maas2011/pos", package = "textreadr") %>%
-    read_dir()
+    pathr::tree(use.data.tree = TRUE)
+```
+
+Here we have read the files in, one row per file.
+
+```{r}
+system.file("docs/Maas2011/pos", package = "textreadr") %>%
+    read_dir() %>%
+    peek(Inf, 40)
 ```

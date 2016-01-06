@@ -37,6 +37,9 @@
 #' @param comment.char A character vector of length one containing a single
 #' character or an empty string. Use \code{""} to turn off the interpretation of
 #' comments altogether.
+#' @param max.person.nchar The max number of characters long names are expected
+#' to be.  This information is used to warn the user if a separat appears beyond
+#' this length in the text.
 #' @param \ldots Further arguments to be passed to \code{\link[utils]{read.table}}.
 #' @return Returns a dataframe of dialogue and people.
 #' @note If a transcript is a .docx file read_transcript expects two columns
@@ -96,14 +99,14 @@
 #'
 #' ## Real Example
 #' real_dat <- read_transcript(
-#'     system.file("docs/Yasmine_Interivew_Transcript.docx", package = "textreadr"),
+#'     system.file("docs/Yasmine_Interview_Transcript.docx", package = "textreadr"),
 #'     skip = 19
 #' )
 read_transcript <-
-function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
+function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke.tot = TRUE,
     header = FALSE, dash = "", ellipsis = "...", quote2bracket = FALSE,
     rm.empty.rows = TRUE, na = "", sep = NULL, skip = 0, text, comment.char = "",
-    ...) {
+    max.person.nchar = 20, ...) {
 
     if (missing(file) && !missing(text)) {
         file <- textConnection(text)
@@ -142,7 +145,7 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
                 na = na, skip = skip, ...)
             },
         docx = {
-            x <- read.docx(file, skip = skip, sep = sep)
+            x <- read.docx(file, skip = skip, sep = sep, max.person.nchar = max.person.nchar)
             sep_hits <- grepl(sep, x[, 2])
             if(any(sep_hits)) {
                 warning(sprintf("The following text contains the \"%s\" separator and may not have split correctly:\n", sep),
@@ -228,7 +231,7 @@ rm_na_row <- function(x, remove = TRUE) {
 }
 
 read.docx <-
-function(file, skip = 0, sep = ":") {
+function(file, skip = 0, sep = ":", max.person.nchar = 20) {
     tmp <- tempfile()
     if (!dir.create(tmp)) stop("Temporary directory could not be established.")
     utils::unzip(file, exdir = tmp)  # Unzip to temporary directory
@@ -239,13 +242,19 @@ function(file, skip = 0, sep = ":") {
     pvalues <- sapply(nodeSet, XML::xmlValue)  # Return their (textual) values
     pvalues <- pvalues[pvalues != ""]  # Remove empty lines
     if (skip > 0) pvalues <- pvalues[-seq(skip)]  # Ignore these many lines
+    if (any(grepl(paste0("^.{", max.person.nchar, ",}", sep), pvalues))) {
+        warning(sprintf(paste0(
+            "I've detected the separator beyond %s characters from the line start.  Parsing may be incorrect...\n",
+            "  Consider manually searching the .docx for use of the separator in-text rather than to separate person/text."
+        ), max.person.nchar))
+    }
     keys    <- sapply(gregexpr(paste0("^.*?", sep), pvalues), function(x) x > 0)
     speaker <- regmatches(pvalues, gregexpr(paste0("^.*?", sep), pvalues))
     pvalues <- gsub(paste0("^.*?", sep), "", pvalues)  # Remove speaker from lines
     speaker <- rep(speaker[which(keys)], diff(c(which(keys), length(speaker)+1)))
     speaker <- unlist(speaker)  # Make sure it's a vector
     speaker <- substr(speaker, 1, nchar(speaker)-nchar(sep)) # Remove ending colon
-    transcript <- data.frame(X1 = speaker,
-        X2 = pvalues, stringsAsFactors = FALSE)
+    transcript <- data.frame(X1 = trimws(speaker),
+        X2 = trimws(pvalues), stringsAsFactors = FALSE)
     return(transcript)
 }

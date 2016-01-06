@@ -2,9 +2,12 @@
 % Please edit documentation in R/peek.R
 \name{peek}
 \alias{peek}
+\alias{unpeek}
 \title{Data Frame Viewing}
 \usage{
 peek(x, n = 10, width = 20, ...)
+
+unpeek(x)
 }
 \arguments{
 \item{x}{A \code{\link[base]{data.frame}} object.}
@@ -19,9 +22,12 @@ peek(x, n = 10, width = 20, ...)
 Prints a truncated head but invisibly returns \code{x}.
 }
 \description{
-Convenience function to view all the columns of the head
+\code{peek} - Convenience function to view all the columns of the head
 of a truncated \code{\link[base]{data.frame}}.  \code{peek} invisibly returns
 \code{x}.  This makes its use ideal in a \pkg{dplyr}/\pkg{magrittr} pipeline.
+
+\code{unpeek} - Strips out class \code{textreadr} to entire
+\code{\link[base]{data.frame}} will be printed.
 }
 \details{
 By default \pkg{dplyr} does not print all columns of a data frame

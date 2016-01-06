@@ -25,5 +25,5 @@ read_docx <- function (file, skip = 0) {
     pvalues <- sapply(nodeSet, XML::xmlValue)
     pvalues <- pvalues[pvalues != ""]
     if (skip > 0) pvalues <- pvalues[-seq(skip)]
-    pvalues
+    trimws(pvalues)
 }
