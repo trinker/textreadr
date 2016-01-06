@@ -74,7 +74,7 @@ Table of Contents
 -   [Installation](#installation)
 -   [Contact](#contact)
 -   [Demonstration](#demonstration)
-    -   [Load the Packages?Data](#load-the-packagesdata)
+    -   [Load the Packages/Data](#load-the-packagesdata)
     -   [Download](#download)
     -   [Read .docx](#read-.docx)
     -   [Read .pdf](#read-.pdf)
