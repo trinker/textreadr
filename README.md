@@ -114,7 +114,7 @@ You are welcome to:
 Demonstration
 =============
 
-Load the Packages?Data
+Load the Packages/Data
 ----------------------
 
     if (!require("pacman")) install.packages("pacman")

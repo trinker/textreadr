@@ -60,7 +60,7 @@ You are welcome to:
 
 # Demonstration
 
-## Load the Packages?Data
+## Load the Packages/Data
 
 ```{r, message=FALSE}
 if (!require("pacman")) install.packages("pacman")
