@@ -323,7 +323,7 @@ separator the first go round.
 
 ### Reading Text
 
-Like `read.table` `read-transcript` also has a `text` argument which is
+Like `read.table` `read_transcript` also has a `text` argument which is
 useful for demoing code.
 
     read_transcript(
