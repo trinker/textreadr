@@ -136,7 +136,7 @@ Download
 `download` is simply a wrapper for `curl::curl_download` that allows
 multiple documents to be download, has the `tempdir` pre-set as the
 `destfile` (named `loc` in **textreadr**), and also returns the path to
-the file down load for easy use in a **magrittr** chain.
+the file download for easy use in a **magrittr** chain.
 
 Here I download a .docx file of presidential debated from 2012.
 
