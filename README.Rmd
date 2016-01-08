@@ -173,7 +173,7 @@ read_transcript(trans_docs[5])
 
 ### Reading Text
 
-Like `read.table` `read-transcript` also has a `text` argument which is useful for demoing code.
+Like `read.table` `read_transcript` also has a `text` argument which is useful for demoing code.
 
 ```{r}
 read_transcript(
