@@ -6,7 +6,7 @@ Authors@R: c(person("Tyler", "Rinker", email =
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 Description: A small collection of convenience tools for reading text
         documents into R.
-Depends: R (>= 3.2.3)
+Depends: R (>= 3.2.2)
 Suggests: testthat
 Imports: curl, readxl, textshape, tm, tools, utils, XML
 Date: 2016-01-06
