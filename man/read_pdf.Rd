@@ -4,28 +4,20 @@
 \alias{read_pdf}
 \title{Read a Portable Document Format into R}
 \usage{
-read_pdf(file, engine = "ghostscript", skip = 0, language = "en",
-  id = "id1")
+read_pdf(file, skip = 0)
 }
 \arguments{
 \item{file}{A path to a PDF file.}
 
-\item{engine}{A character string for the preferred PDF extraction engine (see
-\code{\link[tm]{readPDF}}).}
-
 \item{skip}{Integer; the number of lines of the data file to skip before
 beginning to read data.}
-
-\item{language}{A string giving the language (see \code{\link[tm]{readPDF}}).}
-
-\item{id}{Not used (see \code{\link[tm]{readPDF}}).}
 }
 \value{
 Returns a \code{\link[base]{data.frame}} with the page number
 (\code{page_id}), line number (\code{element_id}), and the \code{text}.
 }
 \description{
-A wrapper for \code{\link[tm]{readPDF}} to read PDFs into R.
+A wrapper for \code{\link[pdftools]{pdf_text}} to read PDFs into R.
 }
 \note{
 A word of caution from \href{http://stackoverflow.com/a/9187015/1000343}{Carl Witthoft}"
@@ -41,8 +33,23 @@ pdf_dat <- read_pdf(
 
 pdf_dat_b <- read_pdf(
     system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr"),
-    skip = 9
+    skip = 1
 )
+
+\dontrun{
+system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr") \%>\%
+    read_pdf(1) \%>\%
+    `[[`('text') \%>\%
+    head(-1) \%>\%
+    textshape::combine() \%>\%
+    gsub("([A-Z])( )([A-Z])", "\\\\1_\\\\3", .) \%>\%
+    strsplit("(-| )(?=[A-Z_]+:)", perl=TRUE) \%>\%
+    `[[`(1) \%>\%
+    dplyr::data_frame(text=.) \%>\%
+    dplyr::mutate(text = gsub('([A-Z]{2}):', "\\\\1::", text)) \%>\% #`[`(38,)\%>\%unlist()
+    tidyr::separate(text, c('person', 'text'), sep = "::") \%>\%
+    dplyr::mutate_each(funs(trimws))
+}
 }
 \seealso{
 \code{\link[tm]{readPDF}}

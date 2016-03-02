@@ -105,9 +105,8 @@ the development version:
 Contact
 =======
 
-You are welcome to:  
-
--   submit suggestions and bug-reports at:     <https://github.com/trinker/textreadr/issues>  
+You are welcome to: 
+-   submit suggestions and bug-reports at: <https://github.com/trinker/textreadr/issues>  
 -   send a pull request on: <https://github.com/trinker/textreadr/>  
 -   compose a friendly e-mail to: <tyler.rinker@gmail.com>
 
@@ -145,7 +144,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\Rtmpie6DKv
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpYFoudA
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -190,19 +189,19 @@ with meta data, including page numbers and element (row) ids.
     pdf_doc %>%
         read_pdf() 
 
-    ## Source: local data frame [825 x 3]
+    ## Source: local data frame [616 x 3]
     ## 
-    ##    page_id element_id                                            text
-    ## 1        1          1                                                
-    ## 2        1          2        Interview with Mary Waters Spaulding, Au
-    ## 3        1          3                                                
-    ## 4        1          4 \\Gamma \\Delta \\Theta \\Lambda \\Xi  \\Pi \\D
-    ## 5        1          5       flfi^ \\Lambda _ffi !i*, "i`j*aefi #ae,fi
-    ## 6        1          6        is August 8, 2013, and we are in Lexingt
-    ## 7        1          7        life and family, and particularly about 
-    ## 8        1          8        your full name, date of birth, and place
-    ## 9        1          9                                                
-    ## 10       1         10        MARY WATERS SPAULDING: My name is Mary E
+    ##    page_id element_id                                     text
+    ## 1        1          1 Interview with Mary Waters Spaulding, Au
+    ## 2        1          2 CRAIG BREADEN: My name is Craig Breaden.
+    ## 3        1          3 and I<U+0092>m with Kirston Johnson, the curato
+    ## 4        1          4 is August 8, 2013, and we are in Lexingt
+    ## 5        1          5 life and family, and particularly about 
+    ## 6        1          6 your full name, date of birth, and place
+    ## 7        1          7 MARY WATERS SPAULDING: My name is Mary E
+    ## 8        1          8 birth was Lexington, NC, on May 14, 1942
+    ## 9        1          9 BREADEN: Can you describe what Lexington
+    ## 10       1         10                                  1940<U+0092>s?
     ## ..     ...        ...                                      ...
 
 [Carl Witthoft's](http://stackoverflow.com/a/9187015/1000343) word of
