@@ -37,6 +37,7 @@ pdf_dat_b <- read_pdf(
 )
 
 \dontrun{
+library(textshape)
 system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr") \%>\%
     read_pdf(1) \%>\%
     `[[`('text') \%>\%
@@ -45,10 +46,7 @@ system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr") \%>\%
     gsub("([A-Z])( )([A-Z])", "\\\\1_\\\\3", .) \%>\%
     strsplit("(-| )(?=[A-Z_]+:)", perl=TRUE) \%>\%
     `[[`(1) \%>\%
-    dplyr::data_frame(text=.) \%>\%
-    dplyr::mutate(text = gsub('([A-Z]{2}):', "\\\\1::", text)) \%>\% #`[`(38,)\%>\%unlist()
-    tidyr::separate(text, c('person', 'text'), sep = "::") \%>\%
-    dplyr::mutate_each(funs(trimws))
+    textshape::split_transcript()
 }
 }
 \seealso{
