@@ -8,7 +8,7 @@ Description: A small collection of convenience tools for reading text
         documents into R.
 Depends: R (>= 3.2.2)
 Suggests: testthat
-Imports: curl, readxl, textshape, tm, tools, utils, XML
+Imports: curl, pdftools, readxl, textshape, tools, utils, XML
 Date: 2016-03-01
 License: GPL-2
 LazyData: TRUE
