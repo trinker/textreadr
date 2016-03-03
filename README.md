@@ -1,7 +1,6 @@
 textreadr
 ============
 
-
 <img src="inst/textreadr_logo/r_textreadr.png" width="320" alt="textreadr Logo">
 
 [![Project Status: Active - The project has reached a stable, usable
@@ -11,12 +10,31 @@ developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repo
 Status](https://travis-ci.org/trinker/textreadr.svg?branch=master)](https://travis-ci.org/trinker/textreadr)
 [![Coverage
 Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](https://coveralls.io/r/trinker/textreadr?branch=master)
-<a href="https://img.shields.io/badge/Version-0.1.0-orange.svg"><img src="https://img.shields.io/badge/Version-0.1.0-orange.svg" alt="Version"/></a>
+<a href="https://img.shields.io/badge/Version-0.2.0-orange.svg"><img src="https://img.shields.io/badge/Version-0.2.0-orange.svg" alt="Version"/></a>
 </p>
+
+
 **textreadr** is a small collection of convenience tools for reading
 text documents into R. This is not meant to be an exhaustive collection;
 for more see the
 [**tm**](https://cran.r-project.org/web/packages/tm/index.html) package.
+
+-   [Function Usage](#function-usage)
+-   [Installation](#installation)
+-   [Contact](#contact)
+-   [Demonstration](#demonstration)
+    -   [Load the Packages/Data](#load-the-packagesdata)
+    -   [Download](#download)
+    -   [Read .docx](#read-.docx)
+    -   [Read .pdf](#read-.pdf)
+    -   [Read Transcripts](#read-transcripts)
+        -   [docx Simple](#docx-simple)
+        -   [docx With Skip](#docx-with-skip)
+        -   [docx With Dash Separator](#docx-with-dash-separator)
+        -   [xls and xlsx](#xls-and-xlsx)
+        -   [Reading Text](#reading-text)
+        -   [Authentic Interview](#authentic-interview)
+    -   [Read Directory Contents](#read-directory-contents)
 
 Function Usage
 ==============
@@ -66,30 +84,8 @@ table below:
 </tbody>
 </table>
 
-
-Table of Contents
-============
-
--   [[Function Usage](#function-usage)](#[function-usage](#function-usage))
--   [[Installation](#installation)](#[installation](#installation))
--   [[Contact](#contact)](#[contact](#contact))
--   [[Demonstration](#demonstration)](#[demonstration](#demonstration))
-    -   [[Load the Packages/Data](#load-the-packagesdata)](#[load-the-packagesdata](#load-the-packagesdata))
-    -   [[Download](#download)](#[download](#download))
-    -   [[Read .docx](#read-.docx)](#[read-.docx](#read-.docx))
-    -   [[Read .pdf](#read-.pdf)](#[read-.pdf](#read-.pdf))
-    -   [[Read Transcripts](#read-transcripts)](#[read-transcripts](#read-transcripts))
-        -   [[docx Simple](#docx-simple)](#[docx-simple](#docx-simple))
-        -   [[docx With Skip](#docx-with-skip)](#[docx-with-skip](#docx-with-skip))
-        -   [[docx With Dash Separator](#docx-with-dash-separator)](#[docx-with-dash-separator](#docx-with-dash-separator))
-        -   [[xls and xlsx](#xls-and-xlsx)](#[xls-and-xlsx](#xls-and-xlsx))
-        -   [[Reading Text](#reading-text)](#[reading-text](#reading-text))
-        -   [[Authentic Interview](#authentic-interview)](#[authentic-interview](#authentic-interview))
-    -   [[Read Directory Contents](#read-directory-contents)](#[read-directory-contents](#read-directory-contents))
-
 Installation
 ============
-
 
 To download the development version of **textreadr**:
 
@@ -105,8 +101,10 @@ the development version:
 Contact
 =======
 
-You are welcome to: 
--   submit suggestions and bug-reports at: <https://github.com/trinker/textreadr/issues>  
+You are welcome to:
+
+-   submit suggestions and bug-reports at:
+    <https://github.com/trinker/textreadr/issues>  
 -   send a pull request on: <https://github.com/trinker/textreadr/>  
 -   compose a friendly e-mail to: <tyler.rinker@gmail.com>
 
@@ -144,7 +142,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpYFoudA
+    ## pres.deb1.docx read into C:\Users\trinker\AppData\Local\Temp\RtmpSKV5mv
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
