@@ -22,22 +22,22 @@ for more see the
 Table of Contents
 ============
 
--   [[Functions](#functions)](#[functions](#functions))
--   [[Installation](#installation)](#[installation](#installation))
--   [[Contact](#contact)](#[contact](#contact))
--   [[Demonstration](#demonstration)](#[demonstration](#demonstration))
-    -   [[Load the Packages/Data](#load-the-packagesdata)](#[load-the-packagesdata](#load-the-packagesdata))
-    -   [[Download](#download)](#[download](#download))
-    -   [[Read .docx](#read-.docx)](#[read-docx](#read-docx))
-    -   [[Read .pdf](#read-.pdf)](#[read-pdf](#read-pdf))
-    -   [[Read Transcripts](#read-transcripts)](#[read-transcripts](#read-transcripts))
-        -   [[docx Simple](#docx-simple)](#[docx-simple](#docx-simple))
-        -   [[docx With Skip](#docx-with-skip)](#[docx-with-skip](#docx-with-skip))
-        -   [[docx With Dash Separator](#docx-with-dash-separator)](#[docx-with-dash-separator](#docx-with-dash-separator))
-        -   [[xls and xlsx](#xls-and-xlsx)](#[xls-and-xlsx](#xls-and-xlsx))
-        -   [[Reading Text](#reading-text)](#[reading-text](#reading-text))
-        -   [[Authentic Interview](#authentic-interview)](#[authentic-interview](#authentic-interview))
-    -   [[Read Directory Contents](#read-directory-contents)](#[read-directory-contents](#read-directory-contents))
+-   [Functions](#functions)
+-   [Installation](#installation)
+-   [Contact](#contact)
+-   [Demonstration](#demonstration)
+    -   [Load the Packages/Data](#load-the-packagesdata)
+    -   [Download](#download)
+    -   [Read .docx](#read-docx)
+    -   [Read .pdf](#read-pdf)
+    -   [Read Transcripts](#read-transcripts)
+        -   [docx Simple](#docx-simple)
+        -   [docx With Skip](#docx-with-skip)
+        -   [docx With Dash Separator](#docx-with-dash-separator)
+        -   [xls and xlsx](#xls-and-xlsx)
+        -   [Reading Text](#reading-text)
+        -   [Authentic Interview](#authentic-interview)
+    -   [Read Directory Contents](#read-directory-contents)
 
 Functions
 ============
