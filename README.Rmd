@@ -24,7 +24,7 @@ verbadge <- sprintf('<a href="https://img.shields.io/badge/Version-%s-orange.svg
 
 **textreadr** is a small collection of convenience tools for reading text documents into R.  This is not meant to be an exhaustive collection; for more see the [**tm**](https://cran.r-project.org/web/packages/tm/index.html) package.
 
-# Function Usage
+# Functions
 
 The main functions, task category, & descriptions are summarized in the table below:
 
