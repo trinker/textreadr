@@ -110,7 +110,7 @@ docx_doc %>%
 
 ## Read .pdf
 
-Like .docx a .pdf file is simply a container.  Reading PDF's is made easier with a number of command line tools.  A few methods of PDF reading have been incorporated into R.  Here I wrap the stable, reliable **tm** port to produce `read_pdf`, a function with sensible defaults that is designed to read PDFs into R for as many folks as possible right out of the box.
+Like .docx a .pdf file is simply a container.  Reading PDF's is made easier with a number of command line tools.  A few methods of PDF reading have been incorporated into R.  Here I wrap **pdftools** `pdf_text` to produce `read_pdf`, a function with sensible defaults that is designed to read PDFs into R for as many folks as possible right out of the box.
 
 Here I read in a PDF with `read_pdf`.  Notice the result is a data frame with meta data, including page numbers and element (row) ids.
 
