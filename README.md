@@ -11,7 +11,7 @@ developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repo
 Status](https://travis-ci.org/trinker/textreadr.svg?branch=master)](https://travis-ci.org/trinker/textreadr)
 [![Coverage
 Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](https://coveralls.io/r/trinker/textreadr?branch=master)
-<a href="https://img.shields.io/badge/Version-0.2.0-orange.svg"><img src="https://img.shields.io/badge/Version-0.2.0-orange.svg" alt="Version"/></a>
+<a href="https://img.shields.io/badge/Version-0.2.1-orange.svg"><img src="https://img.shields.io/badge/Version-0.2.1-orange.svg" alt="Version"/></a>
 </p>
 **textreadr** is a small collection of convenience tools for reading
 text documents into R. This is not meant to be an exhaustive collection;
@@ -36,6 +36,7 @@ Table of Contents
         -   [docx With Skip](#docx-with-skip)
         -   [docx With Dash Separator](#docx-with-dash-separator)
         -   [xls and xlsx](#xls-and-xlsx)
+        -   [doc](#doc)
         -   [Reading Text](#reading-text)
         -   [Authentic Interview](#authentic-interview)
     -   [Read Directory Contents](#read-directory-contents)
@@ -151,7 +152,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpuYNJSd
+    ## pres.deb1.docx read into C:\Users\trinker\AppData\Local\Temp\RtmpqAsDuA
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -169,16 +170,16 @@ the markup.
         read_docx() %>%
         head(3)
 
-    ## [1] "JRMC2202 Audio Project"      "Interview Transcript"       
-    ## [3] "Interviewer: Yasmine Hassan"
+    ## [1] "JRMC2202 Audio Project" " "                     
+    ## [3] "Interview Transcript"
 
     docx_doc %>%
         read_docx(15) %>%
         head(3)
 
-    ## [1] "Hassan:           Could you please tell me your name, your title, your age, and your place of ref,                                   umm, residence?"
-    ## [2] "Abd Rabou:   My name is Ahmad Abd Rabou. I<U+0092>m assistant professor of comparative politics at"                                                         
-    ## [3] "both Cairo University and The American University in Cairo. I<U+0092>m 34 years old. I"
+    ## [1] " "                                              
+    ## [2] "16 October 2014 "                               
+    ## [3] "Persons Present:             Yasmine Hassan - I"
 
 Read .doc
 ---------
@@ -267,7 +268,8 @@ handles. These are the files that will be read in:
 
     basename(trans_docs)
 
-    ## [1] "trans1.docx" "trans2.docx" "trans3.docx" "trans4.xlsx" "trans5.xls"
+    ## [1] "trans1.docx" "trans2.docx" "trans3.docx" "trans4.xlsx" "trans5.xls" 
+    ## [6] "trans6.doc"
 
 ### docx Simple
 
@@ -312,7 +314,7 @@ used to separate speaker and text. Here is an example where hypens are
 used as a separator. Notice the poor parse with colon set as the default
 separator the first go round.
 
-    read_transcript(trans_docs[3],skip = 1)
+    read_transcript(trans_docs[3], skip = 1)
 
     ## Source: local data frame [1 x 2]
     ## 
@@ -354,6 +356,18 @@ separator the first go round.
     ## 4         Teacher 4: Let's read this terrific book together. 
     ## .                ...                                      ...
 
+### doc
+
+    read_transcript(trans_docs[6], skip = 1)
+
+    ## Source: local data frame [3 x 2]
+    ## 
+    ##               Person                                 Dialogue
+    ## 1         /Teacher 4 / Students it's time to learn. [Student 
+    ## 2 /Multiple Students      / Yes teacher we're ready to learn.
+    ## 3         /Teacher 4 / Let's read this terrific book together
+    ## .                ...                                      ...
+
 ### Reading Text
 
 Like `read.table` `read_transcript` also has a `text` argument which is
@@ -390,19 +404,19 @@ Here I read in an authentic interview transcript:
     docx_doc %>%
         read_transcript(c("Person", "Dialogue"), skip = 19)
 
-    ## Source: local data frame [15 x 2]
+    ## Source: local data frame [13 x 2]
     ## 
     ##       Person                                 Dialogue
-    ## 1     Hassan Could you please tell me your name, your
-    ## 2  Abd Rabou My name is Ahmad Abd Rabou. I'm assistan
-    ## 3     Hassan Professor Abd Rabou, being a current pro
-    ## 4  Abd Rabou Sure. First of all, let's look at the so
-    ## 5     Hassan So from this point of the differences of
-    ## 6  Abd Rabou No. I don't--It depends --Like my--This 
-    ## 7     Hassan So, as political science students, does 
-    ## 8  Abd Rabou Less, not mature, they are politically m
-    ## 9     Hassan Since you are an active politician and w
-    ## 10 Abd Rabou It does somehow. What I do is--First of 
+    ## 1     Hassan Professor Abd Rabou, being a current pro
+    ## 2  Abd Rabou Sure. First of all, let's look at the so
+    ## 3     Hassan So from this point of the differences of
+    ## 4  Abd Rabou No. I don't--It depends --Like my--This 
+    ## 5     Hassan So, as political science students, does 
+    ## 6  Abd Rabou Less, not mature, they are politically m
+    ## 7     Hassan Since you are an active politician and w
+    ## 8  Abd Rabou It does somehow. What I do is--First of 
+    ## 9     Hassan But you are characterized with, somehow 
+    ## 10 Abd Rabou So far I didn't get--So far--Maybe it do
     ## ..       ...                                      ...
 
 Read Directory Contents

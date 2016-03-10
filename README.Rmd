@@ -177,9 +177,10 @@ read_transcript(trans_docs[2], skip = 1)
 The colon is the default separator.  At times other separators may be used to separate speaker and text.  Here is an example where hypens are used as a separator.  Notice the poor parse with colon set as the default separator the first go round.
 
 ```{r}
-read_transcript(trans_docs[3],skip = 1)
+read_transcript(trans_docs[3], skip = 1)
 read_transcript(trans_docs[3], sep = "-", skip = 1)
 ```
+
 
 ### xls and xlsx
 
@@ -188,6 +189,14 @@ read_transcript(trans_docs[3], sep = "-", skip = 1)
 read_transcript(trans_docs[4])
 read_transcript(trans_docs[5])
 ```
+
+
+### doc
+
+```{r}
+read_transcript(trans_docs[6], skip = 1)
+```
+
 
 ### Reading Text
 
