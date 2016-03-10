@@ -29,6 +29,7 @@ Table of Contents
     -   [Load the Packages/Data](#load-the-packagesdata)
     -   [Download](#download)
     -   [Read .docx](#read-docx)
+    -   [Read .doc](#read-doc)
     -   [Read .pdf](#read-pdf)
     -   [Read Transcripts](#read-transcripts)
         -   [docx Simple](#docx-simple)
@@ -66,21 +67,26 @@ table below:
 <td align="left">Read .docx</td>
 </tr>
 <tr class="odd">
+<td align="left"><code>read_doc</code></td>
+<td align="left">reading</td>
+<td align="left">Read .doc</td>
+</tr>
+<tr class="even">
 <td align="left"><code>read_pdf</code></td>
 <td align="left">reading</td>
 <td align="left">Read .pdf</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>read_dir</code></td>
 <td align="left">reading</td>
 <td align="left">Read and format multiple .txt files</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>download</code></td>
 <td align="left">downloading</td>
 <td align="left">Download documents</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>peek</code></td>
 <td align="left">viewing</td>
 <td align="left">Truncated viewing of <code>data.frame</code>s</td>
@@ -128,6 +134,7 @@ Load the Packages/Data
 
     pdf_doc <- system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr")
     docx_doc <- system.file("docs/Yasmine_Interview_Transcript.docx", package = "textreadr")
+    doc_doc <- system.file("docs/Yasmine_Interview_Transcript.doc", package = "textreadr")
 
 Download
 --------
@@ -144,7 +151,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\Rtmpm0DIry
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\Rtmpq66wlx
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -172,6 +179,34 @@ the markup.
     ## [1] "Hassan:           Could you please tell me your name, your title, your age, and your place of ref,                                   umm, residence?"
     ## [2] "Abd Rabou:   My name is Ahmad Abd Rabou. I<U+0092>m assistant professor of comparative politics at"                                                         
     ## [3] "both Cairo University and The American University in Cairo. I<U+0092>m 34 years old. I"
+
+Read .doc
+---------
+
+A .doc file is a bit trickier to read in than .docx. The
+[Antiword](http://www.winfield.demon.nl) program can be used from the
+command line to extract text from a .doc file. Antiword must be
+installed.
+
+    doc_doc %>%
+        read_doc() %>%
+        head()
+
+    ## [1] ""                              "*JRMC2202 Audio Project*"     
+    ## [3] ""                              "*Interview Transcript*"       
+    ## [5] ""                              "*Interviewer:* Yasmine Hassan"
+
+    doc_doc %>%
+        read_doc(33) %>%
+        head(7)
+
+    ## [1] "*Hassan:*           Could you please tell me your name, your title, your age,"
+    ## [2] "and your place of ref,"                                                       
+    ## [3] "umm, residence?"                                                              
+    ## [4] ""                                                                             
+    ## [5] "*Abd Rabou:*   My name is Ahmad Abd Rabou. I'm assistant professor of"        
+    ## [6] "comparative politics at"                                                      
+    ## [7] "both Cairo University and The American University"
 
 Read .pdf
 ---------

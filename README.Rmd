@@ -33,6 +33,7 @@ The main functions, task category, & descriptions are summarized in the table be
 |---------------------------|-------------|---------------------------------------| 
 | `read_transcript`         | reading     | Read 2 column transcripts             | 
 | `read_docx`               | reading     | Read .docx                            |
+| `read_doc`                | reading     | Read .doc                             |
 | `read_pdf`                | reading     | Read .pdf                             |
 | `read_dir`                | reading     | Read and format multiple .txt files   |
 | `download`                | downloading | Download documents                    | 
@@ -75,6 +76,7 @@ trans_docs <- dir(
 
 pdf_doc <- system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr")
 docx_doc <- system.file("docs/Yasmine_Interview_Transcript.docx", package = "textreadr")
+doc_doc <- system.file("docs/Yasmine_Interview_Transcript.doc", package = "textreadr")
 ```
 
 
@@ -106,6 +108,22 @@ docx_doc %>%
 docx_doc %>%
     read_docx(19) %>%
     head(3)
+```
+
+## Read .doc
+
+A .doc file is a bit trickier to read in than .docx.  The [Antiword](http://www.winfield.demon.nl) program can be used from the command line to extract text from a .doc file.  Antiword must be installed.
+
+```{r}
+doc_doc %>%
+    read_doc() %>%
+    head()
+```
+
+```{r}
+doc_doc %>%
+    read_doc(33) %>%
+    head(7)
 ```
 
 ## Read .pdf

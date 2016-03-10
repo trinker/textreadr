@@ -4,12 +4,15 @@
 \alias{download}
 \title{Download Documents}
 \usage{
-download(url, loc = tempdir())
+download(url, loc = tempdir(), file.out = NULL)
 }
 \arguments{
 \item{url}{The download url(s).}
 
 \item{loc}{Where to put the files.}
+
+\item{file.out}{Option vector of names matching \code{url}.  If this is not
+given \code{download} will try to create a name from \code{url}.}
 }
 \value{
 Places a copy of the downloaded document in location specified and returns
@@ -22,7 +25,7 @@ This function enables downloading documents.
 \dontrun{
 m <- download(
 c('https://cran.r-project.org/web/packages/curl/curl.pdf',
-"https://github.com/trinker/textreadr/raw/master/inst/docs/rl10075oralhistoryst002.pdf")
+"https://github.com/trinker/textreadr/raw/master/inst/docs/rl10075oralhistoryst002.pdf"),
 )
 
 m
