@@ -240,7 +240,7 @@ function(file, skip = 0, sep = ":", max.person.nchar = 20) {
     unlink(tmp, recursive = TRUE)  # Delete unzipped files; no longer needed
     nodeSet <- XML::getNodeSet(doc, "//w:p")  # Access all p-nodes in document
     pvalues <- sapply(nodeSet, XML::xmlValue)  # Return their (textual) values
-    pvalues <- pvalues[pvalues != ""]  # Remove empty lines
+    pvalues <- pvalues[!grepl("^\\s*$", pvalues)]  # Remove empty lines
     if (skip > 0) pvalues <- pvalues[-seq(skip)]  # Ignore these many lines
     if (any(grepl(paste0("^.{", max.person.nchar, ",}", sep), pvalues))) {
         warning(sprintf(paste0(
