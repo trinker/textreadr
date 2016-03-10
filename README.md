@@ -151,7 +151,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\Rtmpq66wlx
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\Rtmp6jnuTD
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -192,21 +192,20 @@ installed.
         read_doc() %>%
         head()
 
-    ## [1] ""                              "*JRMC2202 Audio Project*"     
-    ## [3] ""                              "*Interview Transcript*"       
-    ## [5] ""                              "*Interviewer:* Yasmine Hassan"
+    ## [1] "*JRMC2202 Audio Project*"      "*Interview Transcript*"       
+    ## [3] "*Interviewer:* Yasmine Hassan" "*Narrator:* Ahmad Abd Rabou"  
+    ## [5] "*Date:* 16/10/2014"            "*Place:* Narrator's office"
 
     doc_doc %>%
-        read_doc(33) %>%
-        head(7)
+        read_doc(15) %>%
+        head()
 
     ## [1] "*Hassan:*           Could you please tell me your name, your title, your age,"
     ## [2] "and your place of ref,"                                                       
     ## [3] "umm, residence?"                                                              
-    ## [4] ""                                                                             
-    ## [5] "*Abd Rabou:*   My name is Ahmad Abd Rabou. I'm assistant professor of"        
-    ## [6] "comparative politics at"                                                      
-    ## [7] "both Cairo University and The American University"
+    ## [4] "*Abd Rabou:*   My name is Ahmad Abd Rabou. I'm assistant professor of"        
+    ## [5] "comparative politics at"                                                      
+    ## [6] "both Cairo University and The American University"
 
 Read .pdf
 ---------

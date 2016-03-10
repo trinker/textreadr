@@ -122,8 +122,8 @@ doc_doc %>%
 
 ```{r}
 doc_doc %>%
-    read_doc(33) %>%
-    head(7)
+    read_doc(15) %>%
+    head()
 ```
 
 ## Read .pdf
