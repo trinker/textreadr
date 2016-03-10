@@ -23,7 +23,7 @@ read_docx <- function (file, skip = 0) {
     unlink(tmp, recursive = TRUE)
     nodeSet <- XML::getNodeSet(doc, "//w:p")
     pvalues <- sapply(nodeSet, XML::xmlValue)
-    pvalues <- pvalues[pvalues != ""]
+    pvalues <- pvalues[!grepl("^\\s*$", pvalues)]
     if (skip > 0) pvalues <- pvalues[-seq(skip)]
     trimws(pvalues)
 }

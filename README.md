@@ -151,7 +151,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\Rtmp6jnuTD
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpuYNJSd
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -169,11 +169,11 @@ the markup.
         read_docx() %>%
         head(3)
 
-    ## [1] "JRMC2202 Audio Project" ""                      
-    ## [3] "Interview Transcript"
+    ## [1] "JRMC2202 Audio Project"      "Interview Transcript"       
+    ## [3] "Interviewer: Yasmine Hassan"
 
     docx_doc %>%
-        read_docx(19) %>%
+        read_docx(15) %>%
         head(3)
 
     ## [1] "Hassan:           Could you please tell me your name, your title, your age, and your place of ref,                                   umm, residence?"
@@ -198,14 +198,15 @@ installed.
 
     doc_doc %>%
         read_doc(15) %>%
-        head()
+        head(7)
 
     ## [1] "*Hassan:*           Could you please tell me your name, your title, your age,"
     ## [2] "and your place of ref,"                                                       
     ## [3] "umm, residence?"                                                              
     ## [4] "*Abd Rabou:*   My name is Ahmad Abd Rabou. I'm assistant professor of"        
     ## [5] "comparative politics at"                                                      
-    ## [6] "both Cairo University and The American University"
+    ## [6] "both Cairo University and The American University"                            
+    ## [7] "in Cairo. I'm 34 years old. I"
 
 Read .pdf
 ---------

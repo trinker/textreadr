@@ -21,7 +21,8 @@ read_doc <- function(file, skip = 0, antiword = 'C:/antiword/antiword.exe'){
     cmd <- sprintf("%s -f %s", shQuote(antiword), shQuote(file))
     results <- system(cmd, intern = TRUE, ignore.stderr = TRUE)
 
-    results <- results[results != ""]
+    results <- results[!grepl("^\\s*$", results)]
+
     if (skip > 0) results <- results[-seq(skip)]
     trimws(results)
 }
