@@ -63,7 +63,8 @@ comments altogether.}
 to be.  This information is used to warn the user if a separat appears beyond
 this length in the text.}
 
-\item{\ldots}{Further arguments to be passed to \code{\link[utils]{read.table}}.}
+\item{\ldots}{Further arguments to be passed to \code{\link[utils]{read.table}}, 
+\code{\link[readxl]{read_excel}}, or \code{\link[textreadr]{read_doc}}.}
 }
 \value{
 Returns a dataframe of dialogue and people.

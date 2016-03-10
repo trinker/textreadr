@@ -40,7 +40,8 @@
 #' @param max.person.nchar The max number of characters long names are expected
 #' to be.  This information is used to warn the user if a separat appears beyond
 #' this length in the text.
-#' @param \ldots Further arguments to be passed to \code{\link[utils]{read.table}}.
+#' @param \ldots Further arguments to be passed to \code{\link[utils]{read.table}}, 
+#' \code{\link[readxl]{read_excel}}, or \code{\link[textreadr]{read_doc}}.
 #' @return Returns a dataframe of dialogue and people.
 #' @note If a transcript is a .docx file read_transcript expects two columns
 #' (generally person and dialogue) with some sort of separator (default is colon
@@ -161,7 +162,7 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
                 }
             },
         doc = {
-            x <- read.doc(file, skip = skip, sep = sep, max.person.nchar = max.person.nchar)
+            x <- read.doc(file, skip = skip, sep = sep, max.person.nchar = max.person.nchar, ...)
             sep_hits <- grepl(sep, x[, 2])
             if(any(sep_hits)) {
                 warning(sprintf("The following text contains the \"%s\" separator and may not have split correctly:\n", sep),
@@ -174,7 +175,6 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
                 strip.white = TRUE, stringsAsFactors = FALSE,
                 blank.lines.skip = rm.empty.rows, ...)
             },
-        doc = stop("convert file to docx"),
         txt = {
             x <- utils::read.table(file=file, header = header, sep = sep, skip=skip)
         },
@@ -278,10 +278,10 @@ function(file, skip = 0, sep = ":", max.person.nchar = 20) {
 
 
 
-read.doc <- function(file, skip = 0, sep = ":", max.person.nchar = 20) {
+read.doc <- function(file, skip = 0, sep = ":", max.person.nchar = 20, ...) {
    
 
-        text.var <- read_doc(file = file, skip = skip)
+        text.var <- read_doc(file = file, skip = skip, ...)
      
         text.var <- textshape::combine(textshape::split_match(
             text.var,
