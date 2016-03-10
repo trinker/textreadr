@@ -87,6 +87,7 @@ each transcript for errors before further parsing the data.
 (doc3 <- system.file("docs/trans3.docx", package = "textreadr"))
 (doc4 <- system.file("docs/trans4.xlsx", package = "textreadr"))
 (doc5 <- system.file("docs/trans5.xls", package = "textreadr"))
+(doc6 <- system.file("docs/trans6.doc", package = "textreadr"))
 
 dat1 <- read_transcript(doc1)
 dat2 <- read_transcript(doc1, col.names = c("person", "dialogue"))
@@ -97,8 +98,15 @@ dat3 <- read_transcript(doc2, skip = 1)
 ## read_transcript(doc3, skip = 1) #incorrect read; wrong sep
 dat4 <- read_transcript(doc3, sep = "-", skip = 1)
 
+## xlsx/xls format
 dat5 <- read_transcript(doc4)
 dat6 <- read_transcript(doc5)
+
+\dontrun{
+## MS doc format (must have antiword installed)
+dat7 <- read_transcript(doc6) ## need to skip Researcher
+dat8 <- read_transcript(doc6, skip = 1) 
+}
 
 trans <- "sam: Computer is fun. Not too fun.
 greg: No it's not, it's dumb.

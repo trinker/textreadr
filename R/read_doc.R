@@ -4,7 +4,7 @@
 #'
 #' @param file The path to the .doc file.
 #' @param skip The number of lines to skip.
-#' @param path to \href{http://www.winfield.demon.nl}{antiword}/
+#' @param antiword.path path to \href{http://www.winfield.demon.nl}{antiword}
 #' @return Returns a character vector.
 #' @keywords doc
 #' @export
@@ -14,11 +14,14 @@
 #' out <- curl::curl_download(x, tempfile())
 #' (txt <- read_doc(out))
 #' }
-read_doc <- function(file, skip = 0, antiword = 'C:/antiword/antiword.exe'){
+read_doc <- function(file, skip = 0, antiword.path = 'C:/antiword/antiword.exe'){
 
     # add an antiword check here based on check and install functions from stansent
-
-    cmd <- sprintf("%s -f %s", shQuote(antiword), shQuote(file))
+    if (!file.exists(antiword.path)) {
+        check_antiword_installed(antiword.path, verbose = FALSE)
+    }
+    
+    cmd <- sprintf("%s -f %s", shQuote(antiword.path), shQuote(file))
     results <- system(cmd, intern = TRUE, ignore.stderr = TRUE)
 
     results <- results[!grepl("^\\s*$", results)]
@@ -26,3 +29,6 @@ read_doc <- function(file, skip = 0, antiword = 'C:/antiword/antiword.exe'){
     if (skip > 0) results <- results[-seq(skip)]
     trimws(results)
 }
+
+
+

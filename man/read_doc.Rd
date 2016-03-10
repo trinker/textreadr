@@ -4,14 +4,14 @@
 \alias{read_doc}
 \title{Read in .doc Content}
 \usage{
-read_doc(file, skip = 0, antiword = "C:/antiword/antiword.exe")
+read_doc(file, skip = 0, antiword.path = "C:/antiword/antiword.exe")
 }
 \arguments{
 \item{file}{The path to the .doc file.}
 
 \item{skip}{The number of lines to skip.}
 
-\item{path}{to \href{http://www.winfield.demon.nl}{antiword}/}
+\item{antiword.path}{path to \href{http://www.winfield.demon.nl}{antiword}}
 }
 \value{
 Returns a character vector.

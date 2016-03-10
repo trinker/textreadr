@@ -58,6 +58,7 @@
 #' (doc3 <- system.file("docs/trans3.docx", package = "textreadr"))
 #' (doc4 <- system.file("docs/trans4.xlsx", package = "textreadr"))
 #' (doc5 <- system.file("docs/trans5.xls", package = "textreadr"))
+#' (doc6 <- system.file("docs/trans6.doc", package = "textreadr"))
 #'
 #' dat1 <- read_transcript(doc1)
 #' dat2 <- read_transcript(doc1, col.names = c("person", "dialogue"))
@@ -68,9 +69,16 @@
 #' ## read_transcript(doc3, skip = 1) #incorrect read; wrong sep
 #' dat4 <- read_transcript(doc3, sep = "-", skip = 1)
 #'
+#' ## xlsx/xls format
 #' dat5 <- read_transcript(doc4)
 #' dat6 <- read_transcript(doc5)
-#'
+#' 
+#' \dontrun{
+#' ## MS doc format (must have antiword installed)
+#' dat7 <- read_transcript(doc6) ## need to skip Researcher
+#' dat8 <- read_transcript(doc6, skip = 1) 
+#' }
+#' 
 #' trans <- "sam: Computer is fun. Not too fun.
 #' greg: No it's not, it's dumb.
 #' teacher: What should we do?
@@ -129,7 +137,7 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
     }
 
     if (is.null(sep)) {
-        if (y %in% c("docx", "txt", "text")) {
+        if (y %in% c("docx", "doc", "txt", "text")) {
             sep <- ":"
         } else {
             sep <- ","
@@ -152,6 +160,14 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
                     paste(which(sep_hits), collapse=", "))
                 }
             },
+        doc = {
+            x <- read.doc(file, skip = skip, sep = sep, max.person.nchar = max.person.nchar)
+            sep_hits <- grepl(sep, x[, 2])
+            if(any(sep_hits)) {
+                warning(sprintf("The following text contains the \"%s\" separator and may not have split correctly:\n", sep),
+                        paste(which(sep_hits), collapse=", "))
+            }
+        },        
         csv = {
             x <- utils::read.csv(file,  header = header,
                 sep = sep, as.is=FALSE, na.strings= na,
@@ -258,3 +274,30 @@ function(file, skip = 0, sep = ":", max.person.nchar = 20) {
         X2 = trimws(pvalues), stringsAsFactors = FALSE)
     return(transcript)
 }
+
+
+
+
+read.doc <- function(file, skip = 0, sep = ":", max.person.nchar = 20) {
+   
+
+        text.var <- read_doc(file = file, skip = skip)
+     
+        text.var <- textshape::combine(textshape::split_match(
+            text.var,
+            sprintf('^.{0,%s}[%s]', max.person.nchar - 1, sep),
+            include = TRUE, regex = TRUE
+        )) 
+        
+        if (any(grepl(paste0("^.{", max.person.nchar, ",}", sep), text.var))) {
+            warning(sprintf(paste0(
+                "I've detected the separator beyond %s characters from the line start.  Parsing may be incorrect...\n",
+                "  Consider manually searching the .doc for use of the separator in-text rather than to separate person/text."
+            ), max.person.nchar))
+        }
+        transcript <- textshape::split_transcript(text.var)
+
+        return(transcript)
+}
+
+
