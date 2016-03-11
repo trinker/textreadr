@@ -17,7 +17,7 @@ antiword_loc <- function(){
 antiword_url <- function(){
 
     os <- Sys.info()[['sysname']]
- 
+
     switch(os,
         Windows= {'http://www-stud.rbi.informatik.uni-frankfurt.de/~markus/antiword/antiword-0_37-windows.zip'},
         Linux  = {os},
@@ -25,5 +25,4 @@ antiword_url <- function(){
         stop(os)
     )
 }
-
 

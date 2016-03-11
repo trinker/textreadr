@@ -4,7 +4,7 @@
 \alias{read_doc}
 \title{Read in .doc Content}
 \usage{
-read_doc(file, skip = 0, antiword.path = "C:/antiword/antiword.exe")
+read_doc(file, skip = 0, antiword.path = textreadr::antiword_loc())
 }
 \arguments{
 \item{file}{The path to the .doc file.}

@@ -1,7 +1,7 @@
 #' Check if Antiword is Installed and In Root
 #'
 #' Checks that Antiword is installed and in root.  Currently this function will
-#' try to install Antiword if missing from root for Windows users only.  Other 
+#' try to install Antiword if missing from root for Windows users only.  Other
 #' users must install manually.
 #'
 #' @param antiword.path The version of antiword's antiword.
@@ -16,14 +16,14 @@
 #' \dontrun{
 #' check_antiword_installed()
 #' }
-check_antiword_installed <- function(antiword.path = antiword_loc(),
-    download = antiword_url(), verbose = TRUE){
-    
+check_antiword_installed <- function(antiword.path = textreadr::antiword_loc(),
+    download = textreadr::antiword_url(), verbose = TRUE){
+
     if (isTRUE(verbose)) message("\nchecking if antiword is installed...\n")
-    
+
     root <- strsplit(getwd(), "(/|\\\\)+")[[1]][1]
     out <- file.exists(antiword.path)
-    
+
     if (isTRUE(out)) {
         mess <- paste0("antiword appears to be installed.\n\n",
                        "...Let the .doc extraction begin!\n\n")
@@ -32,14 +32,20 @@ check_antiword_installed <- function(antiword.path = antiword_loc(),
     } else {
         mess <- "antiword does not appear to be installed in root.\nWould you like me to try to install it there?"
         message(mess)
-        
+
         ans <- utils::menu(c("Yes", "No"))
         if (ans == "2") {
             stop("Please consider installing yourself...\n\nhttp://www.winfield.demon.nl")
         } else {
             message("Let me try...\nHold on.  It may take some time...\n")
         }
-        
+
+        if (!isTRUE(check_availability())) {
+            stop(sprintf(
+                "Currently only %s installs are handled.\nPlease consider installing yourself...\n\nhttp://www.winfield.demon.nl",
+                paste(names(available)[available], collapse=", ")
+            ))
+        }
         temp <- tempdir()
         dest <- file.path(temp, basename(download))
         download.file(download, dest)

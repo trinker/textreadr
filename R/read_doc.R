@@ -14,13 +14,13 @@
 #' out <- curl::curl_download(x, tempfile())
 #' (txt <- read_doc(out))
 #' }
-read_doc <- function(file, skip = 0, antiword.path = 'C:/antiword/antiword.exe'){
+read_doc <- function(file, skip = 0, antiword.path = textreadr::antiword_loc()){
 
     # add an antiword check here based on check and install functions from stansent
     if (!file.exists(antiword.path)) {
         check_antiword_installed(antiword.path, verbose = FALSE)
     }
-    
+
     cmd <- sprintf("%s -f %s", shQuote(antiword.path), shQuote(file))
     results <- system(cmd, intern = TRUE, ignore.stderr = TRUE)
 

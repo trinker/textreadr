@@ -10,8 +10,8 @@ antiword_loc()
 
 antiword_url()
 
-check_antiword_installed(antiword.path = antiword_loc(),
-  download = antiword_url(), verbose = TRUE)
+check_antiword_installed(antiword.path = textreadr::antiword_loc(),
+  download = textreadr::antiword_url(), verbose = TRUE)
 }
 \arguments{
 \item{antiword.path}{The version of antiword's antiword.}
@@ -28,7 +28,7 @@ returns a path as a string.
 Make a user specific path/URL to Antiword.
 
 Checks that Antiword is installed and in root.  Currently this function will
-try to install Antiword if missing from root for Windows users only.  Other 
+try to install Antiword if missing from root for Windows users only.  Other
 users must install manually.
 }
 \examples{
