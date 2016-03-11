@@ -11,7 +11,7 @@ developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repo
 Status](https://travis-ci.org/trinker/textreadr.svg?branch=master)](https://travis-ci.org/trinker/textreadr)
 [![Coverage
 Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](https://coveralls.io/r/trinker/textreadr?branch=master)
-<a href="https://img.shields.io/badge/Version-0.2.1-orange.svg"><img src="https://img.shields.io/badge/Version-0.2.1-orange.svg" alt="Version"/></a>
+<a href="https://img.shields.io/badge/Version-0.3.0-orange.svg"><img src="https://img.shields.io/badge/Version-0.3.0-orange.svg" alt="Version"/></a>
 </p>
 **textreadr** is a small collection of convenience tools for reading
 text documents into R. This is not meant to be an exhaustive collection;
@@ -73,21 +73,26 @@ table below:
 <td align="left">Read .doc</td>
 </tr>
 <tr class="even">
+<td align="left"><code>read_document</code></td>
+<td align="left">reading</td>
+<td align="left">Generic readr; read .doc, .docs, .txt, .pdf</td>
+</tr>
+<tr class="odd">
 <td align="left"><code>read_pdf</code></td>
 <td align="left">reading</td>
 <td align="left">Read .pdf</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>read_dir</code></td>
 <td align="left">reading</td>
 <td align="left">Read and format multiple .txt files</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>download</code></td>
 <td align="left">downloading</td>
 <td align="left">Download documents</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>peek</code></td>
 <td align="left">viewing</td>
 <td align="left">Truncated viewing of <code>data.frame</code>s</td>
@@ -152,7 +157,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\trinker\AppData\Local\Temp\RtmpqAsDuA
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpEra15g
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -170,16 +175,16 @@ the markup.
         read_docx() %>%
         head(3)
 
-    ## [1] "JRMC2202 Audio Project" " "                     
-    ## [3] "Interview Transcript"
+    ## [1] "JRMC2202 Audio Project"      "Interview Transcript"       
+    ## [3] "Interviewer: Yasmine Hassan"
 
     docx_doc %>%
         read_docx(15) %>%
         head(3)
 
-    ## [1] " "                                              
-    ## [2] "16 October 2014 "                               
-    ## [3] "Persons Present:             Yasmine Hassan - I"
+    ## [1] "Hassan:           Could you please tell me your name, your title, your age, and your place of ref,                                   umm, residence?"
+    ## [2] "Abd Rabou:   My name is Ahmad Abd Rabou. I<U+0092>m assistant professor of comparative politics at"                                                         
+    ## [3] "both Cairo University and The American University in Cairo. I<U+0092>m 34 years old. I"
 
 Read .doc
 ---------
