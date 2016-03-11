@@ -1,6 +1,6 @@
 Package: textreadr
 Title: Read Text Documents into R
-Version: 0.2.1
+Version: 0.3.0
 Authors@R: c(person("Tyler", "Rinker", email = "tyler.rinker@gmail.com", role = c("aut", "cre")))
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 Description: A small collection of convenience tools for reading text documents into R.

@@ -21,7 +21,7 @@ are returned. If \code{TRUE}, all file names will be returned.}
 
 \item{recursive}{Logical. Should the listing recurse into directories?}
 
-\item{\ldots}{Other arguments passed to read_in functions.}
+\item{\ldots}{Other arguments passed to read_document functions.}
 }
 \value{
 Returns a \code{\link[base]{data.frame}} with file names as a document

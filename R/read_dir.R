@@ -11,7 +11,7 @@
 #' @param all.files Logical.   If \code{FALSE}, only the names of visible files
 #' are returned. If \code{TRUE}, all file names will be returned.
 #' @param recursive Logical. Should the listing recurse into directories?
-#' @param \ldots Other arguments passed to read_in functions.
+#' @param \ldots Other arguments passed to read_document functions.
 #' @return Returns a \code{\link[base]{data.frame}} with file names as a document
 #' column and content as a text column.
 #' @export
@@ -26,7 +26,7 @@ read_dir <- function(path, pattern = NULL, doc.col = "document", all.files = FAL
 
     if (identical(character(0), to_read_in)) stop("The following location does not appear to contain files:\n   -", path)
 
-    text <- stats::setNames(lapply(to_read_in, read_in, ...), tools::file_path_sans_ext(basename(to_read_in)))
+    text <- stats::setNames(lapply(to_read_in, read_document, ...), tools::file_path_sans_ext(basename(to_read_in)))
 
     errs <- sapply(text, inherits, "try-error")
 
@@ -42,13 +42,13 @@ read_dir <- function(path, pattern = NULL, doc.col = "document", all.files = FAL
 }
 
 
-read_in <- function(x, ...){
-    try(switch(tools::file_ext(x),
-        docx = {textshape::combine(read_docx(x, ...))},
-        pdf = {textshape::combine(read_pdf(x, ...)[["text"]])},
-        textshape::combine(suppressWarnings(readLines(x, ...)))
-    ))
-}
+# read_document <- function(x, ...){
+#     try(switch(tools::file_ext(x),
+#         docx = {textshape::combine(read_docx(x, ...))},
+#         pdf = {textshape::combine(read_pdf(x, ...)[["text"]])},
+#         txt = textshape::combine(suppressWarnings(readLines(x, ...)))
+#     ))
+# }
 
 list_files <- function(path=".", pattern=NULL, all.files=FALSE, full.names=TRUE,
     ignore.case=FALSE, recursive=FALSE) {
