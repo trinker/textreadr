@@ -75,7 +75,7 @@ table below:
 <tr class="even">
 <td align="left"><code>read_document</code></td>
 <td align="left">reading</td>
-<td align="left">Generic text reader; read .doc, .docx, .txt, .pdf</td>
+<td align="left">Generic text reader for .doc, .docx, .txt, .pdf</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>read_pdf</code></td>

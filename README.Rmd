@@ -34,7 +34,7 @@ The main functions, task category, & descriptions are summarized in the table be
 | `read_transcript`         | reading     | Read 2 column transcripts             | 
 | `read_docx`               | reading     | Read .docx                            |
 | `read_doc`                | reading     | Read .doc                             |
-| `read_document`           | reading     | Generic text reader; read .doc, .docx, .txt, .pdf |
+| `read_document`           | reading     | Generic text reader for .doc, .docx, .txt, .pdf |
 | `read_pdf`                | reading     | Read .pdf                             |
 | `read_dir`                | reading     | Read and format multiple .txt files   |
 | `download`                | downloading | Download documents                    | 
