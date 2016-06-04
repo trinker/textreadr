@@ -158,7 +158,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpyghGvY
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpSAlo9U
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -436,26 +436,26 @@ in **textreadr**'s system file:
 
     levelName
     pos          
-      Â¦--0_9.txt  
-      Â¦--1_7.txt  
-      Â¦--10_9.txt 
-      Â¦--11_9.txt 
-      Â¦--12_9.txt 
-      Â¦--13_7.txt 
-      Â¦--14_10.txt
-      Â¦--15_7.txt 
-      Â¦--16_7.txt 
-      Â¦--17_9.txt 
-      Â¦--18_7.txt 
-      Â¦--19_10.txt
-      Â¦--2_9.txt  
-      Â¦--3_10.txt 
-      Â¦--4_8.txt  
-      Â¦--5_10.txt 
-      Â¦--6_10.txt 
-      Â¦--7_7.txt  
-      Â¦--8_7.txt  
-      Â°--9_7.txt
+      ¦--0_9.txt  
+      ¦--1_7.txt  
+      ¦--10_9.txt 
+      ¦--11_9.txt 
+      ¦--12_9.txt 
+      ¦--13_7.txt 
+      ¦--14_10.txt
+      ¦--15_7.txt 
+      ¦--16_7.txt 
+      ¦--17_9.txt 
+      ¦--18_7.txt 
+      ¦--19_10.txt
+      ¦--2_9.txt  
+      ¦--3_10.txt 
+      ¦--4_8.txt  
+      ¦--5_10.txt 
+      ¦--6_10.txt 
+      ¦--7_7.txt  
+      ¦--8_7.txt  
+      °--9_7.txt
 
 Here we have read the files in, one row per file.
 
@@ -519,7 +519,7 @@ I demonstrate pairings with
         textshape::split_index(which(.$loc) -1) %>%
         lapply(select, -loc)
 
-    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\RtmpyghGvY
+    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\RtmpSAlo9U
 
     ## Function to extract cases
     ex_vs <- qdapRegex::ex_(pattern = "((of|[A-Z][A-Za-z'.,-]+)\\s+)+([Vv]s?\\.\\s+)(([A-Z][A-Za-z'.,-]+\\s+)*((of|[A-Z][A-Za-z',.-]+),?($|\\s+|\\d))+)")
