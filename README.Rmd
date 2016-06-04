@@ -233,9 +233,29 @@ docx_doc %>%
 
 Often there is a need to read multiple files in from a single directory.  The `read_dir` function wraps other **textreadr** functions and `lapply` to create a data frame with a document and text column (one row per document).  We will read the following documents from the 'pos' directory in **textreadr**'s system file:
 
-```{r, echo=FALSE}
-system.file("docs/Maas2011/pos", package = "textreadr") %>%
-    pathr::tree(use.data.tree = TRUE)
+```
+levelName
+pos          
+  ¦--0_9.txt  
+  ¦--1_7.txt  
+  ¦--10_9.txt 
+  ¦--11_9.txt 
+  ¦--12_9.txt 
+  ¦--13_7.txt 
+  ¦--14_10.txt
+  ¦--15_7.txt 
+  ¦--16_7.txt 
+  ¦--17_9.txt 
+  ¦--18_7.txt 
+  ¦--19_10.txt
+  ¦--2_9.txt  
+  ¦--3_10.txt 
+  ¦--4_8.txt  
+  ¦--5_10.txt 
+  ¦--6_10.txt 
+  ¦--7_7.txt  
+  ¦--8_7.txt  
+  °--9_7.txt
 ```
 
 Here we have read the files in, one row per file.
@@ -244,4 +264,43 @@ Here we have read the files in, one row per file.
 system.file("docs/Maas2011/pos", package = "textreadr") %>%
     read_dir() %>%
     peek(Inf, 40)
+```
+
+
+## Pairing textreadr 
+
+**textreadr** is but one package used in the text analysis (often the first package used).  It pairs nicely with a variety of other text mundging and analysis packages.  In the example below I show just a few other package pairings that are used to extract case names (e.g., "Jones v. State of New York") from a [Supreme Court Database Code Book](http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf).  I demonstrate pairings with [**textshape**](https://github.com/trinker/textshape), [**textclean**](https://github.com/trinker/textclean), [**qdapRegex**](https://github.com/trinker/qdapRegex), and [**dplyr**](https://github.com/hadley/dplyr).
+
+
+```{r}
+if (!require("pacman")) install.packages("pacman"); library(pacman)
+p_load(dplyr, qdapRegex)
+p_load_current_gh(file.path('trinker', c('textreadr', 'textshape', 'textclean')))
+
+## Read in pdf, split on variables
+dat <- 'http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf' %>%
+    textreadr::download() %>%
+    textreadr::read_pdf() %>%
+    filter(page_id > 5 & page_id < 79) %>%
+    mutate(
+        loc = grepl('Variable Name', text, ignore.case=TRUE),
+        text = textclean::replace_non_ascii(text)
+    ) %>%
+    textshape::split_index(which(.$loc) -1) %>%
+    lapply(select, -loc)
+
+## Function to extract cases
+ex_vs <- qdapRegex::ex_(pattern = "((of|[A-Z][A-Za-z'.,-]+)\\s+)+([Vv]s?\\.\\s+)(([A-Z][A-Za-z'.,-]+\\s+)*((of|[A-Z][A-Za-z',.-]+),?($|\\s+|\\d))+)")
+
+## Extract and filter cases
+dat %>%
+    lapply(function(x) {
+        x$text %>%
+            textshape::combine() %>%
+            ex_vs()  %>% 
+            c() %>% 
+            textclean::mgsub(c("^[ ,]+", "[ ,0-9]+$", "^(See\\s+|E\\.g\\.?,)"), "", fixed=FALSE)
+    }) %>%
+    setNames(seq_along(.)) %>%
+    {.[sapply(., function(x) all(length(x) > 1 | !is.na(x)))]}
 ```
