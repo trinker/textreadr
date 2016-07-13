@@ -40,6 +40,7 @@ Table of Contents
         -   [Reading Text](#reading-text)
         -   [Authentic Interview](#authentic-interview)
     -   [Read Directory Contents](#read-directory-contents)
+    -   [Pairing textreadr](#pairing-textreadr)
 
 Functions
 ============
@@ -117,10 +118,10 @@ the development version:
 Contact
 =======
 
-You are welcome to:  -   submit suggestions and bug-reports at:     <https://github.com/trinker/textreadr/issues>  
-
--   send a pull request on: <https://github.com/trinker/textreadr/>  
-   compose a friendly e-mail to: <tyler.rinker@gmail.com>
+You are welcome to:    
+- submit suggestions and bug-reports at: <https://github.com/trinker/textreadr/issues>    
+- send a pull request on: <https://github.com/trinker/textreadr/>    
+- compose a friendly e-mail to: <tyler.rinker@gmail.com>    
 
 Demonstration
 =============
@@ -157,7 +158,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpEra15g
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpSAlo9U
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -433,28 +434,28 @@ to create a data frame with a document and text column (one row per
 document). We will read the following documents from the 'pos' directory
 in **textreadr**'s system file:
 
-    ##        levelName
-    ## 1  pos          
-    ## 2   ¦--0_9.txt  
-    ## 3   ¦--1_7.txt  
-    ## 4   ¦--10_9.txt 
-    ## 5   ¦--11_9.txt 
-    ## 6   ¦--12_9.txt 
-    ## 7   ¦--13_7.txt 
-    ## 8   ¦--14_10.txt
-    ## 9   ¦--15_7.txt 
-    ## 10  ¦--16_7.txt 
-    ## 11  ¦--17_9.txt 
-    ## 12  ¦--18_7.txt 
-    ## 13  ¦--19_10.txt
-    ## 14  ¦--2_9.txt  
-    ## 15  ¦--3_10.txt 
-    ## 16  ¦--4_8.txt  
-    ## 17  ¦--5_10.txt 
-    ## 18  ¦--6_10.txt 
-    ## 19  ¦--7_7.txt  
-    ## 20  ¦--8_7.txt  
-    ## 21  °--9_7.txt
+    levelName
+    pos          
+      ¦--0_9.txt  
+      ¦--1_7.txt  
+      ¦--10_9.txt 
+      ¦--11_9.txt 
+      ¦--12_9.txt 
+      ¦--13_7.txt 
+      ¦--14_10.txt
+      ¦--15_7.txt 
+      ¦--16_7.txt 
+      ¦--17_9.txt 
+      ¦--18_7.txt 
+      ¦--19_10.txt
+      ¦--2_9.txt  
+      ¦--3_10.txt 
+      ¦--4_8.txt  
+      ¦--5_10.txt 
+      ¦--6_10.txt 
+      ¦--7_7.txt  
+      ¦--8_7.txt  
+      °--9_7.txt
 
 Here we have read the files in, one row per file.
 
@@ -486,3 +487,103 @@ Here we have read the files in, one row per file.
     ## 19      8_7 Very good drama although it appeared to 
     ## 20      9_7 Working-class romantic drama from direct
     ## ..      ...                                      ...
+
+Pairing textreadr
+-----------------
+
+**textreadr** is but one package used in the text analysis (often the
+first package used). It pairs nicely with a variety of other text
+mundging and analysis packages. In the example below I show just a few
+other package pairings that are used to extract case names (e.g., "Jones
+v. State of New York") from a [Supreme Court Database Code
+Book](http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf).
+I demonstrate pairings with
+[**textshape**](https://github.com/trinker/textshape),
+[**textclean**](https://github.com/trinker/textclean),
+[**qdapRegex**](https://github.com/trinker/qdapRegex), and
+[**dplyr**](https://github.com/hadley/dplyr).
+
+    if (!require("pacman")) install.packages("pacman"); library(pacman)
+    p_load(dplyr, qdapRegex)
+    p_load_current_gh(file.path('trinker', c('textreadr', 'textshape', 'textclean')))
+
+    ## Read in pdf, split on variables
+    dat <- 'http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf' %>%
+        textreadr::download() %>%
+        textreadr::read_pdf() %>%
+        filter(page_id > 5 & page_id < 79) %>%
+        mutate(
+            loc = grepl('Variable Name', text, ignore.case=TRUE),
+            text = textclean::replace_non_ascii(text)
+        ) %>%
+        textshape::split_index(which(.$loc) -1) %>%
+        lapply(select, -loc)
+
+    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\RtmpSAlo9U
+
+    ## Function to extract cases
+    ex_vs <- qdapRegex::ex_(pattern = "((of|[A-Z][A-Za-z'.,-]+)\\s+)+([Vv]s?\\.\\s+)(([A-Z][A-Za-z'.,-]+\\s+)*((of|[A-Z][A-Za-z',.-]+),?($|\\s+|\\d))+)")
+
+    ## Extract and filter cases
+    dat %>%
+        lapply(function(x) {
+            x$text %>%
+                textshape::combine() %>%
+                ex_vs()  %>% 
+                c() %>% 
+                textclean::mgsub(c("^[ ,]+", "[ ,0-9]+$", "^(See\\s+|E\\.g\\.?,)"), "", fixed=FALSE)
+        }) %>%
+        setNames(seq_along(.)) %>%
+        {.[sapply(., function(x) all(length(x) > 1 | !is.na(x)))]}
+
+    ## $`24`
+    ## [1] "Townsend v. Sain"         "Simpson v. Florida"      
+    ## [3] "McNally v. United States" "United States v. Gray"   
+    ## 
+    ## $`30`
+    ## [1] "Edward V. Heck"
+    ## 
+    ## $`36`
+    ## [1] "State of Colorado v. Western Alfalfa Corporation"
+    ## 
+    ## $`38`
+    ## [1] "Pulliam v. Allen"   "Burnett v. Grattan"
+    ## 
+    ## $`40`
+    ##  [1] "United States v. Knox"                                            
+    ##  [2] "Lassiter v. Department of Social Services"                        
+    ##  [3] "Arkansas v. Tennessee"                                            
+    ##  [4] "Utah v. United States"                                            
+    ##  [5] "Johnson v. United States"                                         
+    ##  [6] "Baldonado v. California"                                          
+    ##  [7] "Conway v. California Adult Authority"                             
+    ##  [8] "Wheaton v. California"                                            
+    ##  [9] "Maxwell v. Bishop"                                                
+    ## [10] "National Labor Relations Board v. United Insurance Co. of America"
+    ## [11] "United States v. King"                                            
+    ## [12] "National Labor Relations Board v. United Insurance Co. of America"
+    ## [13] "United States v. King"                                            
+    ## 
+    ## $`44`
+    ## [1] "Grisham v. Hagan"                  
+    ## [2] "McElroy v. Guagliardo"             
+    ## [3] "Virginia Supreme Court v. Friedman"
+    ## 
+    ## $`48`
+    ## [1] "Baker v. Carr"                    "Gray v. Sanders"                 
+    ## [3] "Patterson v. McLean Credit Union"
+    ## 
+    ## $`53`
+    ## [1] "Bates v. Arizona State Bar"
+    ## 
+    ## $`57`
+    ## [1] "New York Gaslight Club, Inc. v. Carey"
+    ## [2] "Pruneyard Shopping Center v. Robins"  
+    ## 
+    ## $`58`
+    ## [1] "Mobile v. Bolden"                            
+    ## [2] "Williams v. Brown"                           
+    ## [3] "United States v. Havens"                     
+    ## [4] "Parratt v. Taylor"                           
+    ## [5] "Dougherty County Board of Education v. White"
+    ## [6] "Jenkins v. Anderson"
