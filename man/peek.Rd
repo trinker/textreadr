@@ -26,7 +26,7 @@ Prints a truncated head but invisibly returns \code{x}.
 of a truncated \code{\link[base]{data.frame}}.  \code{peek} invisibly returns
 \code{x}.  This makes its use ideal in a \pkg{dplyr}/\pkg{magrittr} pipeline.
 
-\code{unpeek} - Strips out class \code{textreadr} to entire
+\code{unpeek} - Strips out class \code{textreadr} so that the entire
 \code{\link[base]{data.frame}} will be printed.
 }
 \details{

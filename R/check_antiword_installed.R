@@ -48,7 +48,7 @@ check_antiword_installed <- function(antiword.path = textreadr::antiword_loc(),
         }
         temp <- tempdir()
         dest <- file.path(temp, basename(download))
-        download.file(download, dest)
+        utils::download.file(download, dest)
         utils::unzip(dest, exdir = temp) # this may need to change for other OSes
         anti <- file.path(temp, 'antiword')
         if (!file.exists(anti)) stop(

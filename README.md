@@ -16,7 +16,7 @@ Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](h
 **textreadr** is a small collection of convenience tools for reading
 text documents into R. This is not meant to be an exhaustive collection;
 for more see the
-[**tm**](https://cran.r-project.org/web/packages/tm/index.html) package.
+[**tm**]( https://cran.r-project.org/package=tm) package.
 
 
 Table of Contents

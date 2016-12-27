@@ -63,7 +63,7 @@ comments altogether.}
 to be.  This information is used to warn the user if a separat appears beyond
 this length in the text.}
 
-\item{\ldots}{Further arguments to be passed to \code{\link[utils]{read.table}}, 
+\item{\ldots}{Further arguments to be passed to \code{\link[utils]{read.table}},
 \code{\link[readxl]{read_excel}}, or \code{\link[textreadr]{read_doc}}.}
 }
 \value{
@@ -106,7 +106,7 @@ dat6 <- read_transcript(doc5)
 \dontrun{
 ## MS doc format (must have antiword installed)
 dat7 <- read_transcript(doc6) ## need to skip Researcher
-dat8 <- read_transcript(doc6, skip = 1) 
+dat8 <- read_transcript(doc6, skip = 1)
 }
 
 trans <- "sam: Computer is fun. Not too fun.

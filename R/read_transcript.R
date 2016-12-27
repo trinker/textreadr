@@ -40,7 +40,7 @@
 #' @param max.person.nchar The max number of characters long names are expected
 #' to be.  This information is used to warn the user if a separat appears beyond
 #' this length in the text.
-#' @param \ldots Further arguments to be passed to \code{\link[utils]{read.table}}, 
+#' @param \ldots Further arguments to be passed to \code{\link[utils]{read.table}},
 #' \code{\link[readxl]{read_excel}}, or \code{\link[textreadr]{read_doc}}.
 #' @return Returns a dataframe of dialogue and people.
 #' @note If a transcript is a .docx file read_transcript expects two columns
@@ -73,13 +73,13 @@
 #' ## xlsx/xls format
 #' dat5 <- read_transcript(doc4)
 #' dat6 <- read_transcript(doc5)
-#' 
+#'
 #' \dontrun{
 #' ## MS doc format (must have antiword installed)
 #' dat7 <- read_transcript(doc6) ## need to skip Researcher
-#' dat8 <- read_transcript(doc6, skip = 1) 
+#' dat8 <- read_transcript(doc6, skip = 1)
 #' }
-#' 
+#'
 #' trans <- "sam: Computer is fun. Not too fun.
 #' greg: No it's not, it's dumb.
 #' teacher: What should we do?
@@ -144,6 +144,7 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
             sep <- ","
         }
     }
+# browser()
     switch(y,
         xlsx = {
             x <- readxl::read_excel(file, col_names = header,
@@ -168,7 +169,7 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
                 warning(sprintf("The following text contains the \"%s\" separator and may not have split correctly:\n", sep),
                         paste(which(sep_hits), collapse=", "))
             }
-        },        
+        },
         csv = {
             x <- utils::read.csv(file,  header = header,
                 sep = sep, as.is=FALSE, na.strings= na,
@@ -194,7 +195,7 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
         text.col <- function(dataframe) {
             dial <- function(x) {
                 if(is.factor(x) | is.character(x)) {
-                    n <- max(nchar(as.character(x)))
+                    n <- max(nchar(as.character(x)), na.rm = TRUE)
                 } else {
                     n <- NA
                 }
@@ -279,16 +280,16 @@ function(file, skip = 0, sep = ":", max.person.nchar = 20) {
 
 
 read.doc <- function(file, skip = 0, sep = ":", max.person.nchar = 20, ...) {
-   
+
 
         text.var <- read_doc(file = file, skip = skip, ...)
-     
+
         text.var <- textshape::combine(textshape::split_match(
             text.var,
             sprintf('^.{0,%s}[%s]', max.person.nchar - 1, sep),
             include = TRUE, regex = TRUE
-        )) 
-        
+        ))
+
         if (any(grepl(paste0("^.{", max.person.nchar, ",}", sep), text.var))) {
             warning(sprintf(paste0(
                 "I've detected the separator beyond %s characters from the line start.  Parsing may be incorrect...\n",
