@@ -1,6 +1,34 @@
 language: r
 
-sudo: false
+matrix:
+  include:
+    - os: linux
+      dist: precise
+      sudo: false
+    - os: linux
+      dist: trusty
+      env: R_CODECOV=true
+      sudo: required
+    - os: osx
+      osx_image: xcode8.1
+      brew_packages: poppler
+      latex: false
+    - os: osx
+      osx_image: xcode8.1
+      disable_homebrew: true
+      latex: false
+    - os: osx
+      osx_image: beta-xcode6.1
+      disable_homebrew: true
+      latex: false
+
+addons:
+  apt:
+    packages:
+      - libwebp-dev
+      - libpoppler-cpp-dev
+      - valgrind
+
 before_install:
   - sh -e /etc/init.d/xvfb start
 
