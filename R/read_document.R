@@ -26,7 +26,7 @@
 #'     package = "textreadr")
 #' read_document(doc_doc)
 #' }
-read_document <- function(file, combine = TRUE, ...){
+read_document <- function(file, combine = FALSE, ...){
     fun <- switch(tools::file_ext(file),
         pdf = {function(x, ...) {read_pdf(x, ...)[["text"]]}},
         docx = read_docx,

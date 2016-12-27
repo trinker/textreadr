@@ -4,7 +4,7 @@
 \alias{read_document}
 \title{Generic Fuction to Read in a Document}
 \usage{
-read_document(file, combine = TRUE, ...)
+read_document(file, combine = FALSE, ...)
 }
 \arguments{
 \item{file}{The path to the a .pdf, .txt, .docx, or .doc file.}

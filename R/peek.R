@@ -44,7 +44,7 @@ peek <- function (x, n = 10, width = 20, ...) {
 
 #' Data Frame Viewing
 #'
-#' \code{unpeek} - Strips out class \code{textreadr} to entire
+#' \code{unpeek} - Strips out class \code{textreadr} so that the entire
 #' \code{\link[base]{data.frame}} will be printed.
 #' @rdname peek
 #' @export
