@@ -144,7 +144,8 @@ pdf_doc %>%
 
 Users may find the following sites useful for OCR in R:
 
-- http://electricarchaeology.ca/2014/07/15/doing-ocr-within-r/  
+- https://CRAN.R-project.org/package=tesseract     
+- http://electricarchaeology.ca/2014/07/15/doing-ocr-within-r
 - https://github.com/soodoku/abbyyR
 
 
