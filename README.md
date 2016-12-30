@@ -15,8 +15,8 @@ Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](h
 </p>
 **textreadr** is a small collection of convenience tools for reading
 text documents into R. This is not meant to be an exhaustive collection;
-for more see the
-[**tm**](https://cran.r-project.org/web/packages/tm/index.html) package.
+for more see the [**tm**](https://CRAN.R-project.org/package=tm)
+package.
 
 
 Table of Contents
@@ -28,6 +28,7 @@ Table of Contents
 -   [Demonstration](#demonstration)
     -   [Load the Packages/Data](#load-the-packagesdata)
     -   [Download](#download)
+    -   [Generic Document Reading](#generic-document-reading)
     -   [Read .docx](#read-docx)
     -   [Read .doc](#read-doc)
     -   [Read .pdf](#read-pdf)
@@ -158,11 +159,42 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpeoTOjw
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\Rtmp4SKnwz
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
     ## [3] "LEHRER: And what about the vouchers?"
+
+Generic Document Reading
+------------------------
+
+The `read_document` is a generic wrapper for `read_docx`, `read_doc`,
+and `read_pdf` that detects the file extension and chooses the correct
+reader. For most tasks that require reading a .docx, .doc, or .pdf file
+this is the go to function to get the job done. Below I demonstrate
+reading a .docx, .doc, and .pdf file with `read_document`.
+
+    docx_doc %>%
+        read_document() %>%
+        head(3)
+
+    ## [1] "JRMC2202 Audio Project"      "Interview Transcript"       
+    ## [3] "Interviewer: Yasmine Hassan"
+
+    doc_doc %>%
+        read_document() %>%
+        head(3)
+
+    ## [1] "*JRMC2202 Audio Project*"      "*Interview Transcript*"       
+    ## [3] "*Interviewer:* Yasmine Hassan"
+
+    pdf_doc %>%
+        read_document() %>%
+        head(3)
+
+    ## [1] "Interview with Mary Waters Spaulding, August 8, 2013"                                          
+    ## [2] "CRAIG BREADEN: My name is Craig Breaden. I<U+0092>m the audiovisual archivist at Duke University,"    
+    ## [3] "and I<U+0092>m with Kirston Johnson, the curator of the Archive of Documentary Arts at Duke. The date"
 
 Read .docx
 ----------
@@ -377,7 +409,7 @@ separator the first go round.
 
 ### Reading Text
 
-Like `read.table` `read_transcript` also has a `text` argument which is
+Like `read.table`, `read_transcript` also has a `text` argument which is
 useful for demoing code.
 
     read_transcript(
@@ -520,7 +552,7 @@ I demonstrate pairings with
         textshape::split_index(which(.$loc) -1) %>%
         lapply(select, -loc)
 
-    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\RtmpeoTOjw
+    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\Rtmp4SKnwz
 
     ## Function to extract cases
     ex_vs <- qdapRegex::ex_(pattern = "((of|[A-Z][A-Za-z'.,-]+)\\s+)+([Vv]s?\\.\\s+)(([A-Z][A-Za-z'.,-]+\\s+)*((of|[A-Z][A-Za-z',.-]+),?($|\\s+|\\d))+)")

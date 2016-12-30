@@ -4,15 +4,15 @@
 #'
 #' @param file The path to the .doc file.
 #' @param skip The number of lines to skip.
-#' @param antiword.path path to \href{http://www.winfield.demon.nl}{antiword}
+#' @param antiword.path Path to \href{http://www.winfield.demon.nl}{antiword}.
 #' @return Returns a character vector.
 #' @keywords doc
 #' @export
 #' @examples
 #' \dontrun{
-#' x <- "https://syllabus.chaminade.edu/get_syllabus.php?id=20715"
-#' out <- curl::curl_download(x, tempfile())
-#' (txt <- read_doc(out))
+#' x <- system.file("docs/Yasmine_Interview_Transcript.doc",
+#'     package = "textreadr")
+#' read_doc(x)
 #' }
 read_doc <- function(file, skip = 0, antiword.path = textreadr::antiword_loc()){
 

@@ -22,7 +22,7 @@ verbadge <- sprintf('<a href="https://img.shields.io/badge/Version-%s-orange.svg
 [![Coverage Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](https://coveralls.io/r/trinker/textreadr?branch=master)
 `r verbadge`
 
-**textreadr** is a small collection of convenience tools for reading text documents into R.  This is not meant to be an exhaustive collection; for more see the [**tm**](https://cran.r-project.org/web/packages/tm/index.html) package.
+**textreadr** is a small collection of convenience tools for reading text documents into R.  This is not meant to be an exhaustive collection; for more see the [**tm**](https://CRAN.R-project.org/package=tm) package.
 
 # Functions
 
@@ -92,6 +92,24 @@ Here I download a .docx file of presidential debated from 2012.
 "https://dl.dropboxusercontent.com/u/61803503/pres.deb1.docx" %>%
     download() %>%
     read_docx() %>%
+    head(3)
+```
+
+## Generic Document Reading
+
+The `read_document` is a generic wrapper for `read_docx`, `read_doc`, and `read_pdf` that detects the file extension and chooses the correct reader.  For most tasks that require reading a .docx, .doc, or .pdf file this is the go to function to get the job done.  Below I demonstrate reading a .docx, .doc, and .pdf file with `read_document`.
+
+```{r}
+docx_doc %>%
+    read_document() %>%
+    head(3)
+    
+doc_doc %>%
+    read_document() %>%
+    head(3)
+    
+pdf_doc %>%
+    read_document() %>%
     head(3)
 ```
 
@@ -202,7 +220,7 @@ read_transcript(trans_docs[6], skip = 1)
 
 ### Reading Text
 
-Like `read.table` `read_transcript` also has a `text` argument which is useful for demoing code.
+Like `read.table`, `read_transcript` also has a `text` argument which is useful for demoing code.
 
 ```{r}
 read_transcript(

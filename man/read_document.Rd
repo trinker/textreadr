@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_document.R
 \name{read_document}
 \alias{read_document}
-\title{Generic Fuction to Read in a Document}
+\title{Generic Function to Read in a Document}
 \usage{
 read_document(file, combine = FALSE, ...)
 }

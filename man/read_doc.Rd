@@ -11,7 +11,7 @@ read_doc(file, skip = 0, antiword.path = textreadr::antiword_loc())
 
 \item{skip}{The number of lines to skip.}
 
-\item{antiword.path}{path to \href{http://www.winfield.demon.nl}{antiword}}
+\item{antiword.path}{Path to \href{http://www.winfield.demon.nl}{antiword}.}
 }
 \value{
 Returns a character vector.
@@ -21,9 +21,9 @@ Read in the content from a .doc file using \href{http://www.winfield.demon.nl}{a
 }
 \examples{
 \dontrun{
-x <- "https://syllabus.chaminade.edu/get_syllabus.php?id=20715"
-out <- curl::curl_download(x, tempfile())
-(txt <- read_doc(out))
+x <- system.file("docs/Yasmine_Interview_Transcript.doc",
+    package = "textreadr")
+read_doc(x)
 }
 }
 \keyword{doc}

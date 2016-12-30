@@ -1,4 +1,4 @@
-#' Generic Fuction to Read in a Document
+#' Generic Function to Read in a Document
 #'
 #' Generic function to read in a .pdf, .txt, .docx, or .doc file.
 #'
