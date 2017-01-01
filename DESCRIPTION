@@ -14,3 +14,5 @@ License: GPL-2
 LazyData: TRUE
 Roxygen: list(wrap = FALSE)
 RoxygenNote: 5.0.1
+BugReports: https://github.com/trinker/textreadr/issues?state=open
+URL: https://github.com/trinker/textreadr
