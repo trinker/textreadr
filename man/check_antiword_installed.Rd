@@ -14,9 +14,9 @@ check_antiword_installed(antiword.path = textreadr::antiword_loc(),
   download = textreadr::antiword_url(), verbose = TRUE)
 }
 \arguments{
-\item{antiword.path}{The version of antiword's antiword.}
+\item{antiword.path}{The path to the latest version of Antiword.}
 
-\item{download}{The download url for antiword's antiword.}
+\item{download}{The download url for Antiword.}
 
 \item{verbose}{If \code{TRUE} messages are printed even when everything is
 installed.}

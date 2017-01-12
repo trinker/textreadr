@@ -29,6 +29,7 @@ Table of Contents
     -   [Load the Packages/Data](#load-the-packagesdata)
     -   [Download](#download)
     -   [Generic Document Reading](#generic-document-reading)
+    -   [Read Directory Contents](#read-directory-contents)
     -   [Read .docx](#read-docx)
     -   [Read .doc](#read-doc)
     -   [Read .pdf](#read-pdf)
@@ -40,12 +41,55 @@ Table of Contents
         -   [doc](#doc)
         -   [Reading Text](#reading-text)
         -   [Authentic Interview](#authentic-interview)
-    -   [Read Directory Contents](#read-directory-contents)
     -   [Pairing textreadr](#pairing-textreadr)
 
 Functions
 ============
 
+
+Most jobs in my workflow can be completed with `read_document` and
+`read_dir`. The former generically reads in a .docx, .doc, .pdf, or .txt
+file without specifying the extension. The latter reads in multiple
+.docx, .doc, .pdf, or .txt files from a directory as a `data.frame` with
+a file and text column. This workflow is effective because most text
+documents I encounter are stored as a .docx, .doc, .pdf, or .txt file.
+The remaining common storage formats I encounter include .csv, .xlsx,
+XML, .html, and SQL. For these first 4 forms the
+[**readr**](https://CRAN.R-project.org/package=readr),
+[**readx**l](https://CRAN.R-project.org/package=readxl),
+[**xml2**](https://CRAN.R-project.org/package=xml2), and
+[**rvest**](https://CRAN.R-project.org/package=rvest). For SQL:
+
+<table>
+<thead>
+<tr class="header">
+<th align="left">R Package</th>
+<th align="left">SQL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ROBDC</td>
+<td align="left">Microsoft SQL Server</td>
+</tr>
+<tr class="even">
+<td align="left">RMySQL</td>
+<td align="left">MySQL</td>
+</tr>
+<tr class="odd">
+<td align="left">ROracle</td>
+<td align="left">Oracle</td>
+</tr>
+<tr class="even">
+<td align="left">RJDBC</td>
+<td align="left">JDBC</td>
+</tr>
+</tbody>
+</table>
+
+These packages are already specialized to handle these very specific
+data formats. **textreadr** provides the basic reading tools that work
+with the four basic file formats in which text data is stored.
 
 The main functions, task category, & descriptions are summarized in the
 table below:
@@ -143,6 +187,7 @@ Load the Packages/Data
     pdf_doc <- system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr")
     docx_doc <- system.file("docs/Yasmine_Interview_Transcript.docx", package = "textreadr")
     doc_doc <- system.file("docs/Yasmine_Interview_Transcript.doc", package = "textreadr")
+    txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
 
 Download
 --------
@@ -159,7 +204,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\Rtmp4SKnwz
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpqgojcP
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -170,9 +215,9 @@ Generic Document Reading
 
 The `read_document` is a generic wrapper for `read_docx`, `read_doc`,
 and `read_pdf` that detects the file extension and chooses the correct
-reader. For most tasks that require reading a .docx, .doc, or .pdf file
-this is the go to function to get the job done. Below I demonstrate
-reading a .docx, .doc, and .pdf file with `read_document`.
+reader. For most tasks that require reading a .docx, .doc, .pdf, or .txt
+file this is the go to function to get the job done. Below I demonstrate
+reading each of these four file formats with `read_document`.
 
     docx_doc %>%
         read_document() %>%
@@ -195,6 +240,74 @@ reading a .docx, .doc, and .pdf file with `read_document`.
     ## [1] "Interview with Mary Waters Spaulding, August 8, 2013"                                          
     ## [2] "CRAIG BREADEN: My name is Craig Breaden. I<U+0092>m the audiovisual archivist at Duke University,"    
     ## [3] "and I<U+0092>m with Kirston Johnson, the curator of the Archive of Documentary Arts at Duke. The date"
+
+    txt_doc %>%
+        read_document() %>%
+        paste(collapse = "\n") %>%
+        cat()
+
+Read Directory Contents
+-----------------------
+
+Often there is a need to read multiple files in from a single directory.
+The `read_dir` function wraps other **textreadr** functions and `lapply`
+to create a data frame with a document and text column (one row per
+document). We will read the following documents from the 'pos' directory
+in **textreadr**'s system file:
+
+    levelName
+    pos          
+      Â¦--0_9.txt  
+      Â¦--1_7.txt  
+      Â¦--10_9.txt 
+      Â¦--11_9.txt 
+      Â¦--12_9.txt 
+      Â¦--13_7.txt 
+      Â¦--14_10.txt
+      Â¦--15_7.txt 
+      Â¦--16_7.txt 
+      Â¦--17_9.txt 
+      Â¦--18_7.txt 
+      Â¦--19_10.txt
+      Â¦--2_9.txt  
+      Â¦--3_10.txt 
+      Â¦--4_8.txt  
+      Â¦--5_10.txt 
+      Â¦--6_10.txt 
+      Â¦--7_7.txt  
+      Â¦--8_7.txt  
+      Â°--9_7.txt
+
+Here we have read the files in, one row per file.
+
+    system.file("docs/Maas2011/pos", package = "textreadr") %>%
+        read_dir() %>%
+        peek(Inf, 40)
+
+    ## Source: local data frame [20 x 2]
+    ## 
+    ##    document                                  content
+    ## 1       0_9 Bromwell High is a cartoon comedy. It ra
+    ## 2       1_7 If you like adult comedy cartoons, like 
+    ## 3      10_9 I'm a male, not given to women's movies,
+    ## 4      11_9 Liked Stanley & Iris very much. Acting w
+    ## 5      12_9 Liked Stanley & Iris very much. Acting w
+    ## 6      13_7 The production quality, cast, premise, a
+    ## 7     14_10 This film has a special place in my hear
+    ## 8      15_7 I guess if a film has magic, I don't nee
+    ## 9      16_7 I found this to be a so-so romance/drama
+    ## 10     17_9 This is a complex film that explores the
+    ## 11     18_7 `Stanley and Iris' is a heart warming fi
+    ## 12    19_10 I just read the comments of TomReynolds2
+    ## 13      2_9 Bromwell High is nothing short of brilli
+    ## 14     3_10 "All the world's a stage and its people 
+    ## 15      4_8 FUTZ is the only show preserved from the
+    ## 16     5_10 I came in in the middle of this film so 
+    ## 17     6_10 Fair drama/love story movie that focuses
+    ## 18      7_7 Although I didn't like Stanley & Iris tr
+    ## 19      8_7 Very good drama although it appeared to 
+    ## 20      9_7 Working-class romantic drama from direct
+    ## ..      ...                                      ...
 
 Read .docx
 ----------
@@ -458,69 +571,6 @@ Here I read in an authentic interview transcript:
     ## 10 Abd Rabou So far I didn't get--So far--Maybe it do
     ## ..       ...                                      ...
 
-Read Directory Contents
------------------------
-
-Often there is a need to read multiple files in from a single directory.
-The `read_dir` function wraps other **textreadr** functions and `lapply`
-to create a data frame with a document and text column (one row per
-document). We will read the following documents from the 'pos' directory
-in **textreadr**'s system file:
-
-    levelName
-    pos          
-      Â¦--0_9.txt  
-      Â¦--1_7.txt  
-      Â¦--10_9.txt 
-      Â¦--11_9.txt 
-      Â¦--12_9.txt 
-      Â¦--13_7.txt 
-      Â¦--14_10.txt
-      Â¦--15_7.txt 
-      Â¦--16_7.txt 
-      Â¦--17_9.txt 
-      Â¦--18_7.txt 
-      Â¦--19_10.txt
-      Â¦--2_9.txt  
-      Â¦--3_10.txt 
-      Â¦--4_8.txt  
-      Â¦--5_10.txt 
-      Â¦--6_10.txt 
-      Â¦--7_7.txt  
-      Â¦--8_7.txt  
-      Â°--9_7.txt
-
-Here we have read the files in, one row per file.
-
-    system.file("docs/Maas2011/pos", package = "textreadr") %>%
-        read_dir() %>%
-        peek(Inf, 40)
-
-    ## Source: local data frame [20 x 2]
-    ## 
-    ##    document                                  content
-    ## 1       0_9 Bromwell High is a cartoon comedy. It ra
-    ## 2       1_7 If you like adult comedy cartoons, like 
-    ## 3      10_9 I'm a male, not given to women's movies,
-    ## 4      11_9 Liked Stanley & Iris very much. Acting w
-    ## 5      12_9 Liked Stanley & Iris very much. Acting w
-    ## 6      13_7 The production quality, cast, premise, a
-    ## 7     14_10 This film has a special place in my hear
-    ## 8      15_7 I guess if a film has magic, I don't nee
-    ## 9      16_7 I found this to be a so-so romance/drama
-    ## 10     17_9 This is a complex film that explores the
-    ## 11     18_7 `Stanley and Iris' is a heart warming fi
-    ## 12    19_10 I just read the comments of TomReynolds2
-    ## 13      2_9 Bromwell High is nothing short of brilli
-    ## 14     3_10 "All the world's a stage and its people 
-    ## 15      4_8 FUTZ is the only show preserved from the
-    ## 16     5_10 I came in in the middle of this film so 
-    ## 17     6_10 Fair drama/love story movie that focuses
-    ## 18      7_7 Although I didn't like Stanley & Iris tr
-    ## 19      8_7 Very good drama although it appeared to 
-    ## 20      9_7 Working-class romantic drama from direct
-    ## ..      ...                                      ...
-
 Pairing textreadr
 -----------------
 
@@ -552,7 +602,7 @@ I demonstrate pairings with
         textshape::split_index(which(.$loc) -1) %>%
         lapply(select, -loc)
 
-    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\Rtmp4SKnwz
+    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\RtmpqgojcP
 
     ## Function to extract cases
     ex_vs <- qdapRegex::ex_(pattern = "((of|[A-Z][A-Za-z'.,-]+)\\s+)+([Vv]s?\\.\\s+)(([A-Z][A-Za-z'.,-]+\\s+)*((of|[A-Z][A-Za-z',.-]+),?($|\\s+|\\d))+)")

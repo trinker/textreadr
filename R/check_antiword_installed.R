@@ -4,8 +4,8 @@
 #' try to install Antiword if missing from root for Windows users only.  Other
 #' users must install manually.
 #'
-#' @param antiword.path The version of antiword's antiword.
-#' @param download The download url for antiword's antiword.
+#' @param antiword.path The path to the latest version of Antiword.
+#' @param download The download url for Antiword.
 #' @param verbose If \code{TRUE} messages are printed even when everything is
 #' installed.
 #' @keywords antiword

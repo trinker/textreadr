@@ -17,7 +17,8 @@ And constructed with the following guidelines:
 * Bug fixes and misc changes bumps the patch
 
 
-textreadr 0.3.0
+
+textreadr 0.3.1 -
 ----------------------------------------------------------------
 
 BUG FIXES
@@ -30,7 +31,8 @@ IMPROVEMENTS
 
 CHANGES
 
-textreadr 0.0.1
+
+textreadr 0.0.1 - 0.3.0
 ----------------------------------------------------------------
 
 This package is a  collection of convenience tools for reading text documents

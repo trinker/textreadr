@@ -33,6 +33,10 @@ docx_doc <- system.file("docs/Yasmine_Interview_Transcript.docx",
     package = "textreadr")
 read_document(docx_doc)
 
+## .txt
+txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
+read_document(txt_doc)
+
 \dontrun{
 doc_doc <- system.file("docs/Yasmine_Interview_Transcript.doc",
     package = "textreadr")
