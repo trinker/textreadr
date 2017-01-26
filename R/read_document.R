@@ -41,6 +41,6 @@ read_document <- function(file, combine = FALSE, ...){
 
     out <- try(fun(file, ...), silent = TRUE)
     if (inherits(out, 'try-error')) return(NULL)
-    if (isTRUE(combine)) out <- textshape::combine(out)
+    if (isTRUE(combine)) out <- textshape::combine(out, as.tibble = FALSE)
     out
 }

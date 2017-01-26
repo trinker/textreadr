@@ -288,7 +288,7 @@ read.doc <- function(file, skip = 0, sep = ":", max.person.nchar = 20, ...) {
             text.var,
             sprintf('^.{0,%s}[%s]', max.person.nchar - 1, sep),
             include = TRUE, regex = TRUE
-        ))
+        ), as.tibble = FALSE)
 
         if (any(grepl(paste0("^.{", max.person.nchar, ",}", sep), text.var))) {
             warning(sprintf(paste0(

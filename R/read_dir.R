@@ -36,7 +36,7 @@ read_dir <- function(path, pattern = NULL, doc.col = "document", all.files = FAL
 
         text <- text[errs]
     }
-    out <- textshape::tidy_list(text, doc.col)
+    out <- textshape::tidy_list(text, doc.col, as.tibble = FALSE)
     class(out) <- c("textreadr", "data.frame")
     out
 }
