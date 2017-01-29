@@ -10,7 +10,7 @@ Description: A small collection of convenience tools for reading text
 Depends: R (>= 3.2.2)
 Suggests: testthat
 Imports: curl, pdftools, readxl, textshape, tools, utils, XML
-Date: 2017-01-25
+Date: 2017-01-28
 License: GPL-2
 LazyData: TRUE
 Roxygen: list(wrap = FALSE)
