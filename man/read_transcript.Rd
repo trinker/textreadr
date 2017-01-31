@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_transcript.R
 \name{read_transcript}
 \alias{read_transcript}
-\title{read_transcripts Into R}
+\title{Read Transcripts Into R}
 \usage{
 read_transcript(file, col.names = c("Person", "Dialogue"), text.var = NULL,
   merge.broke.tot = TRUE, header = FALSE, dash = "", ellipsis = "...",

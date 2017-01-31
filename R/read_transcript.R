@@ -1,4 +1,4 @@
-#' read_transcripts Into R
+#' Read Transcripts Into R
 #'
 #' Read .docx, .csv, .xlsx, .xlsx, or .txt transcript style files into R.
 #'

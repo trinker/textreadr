@@ -11,7 +11,7 @@ developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repo
 Status](https://travis-ci.org/trinker/textreadr.svg?branch=master)](https://travis-ci.org/trinker/textreadr)
 [![Coverage
 Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](https://coveralls.io/r/trinker/textreadr?branch=master)
-<a href="https://img.shields.io/badge/Version-0.3.0-orange.svg"><img src="https://img.shields.io/badge/Version-0.3.0-orange.svg" alt="Version"/></a>
+<a href="https://img.shields.io/badge/Version-0.3.1-orange.svg"><img src="https://img.shields.io/badge/Version-0.3.1-orange.svg" alt="Version"/></a>
 </p>
 **textreadr** is a small collection of convenience tools for reading
 text documents into R. This is not meant to be an exhaustive collection;
@@ -204,7 +204,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpqgojcP
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpmGqxDP
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -245,6 +245,28 @@ reading each of these four file formats with `read_document`.
         read_document() %>%
         paste(collapse = "\n") %>%
         cat()
+
+    ## The textreadr package aims to be a lightweight
+    ## tool kit that handles 80% of an analyst's text
+    ## reading in needs.
+    ## 
+    ## The package handles .docx, .doc, .pdf, and .txt.
+    ## 
+    ## If you have another format there is likely already
+    ## another popular R package that specializes in this
+    ## read in task.  For example, got XML, use the xml2
+    ## package, authored by Hadley Wickham, Jim Hester, &
+    ## Jeroen Ooms.  Need to read in .html?  Use Hadley
+    ## Wickham's rvest package.  Got SQL?  Oh boy there's
+    ## a bunch of great ways to read it into R.
+    ## 
+    ## 
+    ## | R Package   | SQL                    |
+    ## |-------------|------------------------|
+    ## | ROBDC       | Microsoft SQL Server   |
+    ## | RMySQL      | MySQL                  |
+    ## | ROracle     | Oracle                 |
+    ## | RJDBC       | JDBC                   |
 
 Read Directory Contents
 -----------------------
@@ -602,7 +624,7 @@ I demonstrate pairings with
         textshape::split_index(which(.$loc) -1) %>%
         lapply(select, -loc)
 
-    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\RtmpqgojcP
+    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\RtmpmGqxDP
 
     ## Function to extract cases
     ex_vs <- qdapRegex::ex_(pattern = "((of|[A-Z][A-Za-z'.,-]+)\\s+)+([Vv]s?\\.\\s+)(([A-Z][A-Za-z'.,-]+\\s+)*((of|[A-Z][A-Za-z',.-]+),?($|\\s+|\\d))+)")
