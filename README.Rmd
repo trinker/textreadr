@@ -47,7 +47,8 @@ The main functions, task category, & descriptions are summarized in the table be
 | `read_doc`                | reading     | Read .doc                             |
 | `read_document`           | reading     | Generic text reader for .doc, .docx, .txt, .pdf |
 | `read_pdf`                | reading     | Read .pdf                             |
-| `read_dir`                | reading     | Read and format multiple .txt files   |
+| `read_dir`                | reading     | Read and format multiple .doc, .docx, .txt, .pdf files   |
+| `read_dir_transcript`     | reading     | Read and format multiple transcript files   |
 | `download`                | downloading | Download documents                    | 
 | `peek`                    | viewing     | Truncated viewing of `data.frame`s    |
 

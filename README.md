@@ -63,26 +63,26 @@ XML, .html, and SQL. For these first 4 forms the
 <table>
 <thead>
 <tr class="header">
-<th align="left">R Package</th>
-<th align="left">SQL</th>
+<th>R Package</th>
+<th>SQL</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">ROBDC</td>
-<td align="left">Microsoft SQL Server</td>
+<td>ROBDC</td>
+<td>Microsoft SQL Server</td>
 </tr>
 <tr class="even">
-<td align="left">RMySQL</td>
-<td align="left">MySQL</td>
+<td>RMySQL</td>
+<td>MySQL</td>
 </tr>
 <tr class="odd">
-<td align="left">ROracle</td>
-<td align="left">Oracle</td>
+<td>ROracle</td>
+<td>Oracle</td>
 </tr>
 <tr class="even">
-<td align="left">RJDBC</td>
-<td align="left">JDBC</td>
+<td>RJDBC</td>
+<td>JDBC</td>
 </tr>
 </tbody>
 </table>
@@ -97,51 +97,56 @@ table below:
 <table>
 <thead>
 <tr class="header">
-<th align="left">Function</th>
-<th align="left">Task</th>
-<th align="left">Description</th>
+<th>Function</th>
+<th>Task</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>read_transcript</code></td>
-<td align="left">reading</td>
-<td align="left">Read 2 column transcripts</td>
+<td><code>read_transcript</code></td>
+<td>reading</td>
+<td>Read 2 column transcripts</td>
 </tr>
 <tr class="even">
-<td align="left"><code>read_docx</code></td>
-<td align="left">reading</td>
-<td align="left">Read .docx</td>
+<td><code>read_docx</code></td>
+<td>reading</td>
+<td>Read .docx</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>read_doc</code></td>
-<td align="left">reading</td>
-<td align="left">Read .doc</td>
+<td><code>read_doc</code></td>
+<td>reading</td>
+<td>Read .doc</td>
 </tr>
 <tr class="even">
-<td align="left"><code>read_document</code></td>
-<td align="left">reading</td>
-<td align="left">Generic text reader for .doc, .docx, .txt, .pdf</td>
+<td><code>read_document</code></td>
+<td>reading</td>
+<td>Generic text reader for .doc, .docx, .txt, .pdf</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>read_pdf</code></td>
-<td align="left">reading</td>
-<td align="left">Read .pdf</td>
+<td><code>read_pdf</code></td>
+<td>reading</td>
+<td>Read .pdf</td>
 </tr>
 <tr class="even">
-<td align="left"><code>read_dir</code></td>
-<td align="left">reading</td>
-<td align="left">Read and format multiple .txt files</td>
+<td><code>read_dir</code></td>
+<td>reading</td>
+<td>Read and format multiple .doc, .docx, .txt, .pdf files</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>download</code></td>
-<td align="left">downloading</td>
-<td align="left">Download documents</td>
+<td><code>read_dir_transcript</code></td>
+<td>reading</td>
+<td>Read and format multiple transcript files</td>
 </tr>
 <tr class="even">
-<td align="left"><code>peek</code></td>
-<td align="left">viewing</td>
-<td align="left">Truncated viewing of <code>data.frame</code>s</td>
+<td><code>download</code></td>
+<td>downloading</td>
+<td>Download documents</td>
+</tr>
+<tr class="odd">
+<td><code>peek</code></td>
+<td>viewing</td>
+<td>Truncated viewing of <code>data.frame</code>s</td>
 </tr>
 </tbody>
 </table>
@@ -204,7 +209,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpmGqxDP
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpUF08U5
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -443,7 +448,7 @@ handles. These are the files that will be read in:
     basename(trans_docs)
 
     ## [1] "trans1.docx" "trans2.docx" "trans3.docx" "trans4.xlsx" "trans5.xls" 
-    ## [6] "trans6.doc"
+    ## [6] "trans6.doc"  "transcripts"
 
 ### docx Simple
 
@@ -624,7 +629,7 @@ I demonstrate pairings with
         textshape::split_index(which(.$loc) -1) %>%
         lapply(select, -loc)
 
-    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\RtmpmGqxDP
+    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\RtmpUF08U5
 
     ## Function to extract cases
     ex_vs <- qdapRegex::ex_(pattern = "((of|[A-Z][A-Za-z'.,-]+)\\s+)+([Vv]s?\\.\\s+)(([A-Z][A-Za-z'.,-]+\\s+)*((of|[A-Z][A-Za-z',.-]+),?($|\\s+|\\d))+)")
