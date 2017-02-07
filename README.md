@@ -11,6 +11,7 @@ developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repo
 Status](https://travis-ci.org/trinker/textreadr.svg?branch=master)](https://travis-ci.org/trinker/textreadr)
 [![Coverage
 Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](https://coveralls.io/r/trinker/textreadr?branch=master)
+[![](http://cranlogs.r-pkg.org/badges/textreadr)](https://cran.r-project.org/package=textreadr)
 <a href="https://img.shields.io/badge/Version-0.3.1-orange.svg"><img src="https://img.shields.io/badge/Version-0.3.1-orange.svg" alt="Version"/></a>
 </p>
 **textreadr** is a small collection of convenience tools for reading
