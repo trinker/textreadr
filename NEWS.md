@@ -18,21 +18,14 @@ And constructed with the following guidelines:
 
 
 
-textreadr 0.3.1 -
+textreadr 0.3.1
 ----------------------------------------------------------------
-
-**BUG FIXES**
 
 **NEW FEATURES**
 
 * `read_dir_transcript` added to complement `read-dir` aimed at a directory of
   transcripts.
 
-**MINOR FEATURES**
-
-**IMPROVEMENTS**
-
-**CHANGES**
 
 
 textreadr 0.0.1 - 0.3.0
