@@ -1,0 +1,2 @@
+cd C:\Users\Tyler\GitHub\textreadr\tools\textreadr_logo
+ffmpeg -i r_textreadra.png -vf scale=250:-1 r_textreadr.png
