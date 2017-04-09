@@ -41,4 +41,3 @@ check_antiword_installed()
 http://nlp.antiword.edu/software/antiword.shtml
 }
 \keyword{antiword}
-

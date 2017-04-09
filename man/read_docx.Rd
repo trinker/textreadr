@@ -28,4 +28,3 @@ out <- download(x)
 Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
 }
 \keyword{docx}
-

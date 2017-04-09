@@ -43,4 +43,3 @@ doc_doc <- system.file("docs/Yasmine_Interview_Transcript.doc",
 read_document(doc_doc)
 }
 }
-
