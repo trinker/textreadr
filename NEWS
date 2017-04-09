@@ -23,6 +23,9 @@ textreadr 0.4.0 -
 
 BUG FIXES
 
+* The README.md called for `ex_` functions from **qdapRegex**.  This was the dev
+  version of **qdapRegex**.  THis is now the CRAN version and now works for users.
+
 NEW FEATURES
 
 MINOR FEATURES
@@ -30,6 +33,8 @@ MINOR FEATURES
 IMPROVEMENTS
 
 CHANGES
+
+* The logo has been moved to tools to conform to CRAN standards.
 
 
 

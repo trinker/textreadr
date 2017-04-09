@@ -15,9 +15,11 @@ README.Rmd
 README.R
 travis.yml
 inst/maintenance.R
-inst/textreadr_logo
+tools/textreadr_logo/r_textreadra.png
+tools/textreadr_logo/r_textreadr.pptx
+tools/textreadr_logo/resize_icon.txt
 inst/staticdocs
 inst/extra_statdoc
 Thumbs.db
 README.html
-resize_icon.txt
+

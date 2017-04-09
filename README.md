@@ -1,6 +1,7 @@
 textreadr   [![Follow](https://img.shields.io/twitter/follow/tylerrinker.svg?style=social)](https://twitter.com/intent/follow?screen_name=tylerrinker)
 ============
 
+
 ![](tools/textreadr_logo/r_textreadr.png)
 
 [![Project Status: Active - The project has reached a stable, usable
@@ -11,10 +12,8 @@ Status](https://travis-ci.org/trinker/textreadr.svg?branch=master)](https://trav
 [![Coverage
 Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](https://coveralls.io/r/trinker/textreadr?branch=master)
 [![](http://cranlogs.r-pkg.org/badges/textreadr)](https://cran.r-project.org/package=textreadr)
-<a href="https://img.shields.io/badge/Version-0.3.1-orange.svg"><img src="https://img.shields.io/badge/Version-0.3.1-orange.svg" alt="Version"/></a>
+<a href="https://img.shields.io/badge/Version-0.4.0-orange.svg"><img src="https://img.shields.io/badge/Version-0.4.0-orange.svg" alt="Version"/></a>
 </p>
-
-
 **textreadr** is a small collection of convenience tools for reading
 text documents into R. This is not meant to be an exhaustive collection;
 for more see the [**tm**](https://CRAN.R-project.org/package=tm)
@@ -206,12 +205,12 @@ the file download for easy use in a **magrittr** chain.
 
 Here I download a .docx file of presidential debated from 2012.
 
-    "https://dl.dropboxusercontent.com/u/61803503/pres.deb1.docx" %>%
+    'https://github.com/trinker/textreadr/raw/master/inst/docs/pres.deb1.docx' %>%
         download() %>%
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\Rtmp6Fg2kD
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\Rtmp8YDS0t
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -619,6 +618,11 @@ I demonstrate pairings with
     p_load(dplyr, qdapRegex)
     p_load_current_gh(file.path('trinker', c('textreadr', 'textshape', 'textclean')))
 
+    ## package 'english' successfully unpacked and MD5 sums checked
+    ## 
+    ## The downloaded binary packages are in
+    ##  C:\Users\Tyler\AppData\Local\Temp\Rtmp8YDS0t\downloaded_packages
+
     ## Read in pdf, split on variables
     dat <- 'http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf' %>%
         textreadr::download() %>%
@@ -631,7 +635,7 @@ I demonstrate pairings with
         textshape::split_index(which(.$loc) -1) %>%
         lapply(select, -loc)
 
-    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\Rtmp6Fg2kD
+    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\Rtmp8YDS0t
 
     ## Function to extract cases
     ex_vs <- qdapRegex::ex_(pattern = "((of|[A-Z][A-Za-z'.,-]+)\\s+)+([Vv]s?\\.\\s+)(([A-Z][A-Za-z'.,-]+\\s+)*((of|[A-Z][A-Za-z',.-]+),?($|\\s+|\\d))+)")
@@ -649,7 +653,7 @@ I demonstrate pairings with
         {.[sapply(., function(x) all(length(x) > 1 | !is.na(x)))]}
 
     ## $`24`
-    ## [1] "Townsend v. Sain"         "Simpson v. Florida"      
+    ## [1] " Townsend v. Sain"        " Simpson v. Florida"     
     ## [3] "McNally v. United States" "United States v. Gray"   
     ## 
     ## $`30`
@@ -662,7 +666,7 @@ I demonstrate pairings with
     ## [1] "Pulliam v. Allen"   "Burnett v. Grattan"
     ## 
     ## $`40`
-    ##  [1] "United States v. Knox"                                            
+    ##  [1] " United States v. Knox"                                           
     ##  [2] "Lassiter v. Department of Social Services"                        
     ##  [3] "Arkansas v. Tennessee"                                            
     ##  [4] "Utah v. United States"                                            
@@ -682,8 +686,8 @@ I demonstrate pairings with
     ## [3] "Virginia Supreme Court v. Friedman"
     ## 
     ## $`48`
-    ## [1] "Baker v. Carr"                    "Gray v. Sanders"                 
-    ## [3] "Patterson v. McLean Credit Union"
+    ## [1] "Baker v. Carr"                     "Gray v. Sanders"                  
+    ## [3] " Patterson v. McLean Credit Union"
     ## 
     ## $`53`
     ## [1] "Bates v. Arizona State Bar"

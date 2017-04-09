@@ -103,7 +103,7 @@ txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
 Here I download a .docx file of presidential debated from 2012.
 
 ```{r}
-"https://dl.dropboxusercontent.com/u/61803503/pres.deb1.docx" %>%
+'https://github.com/trinker/textreadr/raw/master/inst/docs/pres.deb1.docx' %>%
     download() %>%
     read_docx() %>%
     head(3)
