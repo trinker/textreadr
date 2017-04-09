@@ -1,8 +1,7 @@
 textreadr   [![Follow](https://img.shields.io/twitter/follow/tylerrinker.svg?style=social)](https://twitter.com/intent/follow?screen_name=tylerrinker)
 ============
 
-
-<img src="inst/textreadr_logo/r_textreadr.png" width="320" alt="textreadr Logo">
+![](tools/textreadr_logo/r_textreadr.png)
 
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
