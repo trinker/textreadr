@@ -14,6 +14,7 @@ Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](h
 [![](http://cranlogs.r-pkg.org/badges/textreadr)](https://cran.r-project.org/package=textreadr)
 <a href="https://img.shields.io/badge/Version-0.4.0-orange.svg"><img src="https://img.shields.io/badge/Version-0.4.0-orange.svg" alt="Version"/></a>
 </p>
+
 **textreadr** is a small collection of convenience tools for reading
 text documents into R. This is not meant to be an exhaustive collection;
 for more see the [**tm**](https://CRAN.R-project.org/package=tm)
@@ -210,7 +211,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\Rtmp8YDS0t
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpmMCOHL
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -618,11 +619,6 @@ I demonstrate pairings with
     p_load(dplyr, qdapRegex)
     p_load_current_gh(file.path('trinker', c('textreadr', 'textshape', 'textclean')))
 
-    ## package 'english' successfully unpacked and MD5 sums checked
-    ## 
-    ## The downloaded binary packages are in
-    ##  C:\Users\Tyler\AppData\Local\Temp\Rtmp8YDS0t\downloaded_packages
-
     ## Read in pdf, split on variables
     dat <- 'http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf' %>%
         textreadr::download() %>%
@@ -635,7 +631,7 @@ I demonstrate pairings with
         textshape::split_index(which(.$loc) -1) %>%
         lapply(select, -loc)
 
-    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\Rtmp8YDS0t
+    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\RtmpmMCOHL
 
     ## Function to extract cases
     ex_vs <- qdapRegex::ex_(pattern = "((of|[A-Z][A-Za-z'.,-]+)\\s+)+([Vv]s?\\.\\s+)(([A-Z][A-Za-z'.,-]+\\s+)*((of|[A-Z][A-Za-z',.-]+),?($|\\s+|\\d))+)")
