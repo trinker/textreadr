@@ -8,7 +8,17 @@
 #' @examples
 #' antiword_loc()
 antiword_loc <- function(){
-    file.path(strsplit(getwd(), "(/|\\\\)+")[[1]][1], 'antiword/antiword.exe')
+
+    myPaths <- c("antiword", "~/.cabal/bin/antiword", "~/Library/Haskell/bin/antiword",
+        "C:\\PROGRA~1\\antiword\\antiword.exe", "/usr/bin/antiword",
+        "/Applications/antiword.app/Contents/MacOS/antiword", 
+        file.path(strsplit(getwd(), "(/|\\\\)+")[[1]][1], 'antiword/antiword.exe'))
+    
+    antiloc <- Sys.which(myPaths)
+    temp <- antiloc[antiloc != ""]
+
+    short.path <- which.min(unlist(lapply(gregexpr("[Aa]ntiword", temp), "[[", 1)))
+    temp[short.path]
 }
 
 

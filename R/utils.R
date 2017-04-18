@@ -87,6 +87,9 @@ function(multi.columns, sep=".", handle.na=TRUE, trim=TRUE){
 check_availability <- function(){
 
     os <- Sys.info()[['sysname']]
+    
+    if (os != 'Windows') warning("Currently assisted installation isn't enabled for Mac/Linux.\nPull requests with this support would be appreciated!")
+    
     switch(os,
         Windows= available[["Windows"]],
         Linux  = available[["Linux"]],
