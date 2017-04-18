@@ -11,12 +11,11 @@ antiword_loc()
 antiword_url()
 
 check_antiword_installed(antiword.path = textreadr::antiword_loc(),
-  download = textreadr::antiword_url(), verbose = TRUE)
+  verbose = TRUE)
 }
 \arguments{
-\item{antiword.path}{The path to the latest version of Antiword.}
-
-\item{download}{The download url for Antiword.}
+\item{antiword.path}{The path to the latest version of Antiword.  Default
+attempts to locate automatically.}
 
 \item{verbose}{If \code{TRUE} messages are printed even when everything is
 installed.}
