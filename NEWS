@@ -24,7 +24,11 @@ textreadr 0.4.0 -
 BUG FIXES
 
 * The README.md called for `ex_` functions from **qdapRegex**.  This was the dev
-  version of **qdapRegex**.  THis is now the CRAN version and now works for users.
+  version of **qdapRegex**.  This is now the CRAN version and now works for users.
+
+* `check_antiword_installed` failed for Linux and Mac users.  It now works on
+  Windows, Linux, and Mac.  Thanks to José de Jesus Filho for catching this and
+  working through the process on Linux (see issue #5).
 
 NEW FEATURES
 

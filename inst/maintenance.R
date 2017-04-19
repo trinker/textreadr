@@ -1,7 +1,7 @@
 #========
 # BUILD
 #========
-source("inst/build.R")
+update_date(); source("inst/build.R")
 
 #==========================
 # Run unit tests
@@ -51,7 +51,7 @@ expand_statdoc(path2, to.icon = extras, readme = rdme)
 
 x <- readLines(path2)
 x[grepl("<h2>Authors</h2>", x)] <- paste(
-    c("<h2>Author</h2>" 
+    c("<h2>Author</h2>"
     #rep("<h2>Contributor</h2>", 1)
     ),
     c("Tyler W. Rinker")

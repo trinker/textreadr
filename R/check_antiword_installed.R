@@ -24,24 +24,24 @@ check_antiword_installed <- function(antiword.path = textreadr::antiword_loc(),
     out <- file.exists(antiword.path)
 
     if (isTRUE(out)) {
-        
+
         mess <- paste0("antiword appears to be installed.\n\n",
                        "...Let the .doc extraction begin!\n\n")
         if (isTRUE(verbose)) message(mess)
         return(invisible(NULL))
-        
+
     } else {
 
         os <- Sys.info()[['sysname']]
-    
+
         switch(os,
             Windows= {install_anitword_windows()},
             Linux  = {install_anitword_linux()},
             Darwin = {install_anitword_mac()},
             stop(paste0(os, 'is not a supported operating system.'))
-        )        
-        
-        
+        )
+
+
     }
 }
 
@@ -55,10 +55,10 @@ install_anitword_windows <- function(){
     } else {
         message("Let me try...\nHold on.  It may take some time...\n")
     }
-    
+
     root <- strsplit(getwd(), "(/|\\\\)+")[[1]][1]
-    
-    download <- textreadr::antiword_url()    
+
+    download <- textreadr::antiword_url()
     temp <- tempdir()
     dest <- file.path(temp, basename(download))
     utils::download.file(download, dest)
@@ -77,9 +77,9 @@ install_anitword_windows <- function(){
 }
 
 install_anitword_linux <- function(){
-    stop('Antiword must be installed first.  Please try:\n\nsudo apt-get install antiword')
+    stop('Antiword must be installed first.  Please install first:\n\nsudo apt-get install antiword')
 }
 
 install_anitword_mac <- function(){
-    stop('Antiword must be installed first.  Please install from:\n\nhttp://www.finkproject.org/pdb/package.php/antiword')
+    stop('Antiword must be installed first.  Please install first via:\n\nhttp://www.finkproject.org/pdb/package.php/antiword')
 }
