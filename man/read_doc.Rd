@@ -4,20 +4,28 @@
 \alias{read_doc}
 \title{Read in .doc Content}
 \usage{
-read_doc(file, skip = 0, antiword.path = textreadr::antiword_loc())
+read_doc(file, skip = 0, remove.empty = TRUE, format = TRUE, ...)
 }
 \arguments{
 \item{file}{The path to the .doc file.}
 
 \item{skip}{The number of lines to skip.}
 
-\item{antiword.path}{Path to \href{http://www.winfield.demon.nl}{antiword}.}
+\item{remove.empty}{logical.  If \code{TRUE} empty elements in the vector are 
+returned.}
+
+\item{format}{logical.  If \code{TRUE} the output will keep doc formatting 
+(e.g., bold, italics, underlined).  This corresponds to the \code{-f} flag in 
+antiword.}
+
+\item{\dots}{ignored.}
 }
 \value{
 Returns a character vector.
 }
 \description{
-Read in the content from a .doc file using \href{http://www.winfield.demon.nl}{antiword}.
+Read in the content from a .doc file using \href{http://www.winfield.demon.nl}{antiword}
+via the \pkg{antiword} package.
 }
 \examples{
 \dontrun{

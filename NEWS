@@ -36,6 +36,10 @@ MINOR FEATURES
 
 IMPROVEMENTS
 
+* **textreadr** no longer uses the **antiword** program directly, instead the 
+  R antiword package is called for `read_doc`.  This makes installation across
+  operating systems more standardized.
+
 CHANGES
 
 * The logo has been moved to tools to conform to CRAN standards.

@@ -12,9 +12,8 @@ Status](https://travis-ci.org/trinker/textreadr.svg?branch=master)](https://trav
 [![Coverage
 Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](https://coveralls.io/r/trinker/textreadr?branch=master)
 [![](http://cranlogs.r-pkg.org/badges/textreadr)](https://cran.r-project.org/package=textreadr)
-<a href="https://img.shields.io/badge/Version-0.4.1-orange.svg"><img src="https://img.shields.io/badge/Version-0.4.1-orange.svg" alt="Version"/></a>
+<a href="https://img.shields.io/badge/Version-0.5.0-orange.svg"><img src="https://img.shields.io/badge/Version-0.5.0-orange.svg" alt="Version"/></a>
 </p>
-
 **textreadr** is a small collection of convenience tools for reading
 text documents into R. This is not meant to be an exhaustive collection;
 for more see the [**tm**](https://CRAN.R-project.org/package=tm)
@@ -170,10 +169,10 @@ the development version:
 Contact
 =======
 
-You are welcome to:    
-- submit suggestions and bug-reports at: <https://github.com/trinker/textreadr/issues>    
-- send a pull request on: <https://github.com/trinker/textreadr/>    
-- compose a friendly e-mail to: <tyler.rinker@gmail.com>    
+You are welcome to:  -   submit suggestions and bug-reports at:     <https://github.com/trinker/textreadr/issues>  
+
+-   send a pull request on: <https://github.com/trinker/textreadr/>  
+   compose a friendly e-mail to: <tyler.rinker@gmail.com>
 
 Demonstration
 =============
@@ -211,7 +210,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\Rtmp2nx2JB
+    ## pres.deb1.docx read into C:\Users\trinker\AppData\Local\Temp\Rtmpc1vbwb
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -631,7 +630,7 @@ I demonstrate pairings with
         textshape::split_index(which(.$loc) -1) %>%
         lapply(select, -loc)
 
-    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\Rtmp2nx2JB
+    ## SCDB_2012_01_codebook.pdf read into C:\Users\trinker\AppData\Local\Temp\Rtmpc1vbwb
 
     ## Function to extract cases
     ex_vs <- qdapRegex::ex_(pattern = "((of|[A-Z][A-Za-z'.,-]+)\\s+)+([Vv]s?\\.\\s+)(([A-Z][A-Za-z'.,-]+\\s+)*((of|[A-Z][A-Za-z',.-]+),?($|\\s+|\\d))+)")

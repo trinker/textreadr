@@ -1,16 +1,14 @@
 Package: textreadr
 Title: Read Text Documents into R
-Version: 0.4.1
-Authors@R: c(person("Tyler", "Rinker", email =
-        "tyler.rinker@gmail.com", role = c("aut", "cre")),
-        person("Bryan", "Goodrich", role = "ctb"))
+Version: 0.5.0
+Authors@R: c(person("Tyler", "Rinker", email = "tyler.rinker@gmail.com", role = c("aut", "cre")),
+           person("Bryan", "Goodrich", role = "ctb"))
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
-Description: A small collection of convenience tools for reading text
-        documents into R.
+Description: A small collection of convenience tools for reading text documents into R.
 Depends: R (>= 3.2.2)
 Suggests: testthat
-Imports: curl, pdftools, readxl, textshape, tools, utils, XML
-Date: 2017-04-18
+Imports: antiword, curl, pdftools, readxl, textshape, tools, utils, XML
+Date: 2017-04-22
 License: GPL-2
 LazyData: TRUE
 Roxygen: list(wrap = FALSE)
