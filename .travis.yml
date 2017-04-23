@@ -8,6 +8,7 @@ addons:
       - libwebp-dev
       - libpoppler-cpp-dev
       - valgrind
+      - libapparmor-dev
 
 before_install:
   - sh -e /etc/init.d/xvfb start
