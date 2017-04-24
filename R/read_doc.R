@@ -22,7 +22,7 @@
 #' }
 read_doc <- function(file, skip = 0, remove.empty = TRUE, format = TRUE, ...){
 
-    results <- stringi::stri_split_fixed(antiword::antiword(file, format = format, ...), '\r\n')[[1]]
+    results <- strsplit(antiword::antiword(file, format = format, ...), '\r\n', fixed = TRUE)[[1]]
 
     if (isTRUE(remove.empty)) results <- results[!grepl("^\\s*$", results)]
     #if (isTRUE(remove.multiple.white)) results <- gsub("\\s+", " ", results)
@@ -30,4 +30,3 @@ read_doc <- function(file, skip = 0, remove.empty = TRUE, format = TRUE, ...){
     if (skip > 0) results <- results[-seq(skip)]
     trimws(results)
 }
-
