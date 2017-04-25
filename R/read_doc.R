@@ -6,7 +6,7 @@
 #' @param file The path to the .doc file.
 #' @param skip The number of lines to skip.
 #' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are 
-#' returned.
+#' removed.
 #' @param format logical.  If \code{TRUE} the output will keep doc formatting 
 #' (e.g., bold, italics, underlined).  This corresponds to the \code{-f} flag in 
 #' antiword.
