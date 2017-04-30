@@ -75,8 +75,10 @@
 #' dat6 <- read_transcript(doc5)
 #'
 #' ## MS doc format
+#' \dontrun{
 #' dat7 <- read_transcript(doc6) ## need to skip Researcher
 #' dat8 <- read_transcript(doc6, skip = 1)
+#' }
 #'
 #' ## text string input
 #' trans <- "sam: Computer is fun. Not too fun.
@@ -243,7 +245,6 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
 
 
 rm_na_row <- function(x, remove = TRUE) {
-    x <- as.data.frame(x, stringsAsFactors = FALSE)
     if (!remove) return(x)
     x[rowSums(is.na(x)) != ncol(x), ]
 }
