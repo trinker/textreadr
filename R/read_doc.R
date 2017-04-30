@@ -5,10 +5,12 @@
 #'
 #' @param file The path to the .doc file.
 #' @param skip The number of lines to skip.
-#' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are 
+#' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are
 #' removed.
-#' @param format logical.  If \code{TRUE} the output will keep doc formatting 
-#' (e.g., bold, italics, underlined).  This corresponds to the \code{-f} flag in 
+#' @param trim logical.  If \code{TRUE} the leading/training white space is
+#' reoved.
+#' @param format logical.  If \code{TRUE} the output will keep doc formatting
+#' (e.g., bold, italics, underlined).  This corresponds to the \code{-f} flag in
 #' antiword.
 #' @param \dots ignored.
 #' @return Returns a character vector.
@@ -20,13 +22,16 @@
 #'     package = "textreadr")
 #' read_doc(x)
 #' }
-read_doc <- function(file, skip = 0, remove.empty = TRUE, format = TRUE, ...){
+read_doc <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE,
+    format = FALSE, ...){
 
-    results <- strsplit(antiword::antiword(file, format = format, ...), '\r\n', fixed = TRUE)[[1]]
+    ## use antiword package to read in the text
+    text <- strsplit(antiword::antiword(file, format = format, ...), '\r\n', fixed = TRUE)[[1]]
 
-    if (isTRUE(remove.empty)) results <- results[!grepl("^\\s*$", results)]
-    #if (isTRUE(remove.multiple.white)) results <- gsub("\\s+", " ", results)
+    ## formatting
+    if (isTRUE(remove.empty)) text <- text[!grepl("^\\s*$", text)]
+    if (skip > 0) text <- text[-seq(skip)]
+    if (isTRUE(trim)) text <- trimws(text)
 
-    if (skip > 0) results <- results[-seq(skip)]
-    trimws(results)
+    text
 }

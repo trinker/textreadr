@@ -2,15 +2,15 @@ The textreadr package aims to be a lightweight
 tool kit that handles 80% of an analyst's text
 reading in needs.
 
-The package handles .docx, .doc, .pdf, and .txt.
+The package handles .docx, .doc, .pdf, .html, and .txt.
 
 If you have another format there is likely already
 another popular R package that specializes in this
 read in task.  For example, got XML, use the xml2
 package, authored by Hadley Wickham, Jim Hester, &
-Jeroen Ooms.  Need to read in .html?  Use Hadley
-Wickham's rvest package.  Got SQL?  Oh boy there's
-a bunch of great ways to read it into R.
+Jeroen Ooms.  Need special handling for .html?  Use 
+Hadley Wickham's rvest package.  Got SQL?  Oh boy 
+there's a bunch of great ways to read it into R.
 
 
 | R Package   | SQL                    |

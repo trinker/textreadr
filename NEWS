@@ -28,17 +28,29 @@ BUG FIXES
 
 NEW FEATURES
 
+* `read_html` added for reading in the text from the body of .html documents.
+  `read_document` inherits this ability as well.
+
 MINOR FEATURES
+
+* The low level read functions all now have consistent arguments: `skip`,
+  `remove.empty`, & `trim` to ake their use more interoperable.
 
 IMPROVEMENTS
 
-* **textreadr** no longer uses the **antiword** program directly, instead the 
+* **textreadr** no longer uses the **antiword** program directly, instead the
   R antiword package is called for `read_doc`.  This makes installation across
   operating systems more standardized.
 
 CHANGES
 
 * The logo has been moved to tools to conform to CRAN standards.
+
+* `read_doc`'s argument `format` is now `FALSE` by default rather than `TRUE` to
+  be consistent with the other read functions.
+
+* `read_docx` no longer uses the **XML** package but now uses **xml2** as
+  suggested by Jeroen Ooms (see issue #7).
 
 
 

@@ -21,13 +21,13 @@ verbadge <- sprintf('<a href="https://img.shields.io/badge/Version-%s-orange.svg
 [![Build Status](https://travis-ci.org/trinker/textreadr.svg?branch=master)](https://travis-ci.org/trinker/textreadr)
 [![Coverage Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](https://coveralls.io/r/trinker/textreadr?branch=master)
 [![](http://cranlogs.r-pkg.org/badges/textreadr)](https://cran.r-project.org/package=textreadr)
-`r verbadge`
+
 
 **textreadr** is a small collection of convenience tools for reading text documents into R.  This is not meant to be an exhaustive collection; for more see the [**tm**](https://CRAN.R-project.org/package=tm) package.
 
 # Functions
 
-Most jobs in my workflow can be completed with `read_document` and `read_dir`.  The former generically reads in a .docx, .doc, .pdf, or .txt file without specifying the extension.  The latter reads in multiple .docx, .doc, .pdf, or .txt files from a directory as a `data.frame` with a file and text column.  This workflow is effective because most text documents I encounter are stored as a .docx, .doc, .pdf, or .txt file.  The remaining common storage formats I encounter include .csv, .xlsx, XML, .html, and SQL.  For these first 4 forms the [**readr**](https://CRAN.R-project.org/package=readr), [**readx**l](https://CRAN.R-project.org/package=readxl), [**xml2**](https://CRAN.R-project.org/package=xml2), and [**rvest**](https://CRAN.R-project.org/package=rvest).  For SQL:
+Most jobs in my workflow can be completed with `read_document` and `read_dir`.  The former generically reads in a .docx, .doc, .pdf, .html, or .txt file without specifying the extension.  The latter reads in multiple .docx, .doc, .pdf, .html, or .txt files from a directory as a `data.frame` with a file and text column.  This workflow is effective because most text documents I encounter are stored as a .docx, .doc, .pdf, .html, or .txt file.  The remaining common storage formats I encounter include .csv, .xlsx, XML, structured .html, and SQL.  For these first 4 forms the [**readr**](https://CRAN.R-project.org/package=readr), [**readx**l](https://CRAN.R-project.org/package=readxl), [**xml2**](https://CRAN.R-project.org/package=xml2), and [**rvest**](https://CRAN.R-project.org/package=rvest).  For SQL:
 
 | R Package   | SQL                    |
 |-------------|------------------------|
@@ -36,7 +36,7 @@ Most jobs in my workflow can be completed with `read_document` and `read_dir`.  
 | ROracle     | Oracle                 |
 | RJDBC       | JDBC                   |
 
-These packages are already specialized to handle these very specific data formats.  **textreadr** provides the basic reading tools that work with the four basic file formats in which text data is stored. 
+These packages are already specialized to handle these very specific data formats.  **textreadr** provides the basic reading tools that work with the five basic file formats in which text data is stored. 
 
 The main functions, task category, & descriptions are summarized in the table below:
 
@@ -47,6 +47,7 @@ The main functions, task category, & descriptions are summarized in the table be
 | `read_docx`               | reading     | Read .docx                            |
 | `read_doc`                | reading     | Read .doc                             |
 | `read_document`           | reading     | Generic text reader for .doc, .docx, .txt, .pdf |
+| `read_html`               | reading     | Read .html                            |
 | `read_pdf`                | reading     | Read .pdf                             |
 | `read_dir`                | reading     | Read and format multiple .doc, .docx, .txt, .pdf files   |
 | `read_dir_transcript`     | reading     | Read and format multiple transcript files   |
@@ -88,9 +89,10 @@ trans_docs <- dir(
     full.names = TRUE
 )
 
-pdf_doc <- system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr")
 docx_doc <- system.file("docs/Yasmine_Interview_Transcript.docx", package = "textreadr")
 doc_doc <- system.file("docs/Yasmine_Interview_Transcript.doc", package = "textreadr")
+pdf_doc <- system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr")
+html_doc <- system.file('docs/textreadr_creed.html', package = "textreadr")
 txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
 ```
 
@@ -111,7 +113,7 @@ Here I download a .docx file of presidential debated from 2012.
 
 ## Generic Document Reading
 
-The `read_document` is a generic wrapper for `read_docx`, `read_doc`, and `read_pdf` that detects the file extension and chooses the correct reader.  For most tasks that require reading a .docx, .doc, .pdf, or .txt file this is the go to function to get the job done.  Below I demonstrate reading each of these four file formats with `read_document`.
+The `read_document` is a generic wrapper for `read_docx`, `read_doc`, `read_html`, and `read_pdf` that detects the file extension and chooses the correct reader.  For most tasks that require reading a .docx, .doc, .html, .pdf, or .txt file this is the go-to function to get the job done.  Below I demonstrate reading each of these five file formats with `read_document`.
 
 ```{r}
 docx_doc %>%
@@ -123,6 +125,10 @@ doc_doc %>%
     head(3)
     
 pdf_doc %>%
+    read_document() %>%
+    head(3)
+
+html_doc %>%
     read_document() %>%
     head(3)
 
@@ -189,7 +195,7 @@ docx_doc %>%
 
 ## Read .doc
 
-A .doc file is a bit trickier to read in than .docx.  The [Antiword](http://www.winfield.demon.nl) program can be used from the command line to extract text from a .doc file.  Antiword must be installed.
+A .doc file is a bit trickier to read in than .docx but is made easy by the **antiword** package which wraps the [Antiword](http://www.winfield.demon.nl) program in an OS independent way.  
 
 ```{r}
 doc_doc %>%
@@ -202,6 +208,7 @@ doc_doc %>%
     read_doc(15) %>%
     head(7)
 ```
+
 
 ## Read .pdf
 
@@ -224,6 +231,14 @@ Users may find the following sites useful for OCR in R:
 - http://electricarchaeology.ca/2014/07/15/doing-ocr-within-r
 - https://github.com/soodoku/abbyyR
 
+## Read .html
+
+Often a researcher only wishes to grab the text from the body of .html files.  The `read_html` function does exactly this task.  For finer control over .html scraping the user may investigate the **xml2** & **rvest** packages for parsing .html and .xml files.  Here I read in HTML with `read_html`.  
+
+```{r}
+html_doc %>%
+    read_html() 
+```
 
 ## Read Transcripts
 

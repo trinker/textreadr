@@ -74,12 +74,11 @@
 #' dat5 <- read_transcript(doc4)
 #' dat6 <- read_transcript(doc5)
 #'
-#' \dontrun{
-#' ## MS doc format (must have antiword installed)
+#' ## MS doc format
 #' dat7 <- read_transcript(doc6) ## need to skip Researcher
 #' dat8 <- read_transcript(doc6, skip = 1)
-#' }
 #'
+#' ## text string input
 #' trans <- "sam: Computer is fun. Not too fun.
 #' greg: No it's not, it's dumb.
 #' teacher: What should we do?
@@ -129,9 +128,9 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
     revert <- FALSE
     if (!is.null(sep) && !missing(text) && nchar(sep) > 1) {
 
-        text <- gsub(sep, "QDAP_SEP_HOLDER", text)
-        text <- gsub(":", "QDAP_PLACE_HOLDER", text)
-        text <- gsub("QDAP_SEP_HOLDER", ":", text)
+        text <- gsub(sep, "TEXTREADR_SEP_HOLDER", text)
+        text <- gsub(":", "TEXTREADR_PLACE_HOLDER", text)
+        text <- gsub("TEXTREADR_SEP_HOLDER", ":", text)
         sep <- ":"
         revert <- TRUE
 
@@ -144,7 +143,7 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
             sep <- ","
         }
     }
-# browser()
+
     switch(y,
         xlsx = {
             x <- readxl::read_excel(file, col_names = header,
@@ -182,8 +181,8 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
         text = {
             x <- utils::read.table(text=text, header = header, sep = sep, skip=skip)
             if(revert) {
-                x[, 2] <- gsub("QDAP_PLACE_HOLDER", ":", x[, 2])
-                x[, 1] <- gsub("QDAP_PLACE_HOLDER", ":", x[, 1])
+                x[, 2] <- gsub("TEXTREADR_PLACE_HOLDER", ":", x[, 2])
+                x[, 1] <- gsub("TEXTREADR_PLACE_HOLDER", ":", x[, 1])
             }
         },
         stop("invalid file extension:\n \bfile must be a .docx .csv .xls or .xlsx" )
@@ -232,6 +231,8 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
     if (!is.null(col.names)) {
         colnames(x) <- col.names
     }
+
+    x <- as.data.frame(x, stringsAsFactors = FALSE)
     if (merge.broke.tot) {
         x <- combine_tot(x)
     }
@@ -249,16 +250,27 @@ rm_na_row <- function(x, remove = TRUE) {
 
 read.docx <-
 function(file, skip = 0, sep = ":", max.person.nchar = 20) {
+
+    ## create temp dir
     tmp <- tempfile()
     if (!dir.create(tmp)) stop("Temporary directory could not be established.")
-    utils::unzip(file, exdir = tmp)  # Unzip to temporary directory
-    xmlfile <- file.path(tmp, "word", "document.xml")  # Path to xml document
-    doc     <- XML::xmlTreeParse(xmlfile, useInternalNodes=TRUE)  # Import XML
-    unlink(tmp, recursive = TRUE)  # Delete unzipped files; no longer needed
-    nodeSet <- XML::getNodeSet(doc, "//w:p")  # Access all p-nodes in document
-    pvalues <- sapply(nodeSet, XML::xmlValue)  # Return their (textual) values
+
+    ## clean up
+    on.exit(unlink(tmp, recursive=TRUE))
+
+    ## unzip docx
+    xmlfile <- file.path(tmp, "word", "document.xml")
+    utils::unzip(file, exdir = tmp)
+
+    ## Import XML
+    doc <- xml2::read_xml(xmlfile)
+
+    ## extract the content
+    nodeSet <- xml2::xml_find_all(doc, "//w:p")
+    pvalues <- xml2::xml_text(nodeSet)
+
     pvalues <- pvalues[!grepl("^\\s*$", pvalues)]  # Remove empty lines
-    if (skip > 0) pvalues <- pvalues[-seq(skip)]  # Ignore these many lines
+    if (skip > 0) pvalues <- pvalues[-seq(skip)]   # Ignore these many lines
     if (any(grepl(paste0("^.{", max.person.nchar, ",}", sep), pvalues))) {
         warning(sprintf(paste0(
             "I've detected the separator beyond %s characters from the line start.  Parsing may be incorrect...\n",
@@ -271,8 +283,7 @@ function(file, skip = 0, sep = ":", max.person.nchar = 20) {
     speaker <- rep(speaker[which(keys)], diff(c(which(keys), length(speaker)+1)))
     speaker <- unlist(speaker)  # Make sure it's a vector
     speaker <- substr(speaker, 1, nchar(speaker)-nchar(sep)) # Remove ending colon
-    transcript <- data.frame(X1 = trimws(speaker),
-        X2 = trimws(pvalues), stringsAsFactors = FALSE)
+    transcript <- data.frame(X1 = trimws(speaker), X2 = trimws(pvalues), stringsAsFactors = FALSE)
     return(transcript)
 }
 

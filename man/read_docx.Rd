@@ -4,12 +4,20 @@
 \alias{read_docx}
 \title{Read in .docx Content}
 \usage{
-read_docx(file, skip = 0)
+read_docx(file, skip = 0, remove.empty = TRUE, trim = TRUE, ...)
 }
 \arguments{
 \item{file}{The path to the .docx file.}
 
 \item{skip}{The number of lines to skip.}
+
+\item{remove.empty}{logical.  If \code{TRUE} empty elements in the vector are
+removed.}
+
+\item{trim}{logical.  If \code{TRUE} the leading/training white space is
+reoved.}
+
+\item{\dots}{ignored.}
 }
 \value{
 Returns a character vector.
@@ -19,9 +27,9 @@ Read in the content from a .docx file.
 }
 \examples{
 \dontrun{
-x <- "http://www.cybersmart.gov.au/~/media/9999BCDEA99F40DD8170AAD978C8D2F9.docx"
-out <- download(x)
-(txt <- read_docx(out))
+url <- "https://github.com/trinker/textreadr/raw/master/inst/docs/Yasmine_Interview_Transcript.docx"
+file <- download(url)
+(txt <- read_docx(file))
 }
 }
 \author{

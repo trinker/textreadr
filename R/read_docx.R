@@ -4,26 +4,46 @@
 #'
 #' @param file The path to the .docx file.
 #' @param skip The number of lines to skip.
+#' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are
+#' removed.
+#' @param trim logical.  If \code{TRUE} the leading/training white space is
+#' reoved.
+#' @param \dots ignored.
 #' @return Returns a character vector.
 #' @keywords docx
 #' @export
 #' @author Bryan Goodrich and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @examples
 #' \dontrun{
-#' x <- "http://www.cybersmart.gov.au/~/media/9999BCDEA99F40DD8170AAD978C8D2F9.docx"
-#' out <- download(x)
-#' (txt <- read_docx(out))
+#' url <- "https://github.com/trinker/textreadr/raw/master/inst/docs/Yasmine_Interview_Transcript.docx"
+#' file <- download(url)
+#' (txt <- read_docx(file))
 #' }
-read_docx <- function (file, skip = 0) {
+read_docx <- function (file, skip = 0, remove.empty = TRUE, trim = TRUE, ...) {
+
+    ## create temp dir
     tmp <- tempfile()
     if (!dir.create(tmp)) stop("Temporary directory could not be established.")
-    utils::unzip(file, exdir = tmp)
+
+    ## clean up
+    on.exit(unlink(tmp, recursive=TRUE))
+
+    ## unzip docx
     xmlfile <- file.path(tmp, "word", "document.xml")
-    doc <- XML::xmlTreeParse(xmlfile, useInternalNodes = TRUE)
-    unlink(tmp, recursive = TRUE)
-    nodeSet <- XML::getNodeSet(doc, "//w:p")
-    pvalues <- sapply(nodeSet, XML::xmlValue)
-    pvalues <- pvalues[!grepl("^\\s*$", pvalues)]
+    utils::unzip(file, exdir = tmp)
+
+    ## read in the unzipped docx
+    doc <- xml2::read_xml(xmlfile)
+
+    ## extract the content
+    nodeSet <- xml2::xml_find_all(doc, "//w:p")
+    pvalues <- xml2::xml_text(nodeSet)
+
+    ## formatting
+    if (isTRUE(remove.empty)) pvalues <- pvalues[!grepl("^\\s*$", pvalues)]
     if (skip > 0) pvalues <- pvalues[-seq(skip)]
-    trimws(pvalues)
+    if (isTRUE(trim)) pvalues <- trimws(pvalues)
+
+    pvalues
+
 }

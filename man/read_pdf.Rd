@@ -4,27 +4,38 @@
 \alias{read_pdf}
 \title{Read a Portable Document Format into R}
 \usage{
-read_pdf(file, skip = 0)
+read_pdf(file, skip = 0, remove.empty = TRUE, trim = TRUE, ...)
 }
 \arguments{
 \item{file}{A path to a PDF file.}
 
 \item{skip}{Integer; the number of lines of the data file to skip before
 beginning to read data.}
+
+\item{remove.empty}{logical.  If \code{TRUE} empty elements in the vector are
+removed.}
+
+\item{trim}{logical.  If \code{TRUE} the leading/training white space is
+reoved.}
+
+\item{\dots}{Other arguments passed to \code{\link[pdftools]{pdf_text}}.}
 }
 \value{
 Returns a \code{\link[base]{data.frame}} with the page number
 (\code{page_id}), line number (\code{element_id}), and the \code{text}.
 }
 \description{
-A wrapper for \code{\link[pdftools]{pdf_text}} to read PDFs into R.
+A wrapper for \code{\link[pdftools]{pdf_text}} to read PDFs into \pkg{R}.
 }
 \note{
 A word of caution from \href{http://stackoverflow.com/a/9187015/1000343}{Carl Witthoft}"
 "Just a warning to others who may be hoping to extract data: PDF is a
 container, not a format. If the original document does not contain actual
 text, as opposed to bitmapped images of text or possibly even uglier things
-than I can imagine, nothing other than OCR can help you."
+than I can imagine, nothing other than OCR can help you."  If the reader has
+OCR needs the \pkg{tesseract} package, available on CRAN
+(\url{https://CRAN.R-project.org/package=tesseract}), is an "OCR engine with
+unicode (UTF-8) support" and may be of use.
 }
 \examples{
 pdf_dat <- read_pdf(

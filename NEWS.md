@@ -1,15 +1,71 @@
-<
->
-NEWSmajor====.NEWSminor====.NEWSpatch====
-BUG FIXES
-NEW FEATURES
-MINOR FEATURES
-CHANGES
-IMPROVEMENTS
- TRUE 
- FALSE 
- NULL 
-TRUE.
-FALSE.
-NULL.
-:m:
+NEWS
+====
+
+Versioning
+----------
+
+Releases will be numbered with the following semantic versioning format:
+
+&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;
+
+And constructed with the following guidelines:
+
+* Breaking backward compatibility bumps the major (and resets the minor
+  and patch)
+* New additions without breaking backward compatibility bumps the minor
+  (and resets the patch)
+* Bug fixes and misc changes bumps the patch
+
+
+
+textreadr 0.4.0 -
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+* The README.md called for `ex_` functions from **qdapRegex**.  This was the dev
+  version of **qdapRegex**.  This is now the CRAN version and now works for users.
+
+**NEW FEATURES**
+
+* `read_html` added for reading in the text from the body of .html documents.
+  `read_document` inherits this ability as well.
+
+**MINOR FEATURES**
+
+* The low level read functions all now have consistent arguments: `skip`,
+  `remove.empty`, & `trim` to ake their use more interoperable.
+
+**IMPROVEMENTS**
+
+* **textreadr** no longer uses the **antiword** program directly, instead the
+  R antiword package is called for `read_doc`.  This makes installation across
+  operating systems more standardized.
+
+**CHANGES**
+
+* The logo has been moved to tools to conform to CRAN standards.
+
+* `read_doc`'s argument `format` is now `FALSE` by default rather than `TRUE` to
+  be consistent with the other read functions.
+
+* `read_docx` no longer uses the **XML** package but now uses **xml2** as
+  suggested by Jeroen Ooms (see <a href="https://github.com/trinker/textreadr/issues/7">issue #7</a>).
+
+
+
+textreadr 0.3.1
+----------------------------------------------------------------
+
+**NEW FEATURES**
+
+* `read_dir_transcript` added to complement `read-dir` aimed at a directory of
+  transcripts.
+
+
+
+textreadr 0.0.1 - 0.3.0
+----------------------------------------------------------------
+
+This package is a  collection of convenience tools for reading text documents
+into R.

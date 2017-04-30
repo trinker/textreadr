@@ -4,18 +4,22 @@
 \alias{read_doc}
 \title{Read in .doc Content}
 \usage{
-read_doc(file, skip = 0, remove.empty = TRUE, format = TRUE, ...)
+read_doc(file, skip = 0, remove.empty = TRUE, trim = TRUE,
+  format = FALSE, ...)
 }
 \arguments{
 \item{file}{The path to the .doc file.}
 
 \item{skip}{The number of lines to skip.}
 
-\item{remove.empty}{logical.  If \code{TRUE} empty elements in the vector are 
-returned.}
+\item{remove.empty}{logical.  If \code{TRUE} empty elements in the vector are
+removed.}
 
-\item{format}{logical.  If \code{TRUE} the output will keep doc formatting 
-(e.g., bold, italics, underlined).  This corresponds to the \code{-f} flag in 
+\item{trim}{logical.  If \code{TRUE} the leading/training white space is
+reoved.}
+
+\item{format}{logical.  If \code{TRUE} the output will keep doc formatting
+(e.g., bold, italics, underlined).  This corresponds to the \code{-f} flag in
 antiword.}
 
 \item{\dots}{ignored.}
