@@ -35,3 +35,4 @@ Read in multiple files from a directory and create a
 read_dir(system.file("docs/Maas2011/pos", package = "textreadr"))
 read_dir(system.file("docs/Maas2011", package = "textreadr"), recursive=TRUE)
 }
+

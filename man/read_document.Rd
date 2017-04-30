@@ -55,3 +55,4 @@ read_document(txt_doc)
 read_document('http://www.talkstats.com/index.php')
 }
 }
+

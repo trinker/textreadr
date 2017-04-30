@@ -2,10 +2,11 @@
 % Please edit documentation in R/textreadr-package.R
 \docType{package}
 \name{textreadr}
-\alias{textreadr}
 \alias{package-textreadr}
+\alias{textreadr}
 \alias{textreadr-package}
 \title{Read Text Documents into R}
 \description{
 A small collection of convenience tools for reading text documents into R.
 }
+

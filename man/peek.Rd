@@ -42,3 +42,4 @@ peek(presidential_debates_2012)
 \seealso{
 \code{\link[utils]{head}}
 }
+
