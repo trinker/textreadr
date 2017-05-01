@@ -39,4 +39,3 @@ read_doc(x)
 }
 }
 \keyword{doc}
-

@@ -82,6 +82,7 @@ separator).  .doc files must be converted to .docx before reading in.
 file being read in is .docx.  The researcher should carefully investigate
 each transcript for errors before further parsing the data.
 }
+
 \examples{
 (doc1 <- system.file("docs/trans1.docx", package = "textreadr"))
 (doc2 <- system.file("docs/trans2.docx", package = "textreadr"))
@@ -142,11 +143,10 @@ real_dat <- read_transcript(
     skip = 19
 )
 }
-\author{
-Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
-}
 \references{
 \url{https://github.com/trinker/qdap/wiki/Reading-.docx-\%5BMS-Word\%5D-Transcripts-into-R}
 }
+\author{
+Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
+}
 \keyword{transcript}
-

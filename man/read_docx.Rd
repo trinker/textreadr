@@ -36,4 +36,3 @@ file <- download(url)
 Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
 }
 \keyword{docx}
-

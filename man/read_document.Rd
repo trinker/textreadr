@@ -4,10 +4,19 @@
 \alias{read_document}
 \title{Generic Function to Read in a Document}
 \usage{
-read_document(file, combine = FALSE, format = FALSE, ...)
+read_document(file, skip = 0, remove.empty = TRUE, trim = TRUE,
+  combine = FALSE, format = FALSE, ...)
 }
 \arguments{
 \item{file}{The path to the a .pdf, .txt, .html, .docx, or .doc file.}
+
+\item{skip}{The number of lines to skip.}
+
+\item{remove.empty}{logical.  If \code{TRUE} empty elements in the vector are
+removed.}
+
+\item{trim}{logical.  If \code{TRUE} the leading/training white space is
+reoved.}
 
 \item{combine}{logical.  If \code{TRUE} the vector is concatenated into a
 single string via \code{\link[textshape]{combine}}.}
@@ -55,4 +64,3 @@ read_document(txt_doc)
 read_document('http://www.talkstats.com/index.php')
 }
 }
-

@@ -3,6 +3,11 @@
 #' Generic function to read in a .pdf, .txt, .html, .docx, or .doc file.
 #'
 #' @param file The path to the a .pdf, .txt, .html, .docx, or .doc file.
+#' @param skip The number of lines to skip.
+#' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are
+#' removed.
+#' @param trim logical.  If \code{TRUE} the leading/training white space is
+#' reoved.
 #' @param combine logical.  If \code{TRUE} the vector is concatenated into a
 #' single string via \code{\link[textshape]{combine}}.
 #' @param format For .doc files only.  Logical.  If \code{TRUE} the output will
@@ -41,7 +46,8 @@
 #' ## URLs
 #' read_document('http://www.talkstats.com/index.php')
 #' }
-read_document <- function(file, combine = FALSE, format = FALSE, ...){
+read_document <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE,
+    combine = FALSE, format = FALSE, ...){
 
     if (grepl('^([fh]ttp)', file)){
         filetype <- 'html'
@@ -51,16 +57,23 @@ read_document <- function(file, combine = FALSE, format = FALSE, ...){
     }
 
     fun <- switch(filetype,
-        pdf = {function(x, ...) {read_pdf(x, ...)[["text"]]}},
-        docx = read_docx,
-        doc = function(x, ...) read_doc(x, format=format, ...),
-        html = read_html,
+        pdf = {function(x, ...) {read_pdf(x, remove.empty = FALSE, trim = FALSE, ...)[["text"]]}},
+        docx = {function(x, ...) {read_docx(x, remove.empty = FALSE, trim = FALSE, ...)}},
+        doc = {function(x, ...) {read_doc(x, remove.empty = FALSE, trim = FALSE, format=format, ...)}},
+        html = {function(x, ...) {read_html(x, remove.empty = FALSE, trim = FALSE, ...)}},
         txt = {function(x, ...) {suppressWarnings(readLines(x, ...))}},
         {function(x, ...) {suppressWarnings(readLines(x, ...))}}
     )
 
     out <- try(fun(file, ...), silent = TRUE)
     if (inherits(out, 'try-error')) return(NULL)
+
+    ## formatting
+    if (isTRUE(remove.empty)) out <- out[!grepl("^\\s*$", out)]
+    if (skip > 0) out <- out[-seq(skip)]
+    if (isTRUE(trim)) out <- trimws(out)
+
+
     if (isTRUE(combine)) out <- textshape::combine(out)
     out
 

@@ -64,4 +64,3 @@ system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr") \%>\%
 \code{\link[tm]{readPDF}}
 }
 \keyword{pdf}
-
