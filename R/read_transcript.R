@@ -139,7 +139,7 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
     }
 
     if (is.null(sep)) {
-        if (y %in% c("docx", "doc", "txt", "text")) {
+        if (y %in% c("docx", "doc", "txt", "text", 'pdf')) {
             sep <- ":"
         } else {
             sep <- ","

@@ -5,6 +5,8 @@
 #' @param text Character string: if file is not supplied and this is, then data
 #' are read from the value of text. Notice that a literal string can be used to
 #' include (small) data sets within R code.
+#' @param person.regex A capturing regex describing what is a person portion of
+#' a string.  
 #' @param col.names  A character vector specifying the column names of the
 #' transcript columns.
 #' @param text.var A character string specifying the name of the text variable

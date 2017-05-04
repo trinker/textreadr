@@ -15,6 +15,9 @@ as_transcript(text, person.regex = NULL, col.names = c("Person",
 are read from the value of text. Notice that a literal string can be used to
 include (small) data sets within R code.}
 
+\item{person.regex}{A capturing regex describing what is a person portion of
+a string.}
+
 \item{col.names}{A character vector specifying the column names of the
 transcript columns.}
 
