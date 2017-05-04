@@ -76,13 +76,13 @@ function(text, person.regex = NULL, col.names = c("Person", "Dialogue"), text.va
 
     if (!is.null(person.regex)){
         sep <- ":"
-        text <- strsplit(text, '\n')[[1]]
+        text <- unlist(strsplit(text, '\n'))
         text <- paste(gsub(person.regex, '\\1:', text, perl = TRUE), collapse = "\n")
     }
 
-    read_transcript(col.names = col.names, text.var = text.var, merge.broke.tot = merge.broke.tot,
+    suppressWarnings(read_transcript(col.names = col.names, text.var = text.var, merge.broke.tot = merge.broke.tot,
         header = header, dash = dash, ellipsis = ellipsis, quote2bracket = quote2bracket,
         rm.empty.rows = rm.empty.rows, na = na, sep = sep, skip = skip, text =text,
-        comment.char = comment.char, max.person.nchar = max.person.nchar, ...)
+        comment.char = comment.char, max.person.nchar = max.person.nchar, ...))
 
 }
