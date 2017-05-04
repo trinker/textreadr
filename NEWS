@@ -30,6 +30,10 @@ NEW FEATURES
 
 MINOR FEATURES
 
+* `as_transcript` added for coercion of internal strings to transcript.  This
+  function adds the ability to call out the person variable via a regex.  For
+  example one may split after all caps as the leading string.
+
 IMPROVEMENTS
 
 CHANGES

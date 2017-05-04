@@ -18,6 +18,27 @@ And constructed with the following guidelines:
 
 
 
+textreadr 0.6.0 -
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+**NEW FEATURES**
+
+* `read_document` picks up an explicit `skip`, `remove.empty`, and `trim`
+  argument like the other `read_` functions.
+
+**MINOR FEATURES**
+
+* `as_transcript` added for coercion of internal strings to transcript.  This
+  function adds the ability to call out the person variable via a regex.  For
+  example one may split after all caps as the leading string.
+
+**IMPROVEMENTS**
+
+**CHANGES**
+
+
 textreadr 0.4.0 - 0.5.1
 ----------------------------------------------------------------
 
