@@ -23,6 +23,8 @@ textreadr 0.6.0 -
 
 BUG FIXES
 
+* `read_dir` did not handle errored readins correctly resulting in an R error.
+
 NEW FEATURES
 
 * `read_document` picks up an explicit `skip`, `remove.empty`, and `trim`
@@ -34,6 +36,10 @@ MINOR FEATURES
   function adds the ability to call out the person variable via a regex.  For
   example one may split after all caps as the leading string.
 
+* `read_dir` and `read_dir_transcript` pick up an `ignore.case` function for pattern.
+  Pattern becomes more powerful in that it was moved outside of the `dir` command
+  via a `grep` call.
+  
 IMPROVEMENTS
 
 CHANGES
