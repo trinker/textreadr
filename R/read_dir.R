@@ -26,15 +26,16 @@ read_dir <- function (path, pattern = NULL, doc.col = "document", all.files = FA
     to_read_in <- list_files(path, all.files = all.files, full.names = TRUE, 
         recursive = recursive)
 
-    to_read_in <- grep(pattern, to_read_in, ignore.case = ignore.case, value = TRUE)
+    if (!is.nullpattern)) to_read_in <- grep(pattern, to_read_in, ignore.case = ignore.case, value = TRUE)
 
 
     if (identical(character(0), to_read_in)) 
-        stop("The following location does not appear to contain files:\n   -", 
-            path)
+        stop("The following location does not appear to contain files:\n   -", path)
 
-    text <- stats::setNames(lapply(to_read_in, read_document, 
-        ...), tools::file_path_sans_ext(basename(to_read_in)))
+    text <- stats::setNames(
+        lapply(to_read_in, read_document, ...), 
+        tools::file_path_sans_ext(basename(to_read_in))
+    )
 
 
     errs <- sapply(text, inherits, "try-error")
