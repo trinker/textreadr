@@ -18,24 +18,28 @@
 #' @examples
 #' read_dir(system.file("docs/Maas2011/pos", package = "textreadr"))
 #' read_dir(system.file("docs/Maas2011", package = "textreadr"), recursive=TRUE)
-read_dir <- function(path, pattern = NULL, doc.col = "document", all.files = FALSE,
-    recursive = FALSE, ...){
-
-    to_read_in <- list_files(path, all.files = all.files, full.names = TRUE,
+read_dir <- function (path, pattern = NULL, doc.col = "document", all.files = FALSE, 
+    recursive = FALSE, ...) {
+    to_read_in <- list_files(path, all.files = all.files, full.names = TRUE, 
         recursive = recursive)
-
-    if (identical(character(0), to_read_in)) stop("The following location does not appear to contain files:\n   -", path)
-
-    text <- stats::setNames(lapply(to_read_in, read_document, ...), tools::file_path_sans_ext(basename(to_read_in)))
-
+    if (identical(character(0), to_read_in)) 
+        stop("The following location does not appear to contain files:\n   -", 
+            path)
+    text <- stats::setNames(lapply(to_read_in, read_document, 
+        ...), tools::file_path_sans_ext(basename(to_read_in)))
     errs <- sapply(text, inherits, "try-error")
-
     if (sum(errs) > 0) {
-        warning(sprintf("The following files failed to read in and were removed:\n%s",
-            paste(paste0("  -", to_read_in[errs]), collapse="\n")))
-
-        text <- text[errs]
+        warning(sprintf("The following files failed to read in and were removed:\n%s", 
+            paste(paste0("  -", to_read_in[errs]), collapse = "\n")))
+        text <- text[!errs]
     }
+    nulls <- unname(unlist(lapply(text, is.null)))
+    if (sum(nulls) > 0) {
+        warning(sprintf("The following files failed to read in and were removed:\n%s", 
+            paste(paste0("  -", to_read_in[nulls]), collapse = "\n")))
+        text <- text[!nulls]
+    }
+
     out <- textshape::tidy_list(text, doc.col)
     class(out) <- c("textreadr", "data.frame")
     out
