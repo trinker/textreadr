@@ -43,6 +43,7 @@ read_dir <- function (path, pattern = NULL, doc.col = "document", all.files = FA
         warning(sprintf("The following files failed to read in and were removed:\n%s", 
             paste(paste0("  -", to_read_in[errs]), collapse = "\n")))
         text <- text[!errs]
+        to_read_in <- to_read_in[!errs]        
     }
 
     nulls <- unname(unlist(lapply(text, is.null)))
