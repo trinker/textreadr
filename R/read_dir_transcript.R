@@ -36,6 +36,8 @@
 #' @param max.person.nchar The max number of characters long names are expected
 #' to be.  This information is used to warn the user if a separat appears beyond
 #' this length in the text.
+#' @param ignore.case logical.  If \code{TRUE} case in the \code{pattern} argument 
+#' will be ignored.
 #' @param \ldots ignored.
 #' @return Returns a dataframe of documents, dialogue, and people.
 #' @export
@@ -63,9 +65,12 @@ read_dir_transcript <- function(path, col.names = c("Document", "Person", "Dialo
     pattern = NULL, all.files = FALSE,
     recursive = FALSE, skip = 0, merge.broke.tot = TRUE, header = FALSE, dash = "", ellipsis = "...",
     quote2bracket = FALSE, rm.empty.rows = TRUE, na = "", sep = NULL,
-    comment.char = "", max.person.nchar = 20, ...) {
+    comment.char = "", max.person.nchar = 20, ignore.case = FALSE, ...) {
 
     to_read_in <- list_files(path, all.files = all.files, full.names = TRUE, recursive = recursive)
+    
+    if (!is.null(pattern)) to_read_in <- grep(pattern, to_read_in, ignore.case = ignore.case, value = TRUE)
+    
     if (identical(character(0), to_read_in)) {
         stop("The following location does not appear to contain files:\n   -", path)
     }
