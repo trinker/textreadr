@@ -8,7 +8,7 @@ read_dir_transcript(path, col.names = c("Document", "Person", "Dialogue"),
   pattern = NULL, all.files = FALSE, recursive = FALSE, skip = 0,
   merge.broke.tot = TRUE, header = FALSE, dash = "", ellipsis = "...",
   quote2bracket = FALSE, rm.empty.rows = TRUE, na = "", sep = NULL,
-  comment.char = "", max.person.nchar = 20, ...)
+  comment.char = "", max.person.nchar = 20, ignore.case = FALSE, ...)
 }
 \arguments{
 \item{path}{Path to the directory.}
@@ -59,6 +59,9 @@ comments altogether.}
 \item{max.person.nchar}{The max number of characters long names are expected
 to be.  This information is used to warn the user if a separat appears beyond
 this length in the text.}
+
+\item{ignore.case}{logical.  If \code{TRUE} case in the \code{pattern} argument 
+will be ignored.}
 
 \item{\ldots}{ignored.}
 }
