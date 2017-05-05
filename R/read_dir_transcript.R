@@ -69,7 +69,7 @@ read_dir_transcript <- function(path, col.names = c("Document", "Person", "Dialo
 
     to_read_in <- list_files(path, all.files = all.files, full.names = TRUE, recursive = recursive)
     
-    if (!is.null(pattern)) to_read_in <- grep(pattern, to_read_in, ignore.case = ignore.case, value = TRUE)
+    if (!is.null(pattern)) to_read_in <- grep(pattern, to_read_in, ignore.case = ignore.case, value = TRUE, perl=TRUE)
     
     if (identical(character(0), to_read_in)) {
         stop("The following location does not appear to contain files:\n   -", path)
