@@ -117,11 +117,21 @@ read_dir_transcript <- function(path, col.names = c("Document", "Person", "Dialo
 
     goods <- !sapply(reads, inherits, 'try-error')
     if (any(!goods)) {
-        warning(paste0("The following files did not read in correctly:\n",
+        warning(paste0("The following files did not read in and were removed:\n",
             paste0('  - ', to_read_in[!goods], collapse = "\n")
         ))
+        reads <- reads[goods]      
+        to_read_in <- to_read_in[goods]
     }
-    textshape::tidy_list(reads[goods], col.names[1])
+                                    
+    nulls <- unname(unlist(lapply(reads, is.null)))
+    if (sum(nulls) > 0) {
+        warning(sprintf("The following files failed to read in and were removed:\n%s", 
+            paste(paste0("  -", to_read_in[nulls]), collapse = "\n")))
+        reads <- reads[!nulls]
+    }
+                                    
+    textshape::tidy_list(reads, col.names[1])
 
 }
 
