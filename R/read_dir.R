@@ -26,7 +26,7 @@ read_dir <- function (path, pattern = NULL, doc.col = "document", all.files = FA
     to_read_in <- list_files(path, all.files = all.files, full.names = TRUE, 
         recursive = recursive)
 
-    if (!is.nullpattern)) to_read_in <- grep(pattern, to_read_in, ignore.case = ignore.case, value = TRUE)
+    if (!is.nullpattern)) to_read_in <- grep(pattern, to_read_in, ignore.case = ignore.case, value = TRUE, perl=TRUE)
 
 
     if (identical(character(0), to_read_in)) 
