@@ -60,7 +60,7 @@ character or an empty string. Use \code{""} to turn off the interpretation of
 comments altogether.}
 
 \item{max.person.nchar}{The max number of characters long names are expected
-to be.  This information is used to warn the user if a separat appears beyond
+to be.  This information is used to warn the user if a separator appears beyond
 this length in the text.}
 
 \item{\ldots}{Further arguments to be passed to \code{\link[utils]{read.table}},
