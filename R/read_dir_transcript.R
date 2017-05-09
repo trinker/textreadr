@@ -34,9 +34,9 @@
 #' character or an empty string. Use \code{""} to turn off the interpretation of
 #' comments altogether.
 #' @param max.person.nchar The max number of characters long names are expected
-#' to be.  This information is used to warn the user if a separat appears beyond
+#' to be.  This information is used to warn the user if a separator appears beyond
 #' this length in the text.
-#' @param ignore.case logical.  If \code{TRUE} case in the \code{pattern} argument 
+#' @param ignore.case logical.  If \code{TRUE} case in the \code{pattern} argument
 #' will be ignored.
 #' @param \ldots ignored.
 #' @return Returns a dataframe of documents, dialogue, and people.
@@ -68,9 +68,9 @@ read_dir_transcript <- function(path, col.names = c("Document", "Person", "Dialo
     comment.char = "", max.person.nchar = 20, ignore.case = FALSE, ...) {
 
     to_read_in <- list_files(path, all.files = all.files, full.names = TRUE, recursive = recursive)
-    
+
     if (!is.null(pattern)) to_read_in <- grep(pattern, to_read_in, ignore.case = ignore.case, value = TRUE, perl=TRUE)
-    
+
     if (identical(character(0), to_read_in)) {
         stop("The following location does not appear to contain files:\n   -", path)
     }
@@ -120,17 +120,17 @@ read_dir_transcript <- function(path, col.names = c("Document", "Person", "Dialo
         warning(paste0("The following files did not read in and were removed:\n",
             paste0('  - ', to_read_in[!goods], collapse = "\n")
         ))
-        reads <- reads[goods]      
+        reads <- reads[goods]
         to_read_in <- to_read_in[goods]
     }
-                                    
+
     nulls <- unname(unlist(lapply(reads, is.null)))
     if (sum(nulls) > 0) {
-        warning(sprintf("The following files failed to read in and were removed:\n%s", 
+        warning(sprintf("The following files failed to read in and were removed:\n%s",
             paste(paste0("  -", to_read_in[nulls]), collapse = "\n")))
         reads <- reads[!nulls]
     }
-                                    
+
     textshape::tidy_list(reads, col.names[1])
 
 }

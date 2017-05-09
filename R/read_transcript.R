@@ -175,7 +175,7 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
             x <- utils::read.csv(file,  header = header,
                 sep = sep, as.is=FALSE, na.strings= na,
                 strip.white = TRUE, stringsAsFactors = FALSE,
-                blank.lines.skip = rm.empty.rows, ...)
+                blank.lines.skip = rm.empty.rows, comment.char = comment.char, ...)
             },
         txt = {
             x <- utils::read.table(file=file, header = header, sep = sep, skip=skip)
