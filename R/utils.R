@@ -35,8 +35,8 @@ function(dataframe) {
 #     nms <- colnames(x)
 #     colnames(x) <- c('person', 'z')
 #     x <- data.table::data.table(x)
-#
-#     exp <- parse(text='list(text = paste(texts, collapse = " "))')[[1]]
+# 
+#     exp <- parse(text='list(text = paste(z, collapse = " "))')[[1]]
 #     out <- x[, eval(exp),
 #         by = list(person, 'new' = data.table::rleid(person))][,
 #         'new' := NULL][]
