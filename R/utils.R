@@ -30,6 +30,21 @@ function(dataframe) {
 
 
 #Helper function used in read.transcript
+# ## this should work but does not
+# combine_tot <- function(x){
+#     nms <- colnames(x)
+#     colnames(x) <- c('person', 'z')
+#     x <- data.table::data.table(x)
+#
+#     exp <- parse(text='list(text = paste(texts, collapse = " "))')[[1]]
+#     out <- x[, eval(exp),
+#         by = list(person, 'new' = data.table::rleid(person))][,
+#         'new' := NULL][]
+#     data.table::setnames(out, nms)
+#     out
+# }
+
+
 combine_tot <-
   function(dataframe, combine.var = 1, text.var = 2) {
     NAMES <- colnames(dataframe)
