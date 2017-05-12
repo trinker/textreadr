@@ -9,7 +9,7 @@ Description: A small collection of convenience tools for reading text documents 
          R.
 Depends: R (>= 3.2.2)
 Suggests: testthat
-Imports: antiword, curl, pdftools, readxl, rvest, textshape, tools, utils, xml2
+Imports: antiword, curl, data.table, pdftools, readxl, rvest, textshape, tools, utils, xml2
 Date: 2017-05-08
 License: GPL-2
 LazyData: TRUE
