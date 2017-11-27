@@ -47,3 +47,5 @@
 #     class(out) <- c("textreadr", "data.frame")
 #     out
 # }
+
+
