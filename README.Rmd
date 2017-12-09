@@ -46,10 +46,11 @@ The main functions, task category, & descriptions are summarized in the table be
 | `read_transcript`         | reading     | Read 2 column transcripts             | 
 | `read_docx`               | reading     | Read .docx                            |
 | `read_doc`                | reading     | Read .doc                             |
-| `read_document`           | reading     | Generic text reader for .doc, .docx, .txt, .pdf |
+| `read_rtf`                | reading     | Read .rtf                             |
+| `read_document`           | reading     | Generic text reader for .doc, .docx, .rtf, .txt, .pdf |
 | `read_html`               | reading     | Read .html                            |
 | `read_pdf`                | reading     | Read .pdf                             |
-| `read_dir`                | reading     | Read and format multiple .doc, .docx, .txt, .pdf files   |
+| `read_dir`                | reading     | Read and format multiple .doc, .docx, .rtf, .txt, .pdf files   |
 | `read_dir_transcript`     | reading     | Read and format multiple transcript files   |
 | `download`                | downloading | Download documents                    | 
 | `peek`                    | viewing     | Truncated viewing of `data.frame`s    |
@@ -94,6 +95,10 @@ doc_doc <- system.file("docs/Yasmine_Interview_Transcript.doc", package = "textr
 pdf_doc <- system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr")
 html_doc <- system.file('docs/textreadr_creed.html', package = "textreadr")
 txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
+
+rtf_doc <- download(
+    'https://raw.githubusercontent.com/trinker/textreadr/master/inst/docs/trans7.rtf'
+)
 ```
 
 
@@ -121,6 +126,10 @@ docx_doc %>%
     head(3)
     
 doc_doc %>%
+    read_document() %>%
+    head(3)
+
+rtf_doc %>%
     read_document() %>%
     head(3)
     
@@ -210,6 +219,16 @@ doc_doc %>%
 ```
 
 
+## Read .rtf
+
+Rich text format (.rtf) is a plain text document with markup similar to latex.  The **striprtf** package provides the backend for `read_rtf`.
+
+```{r}
+rtf_doc %>%
+    read_rtf() 
+```
+
+
 ## Read .pdf
 
 Like .docx a .pdf file is simply a container.  Reading PDF's is made easier with a number of command line tools.  A few methods of PDF reading have been incorporated into R.  Here I wrap **pdftools** `pdf_text` to produce `read_pdf`, a function with sensible defaults that is designed to read PDFs into R for as many folks as possible right out of the box.
@@ -288,6 +307,13 @@ read_transcript(trans_docs[5])
 
 ```{r}
 read_transcript(trans_docs[6], skip = 1)
+```
+
+
+### rtf
+
+```{r}
+read_transcript(rtf_doc, skip = 1)
 ```
 
 

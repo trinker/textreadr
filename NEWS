@@ -30,6 +30,10 @@ NEW FEATURES
 * `read_document` picks up an explicit `skip`, `remove.empty`, and `trim`
   argument like the other `read_` functions.
 
+* `read_rtf` added to the document forms that can be parsed.  This relies on the
+  **striprtf** package as a backend.  `read_document` and `read_transcript` pick
+  up the ability to read rich text format as well.
+
 MINOR FEATURES
 
 * `as_transcript` added for coercion of internal strings to transcript.  This
@@ -39,7 +43,7 @@ MINOR FEATURES
 * `read_dir` and `read_dir_transcript` pick up an `ignore.case` function for pattern.
   Pattern becomes more powerful in that it was moved outside of the `dir` command
   via a `grep` call.
-  
+
 IMPROVEMENTS
 
 CHANGES

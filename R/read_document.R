@@ -42,6 +42,14 @@
 #' txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
 #' read_document(txt_doc)
 #'
+#' ## .rtf
+#' \dontrun{
+#' rtf_doc <- download(
+#'     'https://raw.githubusercontent.com/trinker/textreadr/master/inst/docs/trans7.rtf'
+#' )
+#' read_document(rtf_doc)
+#' }
+#'
 #' \dontrun{
 #' ## URLs
 #' read_document('http://www.talkstats.com/index.php')
@@ -60,6 +68,7 @@ read_document <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE,
         pdf = {function(x, ...) {read_pdf(x, remove.empty = FALSE, trim = FALSE, ...)[["text"]]}},
         docx = {function(x, ...) {read_docx(x, remove.empty = FALSE, trim = FALSE, ...)}},
         doc = {function(x, ...) {read_doc(x, remove.empty = FALSE, trim = FALSE, format=format, ...)}},
+        rtf = {function(x, ...) {read_rtf(x, remove.empty = FALSE, trim = FALSE, ...)}},
         html = {function(x, ...) {read_html(x, remove.empty = FALSE, trim = FALSE, ...)}},
         txt = {function(x, ...) {suppressWarnings(readLines(x, ...))}},
         {function(x, ...) {suppressWarnings(readLines(x, ...))}}

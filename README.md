@@ -32,6 +32,7 @@ Table of Contents
     -   [Read Directory Contents](#read-directory-contents)
     -   [Read .docx](#read-docx)
     -   [Read .doc](#read-doc)
+    -   [Read .rtf](#read-rtf)
     -   [Read .pdf](#read-pdf)
     -   [Read .html](#read-html)
     -   [Read Transcripts](#read-transcripts)
@@ -40,6 +41,7 @@ Table of Contents
         -   [docx With Dash Separator](#docx-with-dash-separator)
         -   [xls and xlsx](#xls-and-xlsx)
         -   [doc](#doc)
+        -   [rtf](#rtf)
         -   [Reading Text](#reading-text)
         -   [Authentic Interview](#authentic-interview)
     -   [Pairing textreadr](#pairing-textreadr)
@@ -96,6 +98,11 @@ The main functions, task category, & descriptions are summarized in the
 table below:
 
 <table>
+<colgroup>
+<col width="34%" />
+<col width="17%" />
+<col width="48%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Function</th>
@@ -120,36 +127,41 @@ table below:
 <td>Read .doc</td>
 </tr>
 <tr class="even">
-<td><code>read_document</code></td>
+<td><code>read_rtf</code></td>
 <td>reading</td>
-<td>Generic text reader for .doc, .docx, .txt, .pdf</td>
+<td>Read .rtf</td>
 </tr>
 <tr class="odd">
+<td><code>read_document</code></td>
+<td>reading</td>
+<td>Generic text reader for .doc, .docx, .rtf, .txt, .pdf</td>
+</tr>
+<tr class="even">
 <td><code>read_html</code></td>
 <td>reading</td>
 <td>Read .html</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>read_pdf</code></td>
 <td>reading</td>
 <td>Read .pdf</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>read_dir</code></td>
 <td>reading</td>
-<td>Read and format multiple .doc, .docx, .txt, .pdf files</td>
+<td>Read and format multiple .doc, .docx, .rtf, .txt, .pdf files</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>read_dir_transcript</code></td>
 <td>reading</td>
 <td>Read and format multiple transcript files</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>download</code></td>
 <td>downloading</td>
 <td>Download documents</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>peek</code></td>
 <td>viewing</td>
 <td>Truncated viewing of <code>data.frame</code>s</td>
@@ -201,6 +213,10 @@ Load the Packages/Data
     html_doc <- system.file('docs/textreadr_creed.html', package = "textreadr")
     txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
 
+    rtf_doc <- download(
+        'https://raw.githubusercontent.com/trinker/textreadr/master/inst/docs/trans7.rtf'
+    )
+
 Download
 --------
 
@@ -216,7 +232,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpKWuv1R
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpGWwrF3
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -246,20 +262,28 @@ done. Below I demonstrate reading each of these five file formats with
     ## [1] "JRMC2202 Audio Project"      "Interview Transcript"       
     ## [3] "Interviewer: Yasmine Hassan"
 
+    rtf_doc %>%
+        read_document() %>%
+        head(3)
+
+    ## [1] "Researcher 2:\tOctober 7, 1892."          
+    ## [2] "Teacher 4:\tStudents it’s time to learn." 
+    ## [3] "[Student discussion; unintelligible]"
+
     pdf_doc %>%
         read_document() %>%
         head(3)
 
     ## [1] "Interview with Mary Waters Spaulding, August 8, 2013"                                          
-    ## [2] "CRAIG BREADEN: My name is Craig Breaden. I<U+0092>m the audiovisual archivist at Duke University,"    
-    ## [3] "and I<U+0092>m with Kirston Johnson, the curator of the Archive of Documentary Arts at Duke. The date"
+    ## [2] "CRAIG BREADEN: My name is Craig Breaden. I’m the audiovisual archivist at Duke University,"    
+    ## [3] "and I’m with Kirston Johnson, the curator of the Archive of Documentary Arts at Duke. The date"
 
     html_doc %>%
         read_document() %>%
         head(3)
 
     ## [1] "textreadr Creed"                                                                                                
-    ## [2] "The textreadr package aims to be a lightweight tool kit that handles 80% of an analyst<U+0092>s text reading in needs."
+    ## [2] "The textreadr package aims to be a lightweight tool kit that handles 80% of an analyst’s text reading in needs."
     ## [3] "The package handles .docx, .doc, .pdf, .html, and .txt."
 
     txt_doc %>%
@@ -270,18 +294,14 @@ done. Below I demonstrate reading each of these five file formats with
     ## The textreadr package aims to be a lightweight
     ## tool kit that handles 80% of an analyst's text
     ## reading in needs.
-    ## 
     ## The package handles .docx, .doc, .pdf, .html, and .txt.
-    ## 
     ## If you have another format there is likely already
     ## another popular R package that specializes in this
     ## read in task.  For example, got XML, use the xml2
     ## package, authored by Hadley Wickham, Jim Hester, &
-    ## Jeroen Ooms.  Need special handling for .html?  Use 
-    ## Hadley Wickham's rvest package.  Got SQL?  Oh boy 
+    ## Jeroen Ooms.  Need special handling for .html?  Use
+    ## Hadley Wickham's rvest package.  Got SQL?  Oh boy
     ## there's a bunch of great ways to read it into R.
-    ## 
-    ## 
     ## | R Package   | SQL                    |
     ## |-------------|------------------------|
     ## | ROBDC       | Microsoft SQL Server   |
@@ -372,8 +392,8 @@ the markup.
         head(3)
 
     ## [1] "Hassan:           Could you please tell me your name, your title, your age, and your place of ref,                                   umm, residence?"
-    ## [2] "Abd Rabou:   My name is Ahmad Abd Rabou. I<U+0092>m assistant professor of comparative politics at"                                                         
-    ## [3] "both Cairo University and The American University in Cairo. I<U+0092>m 34 years old. I"
+    ## [2] "Abd Rabou:   My name is Ahmad Abd Rabou. I’m assistant professor of comparative politics at"                                                         
+    ## [3] "both Cairo University and The American University in Cairo. I’m 34 years old. I"
 
 Read .doc
 ---------
@@ -403,6 +423,22 @@ way.
     ## [6] "both Cairo University and The American University"                          
     ## [7] "in Cairo. I'm 34 years old. I"
 
+Read .rtf
+---------
+
+Rich text format (.rtf) is a plain text document with markup similar to
+latex. The **striprtf** package provides the backend for `read_rtf`.
+
+    rtf_doc %>%
+        read_rtf() 
+
+    ## [1] "Researcher 2:\tOctober 7, 1892."                                                                                                                                                                                                                                                                                                                              
+    ## [2] "Teacher 4:\tStudents it’s time to learn."                                                                                                                                                                                                                                                                                                                     
+    ## [3] "[Student discussion; unintelligible]"                                                                                                                                                                                                                                                                                                                        
+    ## [4] "Multiple Students:\tYes teacher we‘re ready to learn."                                                                                                                                                                                                                                                                                                        
+    ## [5] "Teacher 4:\tLet's read this terrific book together.  It's called Moo Baa La La La and – what was I going to …  Oh yes — The story is by Sandra Boynton."                                                                                                                                                                                                      
+    ## [6] "“A cow says Moo. A Sheep says Baa. Three singing pigs say LA LA LA! \"No, no!\" you say, that isn't right. The pigs say oink all day and night. Rhinoceroses snort and snuff. And little dogs go ruff ruff ruff! Some other dogs go bow wow wow! And cats and kittens say Meow! Quack! Says the duck. A horse says neigh. It's quiet now. What do you say? ”"
+
 Read .pdf
 ---------
 
@@ -423,14 +459,14 @@ with meta data, including page numbers and element (row) ids.
     ##    page_id element_id                                     text
     ## 1        1          1 Interview with Mary Waters Spaulding, Au
     ## 2        1          2 CRAIG BREADEN: My name is Craig Breaden.
-    ## 3        1          3 and I<U+0092>m with Kirston Johnson, the curato
+    ## 3        1          3 and I’m with Kirston Johnson, the curato
     ## 4        1          4 is August 8, 2013, and we are in Lexingt
     ## 5        1          5 life and family, and particularly about 
     ## 6        1          6 your full name, date of birth, and place
     ## 7        1          7 MARY WATERS SPAULDING: My name is Mary E
     ## 8        1          8 birth was Lexington, NC, on May 14, 1942
     ## 9        1          9 BREADEN: Can you describe what Lexington
-    ## 10       1         10                                  1940<U+0092>s?
+    ## 10       1         10                                  1940’s?
     ## ..     ...        ...                                      ...
 
 [Carl Witthoft's](http://stackoverflow.com/a/9187015/1000343) word of
@@ -460,9 +496,9 @@ with `read_html`.
         read_html() 
 
     ##  [1] "textreadr Creed"                                                                                                                                                                                                                                                                                                                                             
-    ##  [2] "The textreadr package aims to be a lightweight tool kit that handles 80% of an analyst<U+0092>s text reading in needs."                                                                                                                                                                                                                                             
+    ##  [2] "The textreadr package aims to be a lightweight tool kit that handles 80% of an analyst’s text reading in needs."                                                                                                                                                                                                                                             
     ##  [3] "The package handles .docx, .doc, .pdf, .html, and .txt."                                                                                                                                                                                                                                                                                                     
-    ##  [4] "If you have another format there is likely already another popular R package that specializes in this read in task. For example, got XML, use the xml2 package, authored by Hadley Wickham, Jim Hester, & Jeroen Ooms. Need special handling for .html? Use Hadley Wickham<U+0092>s rvest package. Got SQL? Oh boy there<U+0092>s a bunch of great ways to read it into R."
+    ##  [4] "If you have another format there is likely already another popular R package that specializes in this read in task. For example, got XML, use the xml2 package, authored by Hadley Wickham, Jim Hester, & Jeroen Ooms. Need special handling for .html? Use Hadley Wickham’s rvest package. Got SQL? Oh boy there’s a bunch of great ways to read it into R."
     ##  [5] "R Package"                                                                                                                                                                                                                                                                                                                                                   
     ##  [6] "SQL"                                                                                                                                                                                                                                                                                                                                                         
     ##  [7] "ROBDC"                                                                                                                                                                                                                                                                                                                                                       
@@ -491,7 +527,7 @@ handles. These are the files that will be read in:
     basename(trans_docs)
 
     ## [1] "trans1.docx" "trans2.docx" "trans3.docx" "trans4.xlsx" "trans5.xls" 
-    ## [6] "trans6.doc"  "transcripts"
+    ## [6] "trans6.doc"  "trans7.rtf"  "transcripts"
 
 ### docx Simple
 
@@ -558,24 +594,30 @@ separator the first go round.
 
     read_transcript(trans_docs[4])
 
-    ## Source: local data frame [4 x 2]
+    ## Source: local data frame [7 x 2]
     ## 
     ##               Person                                 Dialogue
     ## 1      Researcher 2:                         October 7, 1892.
-    ## 2         Teacher 4:             Students it's time to learn.
-    ## 3 Multiple Students:        Yes teacher we're ready to learn.
-    ## 4         Teacher 4: Let's read this terrific book together. 
+    ## 2               <NA>                                       NA
+    ## 3         Teacher 4:             Students it's time to learn.
+    ## 4               <NA>                                 NA NA NA
+    ## 5 Multiple Students:        Yes teacher we're ready to learn.
+    ## 6               <NA>                                 NA NA NA
+    ## 7         Teacher 4: Let's read this terrific book together. 
     ## .                ...                                      ...
 
     read_transcript(trans_docs[5])
 
-    ## Source: local data frame [4 x 2]
+    ## Source: local data frame [7 x 2]
     ## 
     ##               Person                                 Dialogue
     ## 1      Researcher 2:                         October 7, 1892.
-    ## 2         Teacher 4:             Students it's time to learn.
-    ## 3 Multiple Students:        Yes teacher we're ready to learn.
-    ## 4         Teacher 4: Let's read this terrific book together. 
+    ## 2               <NA>                                       NA
+    ## 3         Teacher 4:             Students it's time to learn.
+    ## 4               <NA>                                 NA NA NA
+    ## 5 Multiple Students:        Yes teacher we're ready to learn.
+    ## 6               <NA>                                 NA NA NA
+    ## 7         Teacher 4: Let's read this terrific book together. 
     ## .                ...                                      ...
 
 ### doc
@@ -588,6 +630,19 @@ separator the first go round.
     ## 1         Teacher 4 Students it's time to learn. [Student di
     ## 2 Multiple Students        Yes teacher we're ready to learn.
     ## 3         Teacher 4 Let's read this terrific book together. 
+    ## .               ...                                      ...
+
+### rtf
+
+    read_transcript(rtf_doc, skip = 1)
+
+    ## Source: local data frame [4 x 2]
+    ## 
+    ##              Person                                 Dialogue
+    ## 1      Researcher 2                         October 7, 1892.
+    ## 2         Teacher 4 Students it's time to learn. [Student di
+    ## 3 Multiple Students        Yes teacher we're ready to learn.
+    ## 4         Teacher 4 Let's read this terrific book together. 
     ## .               ...                                      ...
 
 ### Reading Text
@@ -660,6 +715,14 @@ I demonstrate pairings with
     p_load(dplyr, qdapRegex)
     p_load_current_gh(file.path('trinker', c('textreadr', 'textshape', 'textclean')))
 
+    ## Warning in p_install_gh(package, dependencies = dependencies, ...): The following may have incorrect capitalization specification:
+    ## 
+    ## textshape
+
+    ## Warning in p_install_gh(package, dependencies = dependencies, ...): The following may have incorrect capitalization specification:
+    ## 
+    ## textclean
+
     ## Read in pdf, split on variables
     dat <- 'http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf' %>%
         textreadr::download() %>%
@@ -672,7 +735,7 @@ I demonstrate pairings with
         textshape::split_index(which(.$loc) -1) %>%
         lapply(select, -loc)
 
-    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\RtmpKWuv1R
+    ## SCDB_2012_01_codebook.pdf read into C:\Users\Tyler\AppData\Local\Temp\RtmpGWwrF3
 
     ## Function to extract cases
     ex_vs <- qdapRegex::ex_(pattern = "((of|[A-Z][A-Za-z'.,-]+)\\s+)+([Vv]s?\\.\\s+)(([A-Z][A-Za-z'.,-]+\\s+)*((of|[A-Z][A-Za-z',.-]+),?($|\\s+|\\d))+)")

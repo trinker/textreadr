@@ -59,6 +59,14 @@ read_document(doc_doc)
 txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
 read_document(txt_doc)
 
+## .rtf
+\dontrun{
+rtf_doc <- download(
+    'https://raw.githubusercontent.com/trinker/textreadr/master/inst/docs/trans7.rtf'
+)
+read_document(rtf_doc)
+}
+
 \dontrun{
 ## URLs
 read_document('http://www.talkstats.com/index.php')

@@ -32,6 +32,9 @@ function(dataframe) {
 #Helper function used in read.transcript
 #' @importFrom data.table :=
 combine_tot <- function(x){
+
+    person <- NULL
+
     nms <- colnames(x)
     colnames(x) <- c('person', 'z')
     x <- data.table::data.table(x)

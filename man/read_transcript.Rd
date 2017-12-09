@@ -110,6 +110,14 @@ dat7 <- read_transcript(doc6) ## need to skip Researcher
 dat8 <- read_transcript(doc6, skip = 1)
 }
 
+## rtf format
+\dontrun{
+rtf_doc <- download(
+    'https://raw.githubusercontent.com/trinker/textreadr/master/inst/docs/trans7.rtf'
+)
+dat9 <- read_transcript(rtf_doc, skip = 1)
+}
+
 ## text string input
 trans <- "sam: Computer is fun. Not too fun.
 greg: No it's not, it's dumb.
