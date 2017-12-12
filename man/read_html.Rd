@@ -15,7 +15,7 @@ read_html(file, skip = 0, remove.empty = TRUE, trim = TRUE, ...)
 removed.}
 
 \item{trim}{logical.  If \code{TRUE} the leading/training white space is
-reoved.}
+removed.}
 
 \item{\dots}{Other arguments passed to \code{\link[xml2]{read_html}}.}
 }

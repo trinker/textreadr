@@ -1,6 +1,6 @@
 #' Read Transcripts Into R
 #'
-#' Read .docx, .csv, .xlsx, .xlsx, or .txt transcript style files into R.
+#' Read .docx, .doc, .rtf, .csv, .xlsx, .xlsx, or .txt transcript style files into R.
 #'
 #' @param file The name of the file which the data are to be read from. Each row
 #' of the table appears as one line of the file. If it does not contain an

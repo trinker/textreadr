@@ -717,6 +717,10 @@ I demonstrate pairings with
 
     ## Warning in p_install_gh(package, dependencies = dependencies, ...): The following may have incorrect capitalization specification:
     ## 
+    ## textreadr
+
+    ## Warning in p_install_gh(package, dependencies = dependencies, ...): The following may have incorrect capitalization specification:
+    ## 
     ## textshape
 
     ## Warning in p_install_gh(package, dependencies = dependencies, ...): The following may have incorrect capitalization specification:

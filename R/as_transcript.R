@@ -36,7 +36,7 @@
 #' character or an empty string. Use \code{""} to turn off the interpretation of
 #' comments altogether.
 #' @param max.person.nchar The max number of characters long names are expected
-#' to be.  This information is used to warn the user if a separat appears beyond
+#' to be.  This information is used to warn the user if a separator appears beyond
 #' this length in the text.
 #' @param \ldots Further arguments to be passed to \code{\link[utils]{read.table}},
 #' \code{\link[readxl]{read_excel}}, or \code{\link[textreadr]{read_doc}}.

@@ -18,7 +18,7 @@ And constructed with the following guidelines:
 
 
 
-textreadr 0.6.0 -
+textreadr 0.6.0 - 0.7.0
 ----------------------------------------------------------------
 
 BUG FIXES
@@ -44,9 +44,6 @@ MINOR FEATURES
   Pattern becomes more powerful in that it was moved outside of the `dir` command
   via a `grep` call.
 
-IMPROVEMENTS
-
-CHANGES
 
 
 textreadr 0.4.0 - 0.5.1
@@ -65,7 +62,7 @@ NEW FEATURES
 MINOR FEATURES
 
 * The low level read functions all now have consistent arguments: `skip`,
-  `remove.empty`, & `trim` to ake their use more interoperable.
+  `remove.empty`, & `trim` to make their use more interoperable.
 
 IMPROVEMENTS
 
@@ -90,7 +87,7 @@ textreadr 0.3.1
 
 NEW FEATURES
 
-* `read_dir_transcript` added to complement `read-dir` aimed at a directory of
+* `read_dir_transcript` added to complement `read_dir` aimed at a directory of
   transcripts.
 
 

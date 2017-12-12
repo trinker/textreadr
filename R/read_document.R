@@ -1,13 +1,13 @@
 #' Generic Function to Read in a Document
 #'
-#' Generic function to read in a .pdf, .txt, .html, .docx, or .doc file.
+#' Generic function to read in a .pdf, .txt, .html, .rtf, .docx, or .doc file.
 #'
-#' @param file The path to the a .pdf, .txt, .html, .docx, or .doc file.
+#' @param file The path to the a .pdf, .txt, .html, .rtf, .docx, or .doc file.
 #' @param skip The number of lines to skip.
 #' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are
 #' removed.
 #' @param trim logical.  If \code{TRUE} the leading/training white space is
-#' reoved.
+#' removed.
 #' @param combine logical.  If \code{TRUE} the vector is concatenated into a
 #' single string via \code{\link[textshape]{combine}}.
 #' @param format For .doc files only.  Logical.  If \code{TRUE} the output will

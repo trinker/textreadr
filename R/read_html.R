@@ -9,7 +9,7 @@
 #' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are
 #' removed.
 #' @param trim logical.  If \code{TRUE} the leading/training white space is
-#' reoved.
+#' removed.
 #' @param \dots Other arguments passed to \code{\link[xml2]{read_html}}.
 #' @return Returns a character vector.
 #' @keywords html

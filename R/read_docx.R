@@ -7,7 +7,7 @@
 #' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are
 #' removed.
 #' @param trim logical.  If \code{TRUE} the leading/training white space is
-#' reoved.
+#' removed.
 #' @param \dots ignored.
 #' @return Returns a character vector.
 #' @keywords docx

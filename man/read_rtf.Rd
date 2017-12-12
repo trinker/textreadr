@@ -7,7 +7,7 @@
 read_rtf(file, skip = 0, remove.empty = TRUE, trim = TRUE, ...)
 }
 \arguments{
-\item{file}{A path to a PDF file.}
+\item{file}{A path to a RTF file.}
 
 \item{skip}{The number of lines to skip.}
 
@@ -15,7 +15,7 @@ read_rtf(file, skip = 0, remove.empty = TRUE, trim = TRUE, ...)
 removed.}
 
 \item{trim}{logical.  If \code{TRUE} the leading/training white space is
-reoved.}
+removed.}
 
 \item{\dots}{Other arguments passed to \code{\link[striprtf]{read_rtf}}.}
 }
@@ -23,7 +23,7 @@ reoved.}
 Returns a character vector.
 }
 \description{
-A wrapper for \code{\link[striprtf]{read_rtf}} to read PDFs into \pkg{R}.
+A wrapper for \code{\link[striprtf]{read_rtf}} to read RTFs into \pkg{R}.
 }
 \examples{
 \dontrun{

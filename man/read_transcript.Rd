@@ -70,7 +70,7 @@ this length in the text.}
 Returns a dataframe of dialogue and people.
 }
 \description{
-Read .docx, .csv, .xlsx, .xlsx, or .txt transcript style files into R.
+Read .docx, .doc, .rtf, .csv, .xlsx, .xlsx, or .txt transcript style files into R.
 }
 \note{
 If a transcript is a .docx file read_transcript expects two columns

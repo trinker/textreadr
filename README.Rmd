@@ -79,7 +79,7 @@ You are welcome to:
 
 ## Load the Packages/Data
 
-```{r, message=FALSE}
+```{r, message=FALSE, warning=FALSE}
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(textreadr, magrittr)
 pacman::p_load_gh("trinker/pathr")

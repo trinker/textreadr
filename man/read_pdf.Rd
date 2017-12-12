@@ -16,7 +16,7 @@ beginning to read data.}
 removed.}
 
 \item{trim}{logical.  If \code{TRUE} the leading/training white space is
-reoved.}
+removed.}
 
 \item{\dots}{Other arguments passed to \code{\link[pdftools]{pdf_text}}.}
 }
@@ -35,7 +35,7 @@ text, as opposed to bitmapped images of text or possibly even uglier things
 than I can imagine, nothing other than OCR can help you."  If the reader has
 OCR needs the \pkg{tesseract} package, available on CRAN
 (\url{https://CRAN.R-project.org/package=tesseract}), is an "OCR engine with
-unicode (UTF-8) support" and may be of use.
+Unicode (UTF-8) support" and may be of use.
 }
 \examples{
 pdf_dat <- read_pdf(
