@@ -18,6 +18,21 @@ And constructed with the following guidelines:
 
 
 
+textreadr 0.8.0 -
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+**NEW FEATURES**
+
+**MINOR FEATURES**
+
+**IMPROVEMENTS**
+
+**CHANGES**
+
+
+
 textreadr 0.6.0 - 0.7.0
 ----------------------------------------------------------------
 
