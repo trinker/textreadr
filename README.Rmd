@@ -354,7 +354,7 @@ docx_doc %>%
 **textreadr** is but one package used in the text analysis (often the first package used).  It pairs nicely with a variety of other text mundging and analysis packages.  In the example below I show just a few other package pairings that are used to extract case names (e.g., "Jones v. State of New York") from a [Supreme Court Database Code Book](http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf).  I demonstrate pairings with [**textshape**](https://github.com/trinker/textshape), [**textclean**](https://github.com/trinker/textclean), [**qdapRegex**](https://github.com/trinker/qdapRegex), and [**dplyr**](https://github.com/hadley/dplyr).
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(dplyr, qdapRegex)
 p_load_current_gh(file.path('trinker', c('textreadr', 'textshape', 'textclean')))
