@@ -8,7 +8,7 @@
 #' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are
 #' removed.
 #' @param trim logical.  If \code{TRUE} the leading/training white space is
-#' reoved.
+#' removed.
 #' @param format logical.  If \code{TRUE} the output will keep doc formatting
 #' (e.g., bold, italics, underlined).  This corresponds to the \code{-f} flag in
 #' antiword.

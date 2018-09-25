@@ -18,7 +18,24 @@ And constructed with the following guidelines:
 
 
 
-textreadr 0.6.0 -
+textreadr 0.8.0 -
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+* `read_dir` did not handle errored readins correctly resulting in an R error.
+
+**NEW FEATURES**
+
+**MINOR FEATURES**
+
+**IMPROVEMENTS**
+
+**CHANGES**
+
+
+
+textreadr 0.6.0 - 0.7.0
 ----------------------------------------------------------------
 
 **BUG FIXES**
@@ -30,6 +47,10 @@ textreadr 0.6.0 -
 * `read_document` picks up an explicit `skip`, `remove.empty`, and `trim`
   argument like the other `read_` functions.
 
+* `read_rtf` added to the document forms that can be parsed.  This relies on the
+  **striprtf** package as a backend.  `read_document` and `read_transcript` pick
+  up the ability to read rich text format as well.
+
 **MINOR FEATURES**
 
 * `as_transcript` added for coercion of internal strings to transcript.  This
@@ -39,10 +60,12 @@ textreadr 0.6.0 -
 * `read_dir` and `read_dir_transcript` pick up an `ignore.case` function for pattern.
   Pattern becomes more powerful in that it was moved outside of the `dir` command
   via a `grep` call.
+<<<<<<< HEAD
   
 **IMPROVEMENTS**
+=======
+>>>>>>> c27c88fe2fcca20fde0b37581d7063c9e825fc92
 
-**CHANGES**
 
 
 textreadr 0.4.0 - 0.5.1
@@ -61,7 +84,7 @@ textreadr 0.4.0 - 0.5.1
 **MINOR FEATURES**
 
 * The low level read functions all now have consistent arguments: `skip`,
-  `remove.empty`, & `trim` to ake their use more interoperable.
+  `remove.empty`, & `trim` to make their use more interoperable.
 
 **IMPROVEMENTS**
 
@@ -86,7 +109,7 @@ textreadr 0.3.1
 
 **NEW FEATURES**
 
-* `read_dir_transcript` added to complement `read-dir` aimed at a directory of
+* `read_dir_transcript` added to complement `read_dir` aimed at a directory of
   transcripts.
 
 

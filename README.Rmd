@@ -27,7 +27,7 @@ verbadge <- sprintf('<a href="https://img.shields.io/badge/Version-%s-orange.svg
 
 # Functions
 
-Most jobs in my workflow can be completed with `read_document` and `read_dir`.  The former generically reads in a .docx, .doc, .pdf, .html, or .txt file without specifying the extension.  The latter reads in multiple .docx, .doc, .pdf, .html, or .txt files from a directory as a `data.frame` with a file and text column.  This workflow is effective because most text documents I encounter are stored as a .docx, .doc, .pdf, .html, or .txt file.  The remaining common storage formats I encounter include .csv, .xlsx, XML, structured .html, and SQL.  For these first 4 forms the [**readr**](https://CRAN.R-project.org/package=readr), [**readx**l](https://CRAN.R-project.org/package=readxl), [**xml2**](https://CRAN.R-project.org/package=xml2), and [**rvest**](https://CRAN.R-project.org/package=rvest).  For SQL:
+Most jobs in my workflow can be completed with `read_document` and `read_dir`.  The former generically reads in a .docx, .doc, .pdf, .html, or .txt file without specifying the extension.  The latter reads in multiple .docx, .doc, .rtf, .pdf, .html, or .txt files from a directory as a `data.frame` with a file and text column.  This workflow is effective because most text documents I encounter are stored as a .docx, .doc, .rtf, .pdf, .html, or .txt file.  The remaining common storage formats I encounter include .csv, .xlsx, XML, structured .html, and SQL.  For these first 4 forms the [**readr**](https://CRAN.R-project.org/package=readr), [**readx**l](https://CRAN.R-project.org/package=readxl), [**xml2**](https://CRAN.R-project.org/package=xml2), and [**rvest**](https://CRAN.R-project.org/package=rvest).  For SQL:
 
 | R Package   | SQL                    |
 |-------------|------------------------|
@@ -46,10 +46,11 @@ The main functions, task category, & descriptions are summarized in the table be
 | `read_transcript`         | reading     | Read 2 column transcripts             | 
 | `read_docx`               | reading     | Read .docx                            |
 | `read_doc`                | reading     | Read .doc                             |
-| `read_document`           | reading     | Generic text reader for .doc, .docx, .txt, .pdf |
+| `read_rtf`                | reading     | Read .rtf                             |
+| `read_document`           | reading     | Generic text reader for .doc, .docx, .rtf, .txt, .pdf |
 | `read_html`               | reading     | Read .html                            |
 | `read_pdf`                | reading     | Read .pdf                             |
-| `read_dir`                | reading     | Read and format multiple .doc, .docx, .txt, .pdf files   |
+| `read_dir`                | reading     | Read and format multiple .doc, .docx, .rtf, .txt, .pdf files   |
 | `read_dir_transcript`     | reading     | Read and format multiple transcript files   |
 | `download`                | downloading | Download documents                    | 
 | `peek`                    | viewing     | Truncated viewing of `data.frame`s    |
@@ -78,7 +79,7 @@ You are welcome to:
 
 ## Load the Packages/Data
 
-```{r, message=FALSE}
+```{r, message=FALSE, warning=FALSE}
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(textreadr, magrittr)
 pacman::p_load_gh("trinker/pathr")
@@ -94,6 +95,10 @@ doc_doc <- system.file("docs/Yasmine_Interview_Transcript.doc", package = "textr
 pdf_doc <- system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr")
 html_doc <- system.file('docs/textreadr_creed.html', package = "textreadr")
 txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
+
+rtf_doc <- download(
+    'https://raw.githubusercontent.com/trinker/textreadr/master/inst/docs/trans7.rtf'
+)
 ```
 
 
@@ -121,6 +126,10 @@ docx_doc %>%
     head(3)
     
 doc_doc %>%
+    read_document() %>%
+    head(3)
+
+rtf_doc %>%
     read_document() %>%
     head(3)
     
@@ -210,6 +219,16 @@ doc_doc %>%
 ```
 
 
+## Read .rtf
+
+Rich text format (.rtf) is a plain text document with markup similar to latex.  The **striprtf** package provides the backend for `read_rtf`.
+
+```{r}
+rtf_doc %>%
+    read_rtf() 
+```
+
+
 ## Read .pdf
 
 Like .docx a .pdf file is simply a container.  Reading PDF's is made easier with a number of command line tools.  A few methods of PDF reading have been incorporated into R.  Here I wrap **pdftools** `pdf_text` to produce `read_pdf`, a function with sensible defaults that is designed to read PDFs into R for as many folks as possible right out of the box.
@@ -291,6 +310,13 @@ read_transcript(trans_docs[6], skip = 1)
 ```
 
 
+### rtf
+
+```{r}
+read_transcript(rtf_doc, skip = 1)
+```
+
+
 ### Reading Text
 
 Like `read.table`, `read_transcript` also has a `text` argument which is useful for demoing code.
@@ -325,10 +351,10 @@ docx_doc %>%
 
 ## Pairing textreadr 
 
-**textreadr** is but one package used in the text analysis (often the first package used).  It pairs nicely with a variety of other text mundging and analysis packages.  In the example below I show just a few other package pairings that are used to extract case names (e.g., "Jones v. State of New York") from a [Supreme Court Database Code Book](http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf).  I demonstrate pairings with [**textshape**](https://github.com/trinker/textshape), [**textclean**](https://github.com/trinker/textclean), [**qdapRegex**](https://github.com/trinker/qdapRegex), and [**dplyr**](https://github.com/hadley/dplyr).
+**textreadr** is but one package used in the text analysis (often the first package used).  It pairs nicely with a variety of other text munging and analysis packages.  In the example below I show just a few other package pairings that are used to extract case names (e.g., "Jones v. State of New York") from a [Supreme Court Database Code Book](http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf).  I demonstrate pairings with [**textshape**](https://github.com/trinker/textshape), [**textclean**](https://github.com/trinker/textclean), [**qdapRegex**](https://github.com/trinker/qdapRegex), and [**dplyr**](https://github.com/hadley/dplyr).
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(dplyr, qdapRegex)
 p_load_current_gh(file.path('trinker', c('textreadr', 'textshape', 'textclean')))

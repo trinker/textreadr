@@ -16,7 +16,7 @@ read_doc(file, skip = 0, remove.empty = TRUE, trim = TRUE,
 removed.}
 
 \item{trim}{logical.  If \code{TRUE} the leading/training white space is
-reoved.}
+removed.}
 
 \item{format}{logical.  If \code{TRUE} the output will keep doc formatting
 (e.g., bold, italics, underlined).  This corresponds to the \code{-f} flag in

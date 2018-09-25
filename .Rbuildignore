@@ -22,4 +22,5 @@ inst/staticdocs
 inst/extra_statdoc
 Thumbs.db
 README.html
-
+trans7.rtf
+.gitignore

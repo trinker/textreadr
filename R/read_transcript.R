@@ -1,6 +1,6 @@
 #' Read Transcripts Into R
 #'
-#' Read .docx, .csv, .xlsx, .xlsx, or .txt transcript style files into R.
+#' Read .docx, .doc, .rtf, .csv, .xlsx, .xlsx, or .txt transcript style files into R.
 #'
 #' @param file The name of the file which the data are to be read from. Each row
 #' of the table appears as one line of the file. If it does not contain an
@@ -80,6 +80,14 @@
 #' dat8 <- read_transcript(doc6, skip = 1)
 #' }
 #'
+#' ## rtf format
+#' \dontrun{
+#' rtf_doc <- download(
+#'     'https://raw.githubusercontent.com/trinker/textreadr/master/inst/docs/trans7.rtf'
+#' )
+#' dat9 <- read_transcript(rtf_doc, skip = 1)
+#' }
+#'
 #' ## text string input
 #' trans <- "sam: Computer is fun. Not too fun.
 #' greg: No it's not, it's dumb.
@@ -139,7 +147,7 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
     }
 
     if (is.null(sep)) {
-        if (y %in% c("docx", "doc", "txt", "text", 'pdf')) {
+        if (y %in% c("docx", "doc", "txt", "text", 'pdf', 'rtf')) {
             sep <- ":"
         } else {
             sep <- ","
@@ -165,6 +173,14 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
             },
         doc = {
             x <- read.doc(file, skip = skip, sep = sep, max.person.nchar = max.person.nchar, ...)
+            sep_hits <- grepl(sep, x[, 2])
+            if(any(sep_hits)) {
+                warning(sprintf("The following text contains the \"%s\" separator and may not have split correctly:\n", sep),
+                        paste(which(sep_hits), collapse=", "))
+            }
+        },
+        rtf = {
+            x <- read.rtf(file, skip = skip, sep = sep, max.person.nchar = max.person.nchar, ...)
             sep_hits <- grepl(sep, x[, 2])
             if(any(sep_hits)) {
                 warning(sprintf("The following text contains the \"%s\" separator and may not have split correctly:\n", sep),
@@ -289,28 +305,54 @@ function(file, skip = 0, sep = ":", max.person.nchar = 20) {
 }
 
 
+read.rtf <-
+function(file, skip = 0, sep = ":", max.person.nchar = 20, ...) {
+
+    ## use striprtf to read in the document
+    text.var <- striprtf::read_rtf(file, skip = skip, ...)
+
+    text.var <- textshape::combine(textshape::split_match(
+        text.var,
+        sprintf('^.{0,%s}[%s]', max.person.nchar - 1, sep),
+        include = TRUE, regex = TRUE
+    ))
+
+
+    if (any(grepl(paste0("^.{", max.person.nchar, ",}", sep), text.var))) {
+        warning(sprintf(paste0(
+            "I've detected the separator beyond %s characters from the line start.  Parsing may be incorrect...\n",
+            "  Consider manually searching the .rtf for use of the separator in-text rather than to separate person/text."
+        ), max.person.nchar))
+    }
+
+    transcript <- textshape::split_transcript(text.var, max.delim = max.person.nchar)
+
+    return(transcript)
+}
+
 
 
 read.doc <- function(file, skip = 0, sep = ":", max.person.nchar = 20, ...) {
 
 
-        text.var <- read_doc(file = file, skip = skip, ...)
+    text.var <- read_doc(file = file, skip = skip, ...)
 
-        text.var <- textshape::combine(textshape::split_match(
-            text.var,
-            sprintf('^.{0,%s}[%s]', max.person.nchar - 1, sep),
-            include = TRUE, regex = TRUE
-        ))
+    text.var <- textshape::combine(textshape::split_match(
+        text.var,
+        sprintf('^.{0,%s}[%s]', max.person.nchar - 1, sep),
+        include = TRUE, regex = TRUE
+    ))
 
-        if (any(grepl(paste0("^.{", max.person.nchar, ",}", sep), text.var))) {
-            warning(sprintf(paste0(
-                "I've detected the separator beyond %s characters from the line start.  Parsing may be incorrect...\n",
-                "  Consider manually searching the .doc for use of the separator in-text rather than to separate person/text."
-            ), max.person.nchar))
-        }
-        transcript <- textshape::split_transcript(text.var)
+    if (any(grepl(paste0("^.{", max.person.nchar, ",}", sep), text.var))) {
+        warning(sprintf(paste0(
+            "I've detected the separator beyond %s characters from the line start.  Parsing may be incorrect...\n",
+            "  Consider manually searching the .doc for use of the separator in-text rather than to separate person/text."
+        ), max.person.nchar))
+    }
 
-        return(transcript)
+    transcript <- textshape::split_transcript(text.var, max.delim = max.person.nchar)
+
+    return(transcript)
 }
 
 

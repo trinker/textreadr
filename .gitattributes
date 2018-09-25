@@ -1,0 +1,4 @@
+inst/staticdocs/* linguist-documentation
+inst/web/* linguist-documentation
+inst/textreadr_logo linguist-documentation
+inst/docs/* linguist-documentation

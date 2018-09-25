@@ -71,7 +71,7 @@ this length in the text.}
 Returns a dataframe of dialogue and people.
 }
 \description{
-Read .docx, .csv, .xlsx, .xlsx, or .txt transcript style files into R.
+Read .docx, .doc, .rtf, .csv, .xlsx, .xlsx, or .txt transcript style files into R.
 }
 \note{
 If a transcript is a .docx file read_transcript expects two columns
@@ -109,6 +109,14 @@ dat6 <- read_transcript(doc5)
 \dontrun{
 dat7 <- read_transcript(doc6) ## need to skip Researcher
 dat8 <- read_transcript(doc6, skip = 1)
+}
+
+## rtf format
+\dontrun{
+rtf_doc <- download(
+    'https://raw.githubusercontent.com/trinker/textreadr/master/inst/docs/trans7.rtf'
+)
+dat9 <- read_transcript(rtf_doc, skip = 1)
 }
 
 ## text string input

@@ -8,7 +8,7 @@
 #' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are
 #' removed.
 #' @param trim logical.  If \code{TRUE} the leading/training white space is
-#' reoved.
+#' removed.
 #' @param \dots Other arguments passed to \code{\link[pdftools]{pdf_text}}.
 #' @note A word of caution from \href{http://stackoverflow.com/a/9187015/1000343}{Carl Witthoft}"
 #' "Just a warning to others who may be hoping to extract data: PDF is a
@@ -17,7 +17,7 @@
 #' than I can imagine, nothing other than OCR can help you."  If the reader has
 #' OCR needs the \pkg{tesseract} package, available on CRAN
 #' (\url{https://CRAN.R-project.org/package=tesseract}), is an "OCR engine with
-#' unicode (UTF-8) support" and may be of use.
+#' Unicode (UTF-8) support" and may be of use.
 #' @return Returns a \code{\link[base]{data.frame}} with the page number
 #' (\code{page_id}), line number (\code{element_id}), and the \code{text}.
 #' @keywords pdf
