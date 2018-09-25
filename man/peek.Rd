@@ -5,7 +5,7 @@
 \alias{unpeek}
 \title{Data Frame Viewing}
 \usage{
-peek(x, n = 10, width = 20, ...)
+peek(x, n = 10, width = 20, strings.left = TRUE, ...)
 
 unpeek(x)
 }
@@ -15,6 +15,8 @@ unpeek(x)
 \item{n}{Number of rows to display.}
 
 \item{width}{The width of the columns to be displayed.}
+
+\item{strings.left}{logical.  If \code{TRUE} strings will be left alligned.}
 
 \item{\ldots}{For internal use.}
 }

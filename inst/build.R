@@ -2,7 +2,8 @@ root <- Sys.getenv("USERPROFILE")
 pack <- basename(getwd())
 
 quick <-  TRUE
-pdf <- TRUE
+# pdf <- TRUE
+pdf <- FALSE
 
 unlink(paste0(pack, ".pdf"), recursive = TRUE, force = TRUE)
 devtools::document()

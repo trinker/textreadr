@@ -7,6 +7,7 @@
 #' @param x A \code{\link[base]{data.frame}} object.
 #' @param n Number of rows to display.
 #' @param width The width of the columns to be displayed.
+#' @param strings.left logical.  If \code{TRUE} strings will be left alligned.
 #' @param \ldots For internal use.
 #' @return Prints a truncated head but invisibly returns \code{x}.
 #' @seealso \code{\link[utils]{head}}
@@ -19,14 +20,19 @@
 #' @examples
 #' peek(mtcars)
 #' peek(presidential_debates_2012)
-peek <- function (x, n = 10, width = 20, ...) {
+peek <- function (x, n = 10, width = 20, strings.left = TRUE,...) {
     WD <- options()[["width"]]
     options(width = 3000)
-    o <- utils::head(truncdf(as.data.frame(x), width), n = n,
-        ...)
-    header <- "Source: local data frame [%s x %s]\n\n"
-    cat(sprintf(header, nrow(x), ncol(x)))
-    out <- utils::capture.output(o)
+    o <- utils::head(truncdf(as.data.frame(x), width), n = n, ...)
+    header <- "Table: [%s x %s]\n\n"
+    cat(
+        sprintf(
+            header, 
+            prettyNum(nrow(x), big.mark = ','), 
+            prettyNum(ncol(x), big.mark = ',')
+        )
+    )
+    out <- utils::capture.output(print(o, right = !strings.left))
     fill <- utils::tail(out, 1)
     nth_row <- paste(c(paste(rep(".", nchar(nrow(o))), collapse = ""),
         sapply(1:ncol(o), function(i) {
@@ -41,6 +47,9 @@ peek <- function (x, n = 10, width = 20, ...) {
     options(width = WD)
     invisible(x)
 }
+
+
+
 
 #' Data Frame Viewing
 #'
