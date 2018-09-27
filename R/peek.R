@@ -35,9 +35,9 @@ peek <- function (x, n = 10, width = 20, strings.left = TRUE,...) {
     )
     out <- utils::capture.output(print(o, right = !strings.left))
     start <- paste(rep(".", nchar(nrow(o))), collapse = "")
-    # bot <- gsub('[^ ]', '.', out[1])
-    # substring(bot, 1, nchar(nrow(o))) <- start
-    # gsub('(^|\\s)(\\.{1,3})(\\.|\\s)', ' ')
+    bot <- gsub('(?<=\\.{3})(\\S+?)', ' ', gsub('[^ ]', '.', out[1]), perl = TRUE)
+    substring(bot, 1, nchar(nrow(o))) <- start
+
     #
     # fill <- utils::tail(out, 1)
     # nth_row <- paste(c(paste(rep(".", nchar(nrow(o))), collapse = ""),
@@ -49,7 +49,7 @@ peek <- function (x, n = 10, width = 20, strings.left = TRUE,...) {
     #             collapse = ""))
     #         paste(c(rep(" ", (lens + 1) - 3), "..."), collapse = "")
     #     })), collapse = "")
-    cat(paste(c(out, nth_row), collapse = "\n"), "\n")
+    cat(paste(c(out, bot), collapse = "\n"), "\n")
     options(width = WD)
     invisible(x)
 }

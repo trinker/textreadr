@@ -374,7 +374,7 @@ Here we have read the files in, one row per file.
     ## 18 7_7      Although I didn't like Stanley & Iris tr
     ## 19 8_7      Very good drama although it appeared to 
     ## 20 9_7      Working-class romantic drama from direct
-    ## ..      ...                  ...
+    ## .. ...      ...
 
 Read .docx
 ----------
@@ -471,7 +471,7 @@ with meta data, including page numbers and element (row) ids.
     ## 8  1       8          birth was Lexington, NC, on May 14, 1942
     ## 9  1       9          BREADEN: Can you describe what Lexington
     ## 10 1       10         1940’s?                                 
-    ## ..      ...                  ...
+    ## .. ...     ...        ...
 
 ### Image Based pdf: OCR
 
@@ -493,7 +493,7 @@ First let's try the task without using OCR.
     ## 
     ## [1] page_id    element_id text      
     ## <0 rows> (or 0-length row.names)
-    ## ..      ...                  ...
+    ## ... ...        ...        ...
 
 And now using OCR via **tesseract**. Note that `ocr = TRUE` is the
 default behavior of `read_pdf`.
@@ -577,7 +577,7 @@ handles. These are the files that will be read in:
     ## 3 Multiple Students Yes teacher we're ready to learn.       
     ## 4 [Cross Talk 3     00]                                     
     ## 5 Teacher 4         Let's read this terrific book together. 
-    ## ..      ...                  ...
+    ## . ...               ...
 
 ### docx With Skip
 
@@ -599,7 +599,7 @@ parses the file.
     ## 3 Multiple Students Yes teacher we're ready to learn.       
     ## 4 [Cross Talk 3     00]                                     
     ## 5 Teacher 4         Let's read this terrific book together. 
-    ## ..      ...                  ...
+    ## . ...               ...
 
 ### docx With Dash Separator
 
@@ -614,7 +614,7 @@ separator the first go round.
     ## 
     ##   Person        Dialogue                                
     ## 1 [Cross Talk 3 Teacher 4-Students it's time to learn. [
-    ## ..      ...                  ...
+    ## . ...           ...
 
     read_transcript(trans_docs[3], sep = "-", skip = 1)
 
@@ -624,7 +624,7 @@ separator the first go round.
     ## 1 Teacher 4         Students it's time to learn. [Student di
     ## 2 Multiple Students Yes teacher we're ready to learn. [Cross
     ## 3 Teacher 4         Let's read this terrific book together. 
-    ## ..      ...                  ...
+    ## . ...               ...
 
 ### xls and xlsx
 
@@ -640,7 +640,7 @@ separator the first go round.
     ## 5 Multiple Students: Yes teacher we're ready to learn.       
     ## 6 <NA>               NA NA NA                                
     ## 7 Teacher 4:         Let's read this terrific book together. 
-    ## ..      ...                  ...
+    ## . ...                ...
 
     read_transcript(trans_docs[5])
 
@@ -654,7 +654,7 @@ separator the first go round.
     ## 5 Multiple Students: Yes teacher we're ready to learn.       
     ## 6 <NA>               NA NA NA                                
     ## 7 Teacher 4:         Let's read this terrific book together. 
-    ## ..      ...                  ...
+    ## . ...                ...
 
 ### doc
 
@@ -666,7 +666,7 @@ separator the first go round.
     ## 1 Teacher 4         Students it's time to learn. [Student di
     ## 2 Multiple Students Yes teacher we're ready to learn.       
     ## 3 Teacher 4         Let's read this terrific book together. 
-    ## ..      ...                  ...
+    ## . ...               ...
 
 ### rtf
 
@@ -679,7 +679,7 @@ separator the first go round.
     ## 2 Teacher 4         Students it's time to learn. [Student di
     ## 3 Multiple Students Yes teacher we're ready to learn.       
     ## 4 Teacher 4         Let's read this terrific book together. 
-    ## ..      ...                  ...
+    ## . ...               ...
 
 ### Reading Text
 
@@ -708,7 +708,7 @@ useful for demoing code.
     ## 4 2  The Financial Times reports a lot of wor
     ## 5 9  Greenwire short.                        
     ## 6 13 The New York Times reports a lot of word
-    ## ..      ...                  ...
+    ## . .. ...
 
 ### Authentic Interview
 
@@ -730,7 +730,7 @@ Here I read in an authentic interview transcript:
     ## 8  Abd Rabou It does somehow. What I do is--First of 
     ## 9  Hassan    But you are characterized with, somehow 
     ## 10 Abd Rabou So far I didn't get--So far--Maybe it do
-    ## ..      ...                  ...
+    ## .. ...       ...
 
 Pairing textreadr
 -----------------
