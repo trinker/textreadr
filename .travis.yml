@@ -9,7 +9,13 @@ addons:
       - libpoppler-cpp-dev
       - valgrind
       - libapparmor-dev
-
+      - libtesseract-dev
+      - libleptonica-dev
+      - tesseract-ocr-eng
+      - tesseract-ocr-fra
+      - libmagick++-dev
+      
+      
 before_install:
   - sh -e /etc/init.d/xvfb start
 
