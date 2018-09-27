@@ -4,7 +4,8 @@
 \alias{read_pdf}
 \title{Read a Portable Document Format into R}
 \usage{
-read_pdf(file, skip = 0, remove.empty = TRUE, trim = TRUE, ...)
+read_pdf(file, skip = 0, remove.empty = TRUE, trim = TRUE, ocr = TRUE,
+  ...)
 }
 \arguments{
 \item{file}{A path to a PDF file.}
@@ -17,6 +18,11 @@ removed.}
 
 \item{trim}{logical.  If \code{TRUE} the leading/training white space is
 removed.}
+
+\item{ocr}{logical.  If \code{TRUE} documents with a non-text pull using
+\code{\link[pdftools]{pdf_text}} will be re-run using OCR via the
+\code{\link[tesseract]{ocr}} function.  This will create temporary .png
+files and will require a much larger compute time.}
 
 \item{\dots}{Other arguments passed to \code{\link[pdftools]{pdf_text}}.}
 }
@@ -58,6 +64,22 @@ system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr") \%>\%
     strsplit("(-| )(?=[A-Z_]+:)", perl=TRUE) \%>\%
     `[[`(1) \%>\%
     textshape::split_transcript()
+}
+
+\dontrun{
+## An image based .pdf file returns nothing.  Using the tesseract package as
+## a backend for OCR overcomes this problem.
+
+## Non-ocr
+read_pdf(
+    system.file("docs/McCune2002Choi2010.pdf", package = "textreadr"),
+    ocr = FALSE
+)
+
+read_pdf(
+    system.file("docs/McCune2002Choi2010.pdf", package = "textreadr"),
+    ocr = TRUE
+)
 }
 }
 \seealso{

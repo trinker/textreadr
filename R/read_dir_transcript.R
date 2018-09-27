@@ -98,7 +98,9 @@ read_dir_transcript <- function(path, col.names = c("Document", "Person", "Dialo
 
     lapply(seq_along(arg_list), function(i){
 
-        if(length(arg_list[[i]]) != length(to_read_in)) stop(paste0('`', arg_nms[i], '` is not of length 1 or the same length as files in `path`'))
+        if(length(arg_list[[i]]) != length(to_read_in)) {
+            stop(paste0('`', arg_nms[i], '` is not of length 1 or the same length as files in `path`'))
+        }
     })
 
     #paste(c('skip', 'merge.broke.tot', 'header', 'dash', 'ellipsis',

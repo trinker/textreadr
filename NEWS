@@ -18,19 +18,19 @@ And constructed with the following guidelines:
 
 
 
-textreadr 0.8.0 -
+textreadr 0.8.0
 ----------------------------------------------------------------
-
-BUG FIXES
 
 NEW FEATURES
 
-MINOR FEATURES
+* `peek` picks up a `strings.left` argument to align strings to the left.  This
+  is the default because this is a text reading package that deals primarily
+  with strings.
 
-IMPROVEMENTS
-
-CHANGES
-
+* `read_pdf` picks up an `ocr` argument in order to properly handle image based
+  ,pdf files in order to extract the text.  For this task optical character
+  recognition (OCR) is required.  The **tesseract** package provides the backend
+  for processing these types of .pdfs.
 
 
 textreadr 0.6.0 - 0.7.0

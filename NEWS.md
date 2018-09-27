@@ -18,21 +18,19 @@ And constructed with the following guidelines:
 
 
 
-textreadr 0.8.0 -
+textreadr 0.8.0
 ----------------------------------------------------------------
-
-**BUG FIXES**
-
-* `read_dir` did not handle errored readins correctly resulting in an R error.
 
 **NEW FEATURES**
 
-**MINOR FEATURES**
+* `peek` picks up a `strings.left` argument to align strings to the left.  This
+  is the default because this is a text reading package that deals primarily
+  with strings.
 
-**IMPROVEMENTS**
-
-**CHANGES**
-
+* `read_pdf` picks up an `ocr` argument in order to properly handle image based
+  ,pdf files in order to extract the text.  For this task optical character
+  recognition (OCR) is required.  The **tesseract** package provides the backend
+  for processing these types of .pdfs.
 
 
 textreadr 0.6.0 - 0.7.0
@@ -60,11 +58,6 @@ textreadr 0.6.0 - 0.7.0
 * `read_dir` and `read_dir_transcript` pick up an `ignore.case` function for pattern.
   Pattern becomes more powerful in that it was moved outside of the `dir` command
   via a `grep` call.
-<<<<<<< HEAD
-  
-**IMPROVEMENTS**
-=======
->>>>>>> c27c88fe2fcca20fde0b37581d7063c9e825fc92
 
 
 

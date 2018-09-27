@@ -99,6 +99,8 @@ txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
 rtf_doc <- download(
     'https://raw.githubusercontent.com/trinker/textreadr/master/inst/docs/trans7.rtf'
 )
+
+pdf_doc_img <- system.file("docs/McCune2002Choi2010.pdf", package = "textreadr")
 ```
 
 
@@ -238,6 +240,27 @@ Here I read in a PDF with `read_pdf`.  Notice the result is a data frame with me
 ```{r}
 pdf_doc %>%
     read_pdf() 
+```
+
+
+The `ocr` argument allows the user to read in image based .pdf files and allow the [**tesseract**](https://CRAN.R-project.org/package=tesseract) package do the heavy lifting in the backend.  You can look at the .pdf we'll be using by running:
+
+```{r,eval=FALSE}
+textreadr:::open_path(pdf_doc_img)
+```
+
+First let's try the task without using OCR:
+
+```{r}
+pdf_doc_img %>%
+    read_pdf(ocr = FALSE)
+```
+
+And now using OCR via **tesseract***:
+
+```{r}
+pdf_doc_img %>%
+    read_pdf(ocr = TRUE)
 ```
 
 [Carl Witthoft's](http://stackoverflow.com/a/9187015/1000343) word of caution is useful for those struggling to read image text into R.

@@ -13,6 +13,10 @@
 #' @param format For .doc files only.  Logical.  If \code{TRUE} the output will
 #' keep doc formatting (e.g., bold, italics, underlined).  This corresponds to
 #' the \code{-f} flag in antiword.
+#' @param ocr logical.  If \code{TRUE} .pdf documents with a non-text pull using
+#' \code{\link[pdftools]{pdf_text}} will be re-run using OCR via the
+#' \code{\link[tesseract]{ocr}} function.  This will create temporary .png
+#' files and will require a much larger compute time.
 #' @param \ldots Other arguments passed to \code{\link[textreadr]{read_pdf}},
 #' \code{\link[textreadr]{read_html}}, \code{\link[textreadr]{read_docx}},
 #' \code{\link[textreadr]{read_doc}}, or \code{\link[base]{readLines}}.
@@ -55,7 +59,7 @@
 #' read_document('http://www.talkstats.com/index.php')
 #' }
 read_document <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE,
-    combine = FALSE, format = FALSE, ...){
+    combine = FALSE, format = FALSE, ocr = TRUE, ...){
 
     if (grepl('^([fh]ttp)', file)){
         filetype <- 'html'
@@ -65,7 +69,7 @@ read_document <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE,
     }
 
     fun <- switch(filetype,
-        pdf = {function(x, ...) {read_pdf(x, remove.empty = FALSE, trim = FALSE, ...)[["text"]]}},
+        pdf = {function(x, ...) {read_pdf(x, remove.empty = FALSE, trim = FALSE, ocr = ocr, ...)[["text"]]}},
         docx = {function(x, ...) {read_docx(x, remove.empty = FALSE, trim = FALSE, ...)}},
         doc = {function(x, ...) {read_doc(x, remove.empty = FALSE, trim = FALSE, format=format, ...)}},
         rtf = {function(x, ...) {read_rtf(x, remove.empty = FALSE, trim = FALSE, ...)}},

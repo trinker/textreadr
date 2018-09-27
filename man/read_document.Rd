@@ -5,7 +5,7 @@
 \title{Generic Function to Read in a Document}
 \usage{
 read_document(file, skip = 0, remove.empty = TRUE, trim = TRUE,
-  combine = FALSE, format = FALSE, ...)
+  combine = FALSE, format = FALSE, ocr = TRUE, ...)
 }
 \arguments{
 \item{file}{The path to the a .pdf, .txt, .html, .rtf, .docx, or .doc file.}
@@ -24,6 +24,11 @@ single string via \code{\link[textshape]{combine}}.}
 \item{format}{For .doc files only.  Logical.  If \code{TRUE} the output will
 keep doc formatting (e.g., bold, italics, underlined).  This corresponds to
 the \code{-f} flag in antiword.}
+
+\item{ocr}{logical.  If \code{TRUE} .pdf documents with a non-text pull using
+\code{\link[pdftools]{pdf_text}} will be re-run using OCR via the
+\code{\link[tesseract]{ocr}} function.  This will create temporary .png
+files and will require a much larger compute time.}
 
 \item{\ldots}{Other arguments passed to \code{\link[textreadr]{read_pdf}},
 \code{\link[textreadr]{read_html}}, \code{\link[textreadr]{read_docx}},

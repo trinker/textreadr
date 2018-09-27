@@ -47,6 +47,27 @@ combine_tot <- function(x){
     out
 }
 
+pad_left <- function(x, len = 1 + max(nchar(x)), char = '0'){
+
+    unlist(lapply(x, function(x) {
+        paste0(
+            paste(rep(char, len - nchar(x)), collapse = ''),
+            x
+        )
+    }))
+}
+
+open_path <- function (x = ".") {
+    if (.Platform["OS.type"] == "windows") {
+        invisible(lapply(x, shell.exec))
+    }
+    else {
+        invisible(lapply(x, function(x) {
+            system(paste(Sys.getenv("R_BROWSER"), x))
+        }))
+    }
+}
+
 
 # combine_tot <-
 #   function(dataframe, combine.var = 1, text.var = 2) {

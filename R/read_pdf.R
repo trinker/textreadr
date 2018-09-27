@@ -9,6 +9,10 @@
 #' removed.
 #' @param trim logical.  If \code{TRUE} the leading/training white space is
 #' removed.
+#' @param ocr logical.  If \code{TRUE} documents with a non-text pull using
+#' \code{\link[pdftools]{pdf_text}} will be re-run using OCR via the
+#' \code{\link[tesseract]{ocr}} function.  This will create temporary .png
+#' files and will require a much larger compute time.
 #' @param \dots Other arguments passed to \code{\link[pdftools]{pdf_text}}.
 #' @note A word of caution from \href{http://stackoverflow.com/a/9187015/1000343}{Carl Witthoft}"
 #' "Just a warning to others who may be hoping to extract data: PDF is a
@@ -45,14 +49,55 @@
 #'     `[[`(1) %>%
 #'     textshape::split_transcript()
 #' }
-read_pdf <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE, ...) {
+#'
+#' \dontrun{
+#' ## An image based .pdf file returns nothing.  Using the tesseract package as
+#' ## a backend for OCR overcomes this problem.
+#'
+#' ## Non-ocr
+#' read_pdf(
+#'     system.file("docs/McCune2002Choi2010.pdf", package = "textreadr"),
+#'     ocr = FALSE
+#' )
+#'
+#' read_pdf(
+#'     system.file("docs/McCune2002Choi2010.pdf", package = "textreadr"),
+#'     ocr = TRUE
+#' )
+#' }
+read_pdf <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE, ocr = TRUE, ...) {
 
     ## use pdftools to read in the document
     text <- pdftools::pdf_text(file, ...)
 
+    ## Use ocr if pdf is raster not text
+    if (all(text == '') & isTRUE(ocr)){
+
+        temp <- tempdir()
+        fls <- file.path(
+            temp,
+            paste0(gsub('\\.pdf$', '', file), '_', pad_left(seq_along(text)), '.png')
+        )
+
+        ## convert to png files for tesseract to interact with
+        png_files <- pdftools::pdf_convert(file, dpi = 600, filenames = fls)
+
+        ## OCR
+        text <- tesseract::ocr(png_files)
+        split <- "\\r\\n|\\n"
+
+        ## clean up and remove the png files
+        unlink(png_files, TRUE, TRUE)
+
+    } else {
+
+        split <- "\\r\\n"
+
+    }
+
     ## Convert to UTF-8 encoding and split on carriage returns
     Encoding(text) <- "UTF-8"
-    text <- strsplit(text, "\\r\\n")
+    text <- strsplit(text, split)
 
     ## formatting 1
     if (isTRUE(remove.empty)) text <- lapply(text, function(x) x[!grepl("^\\s*$", x)])
@@ -66,10 +111,11 @@ read_pdf <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE, ...) {
     if (skip > 0) out <- utils::tail(out, -c(skip))
     if (isTRUE(trim)) out[['text']] <- trimws(out[['text']])
 
-
     class(out) <- c("textreadr", "data.frame")
     out
 }
+
+
 
 
 # read_pdf <- function(file, engine = "ghostscript", skip = 0, language='en', id='id1'){
