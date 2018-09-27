@@ -52,8 +52,19 @@ mydata <- reactive({
 
     req(input$file_input)
     in_file <- input$file_input
-    dplyr::data_frame(text = textreadr::read_document(in_file$datapath))
 
+    ext <- tools::file_ext(in_file$datapath)
+    
+    switch(ext,
+        pdf = {textreadr::read_pdf(in_file$datapath)},
+        doc = {textreadr::read_doc(in_file$datapath)},        
+        docx = {textreadr::read_docx(in_file$datapath)},
+        rtf = {textreadr::read_rtf(in_file$datapath)},
+        html = {textreadr::read_html(in_file$datapath)},    
+        stop("file type unsupported")
+    ) %>%
+    dplyr::as_tibble()
+    
 })
 ```
  
