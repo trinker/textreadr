@@ -23,26 +23,32 @@
 peek <- function (x, n = 10, width = 20, strings.left = TRUE,...) {
     WD <- options()[["width"]]
     options(width = 3000)
-    o <- utils::head(truncdf(as.data.frame(x), width), n = n, ...)
+    o <- utils::head(truncdf(as.data.frame(x, stringsAsFactors = FALSE),
+        width, reclass =FALSE), n = n, ...)
     header <- "Table: [%s x %s]\n\n"
     cat(
         sprintf(
-            header, 
-            prettyNum(nrow(x), big.mark = ','), 
+            header,
+            prettyNum(nrow(x), big.mark = ','),
             prettyNum(ncol(x), big.mark = ',')
         )
     )
     out <- utils::capture.output(print(o, right = !strings.left))
-    fill <- utils::tail(out, 1)
-    nth_row <- paste(c(paste(rep(".", nchar(nrow(o))), collapse = ""),
-        sapply(1:ncol(o), function(i) {
-            elems <- c(colnames(o)[i], as.character(o[[i]]))
-            elems[is.na(elems)] <- "NA"
-            lens <- max(nchar(elems), na.rm = TRUE)
-            if (lens <= 3) return(paste(c(" ", rep(".", lens)),
-                collapse = ""))
-            paste(c(rep(" ", (lens + 1) - 3), "..."), collapse = "")
-        })), collapse = "")
+    start <- paste(rep(".", nchar(nrow(o))), collapse = "")
+    # bot <- gsub('[^ ]', '.', out[1])
+    # substring(bot, 1, nchar(nrow(o))) <- start
+    # gsub('(^|\\s)(\\.{1,3})(\\.|\\s)', ' ')
+    #
+    # fill <- utils::tail(out, 1)
+    # nth_row <- paste(c(paste(rep(".", nchar(nrow(o))), collapse = ""),
+    #     sapply(1:ncol(o), function(i) {
+    #         elems <- c(colnames(o)[i], as.character(o[[i]]))
+    #         elems[is.na(elems)] <- "NA"
+    #         lens <- max(nchar(elems), na.rm = TRUE)
+    #         if (lens <= 3) return(paste(c(" ", rep(".", lens)),
+    #             collapse = ""))
+    #         paste(c(rep(" ", (lens + 1) - 3), "..."), collapse = "")
+    #     })), collapse = "")
     cat(paste(c(out, nth_row), collapse = "\n"), "\n")
     options(width = WD)
     invisible(x)
@@ -63,11 +69,11 @@ unpeek <- function(x) {
 }
 
 truncdf <-
-function(x, end=10, begin=1) {
-    x <- as.data.frame(x)
-    DF <- data.frame(lapply(x, substr, begin, end), check.names=FALSE)
+function(x, end=10, begin=1, reclass = TRUE) {
+    x <- as.data.frame(x, stringsAsFactors = FALSE)
+    DF <- data.frame(lapply(x, substr, begin, end), check.names=FALSE, stringsAsFactors = FALSE)
     names(DF) <- substring(names(DF), begin, end)
-    class(DF) <- c("trunc", class(DF))
+    if (isTRUE(reclass)) class(DF) <- c("trunc", class(DF))
     DF
 }
 

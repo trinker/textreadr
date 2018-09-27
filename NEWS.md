@@ -18,7 +18,7 @@ And constructed with the following guidelines:
 
 
 
-textreadr 0.8.0
+textreadr 0.8.0 - 0.8.1
 ----------------------------------------------------------------
 
 **NEW FEATURES**

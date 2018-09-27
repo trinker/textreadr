@@ -242,37 +242,47 @@ pdf_doc %>%
     read_pdf() 
 ```
 
+### Image Based pdf: OCR
 
-The `ocr` argument allows the user to read in image based .pdf files and allow the [**tesseract**](https://CRAN.R-project.org/package=tesseract) package do the heavy lifting in the backend.  You can look at the .pdf we'll be using by running:
+Image based .pdfs require optical character recognition (OCR) in order for the images to be converted to text.  The `ocr` argument of `read_pdf` allows the user to read in image based .pdf files and allow the [**tesseract**](https://CRAN.R-project.org/package=tesseract) package do the heavy lifting in the backend.  You can look at the .pdf we'll be using by running:
 
 ```{r,eval=FALSE}
 textreadr:::open_path(pdf_doc_img)
 ```
 
-First let's try the task without using OCR:
+First let's try the task without using OCR.
 
 ```{r}
 pdf_doc_img %>%
     read_pdf(ocr = FALSE)
 ```
 
-And now using OCR via **tesseract***:
+And now using OCR via **tesseract**.  Note that `ocr = TRUE` is the default behavior of `read_pdf`.
 
-```{r}
+```{r, eval = FALSE}
 pdf_doc_img %>%
     read_pdf(ocr = TRUE)
 ```
 
-[Carl Witthoft's](http://stackoverflow.com/a/9187015/1000343) word of caution is useful for those struggling to read image text into R.
+```r
+## Converting page 1 to C:\Users\AppData\Local\Temp\RtmpKeJAnL/McCune2002Choi2010_01.png... done!
+## Converting page 2 to C:\Users\AppData\Local\Temp\RtmpKeJAnL/McCune2002Choi2010_02.png... done!
 
-> Just a warning to others who may be hoping to extract data: PDF is a container, not a format. If the original document does not contain actual text, as opposed to bitmapped images of text or possibly even uglier things than I can imagine, nothing other than OCR can help you.
-
-Users may find the following sites useful for OCR in R:
-
-- https://CRAN.R-project.org/package=tesseract     
-- http://electricarchaeology.ca/2014/07/15/doing-ocr-within-r
-- https://github.com/soodoku/abbyyR
-
+## Table: [104 x 3]
+##
+##    page_id element_id text                                           
+## 1  1       1          A Survey of Binary Similarity and Distan       
+## 2  1       2          Seung-Seok Choi, Sung-Hyuk Cha, Charles        
+## 3  1       3          Department of Computer Science, Pace Uni       
+## 4  1       4          New York, US                                   
+## 5  1       5          ABSTRACT ecological 25 <U+FB01>sh species [2|].
+## 6  1       6          conventional similarity measures to solv       
+## 7  1       7          The binary feature vector is one of the        
+## 8  1       8          representations of patterns and measurin       
+## 9  1       9          distance measures play a critical role i       
+## 10 1       10         such as clustering, classi<U+FB01>cation, etc. 
+## .. ...     ...        ... 
+```
 ## Read .html
 
 Often a researcher only wishes to grab the text from the body of .html files.  The `read_html` function does exactly this task.  For finer control over .html scraping the user may investigate the **xml2** & **rvest** packages for parsing .html and .xml files.  Here I read in HTML with `read_html`.  
