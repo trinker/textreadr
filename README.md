@@ -34,6 +34,7 @@ Table of Contents
     -   [Read .doc](#read-doc)
     -   [Read .rtf](#read-rtf)
     -   [Read .pdf](#read-pdf)
+        -   [Image Based pdf: OCR](#image-based-pdf-ocr)
     -   [Read .html](#read-html)
     -   [Read Transcripts](#read-transcripts)
         -   [docx Simple](#docx-simple)
@@ -53,12 +54,13 @@ Functions
 Most jobs in my workflow can be completed with `read_document` and
 `read_dir`. The former generically reads in a .docx, .doc, .pdf, .html,
 or .txt file without specifying the extension. The latter reads in
-multiple .docx, .doc, .pdf, .html, or .txt files from a directory as a
-`data.frame` with a file and text column. This workflow is effective
-because most text documents I encounter are stored as a .docx, .doc,
-.pdf, .html, or .txt file. The remaining common storage formats I
-encounter include .csv, .xlsx, XML, structured .html, and SQL. For these
-first 4 forms the [**readr**](https://CRAN.R-project.org/package=readr),
+multiple .docx, .doc, .rtf, .pdf, .html, or .txt files from a directory
+as a `data.frame` with a file and text column. This workflow is
+effective because most text documents I encounter are stored as a .docx,
+.doc, .rtf, .pdf, .html, or .txt file. The remaining common storage
+formats I encounter include .csv, .xlsx, XML, structured .html, and SQL.
+For these first 4 forms the
+[**readr**](https://CRAN.R-project.org/package=readr),
 [**readx**l](https://CRAN.R-project.org/package=readxl),
 [**xml2**](https://CRAN.R-project.org/package=xml2), and
 [**rvest**](https://CRAN.R-project.org/package=rvest). For SQL:
@@ -217,6 +219,8 @@ Load the Packages/Data
         'https://raw.githubusercontent.com/trinker/textreadr/master/inst/docs/trans7.rtf'
     )
 
+    pdf_doc_img <- system.file("docs/McCune2002Choi2010.pdf", package = "textreadr")
+
 Download
 --------
 
@@ -232,7 +236,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpGWwrF3
+    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpmKFBUe
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -347,30 +351,30 @@ Here we have read the files in, one row per file.
         read_dir() %>%
         peek(Inf, 40)
 
-    ## Source: local data frame [20 x 2]
+    ## Table: [20 x 2]
     ## 
-    ##    document                                  content
-    ## 1       0_9 Bromwell High is a cartoon comedy. It ra
-    ## 2       1_7 If you like adult comedy cartoons, like 
-    ## 3      10_9 I'm a male, not given to women's movies,
-    ## 4      11_9 Liked Stanley & Iris very much. Acting w
-    ## 5      12_9 Liked Stanley & Iris very much. Acting w
-    ## 6      13_7 The production quality, cast, premise, a
-    ## 7     14_10 This film has a special place in my hear
-    ## 8      15_7 I guess if a film has magic, I don't nee
-    ## 9      16_7 I found this to be a so-so romance/drama
-    ## 10     17_9 This is a complex film that explores the
-    ## 11     18_7 `Stanley and Iris' is a heart warming fi
-    ## 12    19_10 I just read the comments of TomReynolds2
-    ## 13      2_9 Bromwell High is nothing short of brilli
-    ## 14     3_10 "All the world's a stage and its people 
-    ## 15      4_8 FUTZ is the only show preserved from the
-    ## 16     5_10 I came in in the middle of this film so 
-    ## 17     6_10 Fair drama/love story movie that focuses
-    ## 18      7_7 Although I didn't like Stanley & Iris tr
-    ## 19      8_7 Very good drama although it appeared to 
-    ## 20      9_7 Working-class romantic drama from direct
-    ## ..      ...                                      ...
+    ##    document content                                 
+    ## 1  0_9      Bromwell High is a cartoon comedy. It ra
+    ## 2  1_7      If you like adult comedy cartoons, like 
+    ## 3  10_9     I'm a male, not given to women's movies,
+    ## 4  11_9     Liked Stanley & Iris very much. Acting w
+    ## 5  12_9     Liked Stanley & Iris very much. Acting w
+    ## 6  13_7     The production quality, cast, premise, a
+    ## 7  14_10    This film has a special place in my hear
+    ## 8  15_7     I guess if a film has magic, I don't nee
+    ## 9  16_7     I found this to be a so-so romance/drama
+    ## 10 17_9     This is a complex film that explores the
+    ## 11 18_7     `Stanley and Iris' is a heart warming fi
+    ## 12 19_10    I just read the comments of TomReynolds2
+    ## 13 2_9      Bromwell High is nothing short of brilli
+    ## 14 3_10     "All the world's a stage and its people 
+    ## 15 4_8      FUTZ is the only show preserved from the
+    ## 16 5_10     I came in in the middle of this film so 
+    ## 17 6_10     Fair drama/love story movie that focuses
+    ## 18 7_7      Although I didn't like Stanley & Iris tr
+    ## 19 8_7      Very good drama although it appeared to 
+    ## 20 9_7      Working-class romantic drama from direct
+    ## ..      ...                  ...
 
 Read .docx
 ----------
@@ -454,34 +458,66 @@ with meta data, including page numbers and element (row) ids.
     pdf_doc %>%
         read_pdf() 
 
-    ## Source: local data frame [616 x 3]
+    ## Table: [616 x 3]
     ## 
-    ##    page_id element_id                                     text
-    ## 1        1          1 Interview with Mary Waters Spaulding, Au
-    ## 2        1          2 CRAIG BREADEN: My name is Craig Breaden.
-    ## 3        1          3 and I’m with Kirston Johnson, the curato
-    ## 4        1          4 is August 8, 2013, and we are in Lexingt
-    ## 5        1          5 life and family, and particularly about 
-    ## 6        1          6 your full name, date of birth, and place
-    ## 7        1          7 MARY WATERS SPAULDING: My name is Mary E
-    ## 8        1          8 birth was Lexington, NC, on May 14, 1942
-    ## 9        1          9 BREADEN: Can you describe what Lexington
-    ## 10       1         10                                  1940’s?
-    ## ..     ...        ...                                      ...
+    ##    page_id element_id text                                    
+    ## 1  1       1          Interview with Mary Waters Spaulding, Au
+    ## 2  1       2          CRAIG BREADEN: My name is Craig Breaden.
+    ## 3  1       3          and I’m with Kirston Johnson, the curato
+    ## 4  1       4          is August 8, 2013, and we are in Lexingt
+    ## 5  1       5          life and family, and particularly about 
+    ## 6  1       6          your full name, date of birth, and place
+    ## 7  1       7          MARY WATERS SPAULDING: My name is Mary E
+    ## 8  1       8          birth was Lexington, NC, on May 14, 1942
+    ## 9  1       9          BREADEN: Can you describe what Lexington
+    ## 10 1       10         1940’s?                                 
+    ## ..      ...                  ...
 
-[Carl Witthoft's](http://stackoverflow.com/a/9187015/1000343) word of
-caution is useful for those struggling to read image text into R.
+### Image Based pdf: OCR
 
-> Just a warning to others who may be hoping to extract data: PDF is a
-> container, not a format. If the original document does not contain
-> actual text, as opposed to bitmapped images of text or possibly even
-> uglier things than I can imagine, nothing other than OCR can help you.
+Image based .pdfs require optical character recognition (OCR) in order
+for the images to be converted to text. The `ocr` argument of `read_pdf`
+allows the user to read in image based .pdf files and allow the
+[**tesseract**](https://CRAN.R-project.org/package=tesseract) package do
+the heavy lifting in the backend. You can look at the .pdf we'll be
+using by running:
 
-Users may find the following sites useful for OCR in R:
+    textreadr:::open_path(pdf_doc_img)
 
--   <https://CRAN.R-project.org/package=tesseract>  
--   <http://electricarchaeology.ca/2014/07/15/doing-ocr-within-r>
--   <https://github.com/soodoku/abbyyR>
+First let's try the task without using OCR.
+
+    pdf_doc_img %>%
+        read_pdf(ocr = FALSE)
+
+    ## Table: [0 x 3]
+    ## 
+    ## [1] page_id    element_id text      
+    ## <0 rows> (or 0-length row.names)
+    ## ..      ...                  ...
+
+And now using OCR via **tesseract**. Note that `ocr = TRUE` is the
+default behavior of `read_pdf`.
+
+    pdf_doc_img %>%
+        read_pdf(ocr = TRUE)
+
+    ## Converting page 1 to C:\Users\AppData\Local\Temp\RtmpKeJAnL/McCune2002Choi2010_01.png... done!
+    ## Converting page 2 to C:\Users\AppData\Local\Temp\RtmpKeJAnL/McCune2002Choi2010_02.png... done!
+
+    ## Table: [104 x 3]
+    ##
+    ##    page_id element_id text                                           
+    ## 1  1       1          A Survey of Binary Similarity and Distan       
+    ## 2  1       2          Seung-Seok Choi, Sung-Hyuk Cha, Charles        
+    ## 3  1       3          Department of Computer Science, Pace Uni       
+    ## 4  1       4          New York, US                                   
+    ## 5  1       5          ABSTRACT ecological 25 <U+FB01>sh species [2|].
+    ## 6  1       6          conventional similarity measures to solv       
+    ## 7  1       7          The binary feature vector is one of the        
+    ## 8  1       8          representations of patterns and measurin       
+    ## 9  1       9          distance measures play a critical role i       
+    ## 10 1       10         such as clustering, classi<U+FB01>cation, etc. 
+    ## .. ...     ...        ... 
 
 Read .html
 ----------
@@ -533,15 +569,15 @@ handles. These are the files that will be read in:
 
     read_transcript(trans_docs[1])
 
-    ## Source: local data frame [5 x 2]
+    ## Table: [5 x 2]
     ## 
-    ##              Person                                 Dialogue
-    ## 1      Researcher 2                         October 7, 1892.
-    ## 2         Teacher 4 Students it's time to learn. [Student di
-    ## 3 Multiple Students        Yes teacher we're ready to learn.
-    ## 4     [Cross Talk 3                                      00]
-    ## 5         Teacher 4 Let's read this terrific book together. 
-    ## .               ...                                      ...
+    ##   Person            Dialogue                                
+    ## 1 Researcher 2      October 7, 1892.                        
+    ## 2 Teacher 4         Students it's time to learn. [Student di
+    ## 3 Multiple Students Yes teacher we're ready to learn.       
+    ## 4 [Cross Talk 3     00]                                     
+    ## 5 Teacher 4         Let's read this terrific book together. 
+    ## ..      ...                  ...
 
 ### docx With Skip
 
@@ -555,15 +591,15 @@ parses the file.
 
     read_transcript(trans_docs[2], skip = 1)
 
-    ## Source: local data frame [5 x 2]
+    ## Table: [5 x 2]
     ## 
-    ##              Person                                 Dialogue
-    ## 1      Researcher 2                         October 7, 1892.
-    ## 2         Teacher 4 Students it's time to learn. [Student di
-    ## 3 Multiple Students        Yes teacher we're ready to learn.
-    ## 4     [Cross Talk 3                                      00]
-    ## 5         Teacher 4 Let's read this terrific book together. 
-    ## .               ...                                      ...
+    ##   Person            Dialogue                                
+    ## 1 Researcher 2      October 7, 1892.                        
+    ## 2 Teacher 4         Students it's time to learn. [Student di
+    ## 3 Multiple Students Yes teacher we're ready to learn.       
+    ## 4 [Cross Talk 3     00]                                     
+    ## 5 Teacher 4         Let's read this terrific book together. 
+    ## ..      ...                  ...
 
 ### docx With Dash Separator
 
@@ -574,76 +610,76 @@ separator the first go round.
 
     read_transcript(trans_docs[3], skip = 1)
 
-    ## Source: local data frame [1 x 2]
+    ## Table: [1 x 2]
     ## 
-    ##          Person                                 Dialogue
+    ##   Person        Dialogue                                
     ## 1 [Cross Talk 3 Teacher 4-Students it's time to learn. [
-    ## .           ...                                      ...
+    ## ..      ...                  ...
 
     read_transcript(trans_docs[3], sep = "-", skip = 1)
 
-    ## Source: local data frame [3 x 2]
+    ## Table: [3 x 2]
     ## 
-    ##              Person                                 Dialogue
-    ## 1         Teacher 4 Students it's time to learn. [Student di
+    ##   Person            Dialogue                                
+    ## 1 Teacher 4         Students it's time to learn. [Student di
     ## 2 Multiple Students Yes teacher we're ready to learn. [Cross
-    ## 3         Teacher 4 Let's read this terrific book together. 
-    ## .               ...                                      ...
+    ## 3 Teacher 4         Let's read this terrific book together. 
+    ## ..      ...                  ...
 
 ### xls and xlsx
 
     read_transcript(trans_docs[4])
 
-    ## Source: local data frame [7 x 2]
+    ## Table: [7 x 2]
     ## 
-    ##               Person                                 Dialogue
-    ## 1      Researcher 2:                         October 7, 1892.
-    ## 2               <NA>                                       NA
-    ## 3         Teacher 4:             Students it's time to learn.
-    ## 4               <NA>                                 NA NA NA
-    ## 5 Multiple Students:        Yes teacher we're ready to learn.
-    ## 6               <NA>                                 NA NA NA
-    ## 7         Teacher 4: Let's read this terrific book together. 
-    ## .                ...                                      ...
+    ##   Person             Dialogue                                
+    ## 1 Researcher 2:      October 7, 1892.                        
+    ## 2 <NA>               NA                                      
+    ## 3 Teacher 4:         Students it's time to learn.            
+    ## 4 <NA>               NA NA NA                                
+    ## 5 Multiple Students: Yes teacher we're ready to learn.       
+    ## 6 <NA>               NA NA NA                                
+    ## 7 Teacher 4:         Let's read this terrific book together. 
+    ## ..      ...                  ...
 
     read_transcript(trans_docs[5])
 
-    ## Source: local data frame [7 x 2]
+    ## Table: [7 x 2]
     ## 
-    ##               Person                                 Dialogue
-    ## 1      Researcher 2:                         October 7, 1892.
-    ## 2               <NA>                                       NA
-    ## 3         Teacher 4:             Students it's time to learn.
-    ## 4               <NA>                                 NA NA NA
-    ## 5 Multiple Students:        Yes teacher we're ready to learn.
-    ## 6               <NA>                                 NA NA NA
-    ## 7         Teacher 4: Let's read this terrific book together. 
-    ## .                ...                                      ...
+    ##   Person             Dialogue                                
+    ## 1 Researcher 2:      October 7, 1892.                        
+    ## 2 <NA>               NA                                      
+    ## 3 Teacher 4:         Students it's time to learn.            
+    ## 4 <NA>               NA NA NA                                
+    ## 5 Multiple Students: Yes teacher we're ready to learn.       
+    ## 6 <NA>               NA NA NA                                
+    ## 7 Teacher 4:         Let's read this terrific book together. 
+    ## ..      ...                  ...
 
 ### doc
 
     read_transcript(trans_docs[6], skip = 1)
 
-    ## Source: local data frame [3 x 2]
+    ## Table: [3 x 2]
     ## 
-    ##              Person                                 Dialogue
-    ## 1         Teacher 4 Students it's time to learn. [Student di
-    ## 2 Multiple Students        Yes teacher we're ready to learn.
-    ## 3         Teacher 4 Let's read this terrific book together. 
-    ## .               ...                                      ...
+    ##   Person            Dialogue                                
+    ## 1 Teacher 4         Students it's time to learn. [Student di
+    ## 2 Multiple Students Yes teacher we're ready to learn.       
+    ## 3 Teacher 4         Let's read this terrific book together. 
+    ## ..      ...                  ...
 
 ### rtf
 
     read_transcript(rtf_doc, skip = 1)
 
-    ## Source: local data frame [4 x 2]
+    ## Table: [4 x 2]
     ## 
-    ##              Person                                 Dialogue
-    ## 1      Researcher 2                         October 7, 1892.
-    ## 2         Teacher 4 Students it's time to learn. [Student di
-    ## 3 Multiple Students        Yes teacher we're ready to learn.
-    ## 4         Teacher 4 Let's read this terrific book together. 
-    ## .               ...                                      ...
+    ##   Person            Dialogue                                
+    ## 1 Researcher 2      October 7, 1892.                        
+    ## 2 Teacher 4         Students it's time to learn. [Student di
+    ## 3 Multiple Students Yes teacher we're ready to learn.       
+    ## 4 Teacher 4         Let's read this terrific book together. 
+    ## ..      ...                  ...
 
 ### Reading Text
 
@@ -663,16 +699,16 @@ useful for demoing code.
         col.names = c("NO", "ARTICLE"), sep = "   "
     )
 
-    ## Source: local data frame [6 x 2]
+    ## Table: [6 x 2]
     ## 
-    ##   NO                                  ARTICLE
+    ##   NO ARTICLE                                 
     ## 1 34 The New York Times reports a lot of word
-    ## 2 12        Greenwire reports a lot of words.
-    ## 3 31                        Only three words.
-    ## 4  2 The Financial Times reports a lot of wor
-    ## 5  9                         Greenwire short.
+    ## 2 12 Greenwire reports a lot of words.       
+    ## 3 31 Only three words.                       
+    ## 4 2  The Financial Times reports a lot of wor
+    ## 5 9  Greenwire short.                        
     ## 6 13 The New York Times reports a lot of word
-    ## . ..                                      ...
+    ## ..      ...                  ...
 
 ### Authentic Interview
 
@@ -681,20 +717,20 @@ Here I read in an authentic interview transcript:
     docx_doc %>%
         read_transcript(c("Person", "Dialogue"), skip = 19)
 
-    ## Source: local data frame [13 x 2]
+    ## Table: [13 x 2]
     ## 
-    ##       Person                                 Dialogue
-    ## 1     Hassan Professor Abd Rabou, being a current pro
+    ##    Person    Dialogue                                
+    ## 1  Hassan    Professor Abd Rabou, being a current pro
     ## 2  Abd Rabou Sure. First of all, let's look at the so
-    ## 3     Hassan So from this point of the differences of
+    ## 3  Hassan    So from this point of the differences of
     ## 4  Abd Rabou No. I don't--It depends --Like my--This 
-    ## 5     Hassan So, as political science students, does 
+    ## 5  Hassan    So, as political science students, does 
     ## 6  Abd Rabou Less, not mature, they are politically m
-    ## 7     Hassan Since you are an active politician and w
+    ## 7  Hassan    Since you are an active politician and w
     ## 8  Abd Rabou It does somehow. What I do is--First of 
-    ## 9     Hassan But you are characterized with, somehow 
+    ## 9  Hassan    But you are characterized with, somehow 
     ## 10 Abd Rabou So far I didn't get--So far--Maybe it do
-    ## ..       ...                                      ...
+    ## ..      ...                  ...
 
 Pairing textreadr
 -----------------
