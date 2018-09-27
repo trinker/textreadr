@@ -1,0 +1,125 @@
+---
+title: 'Extract Text'
+output: 
+  flexdashboard::flex_dashboard
+runtime: shiny
+---
+
+
+<style type="text/css">
+
+.chart-title {  /* chart_title  */
+   font-size: 150%;
+
+</style>     
+
+
+```{r}
+# rmarkdown::render(
+#     system.file("extract_text_app/app/extract_text.Rmd", package = "textreadr")
+# )
+    
+library(readr)
+library(shinyWidgets)
+library(readr)
+library(readxl)
+library(shiny)
+library(shinyjs)
+library(magrittr)
+library(dplyr)
+library(textreadr)
+````
+
+
+
+
+
+Inputs {.sidebar  data-width=250} 
+-------------------------------------
+
+
+```{r}
+fileInput('file_input', tags$b('Text File'), accept = c('.doc', '.docx', '.pdf', '.rtf', '.html'))
+```
+
+
+
+
+ 
+ 
+```{r}
+mydata <- reactive({
+
+    req(input$file_input)
+    in_file <- input$file_input
+    dplyr::data_frame(text = textreadr::read_document(in_file$datapath))
+
+})
+```
+ 
+    
+    
+
+
+
+
+
+```{r}
+output$downloadData <- downloadHandler(
+    filename = function() {
+         sprintf('text_file_%s.csv', gsub('\\s+', '_', gsub(':', '.', Sys.time())))
+    },
+    content = function(con) {
+
+        dat <- mydata()
+        
+        
+        readr::write_csv(dat, path= con)
+    }
+)
+
+tags$div(
+    uiOutput('next_instructions'),
+    tags$br(),
+    uiOutput('download_ui')
+)
+
+output$download_ui <- renderUI({
+
+    req(mydata())
+    tags$div(
+        HTML('<span style = "color:black;padding-top: 125px;"><b>Download .csv File</b></span>'),
+        downloadButton('downloadData', 'Download')
+    )
+
+})
+
+``` 
+
+
+Column  
+-------------------------------------
+    
+  
+### Uploaded Data (truncated to 50 rows)
+
+    
+    
+```{r}
+
+renderTable({
+    
+    dat <- mydata()
+    
+    dat[] <- lapply(dat, as.character)
+    
+    dat %>%
+        setNames(gsub('___', '_', colnames(.))) %>%
+        head(50)
+
+}, digits = 2)
+
+```
+    
+
+
