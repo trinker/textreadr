@@ -2,6 +2,7 @@
 
 S3method(print,textreadr)
 export(as_transcript)
+export(browse)
 export(download)
 export(peek)
 export(read_dir)

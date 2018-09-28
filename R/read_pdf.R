@@ -71,23 +71,31 @@ read_pdf <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE, ocr = TRU
     text <- pdftools::pdf_text(file, ...)
 
     ## Use ocr if pdf is raster not text
-    if (all(text == '') & isTRUE(ocr)){
+    if (all(text %in% '') & isTRUE(ocr)){
 
-        temp <- tempdir()
-        fls <- file.path(
-            temp,
-            paste0(gsub('\\.pdf$', '', file), '_', pad_left(seq_along(text)), '.png')
-        )
-
-        ## convert to png files for tesseract to interact with
-        png_files <- pdftools::pdf_convert(file, dpi = 600, filenames = fls)
-
-        ## OCR
-        text <- tesseract::ocr(png_files)
-        split <- "\\r\\n|\\n"
-
-        ## clean up and remove the png files
-        unlink(png_files, TRUE, TRUE)
+        if (requireNamespace("tesseract", quietly = TRUE)){
+            
+            temp <- tempdir()
+            fls <- file.path(
+                temp,
+                paste0(gsub('\\.pdf$', '', basename(file)), '_', pad_left(seq_along(text)), '.png')
+            )
+   
+            ## convert to png files for tesseract to interact with
+            png_files <- pdftools::pdf_convert(file, dpi = 600, filenames = fls)
+    
+            ## OCR
+            text <- tesseract::ocr(png_files)
+            split <- "\\r\\n|\\n"
+    
+            ## clean up and remove the png files
+            unlink(png_files, TRUE, TRUE)
+            
+        } else {
+            
+            warning('\'tesseract\' not available.  `ocr = TRUE` ignored.', call. = FALSE)
+            
+        }
 
     } else {
 

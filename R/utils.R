@@ -57,16 +57,7 @@ pad_left <- function(x, len = 1 + max(nchar(x)), char = '0'){
     }))
 }
 
-open_path <- function (x = ".") {
-    if (.Platform["OS.type"] == "windows") {
-        invisible(lapply(x, shell.exec))
-    }
-    else {
-        invisible(lapply(x, function(x) {
-            system(paste(Sys.getenv("R_BROWSER"), x))
-        }))
-    }
-}
+
 
 
 # combine_tot <-

@@ -27,7 +27,9 @@ Table of Contents
 -   [Contact](#contact)
 -   [Demonstration](#demonstration)
     -   [Load the Packages/Data](#load-the-packagesdata)
-    -   [Download](#download)
+    -   [Download & Browse](#download-browse)
+        -   [Download](#download)
+        -   [Browse](#browse)
     -   [Generic Document Reading](#generic-document-reading)
     -   [Read Directory Contents](#read-directory-contents)
     -   [Read .docx](#read-docx)
@@ -203,6 +205,16 @@ Load the Packages/Data
     pacman::p_load(textreadr, magrittr)
     pacman::p_load_gh("trinker/pathr")
 
+    ## package 'Rook' successfully unpacked and MD5 sums checked
+    ## package 'downloader' successfully unpacked and MD5 sums checked
+    ## package 'influenceR' successfully unpacked and MD5 sums checked
+    ## package 'rgexf' successfully unpacked and MD5 sums checked
+    ## package 'DiagrammeR' successfully unpacked and MD5 sums checked
+    ## package 'data.tree' successfully unpacked and MD5 sums checked
+    ## 
+    ## The downloaded binary packages are in
+    ##  C:\Users\trinker\AppData\Local\Temp\RtmpgVzUqi\downloaded_packages
+
     trans_docs <- dir(
         system.file("docs", package = "textreadr"), 
         pattern = "^trans",
@@ -221,8 +233,13 @@ Load the Packages/Data
 
     pdf_doc_img <- system.file("docs/McCune2002Choi2010.pdf", package = "textreadr")
 
-Download
---------
+Download & Browse
+-----------------
+
+The `download` and `browse` functions are utilities for downloading and
+opening files and directories.
+
+### Download
 
 `download` is simply a wrapper for `curl::curl_download` that allows
 multiple documents to be download, has the `tempdir` pre-set as the
@@ -236,11 +253,25 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\Tyler\AppData\Local\Temp\RtmpmKFBUe
+    ## pres.deb1.docx read into C:\Users\trinker\AppData\Local\Temp\RtmpgVzUqi
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
     ## [3] "LEHRER: And what about the vouchers?"
+
+### Browse
+
+`browse` is a system dependent tool for opening files and directories.
+In the example below we open the directory that contains the example
+documents used in this README.
+
+    system.file("docs", package = "textreadr") %>%
+        browse()
+
+We can open files as well:
+
+    html_doc %>%
+        browse()
 
 Generic Document Reading
 ------------------------
@@ -324,26 +355,26 @@ in **textreadr**'s system file:
 
     levelName
     pos          
-      Â¦--0_9.txt  
-      Â¦--1_7.txt  
-      Â¦--10_9.txt 
-      Â¦--11_9.txt 
-      Â¦--12_9.txt 
-      Â¦--13_7.txt 
-      Â¦--14_10.txt
-      Â¦--15_7.txt 
-      Â¦--16_7.txt 
-      Â¦--17_9.txt 
-      Â¦--18_7.txt 
-      Â¦--19_10.txt
-      Â¦--2_9.txt  
-      Â¦--3_10.txt 
-      Â¦--4_8.txt  
-      Â¦--5_10.txt 
-      Â¦--6_10.txt 
-      Â¦--7_7.txt  
-      Â¦--8_7.txt  
-      Â°--9_7.txt
+      |--0_9.txt  
+      |--1_7.txt  
+      |--10_9.txt 
+      |--11_9.txt 
+      |--12_9.txt 
+      |--13_7.txt 
+      |--14_10.txt
+      |--15_7.txt 
+      |--16_7.txt 
+      |--17_9.txt 
+      |--18_7.txt 
+      |--19_10.txt
+      |--2_9.txt  
+      |--3_10.txt 
+      |--4_8.txt  
+      |--5_10.txt 
+      |--6_10.txt 
+      |--7_7.txt  
+      |--8_7.txt  
+      \--9_7.txt
 
 Here we have read the files in, one row per file.
 
@@ -482,7 +513,7 @@ allows the user to read in image based .pdf files and allow the
 the heavy lifting in the backend. You can look at the .pdf we'll be
 using by running:
 
-    textreadr:::open_path(pdf_doc_img)
+    browse(pdf_doc_img)
 
 First let's try the task without using OCR.
 

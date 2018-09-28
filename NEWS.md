@@ -19,24 +19,9 @@ And constructed with the following guidelines:
 
 
 
-textreadr 0.9.0 - 
+
+textreadr 0.8.0 - 0.9.0
 ----------------------------------------------------------------
-
-**BUG FIXES**
-
-**NEW FEATURES**
-
-**MINOR FEATURES**
-
-**IMPROVEMENTS**
-
-**CHANGES**
-
-
-
-textreadr 0.8.0 - 0.8.1
-----------------------------------------------------------------
-
 
 **NEW FEATURES**
 
@@ -48,6 +33,8 @@ textreadr 0.8.0 - 0.8.1
   ,pdf files in order to extract the text.  For this task optical character
   recognition (OCR) is required.  The **tesseract** package provides the backend
   for processing these types of .pdfs.
+  
+* `browse` added to open files and directories.
 
 
 textreadr 0.6.0 - 0.7.0
