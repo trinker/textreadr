@@ -1,6 +1,6 @@
 Package: textreadr
 Title: Read Text Documents into R
-Version: 0.9.0
+Version: 0.9.1
 Authors@R: c(person("Tyler", "Rinker", email = "tyler.rinker@gmail.com", role = c("aut", "cre")),
            person("Bryan", "Goodrich", role = "ctb"), person("Dason", "Kurkiewicz", role = "ctb"))
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>

@@ -86,17 +86,18 @@ read_pdf <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE, ocr = TRU
     
             ## OCR
             text <- tesseract::ocr(png_files)
-            split <- "\\r\\n|\\n"
     
             ## clean up and remove the png files
             unlink(png_files, TRUE, TRUE)
             
         } else {
             
-            warning('\'tesseract\' not available.  `ocr = TRUE` ignored.', call. = FALSE)
+            warning('\'tesseract\' not available.  `ocr = TRUE` ignored.\n\nPlease use `install.packages(\'tesseract\')` and then retry.', call. = FALSE)
             
         }
 
+        split <- "\\r\\n|\\n"
+        
     } else {
 
         split <- "\\r\\n"

@@ -20,6 +20,22 @@ And constructed with the following guidelines:
 
 
 
+textreadr 0.9.1 - 
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+* `read_pdf` threw an error when `ocr = TRUE` but the **tesseract** package was 
+  unavailable.  This has been fixed.
+
+**NEW FEATURES**
+
+**MINOR FEATURES**
+
+**IMPROVEMENTS**
+
+**CHANGES**
+
 textreadr 0.8.0 - 0.9.0
 ----------------------------------------------------------------
 
