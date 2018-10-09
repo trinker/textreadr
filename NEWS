@@ -30,6 +30,9 @@ BUG FIXES
 
 NEW FEATURES
 
+* `un_zip` & `un_tar` added as convenience functiosn (wrapper for `?utils::unzip` 
+  & `?utils::untar`) to make the functions more pipe-able.
+
 MINOR FEATURES
 
 IMPROVEMENTS

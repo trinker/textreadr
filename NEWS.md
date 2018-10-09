@@ -30,11 +30,16 @@ textreadr 0.9.1 -
 
 **NEW FEATURES**
 
+* `un_zip` & `un_tar` added as convenience functiosn (wrapper for `?utils::unzip` 
+  & `?utils::untar`) to make the functions more pipe-able.
+
 **MINOR FEATURES**
 
 **IMPROVEMENTS**
 
 **CHANGES**
+
+
 
 textreadr 0.8.0 - 0.9.0
 ----------------------------------------------------------------

@@ -4,8 +4,8 @@
 \alias{read_dir}
 \title{Read In Multiple Files From a Directory}
 \usage{
-read_dir(path, pattern = NULL, doc.col = "document",
-  all.files = FALSE, recursive = FALSE, ignore.case = FALSE, ...)
+read_dir(path, pattern = NULL, doc.col = "document", all.files = FALSE,
+  recursive = FALSE, ignore.case = FALSE, ...)
 }
 \arguments{
 \item{path}{Path to the directory.}

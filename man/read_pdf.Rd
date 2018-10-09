@@ -4,8 +4,8 @@
 \alias{read_pdf}
 \title{Read a Portable Document Format into R}
 \usage{
-read_pdf(file, skip = 0, remove.empty = TRUE, trim = TRUE,
-  ocr = TRUE, ...)
+read_pdf(file, skip = 0, remove.empty = TRUE, trim = TRUE, ocr = TRUE,
+  ...)
 }
 \arguments{
 \item{file}{A path to a PDF file.}
