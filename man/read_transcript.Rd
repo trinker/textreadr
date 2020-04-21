@@ -4,10 +4,24 @@
 \alias{read_transcript}
 \title{Read Transcripts Into R}
 \usage{
-read_transcript(file, col.names = c("Person", "Dialogue"), text.var = NULL,
-  merge.broke.tot = TRUE, header = FALSE, dash = "", ellipsis = "...",
-  quote2bracket = FALSE, rm.empty.rows = TRUE, na = "", sep = NULL,
-  skip = 0, text, comment.char = "", max.person.nchar = 20, ...)
+read_transcript(
+  file,
+  col.names = c("Person", "Dialogue"),
+  text.var = NULL,
+  merge.broke.tot = TRUE,
+  header = FALSE,
+  dash = "",
+  ellipsis = "...",
+  quote2bracket = FALSE,
+  rm.empty.rows = TRUE,
+  na = "",
+  sep = NULL,
+  skip = 0,
+  text,
+  comment.char = "",
+  max.person.nchar = 20,
+  ...
+)
 }
 \arguments{
 \item{file}{The name of the file which the data are to be read from. Each row

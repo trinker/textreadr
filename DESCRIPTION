@@ -11,6 +11,6 @@ Imports: antiword, curl, data.table, pdftools, readxl, rvest, striprtf, textshap
 License: GPL-2
 LazyData: TRUE
 Roxygen: list(wrap = FALSE)
-RoxygenNote: 6.1.0
+RoxygenNote: 7.1.0
 BugReports: https://github.com/trinker/textreadr/issues?state=open
 URL: https://github.com/trinker/textreadr

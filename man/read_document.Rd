@@ -4,8 +4,16 @@
 \alias{read_document}
 \title{Generic Function to Read in a Document}
 \usage{
-read_document(file, skip = 0, remove.empty = TRUE, trim = TRUE,
-  combine = FALSE, format = FALSE, ocr = TRUE, ...)
+read_document(
+  file,
+  skip = 0,
+  remove.empty = TRUE,
+  trim = TRUE,
+  combine = FALSE,
+  format = FALSE,
+  ocr = TRUE,
+  ...
+)
 }
 \arguments{
 \item{file}{The path to the a .pdf, .txt, .html, .rtf, .docx, or .doc file.}

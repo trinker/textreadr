@@ -4,11 +4,26 @@
 \alias{read_dir_transcript}
 \title{Read In Multiple Transcript Files From a Directory}
 \usage{
-read_dir_transcript(path, col.names = c("Document", "Person", "Dialogue"),
-  pattern = NULL, all.files = FALSE, recursive = FALSE, skip = 0,
-  merge.broke.tot = TRUE, header = FALSE, dash = "", ellipsis = "...",
-  quote2bracket = FALSE, rm.empty.rows = TRUE, na = "", sep = NULL,
-  comment.char = "", max.person.nchar = 20, ignore.case = FALSE, ...)
+read_dir_transcript(
+  path,
+  col.names = c("Document", "Person", "Dialogue"),
+  pattern = NULL,
+  all.files = FALSE,
+  recursive = FALSE,
+  skip = 0,
+  merge.broke.tot = TRUE,
+  header = FALSE,
+  dash = "",
+  ellipsis = "...",
+  quote2bracket = FALSE,
+  rm.empty.rows = TRUE,
+  na = "",
+  sep = NULL,
+  comment.char = "",
+  max.person.nchar = 20,
+  ignore.case = FALSE,
+  ...
+)
 }
 \arguments{
 \item{path}{Path to the directory.}

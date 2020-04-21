@@ -4,8 +4,7 @@
 \alias{read_doc}
 \title{Read in .doc Content}
 \usage{
-read_doc(file, skip = 0, remove.empty = TRUE, trim = TRUE,
-  format = FALSE, ...)
+read_doc(file, skip = 0, remove.empty = TRUE, trim = TRUE, format = FALSE, ...)
 }
 \arguments{
 \item{file}{The path to the .doc file.}

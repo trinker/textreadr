@@ -4,11 +4,24 @@
 \alias{as_transcript}
 \title{Coerce Text toTranscripts Into R}
 \usage{
-as_transcript(text, person.regex = NULL, col.names = c("Person",
-  "Dialogue"), text.var = NULL, merge.broke.tot = TRUE, header = FALSE,
-  dash = "", ellipsis = "...", quote2bracket = FALSE,
-  rm.empty.rows = TRUE, na = "", sep = NULL, skip = 0,
-  comment.char = "", max.person.nchar = 20, ...)
+as_transcript(
+  text,
+  person.regex = NULL,
+  col.names = c("Person", "Dialogue"),
+  text.var = NULL,
+  merge.broke.tot = TRUE,
+  header = FALSE,
+  dash = "",
+  ellipsis = "...",
+  quote2bracket = FALSE,
+  rm.empty.rows = TRUE,
+  na = "",
+  sep = NULL,
+  skip = 0,
+  comment.char = "",
+  max.person.nchar = 20,
+  ...
+)
 }
 \arguments{
 \item{text}{Character string: if file is not supplied and this is, then data
