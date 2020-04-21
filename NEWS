@@ -27,6 +27,9 @@ BUG FIXES
 
 * `read_pdf` threw an error when `ocr = TRUE` but the **tesseract** package was 
   unavailable.  This has been fixed.
+  
+* `Read_xxx` functions failed when a URL was provided for the path.  This behavior 
+  has been corrected.  Thanks to Brent Brewington for the spot in issue #18.
 
 NEW FEATURES
 

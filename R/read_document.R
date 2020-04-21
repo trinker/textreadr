@@ -61,10 +61,17 @@
 read_document <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE,
     combine = FALSE, format = FALSE, ocr = TRUE, ...){
 
-    if (grepl('^([fh]ttp)', file)){
+    filetype <- tools::file_ext(file)
+        
+    if (!filetype %in% c('pdf', 'docx', 'doc',  'rtf', 'html', 'txt') && grepl('^([fh]ttp)', file)){
         filetype <- 'html'
     } else {
-        filetype <- tools::file_ext(file)
+     
+        if (filetype %in% c('docx', 'doc')){
+            
+            file <- download(file)
+
+        }
         filetype <- ifelse(filetype %in% c('php', 'htm'), 'html', filetype)
     }
 
