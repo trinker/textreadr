@@ -4,22 +4,12 @@
 \alias{read_docx}
 \title{Read in .docx Content}
 \usage{
-read_docx(
-  file,
-  skip = 0,
-  nodetag = "//w:p",
-  remove.empty = TRUE,
-  trim = TRUE,
-  ...
-)
+read_docx(file, skip = 0, remove.empty = TRUE, trim = TRUE, ...)
 }
 \arguments{
 \item{file}{The path to the .docx file.}
 
 \item{skip}{The number of lines to skip.}
-
-\item{nodetag}{The .docx XML style node tag to grab.  Defaults to paragraphs
-('//w:p').  The word run ('//w:r') and text ('//w:t') tags are also useful.}
 
 \item{remove.empty}{logical.  If \code{TRUE} empty elements in the vector are
 removed.}

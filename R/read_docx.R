@@ -4,8 +4,6 @@
 #'
 #' @param file The path to the .docx file.
 #' @param skip The number of lines to skip.
-#' @param nodetag The .docx XML style node tag to grab.  Defaults to paragraphs
-#' ('//w:p').  The word run ('//w:r') and text ('//w:t') tags are also useful.
 #' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are
 #' removed.
 #' @param trim logical.  If \code{TRUE} the leading/training white space is
@@ -21,7 +19,7 @@
 #' file <- download(url)
 #' (txt <- read_docx(file))
 #' }
-read_docx <- function (file, skip = 0, nodetag = "//w:p", remove.empty = TRUE, trim = TRUE, ...) {
+read_docx <- function (file, skip = 0, remove.empty = TRUE, trim = TRUE, ...) {
 
     ## create temp dir
     tmp <- tempfile()
@@ -38,8 +36,10 @@ read_docx <- function (file, skip = 0, nodetag = "//w:p", remove.empty = TRUE, t
     doc <- xml2::read_xml(xmlfile)
 
     ## extract the content
-    nodeSet <- xml2::xml_find_all(doc, nodetag)
-    pvalues <- xml2::xml_text(nodeSet)
+    children <- lapply(xml2::xml_find_all(doc, '//w:p'), xml2::xml_children)
+    pvalues <- unlist(lapply(children, function(x) {
+        paste(xml2::xml_text(xml2::xml_find_all(x, 'w:t')), collapse = ' ')
+    }))
 
     ## formatting
     if (isTRUE(remove.empty)) pvalues <- pvalues[!grepl("^\\s*$", pvalues)]

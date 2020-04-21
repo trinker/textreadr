@@ -37,6 +37,10 @@ MINOR FEATURES
 
 IMPROVEMENTS
 
+* `read_docx` would return non-text, formatting information.  Issue #19 provides 
+  a demonstration of this issue.  THis behavior has been corrected to grab text 
+  (w:t) tags with paragraphs (w:p).
+
 CHANGES
 
 
