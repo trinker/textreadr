@@ -72,7 +72,7 @@ read_document <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE,
             file <- download(file)
 
         }
-        filetype <- ifelse(filetype %in% c('php', 'htm'), 'html', filetype)
+        filetype <- ifelse(filetype %in% c('php', 'htm', 'xml'), 'html', filetype)
     }
 
     fun <- switch(filetype,

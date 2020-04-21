@@ -13,6 +13,7 @@
 #' @param \dots Other arguments passed to \code{\link[xml2]{read_html}}.
 #' @return Returns a character vector.
 #' @keywords html
+#' @rdname read_html
 #' @export
 #' @references The xpath is taken from Tony Breyal's response on StackOverflow:
 #' \url{http://stackoverflow.com/questions/3195522/is-there-a-simple-way-in-r-to-extract-only-the-text-elements-of-an-html-page/3195926#3195926}
@@ -48,3 +49,7 @@ read_html <- function (file, skip = 0, remove.empty = TRUE, trim = TRUE, ...) {
     pvalues
 
 }
+
+#' @rdname read_html
+#' @export
+read_xml <- read_html

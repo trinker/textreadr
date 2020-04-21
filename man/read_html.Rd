@@ -2,9 +2,12 @@
 % Please edit documentation in R/read_html.R
 \name{read_html}
 \alias{read_html}
+\alias{read_xml}
 \title{Read in .html Content}
 \usage{
 read_html(file, skip = 0, remove.empty = TRUE, trim = TRUE, ...)
+
+read_xml(file, skip = 0, remove.empty = TRUE, trim = TRUE, ...)
 }
 \arguments{
 \item{file}{The path to the .html file.}

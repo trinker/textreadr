@@ -38,6 +38,8 @@ NEW FEATURES
 
 MINOR FEATURES
 
+* `read_xml` basic functionality added and part of `read_document`.
+
 IMPROVEMENTS
 
 * `read_docx` would return non-text, formatting information.  Issue #19 provides 
