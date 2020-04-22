@@ -25,6 +25,13 @@
 read_doc <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE,
     format = FALSE, ...){
 
+    filetype <- tools::file_ext(file)
+    if (filetype %in% c('doc') && grepl('^([fh]ttp)', file)){
+
+        file <- download(file)
+
+    }   
+    
     ## use antiword package to read in the text
     text <- strsplit(antiword::antiword(file, format = format, ...), '\r\n', fixed = TRUE)[[1]]
 

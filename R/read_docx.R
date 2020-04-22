@@ -21,6 +21,13 @@
 #' }
 read_docx <- function (file, skip = 0, remove.empty = TRUE, trim = TRUE, ...) {
 
+    filetype <- tools::file_ext(file)
+    if (filetype %in% c('docx') && grepl('^([fh]ttp)', file)){
+
+        file <- download(file)
+
+    }   
+
     ## create temp dir
     tmp <- tempfile()
     if (!dir.create(tmp)) stop("Temporary directory could not be established.")

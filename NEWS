@@ -36,6 +36,8 @@ NEW FEATURES
 * `un_zip` & `un_tar` added as convenience functions (wrapper for `?utils::unzip` 
   & `?utils::untar`) to make the functions more pipe-able.
 
+* `read_pptx` added to read in .pptx files.
+
 MINOR FEATURES
 
 * `read_xml` basic functionality added and part of `read_document`.

@@ -95,6 +95,7 @@ doc_doc <- system.file("docs/Yasmine_Interview_Transcript.doc", package = "textr
 pdf_doc <- system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr")
 html_doc <- system.file('docs/textreadr_creed.html', package = "textreadr")
 txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
+pptx_doc <- system.file('docs/Hello_World.pptx', package = "textreadr")
 
 rtf_doc <- download(
     'https://raw.githubusercontent.com/trinker/textreadr/master/inst/docs/trans7.rtf'
@@ -168,6 +169,10 @@ txt_doc %>%
     read_document() %>%
     paste(collapse = "\n") %>%
     cat()
+
+pptx_doc %>%
+    read_document() %>%
+    head(3)
 ```
 
 
@@ -211,7 +216,7 @@ system.file("docs/Maas2011/pos", package = "textreadr") %>%
 
 ## Read .docx
 
-A .docx file is nothing but a fancy container.  It can be parsed via XML.  The `read_docx` function allows the user to read in a .docx file as plain text.  Elements are essentially the p tags (explicitly `//w:p`) in the markup.  
+A .docx file is nothing but a fancy container.  It can be parsed via XML.  The `read_docx` function allows the user to read in a .docx file as plain text.  Elements are essentially the p tags (explicitly `//w:t` tags collapsed with `//w:p` tags) in the markup.  
 
 ```{r}
 docx_doc %>%
@@ -304,6 +309,17 @@ pdf_doc_img %>%
 ## 10 1       10         such as clustering, classi<U+FB01>cation, etc. 
 ## .. ...     ...        ... 
 ```
+
+## Read .pptx
+
+A .pptx file is also nothing but a fancy container.  Likewise, it can be parsed via XML.  The `read_pptx` function allows the user to read in a .pptx file as a data.frame plain text that tracks slide id numbers.    
+
+```{r}
+pptx_doc %>%
+    r
+```
+
+
 ## Read .html
 
 Often a researcher only wishes to grab the text from the body of .html files.  The `read_html` function does exactly this task.  For finer control over .html scraping the user may investigate the **xml2** & **rvest** packages for parsing .html and .xml files.  Here I read in HTML with `read_html`.  

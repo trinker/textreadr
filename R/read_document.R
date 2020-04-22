@@ -45,7 +45,11 @@
 #' ## .txt
 #' txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
 #' read_document(txt_doc)
-#'
+#' 
+#' ## .pptx 
+#' pptx_doc <- system.file('docs/Hello_World.pptx', package = "textreadr")
+#' read_document(pptx_doc)
+#' 
 #' ## .rtf
 #' \dontrun{
 #' rtf_doc <- download(
@@ -53,7 +57,7 @@
 #' )
 #' read_document(rtf_doc)
 #' }
-#'
+#' 
 #' \dontrun{
 #' ## URLs
 #' read_document('http://www.talkstats.com/index.php')
@@ -63,16 +67,11 @@ read_document <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE,
 
     filetype <- tools::file_ext(file)
         
-    if (!filetype %in% c('pdf', 'docx', 'doc',  'rtf', 'html', 'txt') && grepl('^([fh]ttp)', file)){
+    if (!filetype %in% c('pdf', 'docx', 'doc',  'rtf', 'html', 'txt', 'pptx') && grepl('^([fh]ttp)', file)){
         filetype <- 'html'
     } else {
      
-        if (filetype %in% c('docx', 'doc')){
-            
-            file <- download(file)
-
-        }
-        filetype <- ifelse(filetype %in% c('php', 'htm', 'xml'), 'html', filetype)
+        filetype <- ifelse(filetype %in% c('php', 'htm'), 'html', filetype)
     }
 
     fun <- switch(filetype,
@@ -81,7 +80,9 @@ read_document <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE,
         doc = {function(x, ...) {read_doc(x, remove.empty = FALSE, trim = FALSE, format=format, ...)}},
         rtf = {function(x, ...) {read_rtf(x, remove.empty = FALSE, trim = FALSE, ...)}},
         html = {function(x, ...) {read_html(x, remove.empty = FALSE, trim = FALSE, ...)}},
+        xml = {function(x, ...) {read_xml(x, remove.empty = FALSE, trim = FALSE, ...)}},        
         txt = {function(x, ...) {suppressWarnings(readLines(x, ...))}},
+        pptx = {function(x, ...) {read_pptx(x, remove.empty = FALSE, trim = FALSE, ...)[["text"]]}},
         {function(x, ...) {suppressWarnings(readLines(x, ...))}}
     )
 
