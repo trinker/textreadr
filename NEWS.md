@@ -1,15 +1,150 @@
-<
->
-NEWSmajor====.NEWSminor====.NEWSpatch====
-BUG FIXES
-NEW FEATURES
-MINOR FEATURES
-CHANGES
-IMPROVEMENTS
- TRUE 
- FALSE 
- NULL 
-TRUE.
-FALSE.
-NULL.
-:m:
+NEWS
+====
+
+Versioning
+----------
+
+Releases will be numbered with the following semantic versioning format:
+
+&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;
+
+And constructed with the following guidelines:
+
+* Breaking backward compatibility bumps the major (and resets the minor
+  and patch)
+* New additions without breaking backward compatibility bumps the minor
+  (and resets the patch)
+* Bug fixes and misc changes bumps the patch
+
+
+
+
+
+textreadr 0.9.1 - 
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+* `read_pdf` threw an error when `ocr = TRUE` but the **tesseract** package was 
+  unavailable.  This has been fixed.
+  
+* `Read_xxx` functions failed when a URL was provided for the path.  This behavior 
+  has been corrected.  Thanks to Brent Brewington for the spot in <a href="https://github.com/trinker/textreadr/issues/18">issue #18</a>.
+
+**NEW FEATURES**
+
+* `un_zip` & `un_tar` added as convenience functions (wrapper for `?utils::unzip` 
+  & `?utils::untar`) to make the functions more pipe-able.
+
+* `read_pptx` added to read in .pptx files.
+
+**MINOR FEATURES**
+
+* `read_xml` basic functionality added and part of `read_document`.
+
+**IMPROVEMENTS**
+
+* `read_docx` would return non-text, formatting information.  Issue #19 provides 
+  a demonstration of this issue.  This behavior has been corrected to grab text 
+  (w:t) tags with paragraphs (w:p).
+
+**CHANGES**
+
+
+
+textreadr 0.8.0 - 0.9.0
+----------------------------------------------------------------
+
+**NEW FEATURES**
+
+* `peek` picks up a `strings.left` argument to align strings to the left.  This
+  is the default because this is a text reading package that deals primarily
+  with strings.
+
+* `read_pdf` picks up an `ocr` argument in order to properly handle image based
+  ,pdf files in order to extract the text.  For this task optical character
+  recognition (OCR) is required.  The **tesseract** package provides the back-end
+  for processing these types of .pdfs.
+  
+* `browse` added to open files and directories.
+
+
+textreadr 0.6.0 - 0.7.0
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+* `read_dir` did not handle errored read-ins correctly resulting in an R error.
+
+**NEW FEATURES**
+
+* `read_document` picks up an explicit `skip`, `remove.empty`, and `trim`
+  argument like the other `read_` functions.
+
+* `read_rtf` added to the document forms that can be parsed.  This relies on the
+  **striprtf** package as a back-end.  `read_document` and `read_transcript` pick
+  up the ability to read rich text format as well.
+
+**MINOR FEATURES**
+
+* `as_transcript` added for coercion of internal strings to transcript.  This
+  function adds the ability to call out the person variable via a regex.  For
+  example one may split after all caps as the leading string.
+
+* `read_dir` and `read_dir_transcript` pick up an `ignore.case` function for pattern.
+  Pattern becomes more powerful in that it was moved outside of the `dir` command
+  via a `grep` call.
+
+
+
+textreadr 0.4.0 - 0.5.1
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+* The README.md called for `ex_` functions from **qdapRegex**.  This was the dev
+  version of **qdapRegex**.  This is now the CRAN version and now works for users.
+
+**NEW FEATURES**
+
+* `read_html` added for reading in the text from the body of .html documents.
+  `read_document` inherits this ability as well.
+
+**MINOR FEATURES**
+
+* The low level read functions all now have consistent arguments: `skip`,
+  `remove.empty`, & `trim` to make their use more interoperable.
+
+**IMPROVEMENTS**
+
+* **textreadr** no longer uses the **antiword** program directly, instead the
+  R antiword package is called for `read_doc`.  This makes installation across
+  operating systems more standardized.
+
+**CHANGES**
+
+* The logo has been moved to tools to conform to CRAN standards.
+
+* `read_doc`'s argument `format` is now `FALSE` by default rather than `TRUE` to
+  be consistent with the other read functions.
+
+* `read_docx` no longer uses the **XML** package but now uses **xml2** as
+  suggested by Jeroen Ooms (see <a href="https://github.com/trinker/textreadr/issues/7">issue #7</a>).
+
+
+
+textreadr 0.3.1
+----------------------------------------------------------------
+
+**NEW FEATURES**
+
+* `read_dir_transcript` added to complement `read_dir` aimed at a directory of
+  transcripts.
+
+
+
+textreadr 0.0.1 - 0.3.0
+----------------------------------------------------------------
+
+This package is a  collection of convenience tools for reading text documents
+into R.
