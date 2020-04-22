@@ -4,7 +4,14 @@
 \alias{read_pptx}
 \title{Read in .pptx Content}
 \usage{
-read_pptx(file, skip = 0, remove.empty = TRUE, trim = TRUE, ...)
+read_pptx(
+  file,
+  skip = 0,
+  remove.empty = TRUE,
+  trim = TRUE,
+  include.notes = FALSE,
+  ...
+)
 }
 \arguments{
 \item{file}{The path to the .pptx file.}
@@ -16,6 +23,8 @@ removed.}
 
 \item{trim}{logical.  If \code{TRUE} the leading/training white space is
 removed.}
+
+\item{include.notes}{logical.  If \code{TRUE} then slide notes are included.}
 
 \item{\dots}{ignored.}
 }
@@ -31,6 +40,10 @@ Read in the content from a .pptx file.
 url <- "https://www.oclc.org/content/dam/research/presentations/2019/111319-godby-NISO-What-Are-Entities-Matter.pptx"
 file <- download(url)
 (txt <- read_pptx(file))
+
+pptx_doc <- system.file('docs/Hello_World.pptx', package = "textreadr")
+read_pptx(pptx_doc)
+read_pptx(pptx_doc, include.notes = TRUE)
 }
 }
 \keyword{pptx}
