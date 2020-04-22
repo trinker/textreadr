@@ -45,7 +45,7 @@ MINOR FEATURES
 IMPROVEMENTS
 
 * `read_docx` would return non-text, formatting information.  Issue #19 provides 
-  a demonstration of this issue.  THis behavior has been corrected to grab text 
+  a demonstration of this issue.  This behavior has been corrected to grab text 
   (w:t) tags with paragraphs (w:p).
 
 CHANGES
@@ -63,7 +63,7 @@ NEW FEATURES
 
 * `read_pdf` picks up an `ocr` argument in order to properly handle image based
   ,pdf files in order to extract the text.  For this task optical character
-  recognition (OCR) is required.  The **tesseract** package provides the backend
+  recognition (OCR) is required.  The **tesseract** package provides the back-end
   for processing these types of .pdfs.
   
 * `browse` added to open files and directories.
@@ -74,7 +74,7 @@ textreadr 0.6.0 - 0.7.0
 
 BUG FIXES
 
-* `read_dir` did not handle errored readins correctly resulting in an R error.
+* `read_dir` did not handle errored read-ins correctly resulting in an R error.
 
 NEW FEATURES
 
@@ -82,7 +82,7 @@ NEW FEATURES
   argument like the other `read_` functions.
 
 * `read_rtf` added to the document forms that can be parsed.  This relies on the
-  **striprtf** package as a backend.  `read_document` and `read_transcript` pick
+  **striprtf** package as a back-end.  `read_document` and `read_transcript` pick
   up the ability to read rich text format as well.
 
 MINOR FEATURES

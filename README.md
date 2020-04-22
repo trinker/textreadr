@@ -1,3 +1,7 @@
+textreadr   
+============
+
+
 ![](tools/textreadr_logo/r_textreadr.png)
 
 [![Project Status: Active - The project has reached a stable, usable
@@ -14,8 +18,10 @@ text documents into R. This is not meant to be an exhaustive collection;
 for more see the [**tm**](https://CRAN.R-project.org/package=tm)
 package.
 
+
 Table of Contents
-=================
+============
+
 -   [Functions](#functions)
 -   [Installation](#installation)
 -   [Contact](#contact)
@@ -26,13 +32,13 @@ Table of Contents
         -   [Browse](#browse)
     -   [Generic Document Reading](#generic-document-reading)
     -   [Read Directory Contents](#read-directory-contents)
-    -   [Read .docx](#read-.docx)
-    -   [Read .doc](#read-.doc)
-    -   [Read .rtf](#read-.rtf)
-    -   [Read .pdf](#read-.pdf)
+    -   [Read .docx](#read-docx)
+    -   [Read .doc](#read-doc)
+    -   [Read .rtf](#read-rtf)
+    -   [Read .pdf](#read-pdf)
         -   [Image Based pdf: OCR](#image-based-pdf-ocr)
-    -   [Read .pptx](#read-.pptx)
-    -   [Read .html](#read-.html)
+    -   [Read .pptx](#read-pptx)
+    -   [Read .html](#read-html)
     -   [Read Transcripts](#read-transcripts)
         -   [docx Simple](#docx-simple)
         -   [docx With Skip](#docx-with-skip)
@@ -43,9 +49,10 @@ Table of Contents
         -   [Reading Text](#reading-text)
         -   [Authentic Interview](#authentic-interview)
     -   [Pairing textreadr](#pairing-textreadr)
-    
+
 Functions
-=========
+============
+
 
 Most jobs in my workflow can be completed with `read_document` and
 `read_dir`. The former generically reads in a .docx, .doc, .pdf, .html,
@@ -184,14 +191,11 @@ the development version:
 Contact
 =======
 
-You are welcome to:
+You are welcome to:    
+- submit suggestions and bug-reports at: <https://github.com/trinker/textreadr/issues>    
+- send a pull request on: <https://github.com/trinker/textreadr/>    
+- compose a friendly e-mail to: <tyler.rinker@gmail.com>    
 
--   submit suggestions and bug-reports at:
-    <a href="https://github.com/trinker/textreadr/issues" class="uri">https://github.com/trinker/textreadr/issues</a>  
--   send a pull request on:
-    <a href="https://github.com/trinker/textreadr/" class="uri">https://github.com/trinker/textreadr/</a>  
--   compose a friendly e-mail to:
-    <a href="mailto:tyler.rinker@gmail.com" class="email">tyler.rinker@gmail.com</a>
 
 Demonstration
 =============
@@ -242,7 +246,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\trinker\AppData\Local\Temp\Rtmp6Rrt4N
+    ## pres.deb1.docx read into C:\Users\trinker\AppData\Local\Temp\RtmpsRIhsW
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -276,23 +280,19 @@ done. Below I demonstrate reading each of these five file formats with
         read_document() %>%
         head(3)
 
-    ## [1] "JRMC2202 Audio  Project"      "Interview Transcript"        
-    ## [3] "Interviewer:  Yasmine Hassan"
+    ## [1] "JRMC2202 Audio  Project"      "Interview Transcript"         "Interviewer:  Yasmine Hassan"
 
     doc_doc %>%
         read_document() %>%
         head(3)
 
-    ## [1] "JRMC2202 Audio Project"      "Interview Transcript"       
-    ## [3] "Interviewer: Yasmine Hassan"
+    ## [1] "JRMC2202 Audio Project"      "Interview Transcript"        "Interviewer: Yasmine Hassan"
 
     rtf_doc %>%
         read_document() %>%
         head(3)
 
-    ## [1] "Researcher 2:\tOctober 7, 1892."          
-    ## [2] "Teacher 4:\tStudents it’s time to learn." 
-    ## [3] "[Student discussion; unintelligible]"
+    ## [1] "Researcher 2:\tOctober 7, 1892."           "Teacher 4:\tStudents it’s time to learn."  "[Student discussion; unintelligible]"
 
     pdf_doc %>%
         read_document() %>%
@@ -414,8 +414,7 @@ collapsed with `//w:p` tags) in the markup.
         read_docx() %>%
         head(3)
 
-    ## [1] "JRMC2202 Audio  Project"      "Interview Transcript"        
-    ## [3] "Interviewer:  Yasmine Hassan"
+    ## [1] "JRMC2202 Audio  Project"      "Interview Transcript"         "Interviewer:  Yasmine Hassan"
 
     docx_doc %>%
         read_docx(15) %>%
@@ -437,8 +436,7 @@ way.
         read_doc() %>%
         head()
 
-    ## [1] "JRMC2202 Audio Project"      "Interview Transcript"       
-    ## [3] "Interviewer: Yasmine Hassan" "Narrator: Ahmad Abd Rabou"  
+    ## [1] "JRMC2202 Audio Project"      "Interview Transcript"        "Interviewer: Yasmine Hassan" "Narrator: Ahmad Abd Rabou"  
     ## [5] "Date: 16/10/2014"            "Place: Narrator's office"
 
     doc_doc %>%
@@ -620,8 +618,7 @@ handles. These are the files that will be read in:
 
     basename(trans_docs)
 
-    ## [1] "trans1.docx" "trans2.docx" "trans3.docx" "trans4.xlsx" "trans5.xls" 
-    ## [6] "trans6.doc"  "transcripts"
+    ## [1] "trans1.docx" "trans2.docx" "trans3.docx" "trans4.xlsx" "trans5.xls"  "trans6.doc"  "trans7.rtf"  "transcripts"
 
 ### docx Simple
 
@@ -818,13 +815,13 @@ I demonstrate pairings with
     p_load_current_gh(file.path('trinker', c('textreadr', 'textshape', 'textclean')))
 
     ## 
-    ##          checking for file 'C:\Users\trinker\AppData\Local\Temp\Rtmp6Rrt4N\remotes43b064da640\trinker-textreadr-e7d0bd6/DESCRIPTION' ...  v  checking for file 'C:\Users\trinker\AppData\Local\Temp\Rtmp6Rrt4N\remotes43b064da640\trinker-textreadr-e7d0bd6/DESCRIPTION'
-    ##       -  preparing 'textreadr': (463ms)
-    ##    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   v  checking DESCRIPTION meta-information
+    ##          checking for file 'C:\Users\trinker\AppData\Local\Temp\RtmpsRIhsW\remotes1bec16a84326\trinker-textreadr-b006057/DESCRIPTION' ...  v  checking for file 'C:\Users\trinker\AppData\Local\Temp\RtmpsRIhsW\remotes1bec16a84326\trinker-textreadr-b006057/DESCRIPTION'
+    ##       -  preparing 'textreadr': (416ms)
+    ##    checking DESCRIPTION meta-information ...  v  checking DESCRIPTION meta-information
     ##       -  checking for LF line-endings in source and make files and shell scripts
     ##       -  checking for empty or unneeded directories
     ##       -  looking to see if a 'data/datalist' file should be added
-    ##       -  building 'textreadr_0.9.3.tar.gz'
+    ##       -  building 'textreadr_0.9.4.tar.gz'
     ##      
     ## 
 
@@ -856,8 +853,7 @@ I demonstrate pairings with
         {.[sapply(., function(x) all(length(x) > 1 | !is.na(x)))]}
 
     ## $`24`
-    ## [1] " Townsend v. Sain"        " Simpson v. Florida"     
-    ## [3] "McNally v. United States" "United States v. Gray"   
+    ## [1] " Townsend v. Sain"        " Simpson v. Florida"      "McNally v. United States" "United States v. Gray"   
     ## 
     ## $`30`
     ## [1] "Edward V. Heck"
@@ -869,39 +865,26 @@ I demonstrate pairings with
     ## [1] "Pulliam v. Allen"   "Burnett v. Grattan"
     ## 
     ## $`40`
-    ##  [1] " United States v. Knox"                                           
-    ##  [2] "Lassiter v. Department of Social Services"                        
-    ##  [3] "Arkansas v. Tennessee"                                            
-    ##  [4] "Utah v. United States"                                            
-    ##  [5] "Johnson v. United States"                                         
-    ##  [6] "Baldonado v. California"                                          
-    ##  [7] "Conway v. California Adult Authority"                             
-    ##  [8] "Wheaton v. California"                                            
-    ##  [9] "Maxwell v. Bishop"                                                
-    ## [10] "National Labor Relations Board v. United Insurance Co. of America"
-    ## [11] "United States v. King"                                            
-    ## [12] "National Labor Relations Board v. United Insurance Co. of America"
+    ##  [1] " United States v. Knox"                                            "Lassiter v. Department of Social Services"                        
+    ##  [3] "Arkansas v. Tennessee"                                             "Utah v. United States"                                            
+    ##  [5] "Johnson v. United States"                                          "Baldonado v. California"                                          
+    ##  [7] "Conway v. California Adult Authority"                              "Wheaton v. California"                                            
+    ##  [9] "Maxwell v. Bishop"                                                 "National Labor Relations Board v. United Insurance Co. of America"
+    ## [11] "United States v. King"                                             "National Labor Relations Board v. United Insurance Co. of America"
     ## [13] "United States v. King"                                            
     ## 
     ## $`44`
-    ## [1] "Grisham v. Hagan"                   "McElroy v. Guagliardo"             
-    ## [3] "Virginia Supreme Court v. Friedman"
+    ## [1] "Grisham v. Hagan"                   "McElroy v. Guagliardo"              "Virginia Supreme Court v. Friedman"
     ## 
     ## $`48`
-    ## [1] "Baker v. Carr"                     "Gray v. Sanders"                  
-    ## [3] " Patterson v. McLean Credit Union"
+    ## [1] "Baker v. Carr"                     "Gray v. Sanders"                   " Patterson v. McLean Credit Union"
     ## 
     ## $`53`
     ## [1] "Bates v. Arizona State Bar"
     ## 
     ## $`57`
-    ## [1] "New York Gaslight Club, Inc. v. Carey"
-    ## [2] "Pruneyard Shopping Center v. Robins"  
+    ## [1] "New York Gaslight Club, Inc. v. Carey" "Pruneyard Shopping Center v. Robins"  
     ## 
     ## $`58`
-    ## [1] "Mobile v. Bolden"                            
-    ## [2] "Williams v. Brown"                           
-    ## [3] "United States v. Havens"                     
-    ## [4] "Parratt v. Taylor"                           
-    ## [5] "Dougherty County Board of Education v. White"
-    ## [6] "Jenkins v. Anderson"
+    ## [1] "Mobile v. Bolden"                             "Williams v. Brown"                            "United States v. Havens"                     
+    ## [4] "Parratt v. Taylor"                            "Dougherty County Board of Education v. White" "Jenkins v. Anderson"
