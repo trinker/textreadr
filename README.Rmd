@@ -321,7 +321,7 @@ pdf_doc_img %>%
 
 ## Read .pptx
 
-A .pptx file is also nothing but a fancy container.  Likewise, it can be parsed via XML.  The `read_pptx` function allows the user to read in a .pptx file as a data.frame plain text that tracks slide id numbers.    
+Like the .docx, a .pptx file is also nothing but a fancy container.  Likewise, it can be parsed via XML.  The `read_pptx` function allows the user to read in a .pptx file as a data.frame with plain text that tracks slide id numbers.    
 
 ```{r}
 pptx_doc %>%

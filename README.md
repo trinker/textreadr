@@ -242,7 +242,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\trinker\AppData\Local\Temp\RtmpC6BhsR
+    ## pres.deb1.docx read into C:\Users\trinker\AppData\Local\Temp\Rtmp6Rrt4N
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -548,9 +548,10 @@ default behavior of `read_pdf`.
 Read .pptx
 ----------
 
-A .pptx file is also nothing but a fancy container. Likewise, it can be
-parsed via XML. The `read_pptx` function allows the user to read in a
-.pptx file as a data.frame plain text that tracks slide id numbers.
+Like the .docx, a .pptx file is also nothing but a fancy container.
+Likewise, it can be parsed via XML. The `read_pptx` function allows the
+user to read in a .pptx file as a data.frame with plain text that tracks
+slide id numbers.
 
     pptx_doc %>%
         read_pptx()
@@ -620,7 +621,7 @@ handles. These are the files that will be read in:
     basename(trans_docs)
 
     ## [1] "trans1.docx" "trans2.docx" "trans3.docx" "trans4.xlsx" "trans5.xls" 
-    ## [6] "trans6.doc"  "trans7.rtf"  "transcripts"
+    ## [6] "trans6.doc"  "transcripts"
 
 ### docx Simple
 
@@ -817,9 +818,9 @@ I demonstrate pairings with
     p_load_current_gh(file.path('trinker', c('textreadr', 'textshape', 'textclean')))
 
     ## 
-    ##          checking for file 'C:\Users\trinker\AppData\Local\Temp\RtmpC6BhsR\remotes559c7550740e\trinker-textreadr-992eaac/DESCRIPTION' ...  v  checking for file 'C:\Users\trinker\AppData\Local\Temp\RtmpC6BhsR\remotes559c7550740e\trinker-textreadr-992eaac/DESCRIPTION'
+    ##          checking for file 'C:\Users\trinker\AppData\Local\Temp\Rtmp6Rrt4N\remotes43b064da640\trinker-textreadr-e7d0bd6/DESCRIPTION' ...  v  checking for file 'C:\Users\trinker\AppData\Local\Temp\Rtmp6Rrt4N\remotes43b064da640\trinker-textreadr-e7d0bd6/DESCRIPTION'
     ##       -  preparing 'textreadr': (463ms)
-    ##    checking DESCRIPTION meta-information ...  v  checking DESCRIPTION meta-information
+    ##    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   v  checking DESCRIPTION meta-information
     ##       -  checking for LF line-endings in source and make files and shell scripts
     ##       -  checking for empty or unneeded directories
     ##       -  looking to see if a 'data/datalist' file should be added
