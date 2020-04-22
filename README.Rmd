@@ -278,10 +278,19 @@ browse(pdf_doc_img)
 
 First let's try the task without using OCR.
 
-```{r}
+```{r, eval = FALSE}
 pdf_doc_img %>%
     read_pdf(ocr = FALSE)
 ```
+
+```r
+## Table: [0 x 3]
+## 
+## [1] page_id    element_id text      
+## <0 rows> (or 0-length row.names)
+## ... ...        ...        ...
+```
+
 
 And now using OCR via **tesseract**.  Note that `ocr = TRUE` is the default behavior of `read_pdf`.
 
@@ -316,7 +325,7 @@ A .pptx file is also nothing but a fancy container.  Likewise, it can be parsed 
 
 ```{r}
 pptx_doc %>%
-    r
+    read_pptx()
 ```
 
 

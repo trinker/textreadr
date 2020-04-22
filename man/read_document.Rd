@@ -72,6 +72,10 @@ read_document(doc_doc)
 txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
 read_document(txt_doc)
 
+## .pptx 
+pptx_doc <- system.file('docs/Hello_World.pptx', package = "textreadr")
+read_document(pptx_doc)
+
 ## .rtf
 \dontrun{
 rtf_doc <- download(

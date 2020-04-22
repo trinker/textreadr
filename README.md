@@ -1,7 +1,3 @@
-textreadr   
-============
-
-
 ![](tools/textreadr_logo/r_textreadr.png)
 
 [![Project Status: Active - The project has reached a stable, usable
@@ -18,10 +14,8 @@ text documents into R. This is not meant to be an exhaustive collection;
 for more see the [**tm**](https://CRAN.R-project.org/package=tm)
 package.
 
-
 Table of Contents
-============
-
+=================
 -   [Functions](#functions)
 -   [Installation](#installation)
 -   [Contact](#contact)
@@ -32,12 +26,13 @@ Table of Contents
         -   [Browse](#browse)
     -   [Generic Document Reading](#generic-document-reading)
     -   [Read Directory Contents](#read-directory-contents)
-    -   [Read .docx](#read-docx)
-    -   [Read .doc](#read-doc)
-    -   [Read .rtf](#read-rtf)
-    -   [Read .pdf](#read-pdf)
+    -   [Read .docx](#read-.docx)
+    -   [Read .doc](#read-.doc)
+    -   [Read .rtf](#read-.rtf)
+    -   [Read .pdf](#read-.pdf)
         -   [Image Based pdf: OCR](#image-based-pdf-ocr)
-    -   [Read .html](#read-html)
+    -   [Read .pptx](#read-.pptx)
+    -   [Read .html](#read-.html)
     -   [Read Transcripts](#read-transcripts)
         -   [docx Simple](#docx-simple)
         -   [docx With Skip](#docx-with-skip)
@@ -48,10 +43,9 @@ Table of Contents
         -   [Reading Text](#reading-text)
         -   [Authentic Interview](#authentic-interview)
     -   [Pairing textreadr](#pairing-textreadr)
-
+    
 Functions
-============
-
+=========
 
 Most jobs in my workflow can be completed with `read_document` and
 `read_dir`. The former generically reads in a .docx, .doc, .pdf, .html,
@@ -103,9 +97,9 @@ table below:
 
 <table>
 <colgroup>
-<col width="34%" />
-<col width="17%" />
-<col width="48%" />
+<col style="width: 34%" />
+<col style="width: 16%" />
+<col style="width: 49%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -190,10 +184,14 @@ the development version:
 Contact
 =======
 
-You are welcome to:    
-- submit suggestions and bug-reports at: <https://github.com/trinker/textreadr/issues>    
-- send a pull request on: <https://github.com/trinker/textreadr/>    
-- compose a friendly e-mail to: <tyler.rinker@gmail.com>    
+You are welcome to:
+
+-   submit suggestions and bug-reports at:
+    <a href="https://github.com/trinker/textreadr/issues" class="uri">https://github.com/trinker/textreadr/issues</a>  
+-   send a pull request on:
+    <a href="https://github.com/trinker/textreadr/" class="uri">https://github.com/trinker/textreadr/</a>  
+-   compose a friendly e-mail to:
+    <a href="mailto:tyler.rinker@gmail.com" class="email">tyler.rinker@gmail.com</a>
 
 Demonstration
 =============
@@ -204,16 +202,6 @@ Load the Packages/Data
     if (!require("pacman")) install.packages("pacman")
     pacman::p_load(textreadr, magrittr)
     pacman::p_load_gh("trinker/pathr")
-
-    ## package 'Rook' successfully unpacked and MD5 sums checked
-    ## package 'downloader' successfully unpacked and MD5 sums checked
-    ## package 'influenceR' successfully unpacked and MD5 sums checked
-    ## package 'rgexf' successfully unpacked and MD5 sums checked
-    ## package 'DiagrammeR' successfully unpacked and MD5 sums checked
-    ## package 'data.tree' successfully unpacked and MD5 sums checked
-    ## 
-    ## The downloaded binary packages are in
-    ##  C:\Users\trinker\AppData\Local\Temp\RtmpgVzUqi\downloaded_packages
 
     trans_docs <- dir(
         system.file("docs", package = "textreadr"), 
@@ -226,6 +214,7 @@ Load the Packages/Data
     pdf_doc <- system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr")
     html_doc <- system.file('docs/textreadr_creed.html', package = "textreadr")
     txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
+    pptx_doc <- system.file('docs/Hello_World.pptx', package = "textreadr")
 
     rtf_doc <- download(
         'https://raw.githubusercontent.com/trinker/textreadr/master/inst/docs/trans7.rtf'
@@ -253,7 +242,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\trinker\AppData\Local\Temp\RtmpgVzUqi
+    ## pres.deb1.docx read into C:\Users\trinker\AppData\Local\Temp\RtmpC6BhsR
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -287,8 +276,8 @@ done. Below I demonstrate reading each of these five file formats with
         read_document() %>%
         head(3)
 
-    ## [1] "JRMC2202 Audio Project"      "Interview Transcript"       
-    ## [3] "Interviewer: Yasmine Hassan"
+    ## [1] "JRMC2202 Audio  Project"      "Interview Transcript"        
+    ## [3] "Interviewer:  Yasmine Hassan"
 
     doc_doc %>%
         read_document() %>%
@@ -344,14 +333,20 @@ done. Below I demonstrate reading each of these five file formats with
     ## | ROracle     | Oracle                 |
     ## | RJDBC       | JDBC                   |
 
+    pptx_doc %>%
+        read_document() %>%
+        head(3)
+
+    ## [1] "Hello World"  "Tyler Rinker" "Slide 1"
+
 Read Directory Contents
 -----------------------
 
 Often there is a need to read multiple files in from a single directory.
 The `read_dir` function wraps other **textreadr** functions and `lapply`
 to create a data frame with a document and text column (one row per
-document). We will read the following documents from the 'pos' directory
-in **textreadr**'s system file:
+document). We will read the following documents from the ‘pos’ directory
+in **textreadr**’s system file:
 
     levelName
     pos          
@@ -412,22 +407,22 @@ Read .docx
 
 A .docx file is nothing but a fancy container. It can be parsed via XML.
 The `read_docx` function allows the user to read in a .docx file as
-plain text. Elements are essentially the p tags (explicitly `//w:p`) in
-the markup.
+plain text. Elements are essentially the p tags (explicitly `//w:t` tags
+collapsed with `//w:p` tags) in the markup.
 
     docx_doc %>%
         read_docx() %>%
         head(3)
 
-    ## [1] "JRMC2202 Audio Project"      "Interview Transcript"       
-    ## [3] "Interviewer: Yasmine Hassan"
+    ## [1] "JRMC2202 Audio  Project"      "Interview Transcript"        
+    ## [3] "Interviewer:  Yasmine Hassan"
 
     docx_doc %>%
         read_docx(15) %>%
         head(3)
 
-    ## [1] "Hassan:           Could you please tell me your name, your title, your age, and your place of ref,                                   umm, residence?"
-    ## [2] "Abd Rabou:   My name is Ahmad Abd Rabou. I’m assistant professor of comparative politics at"                                                         
+    ## [1] "Hassan:             Could you please tell me your name, your title, your age, and your place  of ref ,                                      umm, residence?"
+    ## [2] "Abd Rabou:     My name is Ahmad Abd Rabou. I’m assistant professor of comparative politics at"                                                              
     ## [3] "both Cairo University and The American University in Cairo. I’m 34 years old. I"
 
 Read .doc
@@ -477,7 +472,7 @@ latex. The **striprtf** package provides the backend for `read_rtf`.
 Read .pdf
 ---------
 
-Like .docx a .pdf file is simply a container. Reading PDF's is made
+Like .docx a .pdf file is simply a container. Reading PDF’s is made
 easier with a number of command line tools. A few methods of PDF reading
 have been incorporated into R. Here I wrap **pdftools** `pdf_text` to
 produce `read_pdf`, a function with sensible defaults that is designed
@@ -510,12 +505,12 @@ Image based .pdfs require optical character recognition (OCR) in order
 for the images to be converted to text. The `ocr` argument of `read_pdf`
 allows the user to read in image based .pdf files and allow the
 [**tesseract**](https://CRAN.R-project.org/package=tesseract) package do
-the heavy lifting in the backend. You can look at the .pdf we'll be
+the heavy lifting in the backend. You can look at the .pdf we’ll be
 using by running:
 
     browse(pdf_doc_img)
 
-First let's try the task without using OCR.
+First let’s try the task without using OCR.
 
     pdf_doc_img %>%
         read_pdf(ocr = FALSE)
@@ -549,6 +544,37 @@ default behavior of `read_pdf`.
     ## 9  1       9          distance measures play a critical role i       
     ## 10 1       10         such as clustering, classi<U+FB01>cation, etc. 
     ## .. ...     ...        ... 
+
+Read .pptx
+----------
+
+A .pptx file is also nothing but a fancy container. Likewise, it can be
+parsed via XML. The `read_pptx` function allows the user to read in a
+.pptx file as a data.frame plain text that tracks slide id numbers.
+
+    pptx_doc %>%
+        read_pptx()
+
+    ##     slide_id element_id                      text
+    ##  1:        1          1               Hello World
+    ##  2:        1          2              Tyler Rinker
+    ##  3:        2          1                   Slide 1
+    ##  4:        2          2              Really nifty
+    ##  5:        2          3             Kinda  shifty
+    ##  6:        2          4           Not worth fifty
+    ##  7:        3          1                 Wowzers !
+    ##  8:        3          2 There’s a cat sniffing me
+    ##  9:        3          3       I think he likes me
+    ## 10:        3          4                      Ouch
+    ## 11:        3          5                 He bit me
+    ## 12:        3          6       I think he hates me
+    ## 13:        4          1                 Two Lists
+    ## 14:        4          2                       One
+    ## 15:        4          3                       Two
+    ## 16:        4          4                     Three
+    ## 17:        4          5                      Blue
+    ## 18:        4          6                     Green
+    ## 19:        4          7                    Orange
 
 Read .html
 ----------
@@ -661,6 +687,10 @@ separator the first go round.
 
     read_transcript(trans_docs[4])
 
+    ## New names:
+    ## * `` -> ...1
+    ## * `` -> ...2
+
     ## Table: [7 x 2]
     ## 
     ##   Person             Dialogue                                
@@ -674,6 +704,10 @@ separator the first go round.
     ## . ...                ...
 
     read_transcript(trans_docs[5])
+
+    ## New names:
+    ## * `` -> ...1
+    ## * `` -> ...2
 
     ## Table: [7 x 2]
     ## 
@@ -769,8 +803,8 @@ Pairing textreadr
 **textreadr** is but one package used in the text analysis (often the
 first package used). It pairs nicely with a variety of other text
 munging and analysis packages. In the example below I show just a few
-other package pairings that are used to extract case names (e.g., "Jones
-v. State of New York") from a [Supreme Court Database Code
+other package pairings that are used to extract case names (e.g., “Jones
+v. State of New York”) from a [Supreme Court Database Code
 Book](http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf).
 I demonstrate pairings with
 [**textshape**](https://github.com/trinker/textshape),
@@ -781,6 +815,17 @@ I demonstrate pairings with
     if (!require("pacman")) install.packages("pacman"); library(pacman)
     p_load(dplyr, qdapRegex)
     p_load_current_gh(file.path('trinker', c('textreadr', 'textshape', 'textclean')))
+
+    ## 
+    ##          checking for file 'C:\Users\trinker\AppData\Local\Temp\RtmpC6BhsR\remotes559c7550740e\trinker-textreadr-992eaac/DESCRIPTION' ...  v  checking for file 'C:\Users\trinker\AppData\Local\Temp\RtmpC6BhsR\remotes559c7550740e\trinker-textreadr-992eaac/DESCRIPTION'
+    ##       -  preparing 'textreadr': (463ms)
+    ##    checking DESCRIPTION meta-information ...  v  checking DESCRIPTION meta-information
+    ##       -  checking for LF line-endings in source and make files and shell scripts
+    ##       -  checking for empty or unneeded directories
+    ##       -  looking to see if a 'data/datalist' file should be added
+    ##       -  building 'textreadr_0.9.3.tar.gz'
+    ##      
+    ## 
 
     ## Read in pdf, split on variables
     dat <- 'http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf' %>%
@@ -838,8 +883,7 @@ I demonstrate pairings with
     ## [13] "United States v. King"                                            
     ## 
     ## $`44`
-    ## [1] "Grisham v. Hagan"                  
-    ## [2] "McElroy v. Guagliardo"             
+    ## [1] "Grisham v. Hagan"                   "McElroy v. Guagliardo"             
     ## [3] "Virginia Supreme Court v. Friedman"
     ## 
     ## $`48`
