@@ -16,7 +16,8 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' url <- "https://www.oclc.org/content/dam/research/presentations/2019/111319-godby-NISO-What-Are-Entities-Matter.pptx"
+#' url <- file.path("https://www.oclc.org/content/dam/research/presentations", 
+#'     "2019/111319-godby-NISO-What-Are-Entities-Matter.pptx")
 #' file <- download(url)
 #' (txt <- read_pptx(file))
 #' 

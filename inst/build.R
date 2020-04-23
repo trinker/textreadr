@@ -29,7 +29,7 @@ update_news <- function(repo = basename(getwd())) {
 
     News <- readLines("NEWS")
 
-    News <- textclean::mgsub(
+    News <- textclean::mgsub(News, 
         c("<", ">", "&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;", "BUG FIXES",
             "NEW FEATURES", "MINOR FEATURES", "CHANGES", "IMPROVEMENTS", " TRUE ", " FALSE ",
             " NULL ", "TRUE.", "FALSE.", "NULL.", ":m:"),
@@ -37,7 +37,7 @@ update_news <- function(repo = basename(getwd())) {
             "**BUG FIXES**", "**NEW FEATURES**", "**MINOR FEATURES**",
             "**CHANGES**", "**IMPROVEMENTS**", " `TRUE` ", "`FALSE`.", "`NULL`.", "`TRUE`.",
             " `FALSE` ", " `NULL` ", " : m : "),
-            News, trim = FALSE, fixed=TRUE)
+            trim = FALSE, fixed=TRUE)
 
     News <- sub(pattern="issue *# *([0-9]+)",
         replacement=sprintf("<a href=\"https://github.com/trinker/%s/issues/\\1\">issue #\\1</a>",
