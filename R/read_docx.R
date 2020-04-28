@@ -53,7 +53,7 @@ read_docx <- function (file, skip = 0, remove.empty = TRUE, trim = TRUE, ...) {
 
     pvalues <- unlist(lapply(lapply(xml2::xml_find_all(doc, '//w:p'), xml2::xml_children), function(x) {
 
-        paste(rm_na(unlist(xml2::xml_text(xml2::xml_child(x, './/w:t')))), collapse = ' ')
+        paste(rm_na(unlist(xml2::xml_text(xml2::xml_find_all(x, './/w:t')))), collapse = ' ')
 
     }))    
 
