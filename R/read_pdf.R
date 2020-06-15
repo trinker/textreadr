@@ -26,7 +26,6 @@
 #' (\code{page_id}), line number (\code{element_id}), and the \code{text}.
 #' @keywords pdf
 #' @export
-#' @seealso \code{\link[tm]{readPDF}}
 #' @examples
 #' pdf_dat <- read_pdf(
 #'     system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr")

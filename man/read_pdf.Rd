@@ -81,7 +81,4 @@ read_pdf(
 )
 }
 }
-\seealso{
-\code{\link[tm]{readPDF}}
-}
 \keyword{pdf}

@@ -42,13 +42,15 @@ MINOR FEATURES
 
 * `read_xml` basic functionality added and part of `read_document`.
 
+* Looping utilities `loop_counter`, `file_name`, and `try_limit` added for use 
+  inside of loops.  Makes loop reporting and error handling easier and more readable.
+
 IMPROVEMENTS
 
 * `read_docx` would return non-text, formatting information.  Issue #19 provides 
   a demonstration of this issue.  This behavior has been corrected to grab text 
   (w:t) tags with paragraphs (w:p).
 
-CHANGES
 
 
 
