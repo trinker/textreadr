@@ -49,6 +49,7 @@ Table of Contents
         -   [Reading Text](#reading-text)
         -   [Authentic Interview](#authentic-interview)
     -   [Pairing textreadr](#pairing-textreadr)
+-   [Other Implementations](#other-implementations)
 
 Functions
 ============
@@ -804,7 +805,7 @@ I demonstrate pairings with
 [**textshape**](https://github.com/trinker/textshape),
 [**textclean**](https://github.com/trinker/textclean),
 [**qdapRegex**](https://github.com/trinker/qdapRegex), and
-[**dplyr**](https://github.com/hadley/dplyr).
+[**dplyr**](https://github.com/tidyverse/dplyr).
 
     if (!require("pacman")) install.packages("pacman"); library(pacman)
     p_load(dplyr, qdapRegex)
@@ -873,3 +874,11 @@ I demonstrate pairings with
     ## $`58`
     ## [1] "Mobile v. Bolden"                             "Williams v. Brown"                            "United States v. Havens"                     
     ## [4] "Parratt v. Taylor"                            "Dougherty County Board of Education v. White" "Jenkins v. Anderson"
+
+Other Implementations
+=====================
+
+Some other implementations of text readers in R:
+
+1.  [tm](https://CRAN.R-project.org/package=tm)
+2.  [readtext](https://CRAN.R-project.org/package=readtext)

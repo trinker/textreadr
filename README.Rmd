@@ -430,7 +430,7 @@ docx_doc %>%
 
 ## Pairing textreadr 
 
-**textreadr** is but one package used in the text analysis (often the first package used).  It pairs nicely with a variety of other text munging and analysis packages.  In the example below I show just a few other package pairings that are used to extract case names (e.g., "Jones v. State of New York") from a [Supreme Court Database Code Book](http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf).  I demonstrate pairings with [**textshape**](https://github.com/trinker/textshape), [**textclean**](https://github.com/trinker/textclean), [**qdapRegex**](https://github.com/trinker/qdapRegex), and [**dplyr**](https://github.com/hadley/dplyr).
+**textreadr** is but one package used in the text analysis (often the first package used).  It pairs nicely with a variety of other text munging and analysis packages.  In the example below I show just a few other package pairings that are used to extract case names (e.g., "Jones v. State of New York") from a [Supreme Court Database Code Book](http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf).  I demonstrate pairings with [**textshape**](https://github.com/trinker/textshape), [**textclean**](https://github.com/trinker/textclean), [**qdapRegex**](https://github.com/trinker/qdapRegex), and [**dplyr**](https://github.com/tidyverse/dplyr).
 
 
 ```{r, message=FALSE, warning=FALSE}
@@ -465,3 +465,13 @@ dat %>%
     setNames(seq_along(.)) %>%
     {.[sapply(., function(x) all(length(x) > 1 | !is.na(x)))]}
 ```
+
+
+# Other Implementations
+
+Some other implementations of text readers in R:
+
+1. [tm](https://CRAN.R-project.org/package=tm )
+1. [readtext](https://CRAN.R-project.org/package=readtext)
+
+
