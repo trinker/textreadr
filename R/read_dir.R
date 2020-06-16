@@ -1,26 +1,28 @@
 #' Read In Multiple Files From a Directory
 #'
 #' Read in multiple files from a directory and create a
-#' \code{\link[base]{data.frame}}.
+#' [base::data.frame()].
 #'
 #' @param path Path to the directory.
 #' @param pattern An optional regular expression. Only file names which match
 #' the regular expression will be returned.
 #' @param doc.col A string naming the document columns (i.e., file names sans
 #' file extension).
-#' @param all.files Logical.   If \code{FALSE}, only the names of visible files
-#' are returned. If \code{TRUE}, all file names will be returned.
+#' @param all.files Logical.   If `FALSE`, only the names of visible files
+#' are returned. If `TRUE`, all file names will be returned.
 #' @param recursive Logical. Should the listing recurse into directories?
-#' @param ignore.case logical.  If \code{TRUE} case in the \code{pattern} argument 
+#' @param ignore.case logical.  If `TRUE` case in the `pattern` argument 
 #' will be ignored.
-#' @return Returns a \code{\link[base]{data.frame}} with file names as a document
+#' @return Returns a [base::data.frame()] with file names as a document
 #' column and content as a text column.
 #' @param verbose Logical. Should Each iteration of the read-in be reported.
-#' @param \ldots Other arguments passed to read_document functions.
+#' @param ... Other arguments passed to read_document functions.
 #' @export
 #' @examples
+#' \dontrun{
 #' read_dir(system.file("docs/Maas2011/pos", package = "textreadr"))
 #' read_dir(system.file("docs/Maas2011", package = "textreadr"), recursive=TRUE)
+#' }
 read_dir <- function (path, pattern = NULL, doc.col = "document", all.files = FALSE, 
     recursive = FALSE, ignore.case = FALSE, verbose = FALSE, ...) {
 
@@ -35,7 +37,7 @@ read_dir <- function (path, pattern = NULL, doc.col = "document", all.files = FA
     }
     
     len <- length(to_read_in)
-    nms <- file_name(to_read_in)
+    nms <- base_name(to_read_in)
     
     text <- stats::setNames(
         #lapply(to_read_in, read_document, ...),
@@ -84,5 +86,5 @@ list_files <- function(path=".", pattern=NULL, all.files=FALSE, full.names=TRUE,
     fls <- all[!file.info(all)$isdir]
     ## determine whether to return full names or just dir names
     if(isTRUE(full.names)) return(fls)
-    file_name(fls)
+    base_name(fls)
 }

@@ -2,13 +2,13 @@
 % Please edit documentation in R/loop_utilities.R
 \name{loop_counter}
 \alias{loop_counter}
-\alias{file_name}
+\alias{base_name}
 \alias{try_limit}
 \title{Utilities for Looping to Read In Documents}
 \usage{
 loop_counter(i, total, file, ...)
 
-file_name(path)
+base_name(path)
 
 try_limit(
   expr,
@@ -26,6 +26,8 @@ try_limit(
 
 \item{file}{The file name of that iteration to print out.}
 
+\item{...}{ignored}
+
 \item{path}{A character vector, containing path names.}
 
 \item{expr}{An expression to run.}
@@ -36,28 +38,30 @@ try_limit(
 
 \item{zero.length.return}{Value to return for length zero expression evaluations.}
 
-\item{silent}{logical.  If `TRUE` report of error messages.}
-
-\item{\ldots}{ignored}
+\item{silent}{logical.  If \code{TRUE} report of error messages.}
 }
 \value{
-`loop_counter` - Prints loop information.
+\code{loop_counter} - Prints loop information.
+
+\code{base_name} - Returns just the basename of the path.
 }
 \description{
-`loop_counter` - A simple loop counter for tracking the progress of reading in 
+\code{loop_counter} - A simple loop counter for tracking the progress of reading in
 a batch of files.
 
-`file_name` - Like `base::basename` but doesn't choke on long paths.
+\code{base_name} - Like \code{base::basename} but doesn't choke on long paths.
 
-`try_limit` - Limits the amount of try that an expression can run for.  This
-works to limit how long an attempted read-in of a document may take.  Most 
-useful in a loop with a few very long running document read-ins (e.g., .pdf 
-files that require tesseract package).  Note that `max.time` can not stop a 
-`system` call (as many read-in functions are essentially utilizing, but it
-can limit how many `system` calls are made.  This means a .pdf with multiple 
-tesseract pages will only allow the first page to read-in before returning an 
-error result.  Note that this approach does not distinguish between errors
-running the `expr` and time-out errors.
+\code{try_limit} - Limits the amount of try that an expression can run for.  This
+works to limit how long an attempted read-in of a document may take.  Most
+useful in a loop with a few very long running document read-ins (e.g., .pdf
+files that require \href{https://CRAN.R-project.org/package=tesseract}{\strong{tesseract} package}).
+Note that \code{max.time} can not stop a \code{system} call (as many read-in functions
+are essentially utilizing, but it can limit how many \code{system} calls are made.
+This means a .pdf with multiple
+\href{https://CRAN.R-project.org/package=tesseract}{\strong{tesseract}}) pages will only
+allow the first page to read-in before returning an error result.  Note that
+this approach does not distinguish between errors running the \code{expr} and
+time-out errors.
 }
 \examples{
 \dontrun{
@@ -74,7 +78,7 @@ content <- vector(mode = "list", total)
 
 for (i in seq_along(files)){
 
-    loop_counter(i, total, file_name(files[i]))
+    loop_counter(i, total, base_name(files[i]))
 
     content[[i]] <- try_limit(
         textreadr::read_document(files[i]), 

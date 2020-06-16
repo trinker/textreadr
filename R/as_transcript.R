@@ -10,36 +10,36 @@
 #' @param col.names  A character vector specifying the column names of the
 #' transcript columns.
 #' @param text.var A character string specifying the name of the text variable
-#' will ensure that variable is classed as character.  If \code{NULL}
-#' \code{\link[textreadr]{read_transcript}} attempts to guess the text.variable
+#' will ensure that variable is classed as character.  If `NULL`
+#' [read_transcript()] attempts to guess the text.variable
 #' (dialogue).
-#' @param merge.broke.tot logical.  If \code{TRUE} and if the file being read in
+#' @param merge.broke.tot logical.  If `TRUE` and if the file being read in
 #' is .docx with broken space between a single turn of talk read_transcript
 #' will attempt to merge these into a single turn of talk.
-#' @param header logical.  If \code{TRUE} the file contains the names of the
+#' @param header logical.  If `TRUE` the file contains the names of the
 #' variables as its first line.
 #' @param dash A character string to replace the en and em dashes special
 #' characters (default is to remove).
 #' @param ellipsis A character string to replace the ellipsis special characters.
-#' @param quote2bracket logical. If \code{TRUE} replaces curly quotes with curly
-#' braces (default is \code{FALSE}).  If \code{FALSE} curly quotes are removed.
-#' @param rm.empty.rows logical.  If \code{TRUE}
-#' \code{\link[textreadr]{read_transcript}}  attempts to remove empty rows.
-#' @param na A character string to be interpreted as an \code{NA} value.
+#' @param quote2bracket logical. If `TRUE` replaces curly quotes with curly
+#' braces (default is `FALSE`).  If `FALSE` curly quotes are removed.
+#' @param rm.empty.rows logical.  If `TRUE`
+#' [read_transcript()]  attempts to remove empty rows.
+#' @param na A character string to be interpreted as an `NA` value.
 #' @param sep The field separator character. Values on each line of the file are
-#' separated by this character.  The default of \code{NULL} instructs
-#' \code{\link[textreadr]{read_transcript}} to use a separator suitable for the file
+#' separated by this character.  The default of `NULL` instructs
+#' [read_transcript()] to use a separator suitable for the file
 #' type being read in.
 #' @param skip Integer; the number of lines of the data file to skip before
 #' beginning to read data.
 #' @param comment.char A character vector of length one containing a single
-#' character or an empty string. Use \code{""} to turn off the interpretation of
+#' character or an empty string. Use `""` to turn off the interpretation of
 #' comments altogether.
 #' @param max.person.nchar The max number of characters long names are expected
 #' to be.  This information is used to warn the user if a separator appears beyond
 #' this length in the text.
-#' @param \ldots Further arguments to be passed to \code{\link[utils]{read.table}},
-#' \code{\link[readxl]{read_excel}}, or \code{\link[textreadr]{read_doc}}.
+#' @param ... Further arguments to be passed to [utils::read.table()],
+#' [readxl::read_excel()], or [read_doc()].
 #' @return Returns a dataframe of dialogue and people.
 #' @export
 #' @examples
@@ -70,8 +70,7 @@
 #' JILL The New York Times reports a lot of words again.",
 #'    person.regex = '(^[A-Z]{3,})'
 #' )
-as_transcript <-
-function(text, person.regex = NULL, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke.tot = TRUE,
+as_transcript <- function(text, person.regex = NULL, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke.tot = TRUE,
     header = FALSE, dash = "", ellipsis = "...", quote2bracket = FALSE,
     rm.empty.rows = TRUE, na = "", sep = NULL, skip = 0, comment.char = "",
     max.person.nchar = 20, ...) {

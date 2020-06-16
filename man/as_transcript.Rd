@@ -36,7 +36,7 @@ transcript columns.}
 
 \item{text.var}{A character string specifying the name of the text variable
 will ensure that variable is classed as character.  If \code{NULL}
-\code{\link[textreadr]{read_transcript}} attempts to guess the text.variable
+\code{\link[=read_transcript]{read_transcript()}} attempts to guess the text.variable
 (dialogue).}
 
 \item{merge.broke.tot}{logical.  If \code{TRUE} and if the file being read in
@@ -55,13 +55,13 @@ characters (default is to remove).}
 braces (default is \code{FALSE}).  If \code{FALSE} curly quotes are removed.}
 
 \item{rm.empty.rows}{logical.  If \code{TRUE}
-\code{\link[textreadr]{read_transcript}}  attempts to remove empty rows.}
+\code{\link[=read_transcript]{read_transcript()}}  attempts to remove empty rows.}
 
 \item{na}{A character string to be interpreted as an \code{NA} value.}
 
 \item{sep}{The field separator character. Values on each line of the file are
 separated by this character.  The default of \code{NULL} instructs
-\code{\link[textreadr]{read_transcript}} to use a separator suitable for the file
+\code{\link[=read_transcript]{read_transcript()}} to use a separator suitable for the file
 type being read in.}
 
 \item{skip}{Integer; the number of lines of the data file to skip before
@@ -75,8 +75,8 @@ comments altogether.}
 to be.  This information is used to warn the user if a separator appears beyond
 this length in the text.}
 
-\item{\ldots}{Further arguments to be passed to \code{\link[utils]{read.table}},
-\code{\link[readxl]{read_excel}}, or \code{\link[textreadr]{read_doc}}.}
+\item{...}{Further arguments to be passed to \code{\link[utils:read.table]{utils::read.table()}},
+\code{\link[readxl:read_excel]{readxl::read_excel()}}, or \code{\link[=read_doc]{read_doc()}}.}
 }
 \value{
 Returns a dataframe of dialogue and people.

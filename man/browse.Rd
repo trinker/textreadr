@@ -13,7 +13,7 @@ browse(x = ".")
 Use the operating system defaults to open directories and files.
 }
 \note{
-This function is operating system and setting dependant.  Results may
+This function is operating system and setting dependent.  Results may
 not be consistent across operating systems.  Depending upon the default
 programs for file types the results may vary as well.  Some files may not be
 able to be opened.
@@ -27,5 +27,5 @@ browse()
 \url{http://stackoverflow.com/q/12135732/1000343}
 }
 \author{
-Dason Kurkiewicz and Tyler Rinker <tyler.rinker@gmail.com>.
+Dason Kurkiewicz and Tyler Rinker \href{mailto:tyler.rinker@gmail.com}{tyler.rinker@gmail.com}.
 }

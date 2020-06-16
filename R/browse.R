@@ -3,8 +3,8 @@
 #' Use the operating system defaults to open directories and files.
 #'
 #' @param x A vector (typically of length one) of paths to directories of files.
-#' @references \url{http://stackoverflow.com/q/12135732/1000343}
-#' @note This function is operating system and setting dependant.  Results may
+#' @references <http://stackoverflow.com/q/12135732/1000343>
+#' @note This function is operating system and setting dependent.  Results may
 #' not be consistent across operating systems.  Depending upon the default
 #' programs for file types the results may vary as well.  Some files may not be
 #' able to be opened.

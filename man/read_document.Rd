@@ -27,23 +27,22 @@ removed.}
 removed.}
 
 \item{combine}{logical.  If \code{TRUE} the vector is concatenated into a
-single string via \code{\link[textshape]{combine}}.}
+single string via \code{\link[textshape:combine]{textshape::combine()}}.}
 
 \item{format}{For .doc files only.  Logical.  If \code{TRUE} the output will
 keep doc formatting (e.g., bold, italics, underlined).  This corresponds to
-the \code{-f} flag in antiword.}
+the \code{-f} flag in \strong{antiword}.}
 
 \item{ocr}{logical.  If \code{TRUE} .pdf documents with a non-text pull using
-\code{\link[pdftools]{pdf_text}} will be re-run using OCR via the
-\code{\link[tesseract]{ocr}} function.  This will create temporary .png
+\link[pdftools:pdftools]{pdftools::pdf_text()} will be re-run using OCR via the
+\code{\link[tesseract:ocr]{tesseract::ocr()}} function.  This will create temporary .png
 files and will require a much larger compute time.}
 
-\item{\ldots}{Other arguments passed to \code{\link[textreadr]{read_pdf}},
-\code{\link[textreadr]{read_html}}, \code{\link[textreadr]{read_docx}},
-\code{\link[textreadr]{read_doc}}, or \code{\link[base]{readLines}}.}
+\item{...}{Other arguments passed to \code{\link[=read_pdf]{read_pdf()}},
+\code{\link[=read_html]{read_html()}}, \code{\link[=read_docx]{read_docx()}}, \code{\link[=read_doc]{read_doc()}}, or \code{\link[base:readLines]{base::readLines()}}.}
 }
 \value{
-Returns a \code{\link[base]{list}} of string \code{\link[base]{vector}}s.
+Returns a \code{\link[base:list]{base::list()}} of string \code{\link[base:vector]{base::vector()}}s.
 }
 \description{
 Generic function to read in a .pdf, .txt, .html, .rtf, .docx, or .doc file.

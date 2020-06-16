@@ -4,7 +4,7 @@
 \alias{download}
 \title{Download Documents}
 \usage{
-download(url, loc = tempdir(), file.out = NULL)
+download(url, loc = tempdir(), file.out = NULL, ...)
 }
 \arguments{
 \item{url}{The download url(s).}
@@ -12,14 +12,16 @@ download(url, loc = tempdir(), file.out = NULL)
 \item{loc}{Where to put the files.}
 
 \item{file.out}{Option vector of names matching \code{url}.  If this is not
-given \code{download} will try to create a name from \code{url}.}
+given \code{\link[=download]{download()}} will try to create a name from \code{url}.}
+
+\item{...}{Other arguments passed to \code{\link[curl:curl_download]{curl::curl_download()}}.}
 }
 \value{
 Places a copy of the downloaded document in location specified and returns
 vector of the locations as string paths.
 }
 \description{
-This function enables downloading documents.
+This function enables downloading documents by wrapping \code{\link[curl:curl_download]{curl::curl_download()}}.
 }
 \examples{
 \dontrun{

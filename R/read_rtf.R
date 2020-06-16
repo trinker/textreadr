@@ -1,18 +1,18 @@
-#' Read a Rich Text Format into R
+#' Read a Rich Text Format Content
 #'
-#' A wrapper for \code{\link[striprtf]{read_rtf}} to read RTFs into \pkg{R}.
+#' A wrapper for [striprtf::read_rtf()] to read RTFs
 #'
 #' @param file A path to a RTF file.
 #' @param skip The number of lines to skip.
-#' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are
+#' @param remove.empty logical.  If `TRUE` empty elements in the vector are
 #' removed.
-#' @param trim logical.  If \code{TRUE} the leading/training white space is
+#' @param trim logical.  If `TRUE` the leading/training white space is
 #' removed.
-#' @param \dots Other arguments passed to \code{\link[striprtf]{read_rtf}}.
+#' @param ... Other arguments passed to [striprtf::read_rtf()].
 #' @return Returns a character vector.
 #' @keywords rtf
 #' @export
-#' @seealso \code{\link[striprtf]{read_rtf}}
+#' @seealso [striprtf::read_rtf()]
 #' @examples
 #' \dontrun{
 #' rtf_dat <- read_rtf(
@@ -29,7 +29,8 @@ read_rtf <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE, ...) {
     if (isTRUE(remove.empty)) text <- text[!grepl("^\\s*$", text)]
     if (skip > 0) text <- text[-seq(skip)]
     if (isTRUE(trim)) text <- trimws(text)
-
+    if (length(text) == 0) text <- ''
+    
     text
 }
 

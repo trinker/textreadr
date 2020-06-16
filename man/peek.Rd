@@ -10,37 +10,37 @@ peek(x, n = 10, width = 20, strings.left = TRUE, ...)
 unpeek(x)
 }
 \arguments{
-\item{x}{A \code{\link[base]{data.frame}} object.}
+\item{x}{A \code{\link[base:data.frame]{base::data.frame()}} object.}
 
 \item{n}{Number of rows to display.}
 
 \item{width}{The width of the columns to be displayed.}
 
-\item{strings.left}{logical.  If \code{TRUE} strings will be left alligned.}
+\item{strings.left}{logical.  If \code{TRUE} strings will be left aligned.}
 
-\item{\ldots}{For internal use.}
+\item{...}{For internal use.}
 }
 \value{
 Prints a truncated head but invisibly returns \code{x}.
 }
 \description{
 \code{peek} - Convenience function to view all the columns of the head
-of a truncated \code{\link[base]{data.frame}}.  \code{peek} invisibly returns
+of a truncated \code{\link[base:data.frame]{base::data.frame()}}.  \code{peek} invisibly returns
 \code{x}.  This makes its use ideal in a \pkg{dplyr}/\pkg{magrittr} pipeline.
 
-\code{unpeek} - Strips out class \code{textreadr} so that the entire
-\code{\link[base]{data.frame}} will be printed.
+\code{unpeek} - Strips out class \emph{textreadr} so that the entire
+\code{\link[base:data.frame]{base::data.frame()}} will be printed.
 }
 \details{
-By default \pkg{dplyr} does not print all columns of a data frame
-(\code{tbl_df}).  This makes inspection of data difficult at times,
-particularly with text string data.  \code{peek} allows the user to see a
-truncated head for inspection purposes.
+By default \pkg{dplyr} does not print all columns of a \code{\link[dplyr:tibble]{dplyr::tibble()}}.
+This makes inspection of data difficult at times, particularly with text
+string data.  \code{peek()} allows the user to see a truncated head for
+inspection purposes.
 }
 \examples{
 peek(mtcars)
 peek(presidential_debates_2012)
 }
 \seealso{
-\code{\link[utils]{head}}
+\code{\link[utils:head]{utils::head()}}
 }

@@ -1,5 +1,4 @@
-clean <-
-function(text.var) {
+clean <- function(text.var) {
     gsub("\\s+", " ", gsub("\\\\r|\\\\n|\\n|\\\\t", " ", text.var))
 }
 
@@ -20,8 +19,7 @@ mgsub <- function (pattern, replacement, text.var, fixed = TRUE,
     text.var
 }
 
-rm_empty_row <-
-function(dataframe) {
+rm_empty_row <- function(dataframe) {
     x <- paste2(dataframe, sep="")
     x <- gsub("\\s+", "", x)
     ind <- x != ""

@@ -1,18 +1,18 @@
 #' Read in .doc Content
 #'
-#' Read in the content from a .doc file using \href{http://www.winfield.demon.nl}{antiword}
+#' Read in the content from a .doc file using [**antiword**](http://www.winfield.demon.nl)
 #' via the \pkg{antiword} package.
 #'
 #' @param file The path to the .doc file.
 #' @param skip The number of lines to skip.
-#' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are
+#' @param remove.empty logical.  If `TRUE` empty elements in the vector are
 #' removed.
-#' @param trim logical.  If \code{TRUE} the leading/training white space is
+#' @param trim logical.  If `TRUE` the leading/training white space is
 #' removed.
-#' @param format logical.  If \code{TRUE} the output will keep doc formatting
-#' (e.g., bold, italics, underlined).  This corresponds to the \code{-f} flag in
-#' antiword.
-#' @param \dots ignored.
+#' @param format logical.  If `TRUE` the output will keep doc formatting
+#' (e.g., bold, italics, underlined).  This corresponds to the `-f` flag in
+#' [**antiword**](http://www.winfield.demon.nl).
+#' @param ... ignored.
 #' @return Returns a character vector.
 #' @keywords doc
 #' @export
@@ -39,6 +39,7 @@ read_doc <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE,
     if (isTRUE(remove.empty)) text <- text[!grepl("^\\s*$", text)]
     if (skip > 0) text <- text[-seq(skip)]
     if (isTRUE(trim)) text <- trimws(text)
-
+    if (length(text) == 0) text <- ''
+    
     text
 }

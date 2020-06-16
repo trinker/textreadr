@@ -1,18 +1,18 @@
 #' Unzip/Unzip Files
 #' 
 #' Unzip/untar files and return the location of exit directory.  This is a convenience 
-#' function (wrapper for  \link[utils]{unzip}) to make the function more 
+#' function (wrapper for [utils::unzip()]) to make the function more 
 #' pipe-able.  Additionally, the location of the unzip defaults to the directory 
 #' containing the zip file.
 #' 
 #' @param file Path to the zip file.
 #' @param loc The output directory location.
-#' @param \ldots Other arguments passed to \link[utils]{unzip}.
+#' @param ... Other arguments passed to [utils::unzip()].
 #' @return Returns the path to where the zip file was unzipped to.
 #' @keywords unzip
 #' @export
 #' @rdname un_zip
-#' @seealso \link[utils]{unzip}
+#' @seealso [utils::unzip()]
 #' @examples
 #' \dontrun{
 #' if (!require("pacman")) install.packages("pacman")

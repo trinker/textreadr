@@ -20,7 +20,7 @@ And constructed with the following guidelines:
 
 
 
-textreadr 0.9.1 - 1.0.0
+textreadr 0.9.1 - 1.0.1
 ----------------------------------------------------------------
 
 BUG FIXES
@@ -42,7 +42,7 @@ MINOR FEATURES
 
 * `read_xml` basic functionality added and part of `read_document`.
 
-* Looping utilities `loop_counter`, `file_name`, and `try_limit` added for use 
+* Looping utilities `loop_counter`, `base_name`, and `try_limit` added for use 
   inside of loops.  Makes loop reporting and error handling easier and more readable.
 
 IMPROVEMENTS

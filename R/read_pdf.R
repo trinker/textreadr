@@ -1,29 +1,29 @@
 #' Read a Portable Document Format into R
 #'
-#' A wrapper for \code{\link[pdftools]{pdf_text}} to read PDFs into \pkg{R}.
+#' A wrapper for [pdftools::pdf_text()] to read PDFs into \pkg{R}.
 #'
 #' @param file A path to a PDF file.
 #' @param skip Integer; the number of lines of the data file to skip before
 #' beginning to read data.
-#' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are
+#' @param remove.empty logical.  If `TRUE` empty elements in the vector are
 #' removed.
-#' @param trim logical.  If \code{TRUE} the leading/training white space is
+#' @param trim logical.  If `TRUE` the leading/training white space is
 #' removed.
-#' @param ocr logical.  If \code{TRUE} documents with a non-text pull using
-#' \code{\link[pdftools]{pdf_text}} will be re-run using OCR via the
-#' \code{\link[tesseract]{ocr}} function.  This will create temporary .png
+#' @param ocr logical.  If `TRUE` documents with a non-text pull using
+#' [pdftools::pdf_text()][pdftools::pdftools] will be re-run using OCR via the
+#' [tesseract::ocr()] function.  This will create temporary .png
 #' files and will require a much larger compute time.
-#' @param \dots Other arguments passed to \code{\link[pdftools]{pdf_text}}.
-#' @note A word of caution from \href{http://stackoverflow.com/a/9187015/1000343}{Carl Witthoft}"
+#' @param ... Other arguments passed to [pdftools::pdf_text()][pdftools::pdftools].
+#' @note A word of caution from [Carl Witthoft](http://stackoverflow.com/a/9187015/1000343)"
 #' "Just a warning to others who may be hoping to extract data: PDF is a
 #' container, not a format. If the original document does not contain actual
 #' text, as opposed to bitmapped images of text or possibly even uglier things
 #' than I can imagine, nothing other than OCR can help you."  If the reader has
 #' OCR needs the \pkg{tesseract} package, available on CRAN
-#' (\url{https://CRAN.R-project.org/package=tesseract}), is an "OCR engine with
+#' (<https://CRAN.R-project.org/package=tesseract>), is an "OCR engine with
 #' Unicode (UTF-8) support" and may be of use.
-#' @return Returns a \code{\link[base]{data.frame}} with the page number
-#' (\code{page_id}), line number (\code{element_id}), and the \code{text}.
+#' @return Returns a [base::data.frame()] with the page number
+#' (`page_id`), line number (`element_id`), and the `text`.
 #' @keywords pdf
 #' @export
 #' @examples
@@ -77,7 +77,7 @@ read_pdf <- function(file, skip = 0, remove.empty = TRUE, trim = TRUE, ocr = TRU
             temp <- tempdir()
             fls <- file.path(
                 temp,
-                paste0(gsub('\\.pdf$', '', basename(file)), '_', pad_left(seq_along(text)), '.png')
+                paste0(gsub('\\.pdf$', '', base_name(file)), '_', pad_left(seq_along(text)), '.png')
             )
    
             ## convert to png files for tesseract to interact with

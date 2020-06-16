@@ -59,13 +59,13 @@ characters (default is to remove).}
 braces (default is \code{FALSE}).  If \code{FALSE} curly quotes are removed.}
 
 \item{rm.empty.rows}{logical.  If \code{TRUE}
-\code{\link[textreadr]{read_transcript}}  attempts to remove empty rows.}
+\code{\link[=read_transcript]{read_transcript()}}  attempts to remove empty rows.}
 
 \item{na}{A character string to be interpreted as an \code{NA} value.}
 
 \item{sep}{The field separator character. Values on each line of the file are
 separated by this character.  The default of \code{NULL} instructs
-\code{\link[textreadr]{read_transcript}} to use a separator suitable for the file
+\code{\link[=read_transcript]{read_transcript()}} to use a separator suitable for the file
 type being read in.}
 
 \item{comment.char}{A character vector of length one containing a single
@@ -81,14 +81,14 @@ will be ignored.}
 
 \item{verbose}{Logical. Should Each iteration of the read-in be reported.}
 
-\item{\ldots}{ignored.}
+\item{...}{ignored.}
 }
 \value{
 Returns a dataframe of documents, dialogue, and people.
 }
 \description{
 Read in multiple transcript files from a directory and create a
-\code{\link[base]{data.frame}}.
+\code{\link[base:data.frame]{base::data.frame()}}.
 }
 \examples{
 skips <- c(0, 1, 1, 0, 0, 1)

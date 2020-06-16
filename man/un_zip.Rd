@@ -14,15 +14,15 @@ un_tar(file, loc = dirname(file), ...)
 
 \item{loc}{The output directory location.}
 
-\item{\ldots}{Other arguments passed to \link[utils]{unzip}.}
+\item{...}{Other arguments passed to \code{\link[utils:unzip]{utils::unzip()}}.}
 }
 \value{
 Returns the path to where the zip file was unzipped to.
 }
 \description{
-Unzip/untar files and return the location of exit directory.  This is a convenience 
-function (wrapper for  \link[utils]{unzip}) to make the function more 
-pipe-able.  Additionally, the location of the unzip defaults to the directory 
+Unzip/untar files and return the location of exit directory.  This is a convenience
+function (wrapper for \code{\link[utils:unzip]{utils::unzip()}}) to make the function more
+pipe-able.  Additionally, the location of the unzip defaults to the directory
 containing the zip file.
 }
 \examples{
@@ -53,6 +53,6 @@ dir(dl_loc, pattern = 'customer', full.names = TRUE)[1] \%>\%
 }
 }
 \seealso{
-\link[utils]{unzip}
+\code{\link[utils:unzip]{utils::unzip()}}
 }
 \keyword{unzip}

@@ -16,10 +16,10 @@ the 2012 election.
 }
 \details{
 \itemize{
-  \item person. The speaker
-  \item tot. Turn of talk
-  \item dialogue. The words spoken
-  \item time. Variable indicating which of the three debates the dialogue is from
+\item person. The speaker
+\item tot. Turn of talk
+\item dialogue. The words spoken
+\item time. Variable indicating which of the three debates the dialogue is from
 }
 }
 \keyword{datasets}

@@ -2,9 +2,9 @@
 #'
 #' Prints a textreadr object
 #'
-#' @param x A \code{\link[base]{data.frame}} textreadr object.
+#' @param x A \[base::data.frame()] textreadr object.
 #' @param width The width of the columns to be displayed.
-#' @param \ldots Other arguments passed to \code{\link[textreadr]{peek}}.
+#' @param ... Other arguments passed to [peek()].
 #' @method print textreadr
 #' @export
 print.textreadr <- function(x, width = 40, ...){

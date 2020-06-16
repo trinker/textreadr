@@ -1,26 +1,26 @@
 #' Data Frame Viewing
 #'
-#' \code{peek} - Convenience function to view all the columns of the head
-#' of a truncated \code{\link[base]{data.frame}}.  \code{peek} invisibly returns
-#' \code{x}.  This makes its use ideal in a \pkg{dplyr}/\pkg{magrittr} pipeline.
+#' `peek` - Convenience function to view all the columns of the head
+#' of a truncated [base::data.frame()].  `peek` invisibly returns
+#' `x`.  This makes its use ideal in a \pkg{dplyr}/\pkg{magrittr} pipeline.
 #'
-#' @param x A \code{\link[base]{data.frame}} object.
+#' @param x A [base::data.frame()] object.
 #' @param n Number of rows to display.
 #' @param width The width of the columns to be displayed.
-#' @param strings.left logical.  If \code{TRUE} strings will be left alligned.
-#' @param \ldots For internal use.
-#' @return Prints a truncated head but invisibly returns \code{x}.
-#' @seealso \code{\link[utils]{head}}
+#' @param strings.left logical.  If `TRUE` strings will be left aligned.
+#' @param ... For internal use.
+#' @return Prints a truncated head but invisibly returns `x`.
+#' @seealso [utils::head()]
 #' @rdname peek
 #' @export
-#' @details By default \pkg{dplyr} does not print all columns of a data frame
-#' (\code{tbl_df}).  This makes inspection of data difficult at times,
-#' particularly with text string data.  \code{peek} allows the user to see a
-#' truncated head for inspection purposes.
+#' @details By default \pkg{dplyr} does not print all columns of a [dplyr::tibble()].  
+#' This makes inspection of data difficult at times, particularly with text 
+#' string data.  `peek()` allows the user to see a truncated head for 
+#' inspection purposes.
 #' @examples
 #' peek(mtcars)
 #' peek(presidential_debates_2012)
-peek <- function (x, n = 10, width = 20, strings.left = TRUE,...) {
+peek <- function (x, n = 10, width = 20, strings.left = TRUE, ...) {
     WD <- options()[["width"]]
     options(width = 3000)
     o <- utils::head(truncdf(as.data.frame(x, stringsAsFactors = FALSE),
@@ -59,8 +59,8 @@ peek <- function (x, n = 10, width = 20, strings.left = TRUE,...) {
 
 #' Data Frame Viewing
 #'
-#' \code{unpeek} - Strips out class \code{textreadr} so that the entire
-#' \code{\link[base]{data.frame}} will be printed.
+#' `unpeek` - Strips out class *textreadr* so that the entire
+#' [base::data.frame()] will be printed.
 #' @rdname peek
 #' @export
 unpeek <- function(x) {
@@ -68,10 +68,9 @@ unpeek <- function(x) {
     x
 }
 
-truncdf <-
-function(x, end=10, begin=1, reclass = TRUE) {
+truncdf <- function(x, end = 10, begin = 1, reclass = TRUE) {
     x <- as.data.frame(x, stringsAsFactors = FALSE)
-    DF <- data.frame(lapply(x, substr, begin, end), check.names=FALSE, stringsAsFactors = FALSE)
+    DF <- data.frame(lapply(x, substr, begin, end), check.names = FALSE, stringsAsFactors = FALSE)
     names(DF) <- substring(names(DF), begin, end)
     if (isTRUE(reclass)) class(DF) <- c("trunc", class(DF))
     DF

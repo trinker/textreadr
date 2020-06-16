@@ -6,7 +6,7 @@
 #' @param i Iteration of the loop.
 #' @param total Total number of iterations.
 #' @param file The file name of that iteration to print out.
-#' @param \ldots ignored
+#' @param ... ignored
 #' @return `loop_counter` - Prints loop information.
 #' @export
 #' @rdname loop_utilities
@@ -25,7 +25,7 @@
 #' 
 #' for (i in seq_along(files)){
 #' 
-#'     loop_counter(i, total, file_name(files[i]))
+#'     loop_counter(i, total, base_name(files[i]))
 #' 
 #'     content[[i]] <- try_limit(
 #'         textreadr::read_document(files[i]), 
@@ -58,24 +58,27 @@ loop_counter <- function(i, total, file, ...){
 
 #' Utilities for Looping to Read In Documents
 #' 
-#' `file_name` - Like `base::basename` but doesn't choke on long paths.
+#' `base_name` - Like `base::basename` but doesn't choke on long paths.
 #' 
 #' @param path A character vector, containing path names.
 #' @export
+#' @return `base_name` - Returns just the basename of the path.
 #' @rdname loop_utilities
-file_name <- function(path) gsub('^.+/', '', path)
+base_name <- function(path) gsub('^.+/', '', path)
 
 #' Utilities for Looping to Read In Documents
 #' 
 #' `try_limit` - Limits the amount of try that an expression can run for.  This
 #' works to limit how long an attempted read-in of a document may take.  Most 
 #' useful in a loop with a few very long running document read-ins (e.g., .pdf 
-#' files that require tesseract package).  Note that `max.time` can not stop a 
-#' `system` call (as many read-in functions are essentially utilizing, but it
-#' can limit how many `system` calls are made.  This means a .pdf with multiple 
-#' tesseract pages will only allow the first page to read-in before returning an 
-#' error result.  Note that this approach does not distinguish between errors
-#' running the `expr` and time-out errors.
+#' files that require [**tesseract** package](https://CRAN.R-project.org/package=tesseract)).  
+#' Note that `max.time` can not stop a `system` call (as many read-in functions 
+#' are essentially utilizing, but it can limit how many `system` calls are made.  
+#' This means a .pdf with multiple 
+#' [**tesseract**](https://CRAN.R-project.org/package=tesseract)) pages will only 
+#' allow the first page to read-in before returning an error result.  Note that 
+#' this approach does not distinguish between errors running the `expr` and 
+#' time-out errors.
 #' 
 #' @param expr An expression to run.
 #' @param max.time Max allotted elapsed run time in seconds.

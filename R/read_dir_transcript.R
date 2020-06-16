@@ -1,45 +1,45 @@
 #' Read In Multiple Transcript Files From a Directory
 #'
 #' Read in multiple transcript files from a directory and create a
-#' \code{\link[base]{data.frame}}.
+#' [base::data.frame()].
 #'
 #' @param path Path to the directory.
 #' @param col.names  A character vector specifying the column names of the
 #' transcript columns (document, person, dialogue).
 #' @param pattern An optional regular expression. Only file names which match
 #' the regular expression will be returned.
-#' @param all.files Logical.   If \code{FALSE}, only the names of visible files
-#' are returned. If \code{TRUE}, all file names will be returned.
+#' @param all.files Logical.   If `FALSE`, only the names of visible files
+#' are returned. If `TRUE`, all file names will be returned.
 #' @param recursive Logical. Should the listing recurse into directories?
 #' @param skip Integer; the number of lines of the data file to skip before
 #' beginning to read data.
-#' @param merge.broke.tot logical.  If \code{TRUE} and if the file being read in
+#' @param merge.broke.tot logical.  If `TRUE` and if the file being read in
 #' is .docx with broken space between a single turn of talk read_transcript
 #' will attempt to merge these into a single turn of talk.
-#' @param header logical.  If \code{TRUE} the file contains the names of the
+#' @param header logical.  If `TRUE` the file contains the names of the
 #' variables as its first line.
 #' @param dash A character string to replace the en and em dashes special
 #' characters (default is to remove).
 #' @param ellipsis A character string to replace the ellipsis special characters.
-#' @param quote2bracket logical. If \code{TRUE} replaces curly quotes with curly
-#' braces (default is \code{FALSE}).  If \code{FALSE} curly quotes are removed.
-#' @param rm.empty.rows logical.  If \code{TRUE}
-#' \code{\link[textreadr]{read_transcript}}  attempts to remove empty rows.
-#' @param na A character string to be interpreted as an \code{NA} value.
+#' @param quote2bracket logical. If `TRUE` replaces curly quotes with curly
+#' braces (default is `FALSE`).  If `FALSE` curly quotes are removed.
+#' @param rm.empty.rows logical.  If `TRUE`
+#' [read_transcript()]  attempts to remove empty rows.
+#' @param na A character string to be interpreted as an `NA` value.
 #' @param sep The field separator character. Values on each line of the file are
-#' separated by this character.  The default of \code{NULL} instructs
-#' \code{\link[textreadr]{read_transcript}} to use a separator suitable for the file
+#' separated by this character.  The default of `NULL` instructs
+#' [read_transcript()] to use a separator suitable for the file
 #' type being read in.
 #' @param comment.char A character vector of length one containing a single
-#' character or an empty string. Use \code{""} to turn off the interpretation of
+#' character or an empty string. Use `""` to turn off the interpretation of
 #' comments altogether.
 #' @param max.person.nchar The max number of characters long names are expected
 #' to be.  This information is used to warn the user if a separator appears beyond
 #' this length in the text.
-#' @param ignore.case logical.  If \code{TRUE} case in the \code{pattern} argument
+#' @param ignore.case logical.  If `TRUE` case in the `pattern` argument
 #' will be ignored.
 #' @param verbose Logical. Should Each iteration of the read-in be reported.
-#' @param \ldots ignored.
+#' @param ... ignored.
 #' @return Returns a dataframe of documents, dialogue, and people.
 #' @export
 #' @seealso read_transcript
@@ -108,7 +108,7 @@ read_dir_transcript <- function(path, col.names = c("Document", "Person", "Dialo
     # 'quote2bracket', 'rm.empty.rows', 'na', 'sep',
     # 'comment.char', 'max.person.nchar'), collapse=", ")
     len <- length(to_read_in)
-    nms <- file_name(to_read_in)
+    nms <- base_name(to_read_in)
     
     reads <- Map(function(x, y1, y2, y3, y4, y5, y6, y7, y8, y9, y10, y11, i, nm) {
         

@@ -4,11 +4,11 @@
 #'
 #' @param file The path to the .docx file.
 #' @param skip The number of lines to skip.
-#' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are
+#' @param remove.empty logical.  If `TRUE` empty elements in the vector are
 #' removed.
-#' @param trim logical.  If \code{TRUE} the leading/training white space is
+#' @param trim logical.  If `TRUE` the leading/training white space is
 #' removed.
-#' @param \dots ignored.
+#' @param ... ignored.
 #' @return Returns a character vector.
 #' @keywords docx
 #' @export
@@ -61,7 +61,8 @@ read_docx <- function (file, skip = 0, remove.empty = TRUE, trim = TRUE, ...) {
     if (isTRUE(remove.empty)) pvalues <- pvalues[!grepl("^\\s*$", pvalues)]
     if (skip > 0) pvalues <- pvalues[-seq(skip)]
     if (isTRUE(trim)) pvalues <- trimws(pvalues)
-
+    if (length(pvalues) == 0) pvalues <- ''
+    
     pvalues
 
 }

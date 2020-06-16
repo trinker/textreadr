@@ -17,7 +17,7 @@ removed.}
 \item{trim}{logical.  If \code{TRUE} the leading/training white space is
 removed.}
 
-\item{\dots}{ignored.}
+\item{...}{ignored.}
 }
 \value{
 Returns a character vector.
@@ -33,6 +33,6 @@ file <- download(url)
 }
 }
 \author{
-Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
+Bryan Goodrich and Tyler Rinker \href{mailto:tyler.rinker@gmail.com}{tyler.rinker@gmail.com}.
 }
 \keyword{docx}

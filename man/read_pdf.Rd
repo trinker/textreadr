@@ -19,18 +19,18 @@ removed.}
 removed.}
 
 \item{ocr}{logical.  If \code{TRUE} documents with a non-text pull using
-\code{\link[pdftools]{pdf_text}} will be re-run using OCR via the
-\code{\link[tesseract]{ocr}} function.  This will create temporary .png
+\link[pdftools:pdftools]{pdftools::pdf_text()} will be re-run using OCR via the
+\code{\link[tesseract:ocr]{tesseract::ocr()}} function.  This will create temporary .png
 files and will require a much larger compute time.}
 
-\item{\dots}{Other arguments passed to \code{\link[pdftools]{pdf_text}}.}
+\item{...}{Other arguments passed to \link[pdftools:pdftools]{pdftools::pdf_text()}.}
 }
 \value{
-Returns a \code{\link[base]{data.frame}} with the page number
+Returns a \code{\link[base:data.frame]{base::data.frame()}} with the page number
 (\code{page_id}), line number (\code{element_id}), and the \code{text}.
 }
 \description{
-A wrapper for \code{\link[pdftools]{pdf_text}} to read PDFs into \pkg{R}.
+A wrapper for \code{\link[pdftools:pdf_text]{pdftools::pdf_text()}} to read PDFs into \pkg{R}.
 }
 \note{
 A word of caution from \href{http://stackoverflow.com/a/9187015/1000343}{Carl Witthoft}"

@@ -36,7 +36,7 @@ Table of Contents
     -   [Read .doc](#read-doc)
     -   [Read .rtf](#read-rtf)
     -   [Read .pdf](#read-pdf)
-        -   [Image Based pdf: OCR](#image-based-pdf-ocr)
+        -   [Image Based .pdf: OCR](#image-based-pdf-ocr)
     -   [Read .pptx](#read-pptx)
     -   [Read .html](#read-html)
     -   [Read Transcripts](#read-transcripts)
@@ -246,9 +246,11 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\trinker\AppData\Local\Temp\Rtmpc5CDza
+    ## pres.deb1.docx read into C:\Users\trinker\AppData\Local\Temp\RtmpkZ09wS
 
-    ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                            "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program." "LEHRER: And what about the vouchers?"
+    ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
+    ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
+    ## [3] "LEHRER: And what about the vouchers?"
 
 ### Browse
 
@@ -296,13 +298,17 @@ done. Below I demonstrate reading each of these five file formats with
         read_document() %>%
         head(3)
 
-    ## [1] "Interview with Mary Waters Spaulding, August 8, 2013"                                           "CRAIG BREADEN: My name is Craig Breaden. I’m the audiovisual archivist at Duke University,"     "and I’m with Kirston Johnson, the curator of the Archive of Documentary Arts at Duke. The date"
+    ## [1] "Interview with Mary Waters Spaulding, August 8, 2013"                                          
+    ## [2] "CRAIG BREADEN: My name is Craig Breaden. I’m the audiovisual archivist at Duke University,"    
+    ## [3] "and I’m with Kirston Johnson, the curator of the Archive of Documentary Arts at Duke. The date"
 
     html_doc %>%
         read_document() %>%
         head(3)
 
-    ## [1] "textreadr Creed"                                                                                                 "The textreadr package aims to be a lightweight tool kit that handles 80% of an analyst’s text reading in needs." "The package handles .docx, .doc, .pdf, .html, and .txt."
+    ## [1] "textreadr Creed"                                                                                                
+    ## [2] "The textreadr package aims to be a lightweight tool kit that handles 80% of an analyst’s text reading in needs."
+    ## [3] "The package handles .docx, .doc, .pdf, .html, .pptx, and .txt."
 
     txt_doc %>%
         read_document() %>%
@@ -312,7 +318,7 @@ done. Below I demonstrate reading each of these five file formats with
     ## The textreadr package aims to be a lightweight
     ## tool kit that handles 80% of an analyst's text
     ## reading in needs.
-    ## The package handles .docx, .doc, .pdf, .html, and .txt.
+    ## The package handles .docx, .doc, .pdf, .html, .pptx, and .txt.
     ## If you have another format there is likely already
     ## another popular R package that specializes in this
     ## read in task.  For example, got XML, use the xml2
@@ -414,7 +420,9 @@ collapsed with `//w:p` tags) in the markup.
         read_docx(15) %>%
         head(3)
 
-    ## [1] "Hassan:             Could you please tell me your name, your title, your age, and your place  of ref ,                                      umm, residence?" "Abd Rabou:     My name is Ahmad Abd Rabou. I’m assistant professor of comparative politics at"                                                               "both Cairo University and The American University in Cairo. I’m 34 years old. I"
+    ## [1] "Hassan:             Could you please tell me your name, your title, your age, and your place  of ref ,                                      umm, residence?"
+    ## [2] "Abd Rabou:     My name is Ahmad Abd Rabou. I’m assistant professor of comparative politics at"                                                              
+    ## [3] "both Cairo University and The American University in Cairo. I’m 34 years old. I"
 
 Read .doc
 ---------
@@ -434,7 +442,10 @@ way.
         read_doc(15) %>%
         head(7)
 
-    ## [1] "Hassan:           Could you please tell me your name, your title, your age," "and your place of ref,"                                                      "umm, residence?"                                                             "Abd Rabou:   My name is Ahmad Abd Rabou. I'm assistant professor of"         "comparative politics at"                                                     "both Cairo University and The American University"                           "in Cairo. I'm 34 years old. I"
+    ## [1] "Hassan:           Could you please tell me your name, your title, your age," "and your place of ref,"                                                     
+    ## [3] "umm, residence?"                                                             "Abd Rabou:   My name is Ahmad Abd Rabou. I'm assistant professor of"        
+    ## [5] "comparative politics at"                                                     "both Cairo University and The American University"                          
+    ## [7] "in Cairo. I'm 34 years old. I"
 
 Read .rtf
 ---------
@@ -445,7 +456,12 @@ latex. The **striprtf** package provides the backend for `read_rtf`.
     rtf_doc %>%
         read_rtf() 
 
-    ## [1] "Researcher 2:\tOctober 7, 1892."                                                                                                                                                                                                                                                                                                                               "Teacher 4:\tStudents it’s time to learn."                                                                                                                                                                                                                                                                                                                      "[Student discussion; unintelligible]"                                                                                                                                                                                                                                                                                                                         "Multiple Students:\tYes teacher we‘re ready to learn."                                                                                                                                                                                                                                                                                                         "Teacher 4:\tLet's read this terrific book together.  It's called Moo Baa La La La and – what was I going to …  Oh yes — The story is by Sandra Boynton."                                                                                                                                                                                                       "“A cow says Moo. A Sheep says Baa. Three singing pigs say LA LA LA! \"No, no!\" you say, that isn't right. The pigs say oink all day and night. Rhinoceroses snort and snuff. And little dogs go ruff ruff ruff! Some other dogs go bow wow wow! And cats and kittens say Meow! Quack! Says the duck. A horse says neigh. It's quiet now. What do you say? ”"
+    ## [1] "Researcher 2:\tOctober 7, 1892."                                                                                                                                                                                                                                                                                                                              
+    ## [2] "Teacher 4:\tStudents it’s time to learn."                                                                                                                                                                                                                                                                                                                     
+    ## [3] "[Student discussion; unintelligible]"                                                                                                                                                                                                                                                                                                                        
+    ## [4] "Multiple Students:\tYes teacher we‘re ready to learn."                                                                                                                                                                                                                                                                                                        
+    ## [5] "Teacher 4:\tLet's read this terrific book together.  It's called Moo Baa La La La and – what was I going to …  Oh yes — The story is by Sandra Boynton."                                                                                                                                                                                                      
+    ## [6] "“A cow says Moo. A Sheep says Baa. Three singing pigs say LA LA LA! \"No, no!\" you say, that isn't right. The pigs say oink all day and night. Rhinoceroses snort and snuff. And little dogs go ruff ruff ruff! Some other dogs go bow wow wow! And cats and kittens say Meow! Quack! Says the duck. A horse says neigh. It's quiet now. What do you say? ”"
 
 Read .pdf
 ---------
@@ -477,7 +493,7 @@ with meta data, including page numbers and element (row) ids.
     ## 10 1       10         1940’s?                                 
     ## .. ...     ...        ...
 
-### Image Based pdf: OCR
+### Image Based .pdf: OCR
 
 Image based .pdfs require optical character recognition (OCR) in order
 for the images to be converted to text. The `ocr` argument of `read_pdf`
@@ -567,8 +583,20 @@ with `read_html`.
     html_doc %>%
         read_html() 
 
-    ##  [1] "textreadr Creed"                                                                                                                                                                                                                                                                                                                                              "The textreadr package aims to be a lightweight tool kit that handles 80% of an analyst’s text reading in needs."                                                                                                                                                                                                                                              "The package handles .docx, .doc, .pdf, .html, and .txt."                                                                                                                                                                                                                                                                                                      "If you have another format there is likely already another popular R package that specializes in this read in task. For example, got XML, use the xml2 package, authored by Hadley Wickham, Jim Hester, & Jeroen Ooms. Need special handling for .html? Use Hadley Wickham’s rvest package. Got SQL? Oh boy there’s a bunch of great ways to read it into R." "R Package"                                                                                                                                                                                                                                                                                                                                                    "SQL"                                                                                                                                                                                                                                                                                                                                                          "ROBDC"                                                                                                                                                                                                                                                                                                                                                        "Microsoft SQL Server"                                                                                                                                                                                                                                                                                                                                        
-    ##  [9] "RMySQL"                                                                                                                                                                                                                                                                                                                                                       "MySQL"                                                                                                                                                                                                                                                                                                                                                        "ROracle"                                                                                                                                                                                                                                                                                                                                                      "Oracle"                                                                                                                                                                                                                                                                                                                                                       "RJDBC"                                                                                                                                                                                                                                                                                                                                                        "JDBC"
+    ##  [1] "textreadr Creed"                                                                                                                                                                                                                                                                                                                                             
+    ##  [2] "The textreadr package aims to be a lightweight tool kit that handles 80% of an analyst’s text reading in needs."                                                                                                                                                                                                                                             
+    ##  [3] "The package handles .docx, .doc, .pdf, .html, .pptx, and .txt."                                                                                                                                                                                                                                                                                              
+    ##  [4] "If you have another format there is likely already another popular R package that specializes in this read in task. For example, got XML, use the xml2 package, authored by Hadley Wickham, Jim Hester, & Jeroen Ooms. Need special handling for .html? Use Hadley Wickham’s rvest package. Got SQL? Oh boy there’s a bunch of great ways to read it into R."
+    ##  [5] "R Package"                                                                                                                                                                                                                                                                                                                                                   
+    ##  [6] "SQL"                                                                                                                                                                                                                                                                                                                                                         
+    ##  [7] "ROBDC"                                                                                                                                                                                                                                                                                                                                                       
+    ##  [8] "Microsoft SQL Server"                                                                                                                                                                                                                                                                                                                                        
+    ##  [9] "RMySQL"                                                                                                                                                                                                                                                                                                                                                      
+    ## [10] "MySQL"                                                                                                                                                                                                                                                                                                                                                       
+    ## [11] "ROracle"                                                                                                                                                                                                                                                                                                                                                     
+    ## [12] "Oracle"                                                                                                                                                                                                                                                                                                                                                      
+    ## [13] "RJDBC"                                                                                                                                                                                                                                                                                                                                                       
+    ## [14] "JDBC"
 
 Read Transcripts
 ----------------
@@ -584,7 +612,7 @@ will extract the data as a data frame with a person and text column. The
 Here I read in and parse the different formats `read_transcript`
 handles. These are the files that will be read in:
 
-    basename(trans_docs)
+    base_name(trans_docs)
 
     ## [1] "trans1.docx" "trans2.docx" "trans3.docx" "trans4.xlsx" "trans5.xls"  "trans6.doc"  "trans7.rtf"  "transcripts"
 
@@ -782,25 +810,15 @@ I demonstrate pairings with
     p_load(dplyr, qdapRegex)
     p_load_current_gh(file.path('trinker', c('textreadr', 'textshape', 'textclean')))
 
-    ## pdftools  (2.3   -> 2.3.1) [CRAN]
-    ## ellipsis  (0.3.0 -> 0.3.1) [CRAN]
-    ## vctrs     (0.3.0 -> 0.3.1) [CRAN]
-    ## glue      (NA    -> 1.4.1) [CRAN]
-    ## backports (1.1.6 -> 1.1.7) [CRAN]
-    ## pkgload   (1.0.2 -> 1.1.0) [CRAN]
-    ## package 'pdftools' successfully unpacked and MD5 sums checked
-    ## glue      (NA    -> 1.4.1) [CRAN]
-    ## backports (1.1.6 -> 1.1.7) [CRAN]
-    ## ellipsis  (0.3.0 -> 0.3.1) [CRAN]
-    ## pkgload   (1.0.2 -> 1.1.0) [CRAN]
-    ## package 'glue' successfully unpacked and MD5 sums checked
-    ## glue      (NA    -> 1.4.1) [CRAN]
-    ## tidyr     (1.0.3 -> 1.1.0) [CRAN]
-    ## ellipsis  (0.3.0 -> 0.3.1) [CRAN]
-    ## vctrs     (0.3.0 -> 0.3.1) [CRAN]
-    ## backports (1.1.6 -> 1.1.7) [CRAN]
-    ## pkgload   (1.0.2 -> 1.1.0) [CRAN]
-    ## package 'glue' successfully unpacked and MD5 sums checked
+    ## 
+    ##          checking for file 'C:\Users\trinker\AppData\Local\Temp\RtmpkZ09wS\remotes95ec73ca3370\trinker-textreadr-e26e3c2/DESCRIPTION' ...  v  checking for file 'C:\Users\trinker\AppData\Local\Temp\RtmpkZ09wS\remotes95ec73ca3370\trinker-textreadr-e26e3c2/DESCRIPTION' (356ms)
+    ##       -  preparing 'textreadr': (573ms)
+    ##    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   v  checking DESCRIPTION meta-information
+    ##       -  checking for LF line-endings in source and make files and shell scripts
+    ##       -  checking for empty or unneeded directories
+    ##       -  building 'textreadr_1.0.0.tar.gz'
+    ##      
+    ## 
 
     ## Read in pdf, split on variables
     dat <- 'http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf' %>%
@@ -842,7 +860,13 @@ I demonstrate pairings with
     ## [1] "Pulliam v. Allen"   "Burnett v. Grattan"
     ## 
     ## $`40`
-    ##  [1] " United States v. Knox"                                            "Lassiter v. Department of Social Services"                         "Arkansas v. Tennessee"                                             "Utah v. United States"                                             "Johnson v. United States"                                          "Baldonado v. California"                                           "Conway v. California Adult Authority"                              "Wheaton v. California"                                             "Maxwell v. Bishop"                                                 "National Labor Relations Board v. United Insurance Co. of America" "United States v. King"                                             "National Labor Relations Board v. United Insurance Co. of America" "United States v. King"                                            
+    ##  [1] " United States v. Knox"                                            "Lassiter v. Department of Social Services"                        
+    ##  [3] "Arkansas v. Tennessee"                                             "Utah v. United States"                                            
+    ##  [5] "Johnson v. United States"                                          "Baldonado v. California"                                          
+    ##  [7] "Conway v. California Adult Authority"                              "Wheaton v. California"                                            
+    ##  [9] "Maxwell v. Bishop"                                                 "National Labor Relations Board v. United Insurance Co. of America"
+    ## [11] "United States v. King"                                             "National Labor Relations Board v. United Insurance Co. of America"
+    ## [13] "United States v. King"                                            
     ## 
     ## $`44`
     ## [1] "Grisham v. Hagan"                   "McElroy v. Guagliardo"              "Virginia Supreme Court v. Friedman"
@@ -857,4 +881,5 @@ I demonstrate pairings with
     ## [1] "New York Gaslight Club, Inc. v. Carey" "Pruneyard Shopping Center v. Robins"  
     ## 
     ## $`58`
-    ## [1] "Mobile v. Bolden"                             "Williams v. Brown"                            "United States v. Havens"                      "Parratt v. Taylor"                            "Dougherty County Board of Education v. White" "Jenkins v. Anderson"
+    ## [1] "Mobile v. Bolden"                             "Williams v. Brown"                            "United States v. Havens"                     
+    ## [4] "Parratt v. Taylor"                            "Dougherty County Board of Education v. White" "Jenkins v. Anderson"

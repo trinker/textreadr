@@ -19,15 +19,15 @@ removed.}
 
 \item{format}{logical.  If \code{TRUE} the output will keep doc formatting
 (e.g., bold, italics, underlined).  This corresponds to the \code{-f} flag in
-antiword.}
+\href{http://www.winfield.demon.nl}{\strong{antiword}}.}
 
-\item{\dots}{ignored.}
+\item{...}{ignored.}
 }
 \value{
 Returns a character vector.
 }
 \description{
-Read in the content from a .doc file using \href{http://www.winfield.demon.nl}{antiword}
+Read in the content from a .doc file using \href{http://www.winfield.demon.nl}{\strong{antiword}}
 via the \pkg{antiword} package.
 }
 \examples{

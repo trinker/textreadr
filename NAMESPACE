@@ -2,9 +2,9 @@
 
 S3method(print,textreadr)
 export(as_transcript)
+export(base_name)
 export(browse)
 export(download)
-export(file_name)
 export(loop_counter)
 export(peek)
 export(read_dir)

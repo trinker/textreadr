@@ -6,17 +6,17 @@
 #'
 #' @param file The path to the .html file.
 #' @param skip The number of lines to skip.
-#' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are
+#' @param remove.empty logical.  If `TRUE` empty elements in the vector are
 #' removed.
-#' @param trim logical.  If \code{TRUE} the leading/training white space is
+#' @param trim logical.  If `TRUE` the leading/training white space is
 #' removed.
-#' @param \dots Other arguments passed to \code{\link[xml2]{read_html}}.
+#' @param ... Other arguments passed to [xml2::read_html()][xml::read_xml].
 #' @return Returns a character vector.
 #' @keywords html
 #' @rdname read_html
 #' @export
 #' @references The xpath is taken from Tony Breyal's response on StackOverflow:
-#' \url{http://stackoverflow.com/questions/3195522/is-there-a-simple-way-in-r-to-extract-only-the-text-elements-of-an-html-page/3195926#3195926}
+#' <http://stackoverflow.com/questions/3195522/is-there-a-simple-way-in-r-to-extract-only-the-text-elements-of-an-html-page/3195926#3195926>
 #' @examples
 #' html_dat <- read_html(
 #'     system.file("docs/textreadr_creed.html", package = "textreadr")
@@ -45,7 +45,8 @@ read_html <- function (file, skip = 0, remove.empty = TRUE, trim = TRUE, ...) {
     if (isTRUE(remove.empty)) pvalues <- pvalues[!grepl("^\\s*$", pvalues)]
     if (skip > 0) pvalues <- pvalues[-seq(skip)]
     if (isTRUE(trim)) pvalues <- trimws(pvalues)
-
+    if (length(pvalues) == 0) pvalues <- ''
+    
     pvalues
 
 }

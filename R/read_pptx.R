@@ -4,14 +4,14 @@
 #'
 #' @param file The path to the .pptx file.
 #' @param skip The number of lines to skip.
-#' @param remove.empty logical.  If \code{TRUE} empty elements in the vector are
+#' @param remove.empty logical.  If `TRUE` empty elements in the vector are
 #' removed.
-#' @param trim logical.  If \code{TRUE} the leading/training white space is
+#' @param trim logical.  If `TRUE` the leading/training white space is
 #' removed.
-#' @param include.notes logical.  If \code{TRUE} then slide notes are included.
-#' @param \dots ignored.
-#' @return Returns a \code{\link[base]{data.frame}} with the slide number
-#' (\code{slide_id}), line number (\code{element_id}), and the \code{text}.
+#' @param include.notes logical.  If `TRUE` then slide notes are included.
+#' @param ... ignored.
+#' @return Returns a [base::data.frame()] with the slide number
+#' (`slide_id`), line number (`element_id`), and the `text`.
 #' @keywords pptx
 #' @export
 #' @examples

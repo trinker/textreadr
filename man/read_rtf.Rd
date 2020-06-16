@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_rtf.R
 \name{read_rtf}
 \alias{read_rtf}
-\title{Read a Rich Text Format into R}
+\title{Read a Rich Text Format Content}
 \usage{
 read_rtf(file, skip = 0, remove.empty = TRUE, trim = TRUE, ...)
 }
@@ -17,13 +17,13 @@ removed.}
 \item{trim}{logical.  If \code{TRUE} the leading/training white space is
 removed.}
 
-\item{\dots}{Other arguments passed to \code{\link[striprtf]{read_rtf}}.}
+\item{...}{Other arguments passed to \code{\link[striprtf:read_rtf]{striprtf::read_rtf()}}.}
 }
 \value{
 Returns a character vector.
 }
 \description{
-A wrapper for \code{\link[striprtf]{read_rtf}} to read RTFs into \pkg{R}.
+A wrapper for \code{\link[striprtf:read_rtf]{striprtf::read_rtf()}} to read RTFs
 }
 \examples{
 \dontrun{
@@ -33,6 +33,6 @@ rtf_dat <- read_rtf(
 }
 }
 \seealso{
-\code{\link[striprtf]{read_rtf}}
+\code{\link[striprtf:read_rtf]{striprtf::read_rtf()}}
 }
 \keyword{rtf}

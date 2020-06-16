@@ -2,7 +2,7 @@ The textreadr package aims to be a lightweight
 tool kit that handles 80% of an analyst's text
 reading in needs.
 
-The package handles .docx, .doc, .pdf, .html, and .txt.
+The package handles .docx, .doc, .pdf, .html, .pptx, and .txt.
 
 If you have another format there is likely already
 another popular R package that specializes in this

@@ -26,10 +26,10 @@ removed.}
 
 \item{include.notes}{logical.  If \code{TRUE} then slide notes are included.}
 
-\item{\dots}{ignored.}
+\item{...}{ignored.}
 }
 \value{
-Returns a \code{\link[base]{data.frame}} with the slide number
+Returns a \code{\link[base:data.frame]{base::data.frame()}} with the slide number
 (\code{slide_id}), line number (\code{element_id}), and the \code{text}.
 }
 \description{

@@ -29,22 +29,24 @@ are returned. If \code{TRUE}, all file names will be returned.}
 
 \item{recursive}{Logical. Should the listing recurse into directories?}
 
-\item{ignore.case}{logical.  If \code{TRUE} case in the \code{pattern} argument 
+\item{ignore.case}{logical.  If \code{TRUE} case in the \code{pattern} argument
 will be ignored.}
 
 \item{verbose}{Logical. Should Each iteration of the read-in be reported.}
 
-\item{\ldots}{Other arguments passed to read_document functions.}
+\item{...}{Other arguments passed to read_document functions.}
 }
 \value{
-Returns a \code{\link[base]{data.frame}} with file names as a document
+Returns a \code{\link[base:data.frame]{base::data.frame()}} with file names as a document
 column and content as a text column.
 }
 \description{
 Read in multiple files from a directory and create a
-\code{\link[base]{data.frame}}.
+\code{\link[base:data.frame]{base::data.frame()}}.
 }
 \examples{
+\dontrun{
 read_dir(system.file("docs/Maas2011/pos", package = "textreadr"))
 read_dir(system.file("docs/Maas2011", package = "textreadr"), recursive=TRUE)
+}
 }

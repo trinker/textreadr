@@ -268,7 +268,7 @@ pdf_doc %>%
     read_pdf() 
 ```
 
-### Image Based pdf: OCR
+### Image Based .pdf: OCR
 
 Image based .pdfs require optical character recognition (OCR) in order for the images to be converted to text.  The `ocr` argument of `read_pdf` allows the user to read in image based .pdf files and allow the [**tesseract**](https://CRAN.R-project.org/package=tesseract) package do the heavy lifting in the backend.  You can look at the .pdf we'll be using by running:
 
@@ -345,7 +345,7 @@ Many researchers store their dialogue data (including interviews and observation
 Here I read in and parse the different formats `read_transcript` handles. These are the files that will be read in:
 
 ```{r}
-basename(trans_docs)
+base_name(trans_docs)
 ```
 
 ### docx Simple

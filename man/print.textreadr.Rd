@@ -7,11 +7,11 @@
 \method{print}{textreadr}(x, width = 40, ...)
 }
 \arguments{
-\item{x}{A \code{\link[base]{data.frame}} textreadr object.}
+\item{x}{A [base::data.frame()] textreadr object.}
 
 \item{width}{The width of the columns to be displayed.}
 
-\item{\ldots}{Other arguments passed to \code{\link[textreadr]{peek}}.}
+\item{...}{Other arguments passed to \code{\link[=peek]{peek()}}.}
 }
 \description{
 Prints a textreadr object
