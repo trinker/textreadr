@@ -85,7 +85,7 @@ file_name <- function(path) gsub('^.+/', '', path)
 #' @export
 #' @rdname loop_utilities
 try_limit <- function(expr, max.time = Inf, timeout.return = NULL, 
-    zero.length.return = timeout.return, silent = TRUE, ...){
+    zero.length.return = "", silent = TRUE, ...){
 
     setTimeLimit(cpu = max.time, elapsed = max.time, transient=TRUE)
     on.exit(setTimeLimit(cpu = Inf, elapsed = Inf, transient = FALSE))

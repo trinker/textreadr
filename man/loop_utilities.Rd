@@ -14,7 +14,7 @@ try_limit(
   expr,
   max.time = Inf,
   timeout.return = NULL,
-  zero.length.return = timeout.return,
+  zero.length.return = "",
   silent = TRUE,
   ...
 )

@@ -11,17 +11,18 @@
 #' @param all.files Logical.   If \code{FALSE}, only the names of visible files
 #' are returned. If \code{TRUE}, all file names will be returned.
 #' @param recursive Logical. Should the listing recurse into directories?
-#' @param \ldots Other arguments passed to read_document functions.
 #' @param ignore.case logical.  If \code{TRUE} case in the \code{pattern} argument 
 #' will be ignored.
 #' @return Returns a \code{\link[base]{data.frame}} with file names as a document
 #' column and content as a text column.
+#' @param verbose Logical. Should Each iteration of the read-in be reported.
+#' @param \ldots Other arguments passed to read_document functions.
 #' @export
 #' @examples
 #' read_dir(system.file("docs/Maas2011/pos", package = "textreadr"))
 #' read_dir(system.file("docs/Maas2011", package = "textreadr"), recursive=TRUE)
 read_dir <- function (path, pattern = NULL, doc.col = "document", all.files = FALSE, 
-    recursive = FALSE, ignore.case = FALSE, ...) {
+    recursive = FALSE, ignore.case = FALSE, verbose = FALSE, ...) {
 
     to_read_in <- list_files(path, all.files = all.files, full.names = TRUE, 
         recursive = recursive)
@@ -29,12 +30,20 @@ read_dir <- function (path, pattern = NULL, doc.col = "document", all.files = FA
     if (!is.null(pattern)) to_read_in <- grep(pattern, to_read_in, ignore.case = ignore.case, value = TRUE, perl=TRUE)
 
 
-    if (identical(character(0), to_read_in)) 
+    if (identical(character(0), to_read_in)) {
         stop("The following location does not appear to contain files:\n   -", path)
-
+    }
+    
+    len <- length(to_read_in)
+    nms <- file_name(to_read_in)
+    
     text <- stats::setNames(
-        lapply(to_read_in, read_document, ...), 
-        tools::file_path_sans_ext(basename(to_read_in))
+        #lapply(to_read_in, read_document, ...),
+        Map(function(x, i, nm){
+            if (verbose) loop_counter(i, len, nm)
+            read_document(x, ...)
+        }, to_read_in, seq_along(to_read_in), nms),
+        tools::file_path_sans_ext(nms)
     )
 
 
@@ -75,5 +84,5 @@ list_files <- function(path=".", pattern=NULL, all.files=FALSE, full.names=TRUE,
     fls <- all[!file.info(all)$isdir]
     ## determine whether to return full names or just dir names
     if(isTRUE(full.names)) return(fls)
-    basename(fls)
+    file_name(fls)
 }

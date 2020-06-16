@@ -38,6 +38,7 @@
 #' this length in the text.
 #' @param ignore.case logical.  If \code{TRUE} case in the \code{pattern} argument
 #' will be ignored.
+#' @param verbose Logical. Should Each iteration of the read-in be reported.
 #' @param \ldots ignored.
 #' @return Returns a dataframe of documents, dialogue, and people.
 #' @export
@@ -65,7 +66,7 @@ read_dir_transcript <- function(path, col.names = c("Document", "Person", "Dialo
     pattern = NULL, all.files = FALSE,
     recursive = FALSE, skip = 0, merge.broke.tot = TRUE, header = FALSE, dash = "", ellipsis = "...",
     quote2bracket = FALSE, rm.empty.rows = TRUE, na = "", sep = NULL,
-    comment.char = "", max.person.nchar = 20, ignore.case = FALSE, ...) {
+    comment.char = "", max.person.nchar = 20, ignore.case = FALSE, verbose = FALSE, ...) {
 
     to_read_in <- list_files(path, all.files = all.files, full.names = TRUE, recursive = recursive)
 
@@ -106,16 +107,23 @@ read_dir_transcript <- function(path, col.names = c("Document", "Person", "Dialo
     #paste(c('skip', 'merge.broke.tot', 'header', 'dash', 'ellipsis',
     # 'quote2bracket', 'rm.empty.rows', 'na', 'sep',
     # 'comment.char', 'max.person.nchar'), collapse=", ")
-
-    reads <- Map(function(x, y1, y2, y3, y4, y5, y6, y7, y8, y9, y10, y11) {
+    len <- length(to_read_in)
+    nms <- file_name(to_read_in)
+    
+    reads <- Map(function(x, y1, y2, y3, y4, y5, y6, y7, y8, y9, y10, y11, i, nm) {
+        
+        if (verbose) loop_counter(i, len, nm)  
+        
         try(read_transcript(x, col.names = col.names[-1], skip = y1,
             merge.broke.tot = y2, header = y3, dash = y4, ellipsis = y5,
             quote2bracket = y6, rm.empty.rows = y7, na = y8, sep = y9,
             comment.char = y10, max.person.nchar = y11, ...))
+        
     }, to_read_in, skip, merge.broke.tot, header, dash, ellipsis,
-       quote2bracket, rm.empty.rows, na, sep, comment.char, max.person.nchar)
+       quote2bracket, rm.empty.rows, na, sep, comment.char, max.person.nchar, 
+       seq_along(to_read_in), nms)
 
-    names(reads) <- tools::file_path_sans_ext(basename(to_read_in))
+    names(reads) <- tools::file_path_sans_ext(nms)
 
     goods <- !sapply(reads, inherits, 'try-error')
     if (any(!goods)) {

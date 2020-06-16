@@ -22,6 +22,7 @@ read_dir_transcript(
   comment.char = "",
   max.person.nchar = 20,
   ignore.case = FALSE,
+  verbose = FALSE,
   ...
 )
 }
@@ -77,6 +78,8 @@ this length in the text.}
 
 \item{ignore.case}{logical.  If \code{TRUE} case in the \code{pattern} argument
 will be ignored.}
+
+\item{verbose}{Logical. Should Each iteration of the read-in be reported.}
 
 \item{\ldots}{ignored.}
 }

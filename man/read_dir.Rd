@@ -11,6 +11,7 @@ read_dir(
   all.files = FALSE,
   recursive = FALSE,
   ignore.case = FALSE,
+  verbose = FALSE,
   ...
 )
 }
@@ -30,6 +31,8 @@ are returned. If \code{TRUE}, all file names will be returned.}
 
 \item{ignore.case}{logical.  If \code{TRUE} case in the \code{pattern} argument 
 will be ignored.}
+
+\item{verbose}{Logical. Should Each iteration of the read-in be reported.}
 
 \item{\ldots}{Other arguments passed to read_document functions.}
 }
