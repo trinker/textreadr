@@ -1,6 +1,30 @@
-textreadr   
-============
-
+-   [Functions](#functions)
+-   [Installation](#installation)
+-   [Contact](#contact)
+-   [Demonstration](#demonstration)
+    -   [Load the Packages/Data](#load-the-packagesdata)
+    -   [Download & Browse](#download-browse)
+        -   [Download](#download)
+        -   [Browse](#browse)
+    -   [Generic Document Reading](#generic-document-reading)
+    -   [Read Directory Contents](#read-directory-contents)
+    -   [Read .docx](#read-.docx)
+    -   [Read .doc](#read-.doc)
+    -   [Read .rtf](#read-.rtf)
+    -   [Read .pdf](#read-.pdf)
+        -   [Image Based .pdf: OCR](#image-based-.pdf-ocr)
+    -   [Read .pptx](#read-.pptx)
+    -   [Read .html](#read-.html)
+    -   [Read Transcripts](#read-transcripts)
+        -   [docx Simple](#docx-simple)
+        -   [docx With Skip](#docx-with-skip)
+        -   [docx With Dash Separator](#docx-with-dash-separator)
+        -   [xls and xlsx](#xls-and-xlsx)
+        -   [doc](#doc)
+        -   [rtf](#rtf)
+        -   [Reading Text](#reading-text)
+        -   [Authentic Interview](#authentic-interview)
+    -   [Pairing textreadr](#pairing-textreadr)
 
 ![](tools/textreadr_logo/r_textreadr.png)
 
@@ -18,41 +42,8 @@ text documents into R. This is not meant to be an exhaustive collection;
 for more see the [**tm**](https://CRAN.R-project.org/package=tm)
 package.
 
-
-Table of Contents
-============
-
--   [Functions](#functions)
--   [Installation](#installation)
--   [Contact](#contact)
--   [Demonstration](#demonstration)
-    -   [Load the Packages/Data](#load-the-packagesdata)
-    -   [Download & Browse](#download-browse)
-        -   [Download](#download)
-        -   [Browse](#browse)
-    -   [Generic Document Reading](#generic-document-reading)
-    -   [Read Directory Contents](#read-directory-contents)
-    -   [Read .docx](#read-docx)
-    -   [Read .doc](#read-doc)
-    -   [Read .rtf](#read-rtf)
-    -   [Read .pdf](#read-pdf)
-        -   [Image Based .pdf: OCR](#image-based-pdf-ocr)
-    -   [Read .pptx](#read-pptx)
-    -   [Read .html](#read-html)
-    -   [Read Transcripts](#read-transcripts)
-        -   [docx Simple](#docx-simple)
-        -   [docx With Skip](#docx-with-skip)
-        -   [docx With Dash Separator](#docx-with-dash-separator)
-        -   [xls and xlsx](#xls-and-xlsx)
-        -   [doc](#doc)
-        -   [rtf](#rtf)
-        -   [Reading Text](#reading-text)
-        -   [Authentic Interview](#authentic-interview)
-    -   [Pairing textreadr](#pairing-textreadr)
-
 Functions
-============
-
+=========
 
 Most jobs in my workflow can be completed with `read_document` and
 `read_dir`. The former generically reads in a .docx, .doc, .pdf, .html,
@@ -191,11 +182,14 @@ the development version:
 Contact
 =======
 
-You are welcome to:    
-- submit suggestions and bug-reports at: <https://github.com/trinker/textreadr/issues>    
-- send a pull request on: <https://github.com/trinker/textreadr/>    
-- compose a friendly e-mail to: <tyler.rinker@gmail.com>    
+You are welcome to:
 
+-   submit suggestions and bug-reports at:
+    <a href="https://github.com/trinker/textreadr/issues" class="uri">https://github.com/trinker/textreadr/issues</a>  
+-   send a pull request on:
+    <a href="https://github.com/trinker/textreadr/" class="uri">https://github.com/trinker/textreadr/</a>  
+-   compose a friendly e-mail to:
+    <a href="mailto:tyler.rinker@gmail.com" class="email">tyler.rinker@gmail.com</a>
 
 Demonstration
 =============
@@ -809,16 +803,6 @@ I demonstrate pairings with
     if (!require("pacman")) install.packages("pacman"); library(pacman)
     p_load(dplyr, qdapRegex)
     p_load_current_gh(file.path('trinker', c('textreadr', 'textshape', 'textclean')))
-
-    ## 
-    ##          checking for file 'C:\Users\trinker\AppData\Local\Temp\RtmpkZ09wS\remotes95ec73ca3370\trinker-textreadr-e26e3c2/DESCRIPTION' ...  v  checking for file 'C:\Users\trinker\AppData\Local\Temp\RtmpkZ09wS\remotes95ec73ca3370\trinker-textreadr-e26e3c2/DESCRIPTION' (356ms)
-    ##       -  preparing 'textreadr': (573ms)
-    ##    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   v  checking DESCRIPTION meta-information
-    ##       -  checking for LF line-endings in source and make files and shell scripts
-    ##       -  checking for empty or unneeded directories
-    ##       -  building 'textreadr_1.0.0.tar.gz'
-    ##      
-    ## 
 
     ## Read in pdf, split on variables
     dat <- 'http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf' %>%
