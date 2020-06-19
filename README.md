@@ -32,20 +32,22 @@ Table of Contents
         -   [Browse](#browse)
     -   [Generic Document Reading](#generic-document-reading)
     -   [Read Directory Contents](#read-directory-contents)
-    -   [Read .docx](#read-docx)
-    -   [Read .doc](#read-doc)
-    -   [Read .rtf](#read-rtf)
-    -   [Read .pdf](#read-pdf)
-        -   [Image Based .pdf: OCR](#image-based-pdf-ocr)
-    -   [Read .pptx](#read-pptx)
-    -   [Read .html](#read-html)
+    -   [Basic Readers](#basic-readers)
+        -   [Read .doc](#read-doc)
+        -   [Read .docx](#read-docx)
+        -   [Read .html](#read-html)
+        -   [Read .odt](#read-odt)
+        -   [Read .pdf](#read-pdf)
+        -   [Read .pptx](#read-pptx)
+        -   [Read .rtf](#read-rtf)
     -   [Read Transcripts](#read-transcripts)
+        -   [doc](#doc)
         -   [docx Simple](#docx-simple)
         -   [docx With Skip](#docx-with-skip)
         -   [docx With Dash Separator](#docx-with-dash-separator)
-        -   [xls and xlsx](#xls-and-xlsx)
-        -   [doc](#doc)
+        -   [odt](#odt)
         -   [rtf](#rtf)
+        -   [xls and xlsx](#xls-and-xlsx)
         -   [Reading Text](#reading-text)
         -   [Authentic Interview](#authentic-interview)
     -   [Pairing textreadr](#pairing-textreadr)
@@ -153,21 +155,26 @@ table below:
 <td>Read .pdf</td>
 </tr>
 <tr class="even">
-<td><code>read_dir</code></td>
+<td><code>read_odt</code></td>
 <td>reading</td>
-<td>Read and format multiple .doc, .docx, .rtf, .txt, .pdf files</td>
+<td>Read .odt</td>
 </tr>
 <tr class="odd">
+<td><code>read_dir</code></td>
+<td>reading</td>
+<td>Read and format multiple .doc, .docx, .rtf, .txt, .pdf, .pptx, .odt files</td>
+</tr>
+<tr class="even">
 <td><code>read_dir_transcript</code></td>
 <td>reading</td>
 <td>Read and format multiple transcript files</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>download</code></td>
 <td>downloading</td>
 <td>Download documents</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>peek</code></td>
 <td>viewing</td>
 <td>Truncated viewing of <code>data.frame</code>s</td>
@@ -220,7 +227,8 @@ Load the Packages/Data
     html_doc <- system.file('docs/textreadr_creed.html', package = "textreadr")
     txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
     pptx_doc <- system.file('docs/Hello_World.pptx', package = "textreadr")
-
+    odt_doc <- system.file('docs/Hello_World.odt', package = "textreadr") 
+      
     rtf_doc <- download(
         'https://raw.githubusercontent.com/trinker/textreadr/master/inst/docs/trans7.rtf'
     )
@@ -247,7 +255,7 @@ Here I download a .docx file of presidential debated from 2012.
         read_docx() %>%
         head(3)
 
-    ## pres.deb1.docx read into C:\Users\trinker\AppData\Local\Temp\RtmpkZ09wS
+    ## pres.deb1.docx read into C:\Users\trinker\AppData\Local\Temp\RtmpsLX1ol
 
     ## [1] "LEHRER: We'll talk about -- specifically about health care in a moment. But what -- do you support the voucher system, Governor?"                           
     ## [2] "ROMNEY: What I support is no change for current retirees and near-retirees to Medicare. And the president supports taking $716 billion out of that program."
@@ -271,17 +279,12 @@ Generic Document Reading
 ------------------------
 
 The `read_document` is a generic wrapper for `read_docx`, `read_doc`,
-`read_html`, and `read_pdf` that detects the file extension and chooses
-the correct reader. For most tasks that require reading a .docx, .doc,
-.html, .pdf, or .txt file this is the go-to function to get the job
-done. Below I demonstrate reading each of these five file formats with
+`read_html`, `read_odt`, `read_pdf`, `read_rtf`, and `read_pptx` that
+detects the file extension and chooses the correct reader. For most
+tasks that require reading a .docx, .doc, .html, .odt, .pdf, .pptx, .rtf
+or .txt file this is the go-to function to get the job done. Below I
+demonstrate reading each of these five file formats with
 `read_document`.
-
-    docx_doc %>%
-        read_document() %>%
-        head(3)
-
-    ## [1] "JRMC2202 Audio  Project"      "Interview Transcript"         "Interviewer:  Yasmine Hassan"
 
     doc_doc %>%
         read_document() %>%
@@ -289,11 +292,25 @@ done. Below I demonstrate reading each of these five file formats with
 
     ## [1] "JRMC2202 Audio Project"      "Interview Transcript"        "Interviewer: Yasmine Hassan"
 
-    rtf_doc %>%
+    docx_doc %>%
         read_document() %>%
         head(3)
 
-    ## [1] "Researcher 2:\tOctober 7, 1892."           "Teacher 4:\tStudents it’s time to learn."  "[Student discussion; unintelligible]"
+    ## [1] "JRMC2202 Audio  Project"      "Interview Transcript"         "Interviewer:  Yasmine Hassan"
+
+    html_doc %>%
+        read_document() %>%
+        head(3)
+
+    ## [1] "textreadr Creed"                                                                                                
+    ## [2] "The textreadr package aims to be a lightweight tool kit that handles 80% of an analyst’s text reading in needs."
+    ## [3] "The package handles .docx, .doc, .pdf, .html, .pptx, and .txt."
+
+    odt_doc %>%
+        read_document() %>%
+        head(3)
+
+    ## [1] "Hello World"                     "I am Open Document Text Format!"
 
     pdf_doc %>%
         read_document() %>%
@@ -303,13 +320,17 @@ done. Below I demonstrate reading each of these five file formats with
     ## [2] "CRAIG BREADEN: My name is Craig Breaden. I’m the audiovisual archivist at Duke University,"    
     ## [3] "and I’m with Kirston Johnson, the curator of the Archive of Documentary Arts at Duke. The date"
 
-    html_doc %>%
+    pptx_doc %>%
         read_document() %>%
         head(3)
 
-    ## [1] "textreadr Creed"                                                                                                
-    ## [2] "The textreadr package aims to be a lightweight tool kit that handles 80% of an analyst’s text reading in needs."
-    ## [3] "The package handles .docx, .doc, .pdf, .html, .pptx, and .txt."
+    ## [1] "Hello World"  "Tyler Rinker" "Slide 1"
+
+    rtf_doc %>%
+        read_document() %>%
+        head(3)
+
+    ## [1] "Researcher 2:\tOctober 7, 1892."           "Teacher 4:\tStudents it’s time to learn."  "[Student discussion; unintelligible]"
 
     txt_doc %>%
         read_document() %>%
@@ -333,12 +354,6 @@ done. Below I demonstrate reading each of these five file formats with
     ## | RMySQL      | MySQL                  |
     ## | ROracle     | Oracle                 |
     ## | RJDBC       | JDBC                   |
-
-    pptx_doc %>%
-        read_document() %>%
-        head(3)
-
-    ## [1] "Hello World"  "Tyler Rinker" "Slide 1"
 
 Read Directory Contents
 -----------------------
@@ -403,30 +418,10 @@ Here we have read the files in, one row per file.
     ## 20 9_7      Working-class romantic drama from direct
     ## .. ...      ...
 
-Read .docx
-----------
+Basic Readers
+-------------
 
-A .docx file is nothing but a fancy container. It can be parsed via XML.
-The `read_docx` function allows the user to read in a .docx file as
-plain text. Elements are essentially the p tags (explicitly `//w:t` tags
-collapsed with `//w:p` tags) in the markup.
-
-    docx_doc %>%
-        read_docx() %>%
-        head(3)
-
-    ## [1] "JRMC2202 Audio  Project"      "Interview Transcript"         "Interviewer:  Yasmine Hassan"
-
-    docx_doc %>%
-        read_docx(15) %>%
-        head(3)
-
-    ## [1] "Hassan:             Could you please tell me your name, your title, your age, and your place  of ref ,                                      umm, residence?"
-    ## [2] "Abd Rabou:     My name is Ahmad Abd Rabou. I’m assistant professor of comparative politics at"                                                              
-    ## [3] "both Cairo University and The American University in Cairo. I’m 34 years old. I"
-
-Read .doc
----------
+### Read .doc
 
 A .doc file is a bit trickier to read in than .docx but is made easy by
 the **antiword** package which wraps the
@@ -448,24 +443,64 @@ way.
     ## [5] "comparative politics at"                                                     "both Cairo University and The American University"                          
     ## [7] "in Cairo. I'm 34 years old. I"
 
-Read .rtf
----------
+### Read .docx
 
-Rich text format (.rtf) is a plain text document with markup similar to
-latex. The **striprtf** package provides the backend for `read_rtf`.
+A .docx file is nothing but a fancy container. It can be parsed via XML.
+The `read_docx` function allows the user to read in a .docx file as
+plain text. Elements are essentially the p tags (explicitly `//w:t` tags
+collapsed with `//w:p` tags) in the markup.
 
-    rtf_doc %>%
-        read_rtf() 
+    docx_doc %>%
+        read_docx() %>%
+        head(3)
 
-    ## [1] "Researcher 2:\tOctober 7, 1892."                                                                                                                                                                                                                                                                                                                              
-    ## [2] "Teacher 4:\tStudents it’s time to learn."                                                                                                                                                                                                                                                                                                                     
-    ## [3] "[Student discussion; unintelligible]"                                                                                                                                                                                                                                                                                                                        
-    ## [4] "Multiple Students:\tYes teacher we‘re ready to learn."                                                                                                                                                                                                                                                                                                        
-    ## [5] "Teacher 4:\tLet's read this terrific book together.  It's called Moo Baa La La La and – what was I going to …  Oh yes — The story is by Sandra Boynton."                                                                                                                                                                                                      
-    ## [6] "“A cow says Moo. A Sheep says Baa. Three singing pigs say LA LA LA! \"No, no!\" you say, that isn't right. The pigs say oink all day and night. Rhinoceroses snort and snuff. And little dogs go ruff ruff ruff! Some other dogs go bow wow wow! And cats and kittens say Meow! Quack! Says the duck. A horse says neigh. It's quiet now. What do you say? ”"
+    ## [1] "JRMC2202 Audio  Project"      "Interview Transcript"         "Interviewer:  Yasmine Hassan"
 
-Read .pdf
----------
+    docx_doc %>%
+        read_docx(15) %>%
+        head(3)
+
+    ## [1] "Hassan:             Could you please tell me your name, your title, your age, and your place  of ref ,                                      umm, residence?"
+    ## [2] "Abd Rabou:     My name is Ahmad Abd Rabou. I’m assistant professor of comparative politics at"                                                              
+    ## [3] "both Cairo University and The American University in Cairo. I’m 34 years old. I"
+
+### Read .html
+
+Often a researcher only wishes to grab the text from the body of .html
+files. The `read_html` function does exactly this task. For finer
+control over .html scraping the user may investigate the **xml2** &
+**rvest** packages for parsing .html and .xml files. Here I read in HTML
+with `read_html`.
+
+    html_doc %>%
+        read_html() 
+
+    ##  [1] "textreadr Creed"                                                                                                                                                                                                                                                                                                                                             
+    ##  [2] "The textreadr package aims to be a lightweight tool kit that handles 80% of an analyst’s text reading in needs."                                                                                                                                                                                                                                             
+    ##  [3] "The package handles .docx, .doc, .pdf, .html, .pptx, and .txt."                                                                                                                                                                                                                                                                                              
+    ##  [4] "If you have another format there is likely already another popular R package that specializes in this read in task. For example, got XML, use the xml2 package, authored by Hadley Wickham, Jim Hester, & Jeroen Ooms. Need special handling for .html? Use Hadley Wickham’s rvest package. Got SQL? Oh boy there’s a bunch of great ways to read it into R."
+    ##  [5] "R Package"                                                                                                                                                                                                                                                                                                                                                   
+    ##  [6] "SQL"                                                                                                                                                                                                                                                                                                                                                         
+    ##  [7] "ROBDC"                                                                                                                                                                                                                                                                                                                                                       
+    ##  [8] "Microsoft SQL Server"                                                                                                                                                                                                                                                                                                                                        
+    ##  [9] "RMySQL"                                                                                                                                                                                                                                                                                                                                                      
+    ## [10] "MySQL"                                                                                                                                                                                                                                                                                                                                                       
+    ## [11] "ROracle"                                                                                                                                                                                                                                                                                                                                                     
+    ## [12] "Oracle"                                                                                                                                                                                                                                                                                                                                                      
+    ## [13] "RJDBC"                                                                                                                                                                                                                                                                                                                                                       
+    ## [14] "JDBC"
+
+### Read .odt
+
+Open Document Texts (.odt) are rather similar to .docx files in how they
+behave. The `read_odt` function reads them in in a similar way.
+
+    odt_doc %>%
+        read_odt() 
+
+    ## [1] "Hello World"                     "I am Open Document Text Format!"
+
+### Read .pdf
 
 Like .docx a .pdf file is simply a container. Reading PDF’s is made
 easier with a number of command line tools. A few methods of PDF reading
@@ -494,7 +529,7 @@ with meta data, including page numbers and element (row) ids.
     ## 10 1       10         1940’s?                                 
     ## .. ...     ...        ...
 
-### Image Based .pdf: OCR
+#### Image Based .pdf: OCR
 
 Image based .pdfs require optical character recognition (OCR) in order
 for the images to be converted to text. The `ocr` argument of `read_pdf`
@@ -540,8 +575,7 @@ default behavior of `read_pdf`.
     ## 10 1       10         such as clustering, classi<U+FB01>cation, etc. 
     ## .. ...     ...        ... 
 
-Read .pptx
-----------
+### Read .pptx
 
 Like the .docx, a .pptx file is also nothing but a fancy container.
 Likewise, it can be parsed via XML. The `read_pptx` function allows the
@@ -572,32 +606,20 @@ slide id numbers.
     ## 18:        4          6                     Green
     ## 19:        4          7                    Orange
 
-Read .html
-----------
+### Read .rtf
 
-Often a researcher only wishes to grab the text from the body of .html
-files. The `read_html` function does exactly this task. For finer
-control over .html scraping the user may investigate the **xml2** &
-**rvest** packages for parsing .html and .xml files. Here I read in HTML
-with `read_html`.
+Rich text format (.rtf) is a plain text document with markup similar to
+latex. The **striprtf** package provides the backend for `read_rtf`.
 
-    html_doc %>%
-        read_html() 
+    rtf_doc %>%
+        read_rtf() 
 
-    ##  [1] "textreadr Creed"                                                                                                                                                                                                                                                                                                                                             
-    ##  [2] "The textreadr package aims to be a lightweight tool kit that handles 80% of an analyst’s text reading in needs."                                                                                                                                                                                                                                             
-    ##  [3] "The package handles .docx, .doc, .pdf, .html, .pptx, and .txt."                                                                                                                                                                                                                                                                                              
-    ##  [4] "If you have another format there is likely already another popular R package that specializes in this read in task. For example, got XML, use the xml2 package, authored by Hadley Wickham, Jim Hester, & Jeroen Ooms. Need special handling for .html? Use Hadley Wickham’s rvest package. Got SQL? Oh boy there’s a bunch of great ways to read it into R."
-    ##  [5] "R Package"                                                                                                                                                                                                                                                                                                                                                   
-    ##  [6] "SQL"                                                                                                                                                                                                                                                                                                                                                         
-    ##  [7] "ROBDC"                                                                                                                                                                                                                                                                                                                                                       
-    ##  [8] "Microsoft SQL Server"                                                                                                                                                                                                                                                                                                                                        
-    ##  [9] "RMySQL"                                                                                                                                                                                                                                                                                                                                                      
-    ## [10] "MySQL"                                                                                                                                                                                                                                                                                                                                                       
-    ## [11] "ROracle"                                                                                                                                                                                                                                                                                                                                                     
-    ## [12] "Oracle"                                                                                                                                                                                                                                                                                                                                                      
-    ## [13] "RJDBC"                                                                                                                                                                                                                                                                                                                                                       
-    ## [14] "JDBC"
+    ## [1] "Researcher 2:\tOctober 7, 1892."                                                                                                                                                                                                                                                                                                                              
+    ## [2] "Teacher 4:\tStudents it’s time to learn."                                                                                                                                                                                                                                                                                                                     
+    ## [3] "[Student discussion; unintelligible]"                                                                                                                                                                                                                                                                                                                        
+    ## [4] "Multiple Students:\tYes teacher we‘re ready to learn."                                                                                                                                                                                                                                                                                                        
+    ## [5] "Teacher 4:\tLet's read this terrific book together.  It's called Moo Baa La La La and – what was I going to …  Oh yes — The story is by Sandra Boynton."                                                                                                                                                                                                      
+    ## [6] "“A cow says Moo. A Sheep says Baa. Three singing pigs say LA LA LA! \"No, no!\" you say, that isn't right. The pigs say oink all day and night. Rhinoceroses snort and snuff. And little dogs go ruff ruff ruff! Some other dogs go bow wow wow! And cats and kittens say Meow! Quack! Says the duck. A horse says neigh. It's quiet now. What do you say? ”"
 
 Read Transcripts
 ----------------
@@ -615,7 +637,19 @@ handles. These are the files that will be read in:
 
     base_name(trans_docs)
 
-    ## [1] "trans1.docx" "trans2.docx" "trans3.docx" "trans4.xlsx" "trans5.xls"  "trans6.doc"  "trans7.rtf"  "transcripts"
+    ## [1] "trans1.docx" "trans2.docx" "trans3.docx" "trans4.xlsx" "trans5.xls"  "trans6.doc"  "trans7.rtf"  "trans8.odt"  "transcripts"
+
+### doc
+
+    read_transcript(trans_docs[6], skip = 1)
+
+    ## Table: [3 x 2]
+    ## 
+    ##   Person            Dialogue                                
+    ## 1 Teacher 4         Students it's time to learn. [Student di
+    ## 2 Multiple Students Yes teacher we're ready to learn.       
+    ## 3 Teacher 4         Let's read this terrific book together. 
+    ## . ...               ...
 
 ### docx Simple
 
@@ -678,13 +712,35 @@ separator the first go round.
     ## 3 Teacher 4         Let's read this terrific book together. 
     ## . ...               ...
 
+### odt
+
+    read_transcript(trans_docs[8])
+
+    ## Table: [4 x 2]
+    ## 
+    ##   Person            Dialogue                                
+    ## 1 Researcher 2      October 7,1892.                         
+    ## 2 Teacher4          Students it's time to learn. [Student di
+    ## 3 Multiple Students Yes teacher we're ready to learn.       
+    ## 4 Teacher4          Let's read this terrific book together. 
+    ## . ...               ...
+
+### rtf
+
+    read_transcript(rtf_doc, skip = 1)
+
+    ## Table: [4 x 2]
+    ## 
+    ##   Person            Dialogue                                
+    ## 1 Researcher 2      October 7, 1892.                        
+    ## 2 Teacher 4         Students it's time to learn. [Student di
+    ## 3 Multiple Students Yes teacher we're ready to learn.       
+    ## 4 Teacher 4         Let's read this terrific book together. 
+    ## . ...               ...
+
 ### xls and xlsx
 
     read_transcript(trans_docs[4])
-
-    ## New names:
-    ## * `` -> ...1
-    ## * `` -> ...2
 
     ## Table: [7 x 2]
     ## 
@@ -700,10 +756,6 @@ separator the first go round.
 
     read_transcript(trans_docs[5])
 
-    ## New names:
-    ## * `` -> ...1
-    ## * `` -> ...2
-
     ## Table: [7 x 2]
     ## 
     ##   Person             Dialogue                                
@@ -715,31 +767,6 @@ separator the first go round.
     ## 6 <NA>               NA NA NA                                
     ## 7 Teacher 4:         Let's read this terrific book together. 
     ## . ...                ...
-
-### doc
-
-    read_transcript(trans_docs[6], skip = 1)
-
-    ## Table: [3 x 2]
-    ## 
-    ##   Person            Dialogue                                
-    ## 1 Teacher 4         Students it's time to learn. [Student di
-    ## 2 Multiple Students Yes teacher we're ready to learn.       
-    ## 3 Teacher 4         Let's read this terrific book together. 
-    ## . ...               ...
-
-### rtf
-
-    read_transcript(rtf_doc, skip = 1)
-
-    ## Table: [4 x 2]
-    ## 
-    ##   Person            Dialogue                                
-    ## 1 Researcher 2      October 7, 1892.                        
-    ## 2 Teacher 4         Students it's time to learn. [Student di
-    ## 3 Multiple Students Yes teacher we're ready to learn.       
-    ## 4 Teacher 4         Let's read this terrific book together. 
-    ## . ...               ...
 
 ### Reading Text
 
@@ -810,7 +837,16 @@ I demonstrate pairings with
     if (!require("pacman")) install.packages("pacman"); library(pacman)
     p_load(dplyr, qdapRegex)
     p_load_current_gh(file.path('trinker', c('textreadr', 'textshape', 'textclean')))
-    
+
+    ## 
+    ##          checking for file 'C:\Users\trinker\AppData\Local\Temp\RtmpsLX1ol\remotes2aa410a9521e\trinker-textreadr-b176aa5/DESCRIPTION' ...  v  checking for file 'C:\Users\trinker\AppData\Local\Temp\RtmpsLX1ol\remotes2aa410a9521e\trinker-textreadr-b176aa5/DESCRIPTION' (351ms)
+    ##       -  preparing 'textreadr': (1.2s)
+    ##    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   v  checking DESCRIPTION meta-information
+    ##       -  checking for LF line-endings in source and make files and shell scripts
+    ##       -  checking for empty or unneeded directories
+    ##       -  building 'textreadr_1.0.3.tar.gz'
+    ##      
+    ## 
 
     ## Read in pdf, split on variables
     dat <- 'http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf' %>%

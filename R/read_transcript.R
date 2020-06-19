@@ -60,6 +60,8 @@
 #' (doc4 <- system.file("docs/trans4.xlsx", package = "textreadr"))
 #' (doc5 <- system.file("docs/trans5.xls", package = "textreadr"))
 #' (doc6 <- system.file("docs/trans6.doc", package = "textreadr"))
+#' ##(doc7 <- system.file("docs/trans7.rtf", package = "textreadr"))
+#' (doc8 <- system.file("docs/trans8.odt", package = "textreadr"))
 #'
 #' dat1 <- read_transcript(doc1)
 #' dat2 <- read_transcript(doc1, col.names = c("person", "dialogue"))
@@ -76,8 +78,8 @@
 #'
 #' ## MS doc format
 #' \dontrun{
-#' dat7 <- read_transcript(doc6) ## need to skip Researcher
-#' dat8 <- read_transcript(doc6, skip = 1)
+#' dat6b <- read_transcript(doc6) ## need to skip Researcher
+#' dat6c <- read_transcript(doc6, skip = 1)
 #' }
 #'
 #' ## rtf format
@@ -87,7 +89,10 @@
 #' )
 #' dat9 <- read_transcript(rtf_doc, skip = 1)
 #' }
-#'
+#' 
+#' ## odt format
+#' read_transcript(doc8)
+#' 
 #' ## text string input
 #' trans <- "sam: Computer is fun. Not too fun.
 #' greg: No it's not, it's dumb.
@@ -147,7 +152,7 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
     }
 
     if (is.null(sep)) {
-        if (y %in% c("docx", "doc", "txt", "text", 'pdf', 'rtf')) {
+        if (y %in% c("docx", "doc", "txt", "text", 'pdf', 'rtf', 'odt')) {
             sep <- ":"
         } else {
             sep <- ","
@@ -179,6 +184,14 @@ function(file, col.names = c("Person", "Dialogue"), text.var = NULL, merge.broke
                         paste(which(sep_hits), collapse=", "))
             }
         },
+        odt = {
+            x <- read.odt(file, skip = skip, sep = sep, max.person.nchar = max.person.nchar)
+            sep_hits <- grepl(sep, x[, 2])
+            if(any(sep_hits)) {
+                warning(sprintf("The following text contains the \"%s\" separator and may not have split correctly:\n", sep),
+                    paste(which(sep_hits), collapse=", "))
+                }
+            },       
         rtf = {
             x <- read.rtf(file, skip = skip, sep = sep, max.person.nchar = max.person.nchar, ...)
             sep_hits <- grepl(sep, x[, 2])
@@ -304,6 +317,45 @@ function(file, skip = 0, sep = ":", max.person.nchar = 20) {
     return(transcript)
 }
 
+
+
+read.odt <-
+function(file, skip = 0, sep = ":", max.person.nchar = 20) {
+
+    ## create temp dir
+    tmp <- tempfile()
+    if (!dir.create(tmp)) stop("Temporary directory could not be established.")
+
+    ## clean up
+    on.exit(unlink(tmp, recursive=TRUE))
+
+    ## unzip docx
+    xmlfile <- file.path(tmp, "content.xml")
+    utils::unzip(file, exdir = tmp)
+
+    ## Import XML
+    doc <- xml2::read_xml(xmlfile)
+
+    ## extract the content
+    pvalues <- xml2::xml_text(xml2::xml_find_all(doc, "//text:p"))
+
+    pvalues <- pvalues[!grepl("^\\s*$", pvalues)]  # Remove empty lines
+    if (skip > 0) pvalues <- pvalues[-seq(skip)]   # Ignore these many lines
+    if (any(grepl(paste0("^.{", max.person.nchar, ",}", sep), pvalues))) {
+        warning(sprintf(paste0(
+            "I've detected the separator beyond %s characters from the line start.  Parsing may be incorrect...\n",
+            "  Consider manually searching the .docx for use of the separator in-text rather than to separate person/text."
+        ), max.person.nchar))
+    }
+    keys    <- sapply(gregexpr(paste0("^.*?", sep), pvalues), function(x) x > 0)
+    speaker <- regmatches(pvalues, gregexpr(paste0("^.*?", sep), pvalues))
+    pvalues <- gsub(paste0("^.*?", sep), "", pvalues)  # Remove speaker from lines
+    speaker <- rep(speaker[which(keys)], diff(c(which(keys), length(speaker)+1)))
+    speaker <- unlist(speaker)  # Make sure it's a vector
+    speaker <- substr(speaker, 1, nchar(speaker)-nchar(sep)) # Remove ending colon
+    transcript <- data.frame(X1 = trimws(speaker), X2 = trimws(pvalues), stringsAsFactors = FALSE)
+    return(transcript)
+}
 
 read.rtf <-
 function(file, skip = 0, sep = ":", max.person.nchar = 20, ...) {

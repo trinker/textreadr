@@ -1,8 +1,8 @@
-#' Read in .docx Content
+#' Read in .odt Content
 #'
-#' Read in the content from a .docx file.
+#' Read in the content from a .odt file.
 #'
-#' @param file The path to the .docx file.
+#' @param file The path to the .odt file.
 #' @param skip The number of lines to skip.
 #' @param remove.empty logical.  If `TRUE` empty elements in the vector are
 #' removed.
@@ -10,12 +10,11 @@
 #' removed.
 #' @param ... ignored.
 #' @return Returns a character vector.
-#' @keywords docx
+#' @keywords odt
 #' @export
-#' @author Bryan Goodrich and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @examples
 #' \dontrun{
-#' url <- "https://github.com/trinker/textreadr/raw/master/inst/docs/Yasmine_Interview_Transcript.docx"
+#' url <- "https://github.com/trinker/textreadr/raw/master/inst/docs/Hello_World.odt"
 #' file <- download(url)
 #' (txt <- read_odt(file))
 #' }
@@ -43,7 +42,7 @@ read_odt <- function (file, skip = 0, remove.empty = TRUE, trim = TRUE, ...) {
     doc <- xml2::read_xml(xmlfile)
 
     ## extract the content
-    rm_na <- function(x) x[!is.na(x)]
+    #rm_na <- function(x) x[!is.na(x)]
 
     pvalues <- xml2::xml_text(xml2::xml_find_all(doc, "//text:p"))
 
@@ -59,4 +58,4 @@ read_odt <- function (file, skip = 0, remove.empty = TRUE, trim = TRUE, ...) {
 
 
 
-read_odt("C:/Users/trinker/Desktop/Hello World.odt")
+

@@ -50,7 +50,8 @@ The main functions, task category, & descriptions are summarized in the table be
 | `read_document`           | reading     | Generic text reader for .doc, .docx, .rtf, .txt, .pdf |
 | `read_html`               | reading     | Read .html                            |
 | `read_pdf`                | reading     | Read .pdf                             |
-| `read_dir`                | reading     | Read and format multiple .doc, .docx, .rtf, .txt, .pdf files   |
+| `read_odt`                | reading     | Read .odt                             |
+| `read_dir`                | reading     | Read and format multiple .doc, .docx, .rtf, .txt, .pdf, .pptx, .odt files   |
 | `read_dir_transcript`     | reading     | Read and format multiple transcript files   |
 | `download`                | downloading | Download documents                    | 
 | `peek`                    | viewing     | Truncated viewing of `data.frame`s    |
@@ -96,7 +97,8 @@ pdf_doc <- system.file("docs/rl10075oralhistoryst002.pdf", package = "textreadr"
 html_doc <- system.file('docs/textreadr_creed.html', package = "textreadr")
 txt_doc <- system.file('docs/textreadr_creed.txt', package = "textreadr")
 pptx_doc <- system.file('docs/Hello_World.pptx', package = "textreadr")
-
+odt_doc <- system.file('docs/Hello_World.odt', package = "textreadr") 
+  
 rtf_doc <- download(
     'https://raw.githubusercontent.com/trinker/textreadr/master/inst/docs/trans7.rtf'
 )
@@ -134,7 +136,7 @@ system.file("docs", package = "textreadr") %>%
 
 We can open files as well:
 
-```{r}
+```{r, eval = FALSE}
 html_doc %>%
     browse()
 ```
@@ -142,22 +144,15 @@ html_doc %>%
 
 ## Generic Document Reading
 
-The `read_document` is a generic wrapper for `read_docx`, `read_doc`, `read_html`, and `read_pdf` that detects the file extension and chooses the correct reader.  For most tasks that require reading a .docx, .doc, .html, .pdf, or .txt file this is the go-to function to get the job done.  Below I demonstrate reading each of these five file formats with `read_document`.
+The `read_document` is a generic wrapper for `read_docx`, `read_doc`, `read_html`, `read_odt`, `read_pdf`, `read_rtf`, and `read_pptx` that detects the file extension and chooses the correct reader.  For most tasks that require reading a .docx, .doc, .html, .odt, .pdf, .pptx, .rtf or .txt file this is the go-to function to get the job done.  Below I demonstrate reading each of these five file formats with `read_document`.
 
 ```{r}
-docx_doc %>%
-    read_document() %>%
-    head(3)
     
 doc_doc %>%
     read_document() %>%
     head(3)
 
-rtf_doc %>%
-    read_document() %>%
-    head(3)
-    
-pdf_doc %>%
+docx_doc %>%
     read_document() %>%
     head(3)
 
@@ -165,14 +160,26 @@ html_doc %>%
     read_document() %>%
     head(3)
 
-txt_doc %>%
+odt_doc %>%
     read_document() %>%
-    paste(collapse = "\n") %>%
-    cat()
+    head(3)
+    
+pdf_doc %>%
+    read_document() %>%
+    head(3)
 
 pptx_doc %>%
     read_document() %>%
     head(3)
+
+rtf_doc %>%
+    read_document() %>%
+    head(3)
+
+txt_doc %>%
+    read_document() %>%
+    paste(collapse = "\n") %>%
+    cat()
 ```
 
 
@@ -214,23 +221,9 @@ system.file("docs/Maas2011/pos", package = "textreadr") %>%
 ```
 
 
-## Read .docx
+## Basic Readers
 
-A .docx file is nothing but a fancy container.  It can be parsed via XML.  The `read_docx` function allows the user to read in a .docx file as plain text.  Elements are essentially the p tags (explicitly `//w:t` tags collapsed with `//w:p` tags) in the markup.  
-
-```{r}
-docx_doc %>%
-    read_docx() %>%
-    head(3)
-```
-
-```{r}
-docx_doc %>%
-    read_docx(15) %>%
-    head(3)
-```
-
-## Read .doc
+### Read .doc
 
 A .doc file is a bit trickier to read in than .docx but is made easy by the **antiword** package which wraps the [Antiword](http://www.winfield.demon.nl) program in an OS independent way.  
 
@@ -246,18 +239,43 @@ doc_doc %>%
     head(7)
 ```
 
+### Read .docx
 
-## Read .rtf
-
-Rich text format (.rtf) is a plain text document with markup similar to latex.  The **striprtf** package provides the backend for `read_rtf`.
+A .docx file is nothing but a fancy container.  It can be parsed via XML.  The `read_docx` function allows the user to read in a .docx file as plain text.  Elements are essentially the p tags (explicitly `//w:t` tags collapsed with `//w:p` tags) in the markup.  
 
 ```{r}
-rtf_doc %>%
-    read_rtf() 
+docx_doc %>%
+    read_docx() %>%
+    head(3)
+```
+
+```{r}
+docx_doc %>%
+    read_docx(15) %>%
+    head(3)
 ```
 
 
-## Read .pdf
+### Read .html
+
+Often a researcher only wishes to grab the text from the body of .html files.  The `read_html` function does exactly this task.  For finer control over .html scraping the user may investigate the **xml2** & **rvest** packages for parsing .html and .xml files.  Here I read in HTML with `read_html`.  
+
+```{r}
+html_doc %>%
+    read_html() 
+```
+
+### Read .odt
+
+Open Document Texts (.odt) are rather similar to .docx files in how they behave.  The `read_odt` function reads them in in a similar way.
+
+
+```{r}
+odt_doc %>%
+    read_odt() 
+```
+
+### Read .pdf
 
 Like .docx a .pdf file is simply a container.  Reading PDF's is made easier with a number of command line tools.  A few methods of PDF reading have been incorporated into R.  Here I wrap **pdftools** `pdf_text` to produce `read_pdf`, a function with sensible defaults that is designed to read PDFs into R for as many folks as possible right out of the box.
 
@@ -268,7 +286,7 @@ pdf_doc %>%
     read_pdf() 
 ```
 
-### Image Based .pdf: OCR
+#### Image Based .pdf: OCR
 
 Image based .pdfs require optical character recognition (OCR) in order for the images to be converted to text.  The `ocr` argument of `read_pdf` allows the user to read in image based .pdf files and allow the [**tesseract**](https://CRAN.R-project.org/package=tesseract) package do the heavy lifting in the backend.  You can look at the .pdf we'll be using by running:
 
@@ -319,7 +337,7 @@ pdf_doc_img %>%
 ## .. ...     ...        ... 
 ```
 
-## Read .pptx
+### Read .pptx
 
 Like the .docx, a .pptx file is also nothing but a fancy container.  Likewise, it can be parsed via XML.  The `read_pptx` function allows the user to read in a .pptx file as a data.frame with plain text that tracks slide id numbers.    
 
@@ -328,15 +346,16 @@ pptx_doc %>%
     read_pptx()
 ```
 
+### Read .rtf
 
-## Read .html
-
-Often a researcher only wishes to grab the text from the body of .html files.  The `read_html` function does exactly this task.  For finer control over .html scraping the user may investigate the **xml2** & **rvest** packages for parsing .html and .xml files.  Here I read in HTML with `read_html`.  
+Rich text format (.rtf) is a plain text document with markup similar to latex.  The **striprtf** package provides the backend for `read_rtf`.
 
 ```{r}
-html_doc %>%
-    read_html() 
+rtf_doc %>%
+    read_rtf() 
 ```
+
+
 
 ## Read Transcripts
 
@@ -347,6 +366,14 @@ Here I read in and parse the different formats `read_transcript` handles. These 
 ```{r}
 base_name(trans_docs)
 ```
+
+
+### doc
+
+```{r}
+read_transcript(trans_docs[6], skip = 1)
+```
+
 
 ### docx Simple
 
@@ -373,6 +400,19 @@ read_transcript(trans_docs[3], sep = "-", skip = 1)
 ```
 
 
+### odt
+
+```{r}
+read_transcript(trans_docs[8])
+```
+### rtf
+
+
+```{r}
+read_transcript(rtf_doc, skip = 1)
+```
+
+
 ### xls and xlsx
 
 
@@ -381,19 +421,6 @@ read_transcript(trans_docs[4])
 read_transcript(trans_docs[5])
 ```
 
-
-### doc
-
-```{r}
-read_transcript(trans_docs[6], skip = 1)
-```
-
-
-### rtf
-
-```{r}
-read_transcript(rtf_doc, skip = 1)
-```
 
 
 ### Reading Text

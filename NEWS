@@ -25,6 +25,8 @@ BUG FIXES
 
 NEW FEATURES
 
+* `read_odt` added to read in .odt files.
+
 MINOR FEATURES
 
 IMPROVEMENTS

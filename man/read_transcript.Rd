@@ -104,6 +104,8 @@ each transcript for errors before further parsing the data.
 (doc4 <- system.file("docs/trans4.xlsx", package = "textreadr"))
 (doc5 <- system.file("docs/trans5.xls", package = "textreadr"))
 (doc6 <- system.file("docs/trans6.doc", package = "textreadr"))
+##(doc7 <- system.file("docs/trans7.rtf", package = "textreadr"))
+(doc8 <- system.file("docs/trans8.odt", package = "textreadr"))
 
 dat1 <- read_transcript(doc1)
 dat2 <- read_transcript(doc1, col.names = c("person", "dialogue"))
@@ -120,8 +122,8 @@ dat6 <- read_transcript(doc5)
 
 ## MS doc format
 \dontrun{
-dat7 <- read_transcript(doc6) ## need to skip Researcher
-dat8 <- read_transcript(doc6, skip = 1)
+dat6b <- read_transcript(doc6) ## need to skip Researcher
+dat6c <- read_transcript(doc6, skip = 1)
 }
 
 ## rtf format
@@ -131,6 +133,9 @@ rtf_doc <- download(
 )
 dat9 <- read_transcript(rtf_doc, skip = 1)
 }
+
+## odt format
+read_transcript(doc8)
 
 ## text string input
 trans <- "sam: Computer is fun. Not too fun.
