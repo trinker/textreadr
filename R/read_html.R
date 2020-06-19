@@ -10,7 +10,7 @@
 #' removed.
 #' @param trim logical.  If `TRUE` the leading/training white space is
 #' removed.
-#' @param ... Other arguments passed to [xml2::read_html()][xml::read_xml].
+#' @param ... Other arguments passed to [xml2::read_html()][xml2::read_xml].
 #' @return Returns a character vector.
 #' @keywords html
 #' @rdname read_html

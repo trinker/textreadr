@@ -32,7 +32,7 @@ of a truncated \code{\link[base:data.frame]{base::data.frame()}}.  \code{peek} i
 \code{\link[base:data.frame]{base::data.frame()}} will be printed.
 }
 \details{
-By default \pkg{dplyr} does not print all columns of a \code{\link[dplyr:tibble]{dplyr::tibble()}}.
+By default \pkg{dplyr} does not print all columns of a \emph{\strong{tibble}}.
 This makes inspection of data difficult at times, particularly with text
 string data.  \code{peek()} allows the user to see a truncated head for
 inspection purposes.

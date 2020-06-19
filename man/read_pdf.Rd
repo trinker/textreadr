@@ -30,7 +30,7 @@ Returns a \code{\link[base:data.frame]{base::data.frame()}} with the page number
 (\code{page_id}), line number (\code{element_id}), and the \code{text}.
 }
 \description{
-A wrapper for \code{\link[pdftools:pdf_text]{pdftools::pdf_text()}} to read PDFs into \pkg{R}.
+A wrapper for \link[pdftools:pdftools]{pdftools::pdf_text()} to read PDFs into \pkg{R}.
 }
 \note{
 A word of caution from \href{http://stackoverflow.com/a/9187015/1000343}{Carl Witthoft}"

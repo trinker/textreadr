@@ -57,13 +57,13 @@ Functions
 
 Most jobs in my workflow can be completed with `read_document` and
 `read_dir`. The former generically reads in a .docx, .doc, .pdf, .html,
-or .txt file without specifying the extension. The latter reads in
-multiple .docx, .doc, .rtf, .pdf, .html, or .txt files from a directory
-as a `data.frame` with a file and text column. This workflow is
-effective because most text documents I encounter are stored as a .docx,
-.doc, .rtf, .pdf, .html, or .txt file. The remaining common storage
-formats I encounter include .csv, .xlsx, XML, structured .html, and SQL.
-For these first 4 forms the
+.pptx, or .txt file without specifying the extension. The latter reads
+in multiple .docx, .doc, .rtf, .pdf, .html, .pptx or .txt files from a
+directory as a `data.frame` with a file and text column. This workflow
+is effective because most text documents I encounter are stored as a
+.docx, .doc, .rtf, .pdf, .html, .pptx, or .txt file. The remaining
+common storage formats I encounter include .csv, .xlsx, XML, structured
+.html, and SQL. For these first 4 forms the
 [**readr**](https://CRAN.R-project.org/package=readr),
 [**readx**l](https://CRAN.R-project.org/package=readxl),
 [**xml2**](https://CRAN.R-project.org/package=xml2), and
@@ -810,6 +810,7 @@ I demonstrate pairings with
     if (!require("pacman")) install.packages("pacman"); library(pacman)
     p_load(dplyr, qdapRegex)
     p_load_current_gh(file.path('trinker', c('textreadr', 'textshape', 'textclean')))
+    
 
     ## Read in pdf, split on variables
     dat <- 'http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf' %>%

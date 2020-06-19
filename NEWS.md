@@ -20,7 +20,7 @@ And constructed with the following guidelines:
 
 
 
-textreadr 0.9.1 - 1.0.1
+textreadr 0.9.1 - 1.0.2
 ----------------------------------------------------------------
 
 **BUG FIXES**

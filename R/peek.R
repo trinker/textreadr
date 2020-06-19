@@ -13,7 +13,7 @@
 #' @seealso [utils::head()]
 #' @rdname peek
 #' @export
-#' @details By default \pkg{dplyr} does not print all columns of a [dplyr::tibble()].  
+#' @details By default \pkg{dplyr} does not print all columns of a ***tibble***.  
 #' This makes inspection of data difficult at times, particularly with text 
 #' string data.  `peek()` allows the user to see a truncated head for 
 #' inspection purposes.

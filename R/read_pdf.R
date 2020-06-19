@@ -1,6 +1,6 @@
 #' Read a Portable Document Format into R
 #'
-#' A wrapper for [pdftools::pdf_text()] to read PDFs into \pkg{R}.
+#' A wrapper for [pdftools::pdf_text()][pdftools::pdftools] to read PDFs into \pkg{R}.
 #'
 #' @param file A path to a PDF file.
 #' @param skip Integer; the number of lines of the data file to skip before

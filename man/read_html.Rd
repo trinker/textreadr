@@ -20,7 +20,7 @@ removed.}
 \item{trim}{logical.  If \code{TRUE} the leading/training white space is
 removed.}
 
-\item{...}{Other arguments passed to \link[xml:read_xml]{xml2::read_html()}.}
+\item{...}{Other arguments passed to \link[xml2:read_xml]{xml2::read_html()}.}
 }
 \value{
 Returns a character vector.
