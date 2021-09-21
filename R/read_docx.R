@@ -42,20 +42,13 @@ read_docx <- function (file, skip = 0, remove.empty = TRUE, trim = TRUE, ...) {
     ## read in the unzipped docx
     doc <- xml2::read_xml(xmlfile)
 
-    ### extract the content
-    # children <- lapply(xml2::xml_find_all(doc, '//w:p'), xml2::xml_children)
-    # pvalues <- unlist(lapply(children, function(x) {
-    #     paste(xml2::xml_text(xml2::xml_find_all(x, 'w:t')), collapse = ' ')
-    # }))
-    
     ## extract the content
     rm_na <- function(x) x[!is.na(x)]
 
-    pvalues <- unlist(lapply(lapply(xml2::xml_find_all(doc, '//w:p'), xml2::xml_children), function(x) {
-
-        paste(rm_na(unlist(xml2::xml_text(xml2::xml_find_all(x, './/w:t')))), collapse = ' ')
-
-    }))    
+    # pvalues <- unlist(lapply(lapply(xml2::xml_find_all(doc, '//w:p'), xml2::xml_children), function(x) {
+    #     paste(rm_na(unlist(xml2::xml_text(xml2::xml_find_all(x, './/w:t')))), collapse = ' ')
+    # }))   
+    pvalues <- xml2::xml_text(xml2::xml_find_all(doc, '//w:p'))
 
     ## formatting
     if (isTRUE(remove.empty)) pvalues <- pvalues[!grepl("^\\s*$", pvalues)]

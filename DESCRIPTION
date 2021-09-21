@@ -1,6 +1,6 @@
 Package: textreadr
 Title: Read Text Documents into R
-Version: 1.1.0
+Version: 1.1.1
 Authors@R: c(person("Tyler", "Rinker", email = "tyler.rinker@gmail.com", role = c("aut", "cre")),
            person("Bryan", "Goodrich", role = "ctb"), person("Dason", "Kurkiewicz", role = "ctb"))
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
@@ -11,6 +11,6 @@ Imports: antiword, curl, data.table, pdftools, readxl, rvest, striprtf, textshap
 License: GPL-2
 LazyData: TRUE
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 BugReports: https://github.com/trinker/textreadr/issues?state=open
 URL: https://github.com/trinker/textreadr

@@ -23,6 +23,8 @@ textreadr 1.0.3 -
 
 BUG FIXES
 
+* `read_docx` would return the same word as 2 separate words if different characters within the word had different styling (pseudocode example: '<w:p><bold>h</bold>ello word<w:p>' returned 'h ello world').
+
 NEW FEATURES
 
 * `read_odt` added to read in .odt files.
