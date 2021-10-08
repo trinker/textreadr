@@ -5,11 +5,11 @@ citEntry(entry = "manual",
     title = "{textreadr}: Read Text Documents into R",
     author = "Tyler W. Rinker",
     address = "Buffalo, New York",
-    note = "version 1.1.1",
+    note = "version 1.2.0",
     year = "2021",
-    url = "http://github.com/trinker/textreadr",
+    url = "https://github.com/trinker/textreadr",
     textVersion  = paste("Rinker, T. W. (2021).",
         "textreadr: Read Text Documents into R",
-        "version 1.1.1. Buffalo, New York.",
-        "http://github.com/trinker/textreadr")
+        "version 1.2.0. Buffalo, New York.",
+        "https://github.com/trinker/textreadr")
 )

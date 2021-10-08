@@ -44,6 +44,6 @@ file <- download(url)
 }
 \references{
 The xpath is taken from Tony Breyal's response on StackOverflow:
-\url{http://stackoverflow.com/questions/3195522/is-there-a-simple-way-in-r-to-extract-only-the-text-elements-of-an-html-page/3195926#3195926}
+\url{https://stackoverflow.com/questions/3195522/is-there-a-simple-way-in-r-to-extract-only-the-text-elements-of-an-html-page/3195926#3195926}
 }
 \keyword{html}

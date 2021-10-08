@@ -18,22 +18,18 @@ And constructed with the following guidelines:
 
 
 
-textreadr 1.0.3 - 
+textreadr 1.0.3 - 1.2.0
 ----------------------------------------------------------------
 
 BUG FIXES
 
-* `read_docx` would return the same word as 2 separate words if different characters within the word had different styling (pseudocode example: '<w:p><bold>h</bold>ello word<w:p>' returned 'h ello world').
+* `read_docx` would return the same word as 2 separate words if different 
+  characters within the word had different styling (pseudocode example: 
+  '<w:p><bold>h</bold>ello word<w:p>' returned 'h ello world').
 
 NEW FEATURES
 
 * `read_odt` added to read in .odt files.
-
-MINOR FEATURES
-
-IMPROVEMENTS
-
-CHANGES
 
 
 

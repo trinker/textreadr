@@ -14,7 +14,7 @@
 #' [tesseract::ocr()] function.  This will create temporary .png
 #' files and will require a much larger compute time.
 #' @param ... Other arguments passed to [pdftools::pdf_text()][pdftools::pdftools].
-#' @note A word of caution from [Carl Witthoft](http://stackoverflow.com/a/9187015/1000343)"
+#' @note A word of caution from [Carl Witthoft](https://stackoverflow.com/a/9187015/1000343)"
 #' "Just a warning to others who may be hoping to extract data: PDF is a
 #' container, not a format. If the original document does not contain actual
 #' text, as opposed to bitmapped images of text or possibly even uglier things

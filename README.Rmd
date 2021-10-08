@@ -1,30 +1,24 @@
 ---
 title: "textreadr"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   md_document:
-    toc: true      
+    toc: true
 ---
-
-```{r, echo=FALSE}
-desc <- suppressWarnings(readLines("DESCRIPTION"))
-regex <- "(^Version:\\s+)(\\d+\\.\\d+\\.\\d+)"
-loc <- grep(regex, desc)
-ver <- gsub(regex, "\\2", desc[loc])
-verbadge <- sprintf('<a href="https://img.shields.io/badge/Version-%s-orange.svg"><img src="https://img.shields.io/badge/Version-%s-orange.svg" alt="Version"/></a></p>', ver, ver)
-````
 
 
 ![](tools/textreadr_logo/r_textreadr.png)
 
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Build Status](https://travis-ci.org/trinker/textreadr.svg?branch=master)](https://travis-ci.org/trinker/textreadr)
-[![Coverage Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](https://coveralls.io/r/trinker/textreadr?branch=master)
+[![Coverage Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](https://coveralls.io/github/trinker/textreadr)
 [![](http://cranlogs.r-pkg.org/badges/textreadr)](https://cran.r-project.org/package=textreadr)
 
 
 **textreadr** is a small collection of convenience tools for reading text documents into R.  This is not meant to be an exhaustive collection; for more see the [**tm**](https://CRAN.R-project.org/package=tm) package.
 
+```{r}
+#render("README.Rmd", md_document(variant="markdown", toc=TRUE, preserve_yaml = TRUE))
+```
 # Functions
 
 Most jobs in my workflow can be completed with `read_document` and `read_dir`.  The former generically reads in a .docx, .doc, .pdf, .html, .pptx, or .txt file without specifying the extension.  The latter reads in multiple .docx, .doc, .html, .odt .pdf, .pptx, .rtf, or .txt files from a directory as a `data.frame` with a file and text column.  This workflow is effective because most text documents I encounter are stored as a .docx, .doc, .html, .odt .pdf, .pptx, .rtf, or .txt file.  The remaining common storage formats I encounter include .csv, .xlsx, XML, structured .html, and SQL.  For these first 4 forms the [**readr**](https://CRAN.R-project.org/package=readr), [**readx**l](https://CRAN.R-project.org/package=readxl), [**xml2**](https://CRAN.R-project.org/package=xml2), and [**rvest**](https://CRAN.R-project.org/package=rvest).  For SQL:
@@ -461,9 +455,11 @@ docx_doc %>%
 
 
 ```{r, message=FALSE, warning=FALSE}
-if (!require("pacman")) install.packages("pacman"); library(pacman)
-p_load(dplyr, qdapRegex)
-p_load_current_gh(file.path('trinker', c('textreadr', 'textshape', 'textclean')))
+library(dplyr)
+library(qdapRegex)
+library(textreadr)
+library(textshape)
+library(textclean)
 
 ## Read in pdf, split on variables
 dat <- 'http://scdb.wustl.edu/_brickFiles/2012_01/SCDB_2012_01_codebook.pdf' %>%

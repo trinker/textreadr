@@ -24,7 +24,7 @@ browse()
 }
 }
 \references{
-\url{http://stackoverflow.com/q/12135732/1000343}
+\url{https://stackoverflow.com/q/12135732/1000343}
 }
 \author{
 Dason Kurkiewicz and Tyler Rinker \href{mailto:tyler.rinker@gmail.com}{tyler.rinker@gmail.com}.

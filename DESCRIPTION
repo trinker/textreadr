@@ -5,12 +5,12 @@ Authors@R: c(person("Tyler", "Rinker", email = "tyler.rinker@gmail.com", role = 
            person("Bryan", "Goodrich", role = "ctb"), person("Dason", "Kurkiewicz", role = "ctb"))
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 Description: A small collection of convenience tools for reading text documents into R.
-Depends: R (>= 3.2.2)
+Depends: R (>= 3.3.0)
 Suggests: tesseract, testthat
 Imports: antiword, curl, data.table, pdftools, readxl, rvest, striprtf, textshape, tools, utils, xml2
 License: GPL-2
 LazyData: TRUE
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 BugReports: https://github.com/trinker/textreadr/issues?state=open
 URL: https://github.com/trinker/textreadr

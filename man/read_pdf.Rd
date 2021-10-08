@@ -33,7 +33,7 @@ Returns a \code{\link[base:data.frame]{base::data.frame()}} with the page number
 A wrapper for \link[pdftools:pdftools]{pdftools::pdf_text()} to read PDFs into \pkg{R}.
 }
 \note{
-A word of caution from \href{http://stackoverflow.com/a/9187015/1000343}{Carl Witthoft}"
+A word of caution from \href{https://stackoverflow.com/a/9187015/1000343}{Carl Witthoft}"
 "Just a warning to others who may be hoping to extract data: PDF is a
 container, not a format. If the original document does not contain actual
 text, as opposed to bitmapped images of text or possibly even uglier things

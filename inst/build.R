@@ -63,7 +63,6 @@ md_toc <- function(path = "README.md", repo = basename(getwd()),
 
     x <- suppressWarnings(readLines(path))
     
-    twitter <- ''
     contact <- paste(c(
         "You are welcome to:    ",
         "- submit suggestions and bug-reports at: <https://github.com/trinker/%s/issues>    ",
@@ -98,7 +97,7 @@ md_toc <- function(path = "README.md", repo = basename(getwd()),
     inst_loc <- which(grepl(sprintf("^%s$", insert.loc), x))[1]
     x[inst_loc] <- toc
     x <- x[-c(1 + inst_loc)]
-
+browser()
     beg <- grep("^You are welcome", x)
     end <- grep("compose a friendly", x)
     

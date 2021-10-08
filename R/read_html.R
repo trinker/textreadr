@@ -16,7 +16,7 @@
 #' @rdname read_html
 #' @export
 #' @references The xpath is taken from Tony Breyal's response on StackOverflow:
-#' <http://stackoverflow.com/questions/3195522/is-there-a-simple-way-in-r-to-extract-only-the-text-elements-of-an-html-page/3195926#3195926>
+#' <https://stackoverflow.com/questions/3195522/is-there-a-simple-way-in-r-to-extract-only-the-text-elements-of-an-html-page/3195926#3195926>
 #' @examples
 #' html_dat <- read_html(
 #'     system.file("docs/textreadr_creed.html", package = "textreadr")

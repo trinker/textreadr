@@ -18,6 +18,19 @@ And constructed with the following guidelines:
 
 
 
+textreadr 1.0.3 - 1.2.0
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+* `read_docx` would return the same word as 2 separate words if different 
+  characters within the word had different styling (pseudocode example: 
+  '&lt;w:p&gt;&lt;bold&gt;h&lt;/bold&gt;ello word&lt;w:p&gt;' returned 'h ello world').
+
+**NEW FEATURES**
+
+* `read_odt` added to read in .odt files.
+
 
 
 textreadr 0.9.1 - 1.0.2
