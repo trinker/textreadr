@@ -13,6 +13,12 @@ Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](h
 [![](http://cranlogs.r-pkg.org/badges/textreadr)](https://cran.r-project.org/package=textreadr)
 
 
+**textreadr** is a small collection of convenience tools for reading
+text documents into R. This is not meant to be an exhaustive collection;
+for more see the [**tm**](https://CRAN.R-project.org/package=tm)
+package.
+
+
 Table of Contents
 ============
 
@@ -47,11 +53,6 @@ Table of Contents
     -   [Pairing textreadr](#pairing-textreadr)
 -   [Other Implementations](#other-implementations)
 
-
-**textreadr** is a small collection of convenience tools for reading
-text documents into R. This is not meant to be an exhaustive collection;
-for more see the [**tm**](https://CRAN.R-project.org/package=tm)
-package.
 
 
 # Functions
