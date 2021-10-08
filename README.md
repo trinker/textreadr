@@ -53,7 +53,6 @@ text documents into R. This is not meant to be an exhaustive collection;
 for more see the [**tm**](https://CRAN.R-project.org/package=tm)
 package.
 
-    #render("README.Rmd", md_document(variant="markdown", toc=TRUE, preserve_yaml = TRUE))
 
 # Functions
 
