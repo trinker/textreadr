@@ -1,6 +1,17 @@
 textreadr
 ============
 
+![](tools/textreadr_logo/r_textreadr.png)
+
+[![Project Status: Active - The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Build
+Status](https://travis-ci.org/trinker/textreadr.svg?branch=master)](https://travis-ci.org/trinker/textreadr)
+[![Coverage
+Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](https://coveralls.io/github/trinker/textreadr)
+[![](http://cranlogs.r-pkg.org/badges/textreadr)](https://cran.r-project.org/package=textreadr)
+
 
 Table of Contents
 ============
@@ -36,17 +47,6 @@ Table of Contents
     -   [Pairing textreadr](#pairing-textreadr)
 -   [Other Implementations](#other-implementations)
 
-
-![](tools/textreadr_logo/r_textreadr.png)
-
-[![Project Status: Active - The project has reached a stable, usable
-state and is being actively
-developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Build
-Status](https://travis-ci.org/trinker/textreadr.svg?branch=master)](https://travis-ci.org/trinker/textreadr)
-[![Coverage
-Status](https://coveralls.io/repos/trinker/textreadr/badge.svg?branch=master)](https://coveralls.io/github/trinker/textreadr)
-[![](http://cranlogs.r-pkg.org/badges/textreadr)](https://cran.r-project.org/package=textreadr)
 
 **textreadr** is a small collection of convenience tools for reading
 text documents into R. This is not meant to be an exhaustive collection;
