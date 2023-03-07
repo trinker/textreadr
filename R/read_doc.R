@@ -10,8 +10,8 @@
 #' @param trim logical.  If `TRUE` the leading/training white space is
 #' removed.
 #' @param format logical.  If `TRUE` the output will keep doc formatting
-#' (e.g., bold, italics, underlined).  This corresponds to the `-f` flag in
-#' [**antiword**](http://www.winfield.demon.nl).
+#' (e.g., bold, italics, underlined); bold text is printed like \\*bold\\*, 
+#' italics like /italics/ and underlined text as \\_underlined\\_.
 #' @param ... ignored.
 #' @return Returns a character vector.
 #' @keywords doc

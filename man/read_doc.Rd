@@ -18,8 +18,8 @@ removed.}
 removed.}
 
 \item{format}{logical.  If \code{TRUE} the output will keep doc formatting
-(e.g., bold, italics, underlined).  This corresponds to the \code{-f} flag in
-\href{http://www.winfield.demon.nl}{\strong{antiword}}.}
+(e.g., bold, italics, underlined); bold text is printed like \\\emph{bold\\},
+italics like /italics/ and underlined text as \\\emph{underlined\\}.}
 
 \item{...}{ignored.}
 }
